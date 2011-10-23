@@ -1,0 +1,9 @@
+.bundle
+.DS_Store
+.idea
+.sass-cache/
+db/*.sqlite3
+log/*.log
+tmp/
+
+

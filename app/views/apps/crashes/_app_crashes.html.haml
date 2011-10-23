@@ -1,0 +1,7 @@
+%table#app-crashes-table
+  %thead
+    %tr
+      %th.thsort{:scope => "col"} Instance ID
+      %th.thsort{:scope => "col"} Crashed Time
+  %tbody
+    = render :partial => "apps/crashes/app_crash_item", :collection => @app[:crashes]

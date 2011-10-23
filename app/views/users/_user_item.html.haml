@@ -1,0 +1,15 @@
+%tr.oddeven{:id => "user-" + user_item[:email].hash.to_s}
+  %td= user_item[:email]
+  %td
+    - if !user_item[:apps].nil?
+      - user_item[:apps].each do |appname|
+        = link_to appname[:name], app_info_url(appname[:name])
+        %br/
+  %td.tdcenter
+    - if user_item[:admin]
+      = image_tag("ok.png", :alt => "Admin user")
+  %td.tdcenter= link_to image_tag("delete.png", :alt => "Delete the user"),
+                user_delete_url(Base64.encode64(user_item[:email])),
+                :id => "delete-user-link", :remote => true,
+                :method => :delete, :confirm => "Are you sure?"
+

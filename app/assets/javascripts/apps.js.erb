@@ -1,0 +1,78 @@
+$(function() {
+  if ($('body').hasClass('apps') && !$('body').hasClass('show')) {
+    $('#apps-menu-link').addClass('menu-current');
+    appsTable_Settings = {
+      'bAutoWidth':      false,
+      'bFilter':         false,
+      'bLengthChange':   false,
+      'bStateSave':      true,
+      'sPaginationType': 'full_numbers',
+      'aoColumnDefs':    [{'bSortable': false, 'aTargets': [8]}, {'sType': 'string', 'aTargets': [5, 6, 7]}],
+      'fnRowCallback':   function(nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+        var appid = '#' + nRow.id + '-tooltip';
+        $(appid).tooltip({'tip': appid + 'box'});
+        return nRow;
+      }
+    };
+    appsTable = $('#apps-table').dataTable(appsTable_Settings);
+    var ultabs = $('ul.tabs');
+    ultabs.tabs('div.panels > div.panel', {effect: 'slide', tabs: 'li'});
+    $('#start-app-link')
+      .live('ajax:beforeSend', function(evt, xhr, settings) {
+        request_processed = false;
+        $(this).find('img').attr({ src : '<%= asset_path('wait.gif') %>'});
+      })
+      .live('ajax:error', function(evt, xhr, status, error) {
+        $('#flash').empty();
+        $('#flash').append('<div class="alert">An error occurred processing your request, please reload the page and try again.</div>');
+        $('#flash').fadeIn('slow');
+      })
+      .live('ajax:complete', function(evt, xhr, status) {
+        if (request_processed == false) {
+          $(this).find('img').attr({ src : '<%= asset_path('start.png') %>'});
+        }
+      });
+    $('#stop-app-link')
+      .live('ajax:beforeSend', function(evt, xhr, settings) {
+        request_processed = false;
+        $(this).find('img').attr({ src : '<%= asset_path('wait.gif') %>'});
+      })
+      .live('ajax:error', function(evt, xhr, status, error) {
+        $('#flash').empty();
+        $('#flash').append('<div class="alert">An error occurred processing your request, please reload the page and try again.</div>');
+        $('#flash').fadeIn('slow');
+      })
+      .live('ajax:complete', function(evt, xhr, status) {
+        if (request_processed == false) {
+          $(this).find('img').attr({ src : '<%= asset_path('stop.png') %>'});
+        }
+      });
+    $('#restart-app-link')
+      .live('ajax:beforeSend', function(evt, xhr, settings) {
+        request_processed = false;
+        $(this).find('img').attr({ src : '<%= asset_path('wait.gif') %>'});
+      })
+      .live('ajax:error', function(evt, xhr, status, error) {
+        $('#flash').empty();
+        $('#flash').append('<div class="alert">An error occurred processing your request, please reload the page and try again.</div>');
+        $('#flash').fadeIn('slow');
+      })
+      .live('ajax:complete', function(evt, xhr, status) {
+        if (request_processed == false) {
+          $(this).find('img').attr({ src : '<%= asset_path('restart.png') %>'});
+        }
+      });
+    $('#delete-app-link')
+      .live('ajax:beforeSend', function(evt, xhr, settings) {
+        $(this).find('img').attr({ src : '<%= asset_path('wait.gif') %>'});
+      })
+      .live('ajax:error', function(evt, xhr, status, error) {
+        $('#flash').empty();
+        $('#flash').append('<div class="alert">An error occurred processing your request, please reload the page and try again.</div>');
+        $('#flash').fadeIn('slow');
+      })
+      .live('ajax:complete', function(evt, xhr, status) {
+        $(this).find('img').attr({ src : '<%= asset_path('delete.png') %>'});
+      });
+  }
+});

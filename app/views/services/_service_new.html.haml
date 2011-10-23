@@ -1,0 +1,14 @@
+.modalBox{:id => "add_service_modalBox"}
+  = form_tag service_create_url, :id => "new-service-form", :remote => true do
+    .modalBox-title Add Service
+    .modalBox-flash
+    .modalBox-content
+      %table
+        %tbody
+          %tr
+            %td= label_tag 'Name:'
+            %td= text_field_tag :name, @name, :size => 30, :required => "required", :placeholder => "Provisioned Service Name", :autofocus => "autofocus"
+          %tr
+            %td= label_tag 'Service:'
+            %td= select_tag :ss, options_for_select(@available_system_services), :required => "required", :class => "service-selectBox"
+    .modalBox-submit= submit_tag "Add Service"

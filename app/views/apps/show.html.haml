@@ -1,0 +1,34 @@
+= title("Application Details for \"#{@name}\"")
+
+.invoke-modalBox
+%ul.tabs
+  %li
+    %a{:href => "#resources"} Resources
+  %li
+    %a{:href => "#instances"} Instances
+  %li
+    %a{:href => "#crashes"} Crashes
+  %li
+    %a{:href => "#envvars"} Environment
+  %li
+    %a{:href => "#services"} Services
+  %li
+    %a{:href => "#urls"} URLs
+  %li
+    %a{:href => "#files"} Files
+
+%div.panels
+  %div.panel
+    = render "apps/resources/app_resources"
+  %div.panel
+    = render "apps/instances/app_instances"
+  %div.panel
+    = render "apps/crashes/app_crashes"
+  %div.panel
+    = render "apps/envvars/app_envvars"
+  %div.panel
+    = render "apps/services/app_services"
+  %div.panel
+    = render "apps/urls/app_urls"
+  %div.panel
+    = render "apps/files/app_files"

@@ -1,0 +1,13 @@
+$('#flash').empty();
+$('.modalBox-flash').empty();
+<%- if flash[:alert] %>
+  request_processed = false;
+  $('.modalBox-flash').append('<div class="alert"><%= escape_javascript(flash[:alert]) %></div>');
+  $('.modalBox-flash').fadeIn('slow');
+<%- else %>
+  request_processed = true;
+  var row = $('#app-urls-table').append('<%= escape_javascript( render :partial => "apps/urls/app_url_item", :collection => @new_url ) %>').find('tr:last').addClass('highlight').hide();
+  row.fadeIn(1800, function() { $(this).removeClass('highlight'); });
+  appUrlsTable.dataTable().fnDestroy();
+  appUrlsTable.dataTable(appUrlsTable_Settings);
+<%- end %>

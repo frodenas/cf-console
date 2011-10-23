@@ -1,0 +1,20 @@
+.item
+  %table
+    %tbody
+      %tr.pieCharts
+        %td
+          .apps_states
+        %td
+          .instances_states
+      %tr
+        %td.tdptop
+          .apps_states_hover Application's States
+        %td.tdptop
+          .instances_states_hover Instance's States
+
+- content_for :javascripts do
+  :javascript
+    $(function() {
+      apps_states = #{@apps_states};
+      instances_states = #{@instances_states};
+    });

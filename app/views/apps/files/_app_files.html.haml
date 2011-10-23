@@ -1,0 +1,37 @@
+#app-files
+  #app-files-breadcrumbs
+    %b
+      = link_to @name, app_files_url(@name, 0, Base64.encode64("/")), :remote => :true
+    - if @filename && !@filename.empty? && @filename != "/"
+      - path = ""
+      - dirname = File.dirname(@filename)
+      - dirname.split("/").each do |dir|
+        - if !dir.empty?
+          - path = File.join(path, dir)
+          \/
+          = link_to dir, app_files_url(@name, 0, Base64.encode64(File.join(path, "/"))), :remote => :true
+      \/ #{File.basename(@filename)}
+      - if @file_loc
+        %small
+          (#{@file_loc} sloc)
+
+  #app-files-contents
+    - if @app_files
+      %table#app-files-table
+        %thead
+          %tr
+            %th{:scope => "col"} Name
+            %th.tdright{:scope => "col", :width => "10%"} Size
+        %tbody
+          - if @filename && !@filename.empty? && @filename != "/"
+            %tr.oddeven
+              %td
+                = image_tag("dir.png")
+                = link_to "..", app_files_url(@name, 0, Base64.encode64(File.join(File.dirname(@filename), "/"))), :remote => :true
+              %td.tdright -
+          - @app_files.select{ |file| file[:type] == "dir"}.each do |dir_item|
+            = render :partial => "apps/files/app_file_item", :object => dir_item
+          - @app_files.select{ |file| file[:type] == "file"}.each do |file_item|
+            = render :partial => "apps/files/app_file_item", :object => file_item
+    - if @file_contents
+      = @file_contents.html_safe

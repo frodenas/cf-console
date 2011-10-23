@@ -1,0 +1,8 @@
+$('#flash').empty();
+<%- if flash[:alert] %>
+  $('#flash').append('<div class="alert"><%= escape_javascript(flash[:alert]) %></div>');
+  $('#flash').fadeIn('slow');
+<%- else %>
+  var row = $('tr.#user-<%= @email.hash.to_s %>').html('<td colspan="4" class="tdcenter"><%= escape_javascript(flash[:notice]) %></td>').addClass('highlight');
+  row.fadeOut(1800, function() { usersTable.fnDeleteRow(row.get(0)); });
+<%- end %>

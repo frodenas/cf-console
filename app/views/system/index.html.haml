@@ -1,0 +1,21 @@
+= title("System Information")
+
+%ul.tabs
+  %li
+    %a{:href => "#target"} Target
+  %li
+    %a{:href => "#system_services"} System Services
+  %li
+    %a{:href => "#runtimes"} Runtimes
+  %li
+    %a{:href => "#frameworks"} Frameworks
+
+%div.panels
+  %div.panel
+    = render "target"
+  %div.panel
+    = render "system_services"
+  %div.panel
+    = render "runtimes"
+  %div.panel
+    = render "frameworks"

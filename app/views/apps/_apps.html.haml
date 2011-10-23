@@ -1,0 +1,16 @@
+%table#apps-table
+  %thead
+    %tr
+      %th.thsort{:scope => "col", :rowspan => 2} Application
+      %th.thsort{:scope => "col", :rowspan => 2} Health
+      %th.thcenter{:scope => "col", :colspan => 6} Resources
+      %th.thcenter{:scope => "col", :rowspan => 2, :width => "10%"} Actions
+    %tr
+      %th.thsort{:scope => "col"} Instances
+      %th.thsort{:scope => "col"} Memory
+      %th.thsort{:scope => "col"} Disk
+      %th.thsort{:scope => "col"} Framework
+      %th.thsort{:scope => "col"} Runtime
+      %th.thsort{:scope => "col"} Services
+  %tbody
+    = render :partial => "app_item", :collection => @apps

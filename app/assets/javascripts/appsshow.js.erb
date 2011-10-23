@@ -1,0 +1,317 @@
+$(function() {
+  if ($('body').hasClass('apps') && $('body').hasClass('show')) {
+    $('#apps-menu-link').addClass('menu-current');
+    appInstancesTable_Settings = {
+      'bAutoWidth':      false,
+      'bFilter':         false,
+      'bLengthChange':   false,
+      'bStateSave':      false,
+      'sPaginationType': 'full_numbers',
+      'aoColumnDefs':    [{'bSortable': false, 'aTargets': [6]}]
+    };
+    appInstancesTable = $('#app-instances-table').dataTable(appInstancesTable_Settings);
+    appCrashesTable_Settings = {
+      'bAutoWidth':      false,
+      'bFilter':         false,
+      'bLengthChange':   false,
+      'bStateSave':      false,
+      'sPaginationType': 'full_numbers',
+      'aaSorting':       [[ 1, 'desc']]
+    };
+    appCrashesTable = $('#app-crashes-table').dataTable(appCrashesTable_Settings);
+    appServicesTable_Settings = {
+      'bAutoWidth':      false,
+      'bFilter':         false,
+      'bLengthChange':   false,
+      'bStateSave':      false,
+      'sPaginationType': 'full_numbers',
+      'aoColumnDefs':    [{'bSortable': false, 'aTargets': [3]}, {'sType': 'string', 'aTargets': [1]}]
+    };
+    appServicesTable = $('#app-services-table').dataTable(appServicesTable_Settings);
+    appUrlsTable_Settings = {
+      'bAutoWidth':      false,
+      'bFilter':         false,
+      'bLengthChange':   false,
+      'bStateSave':      false,
+      'sPaginationType': 'full_numbers',
+      'aoColumnDefs':    [{'bSortable': false, 'aTargets': [1]}]
+    };
+    appUrlsTable = $('#app-urls-table').dataTable(appUrlsTable_Settings);
+    var ultabs = $('ul.tabs');
+    ultabs.tabs('div.panels > div.panel', {effect: 'slide', tabs: 'li'});
+    ultabs
+      .live('onClick', function(event, tabIndex) {
+        var tab = $(this).find('li.current > a').attr('href');
+        if (tab == '#resources') {
+          $('.invoke-modalBox').empty().hide();
+          $.editable.addInputType('range', {
+            element: function(settings, original) {
+              var input = jQuery('<input type="range" />');
+              $(this).append(input);
+              return(input);
+            },
+            plugin: function(settings, original) {
+              if (typeof rangeapi == 'undefined') {
+                value = resources_instances;
+              } else {
+                value = rangeapi.getValue()
+              }
+              var range = $(':range', this).rangeinput({'min': 1, 'max': resources_available_instances});
+              rangeapi = range.data("rangeinput");
+              rangeapi.setValue(value)
+            }
+          });
+          $('td#instances-' + resources_appname + '.editableText').editable(app_set_instances_url, {
+            'method'   : 'PUT',
+            'name'     : 'instances',
+            'type'     : 'range',
+            'submit'   : 'Update',
+            'cancel'   : 'Cancel',
+            'indicator': '<%= image_tag('wait.gif') %>',
+            'tooltip'  : 'Click to edit ...',
+            'callback'  : function(value, settings) {
+              var row = $(this.parentNode).addClass('highlight').hide();
+              row.fadeIn(1800, function() {
+                $(this).removeClass('highlight');
+              });
+              $('#flash').empty();
+            },
+            'submitdata' : function(value, settings) {
+              var value = rangeapi.getValue();
+              return {'instances': value};
+            },
+            'onerror'   : function(settings, original, xhr) {
+              original.reset();
+              $('#flash').empty();
+              $('#flash').append('<div class="alert">Error ' + xhr.status + ': ' + xhr.responseText + '</div>');
+              $('#flash').fadeIn('slow');
+            }
+          });
+          $('td#memory-' + resources_appname + '.editableText').editable(app_set_memsize_url, {
+            'method'   : 'PUT',
+            'name'     : 'memsize',
+            'type'     : 'select',
+            'submit'   : 'Update',
+            'cancel'   : 'Cancel',
+            'indicator': '<%= image_tag('wait.gif') %>',
+            'tooltip'  : 'Click to edit ...',
+            'data'     : resources_available_memsizes,
+            'callback' : function(value, settings) {
+              var row = $(this.parentNode).addClass('highlight').hide();
+              row.fadeIn(1800, function() {
+                $(this).removeClass('highlight');
+              });
+              $('#flash').empty();
+            },
+            'onerror'  : function(settings, original, xhr) {
+              original.reset();
+              $('#flash').empty();
+              $('#flash').append('<div class="alert">Error ' + xhr.status + ': ' + xhr.responseText + '</div>');
+              $('#flash').fadeIn('slow');
+            }
+          });
+        }
+        if (tab == '#instances') {
+          $('.invoke-modalBox').empty().hide();
+          view_log_trigger = $('.viewLog').overlay({
+            'closeOnClick': false,
+            'fixed': false,
+            'left': 'left',
+            'mask': {color: '#404040', loadSpeed: 'normal', opacity: 0.7},
+            'top': '5%',
+            'onBeforeLoad': function(event) {
+              $('.modalBox-flash').empty();
+              var wrap = this.getOverlay().find(".modalLog");
+              wrap.load(this.getTrigger().attr("href"));
+            }
+          });
+        }
+        if (tab == '#crashes') {
+          $('.invoke-modalBox').empty().hide();
+        }
+        if (tab == '#envvars') {
+          $('.invoke-modalBox').html('<button class="addEnvvar" rel="#add_envvar_modalBox">Add Var</button>').show();
+          if (typeof appEnvvarsTable == 'undefined') {
+            appEnvvarsTable_Settings = {
+              'bAutoWidth':      false,
+              'bFilter':         false,
+              'bLengthChange':   false,
+              'bStateSave':      false,
+              'sPaginationType': 'full_numbers',
+              'aoColumnDefs':    [{'bSortable': false, 'aTargets': [2]}],
+              'fnDrawCallback':  function() {
+                $('td.editableText').editable(app_set_var_url, {
+                  'method'    : 'PUT',
+                  'name'      : 'var_value',
+                  'type'      : 'text',
+                  'submit'    : 'Update',
+                  'cancel'    : 'Cancel',
+                  'indicator' : '<%= image_tag('wait.gif') %>',
+                  'tooltip'   : 'Click to edit ...',
+                  'callback'  : function(value, settings) {
+                    var aPos = appEnvvarsTable.fnGetPosition(this);
+                    var row = $(this.parentNode).addClass('highlight').hide();
+                    row.fadeIn(1800, function() {
+                      $(this).removeClass('highlight');
+                    });
+                    appEnvvarsTable.fnUpdate(value, aPos[0], aPos[1]);
+                    $('#flash').empty();
+                  },
+                  'submitdata': function(value, settings) {
+                    return {
+                      'edit'   : true,
+                      'restart': true,
+                      'id'     : this.parentNode.getAttribute('id')
+                    };
+                  },
+                  'onerror'   : function(settings, original, xhr) {
+                    original.reset();
+                    $('#flash').empty();
+                    $('#flash').append('<div class="alert">Error ' + xhr.status + ': ' + xhr.responseText + '</div>');
+                    $('#flash').fadeIn('slow');
+                  }
+                });
+              }
+            };
+            appEnvvarsTable = $('#app-envvars-table').dataTable(appEnvvarsTable_Settings);
+          }
+          addEnvvar_trigger = $('.addEnvvar').overlay({
+            'closeOnClick': false,
+            'mask': {color: '#404040', loadSpeed: 'normal', opacity: 0.7},
+            'top': '25%',
+            'onBeforeLoad': function(event) {
+              $('.modalBox-flash').empty();
+            }
+          });
+        }
+        if (tab == '#services') {
+          $('.invoke-modalBox').html('<button class="bindService" rel="#bind_service_modalBox">Bind Service</button>').show();
+          bindService_trigger = $('.bindService').overlay({
+            'closeOnClick': false,
+            'mask': {color: '#404040', loadSpeed: 'normal', opacity: 0.7},
+            'top': '25%',
+            'onBeforeLoad': function(event) {
+              $('.modalBox-flash').empty();
+            }
+          });
+          $('.service-selectBox').selectBox();
+        }
+        if (tab == '#urls') {
+          $('.invoke-modalBox').html('<button class="addURL" rel="#add_url_modalBox">Add URL</button>').show();
+          addURL_trigger = $('.addURL').overlay({
+            'closeOnClick': false,
+            'mask': {color: '#404040', loadSpeed: 'normal', opacity: 0.7},
+            'top': '25%',
+            'onBeforeLoad': function(event) {
+              $('.modalBox-flash').empty();
+            }
+          });
+        }
+        if (tab == '#files') {
+          $('.invoke-modalBox').empty().hide();
+        }
+      });
+    $('#set-var-form')
+      .live('ajax:beforeSend', function(evt, xhr, settings) {
+        request_processed = false;
+        $(this).find('.modalBox-submit input[type="submit"]').attr({value: 'Processing ...'});
+      })
+      .live('ajax:success', function(evt, data, status, xhr) {
+        if (request_processed == true) {
+          $(this).find('input[type="text"]').val('');
+        }
+      })
+      .live('ajax:error', function(evt, xhr, status, error) {
+        request_processed = true;
+        $('#flash').empty();
+        $('#flash').append('<div class="alert">An error occurred processing your request, please reload the page and try again.</div>');
+        $('#flash').fadeIn('slow');
+      })
+      .live('ajax:complete', function(evt, xhr, status) {;
+        if (request_processed == true) {
+          addEnvvar_trigger.eq(0).overlay().close();
+        }
+        $(this).find('.modalBox-submit input[type="submit"]').attr({value: 'Add Var'});
+      });
+    $('#unset-var-link')
+      .live('ajax:beforeSend', function(evt, xhr, settings) {
+        $(this).find('img').attr({ src : '<%= asset_path('wait.gif') %>'});
+      })
+      .live('ajax:error', function(evt, xhr, status, error) {
+        $('#flash').empty();
+        $('#flash').append('<div class="alert">An error occurred processing your request, please reload the page and try again.</div>');
+        $('#flash').fadeIn('slow');
+      })
+      .live('ajax:complete', function(evt, xhr, status) {
+        $(this).find('img').attr({ src : '<%= asset_path('delete.png') %>'});
+      });
+    $('#bind-service-form')
+      .live('ajax:beforeSend', function(evt, xhr, settings) {
+        request_processed = false;
+        $(this).find('.modalBox-submit input[type="submit"]').attr({value: 'Processing ...'});
+      })
+      .live('ajax:success', function(evt, data, status, xhr) {
+        if (request_processed == true) {
+          $(this).find('select').val('');
+        }
+      })
+      .live('ajax:error', function(evt, xhr, status, error) {
+        request_processed = true;
+        $('#flash').empty();
+        $('#flash').append('<div class="alert">An error occurred processing your request, please reload the page and try again.</div>');
+        $('#flash').fadeIn('slow');
+      })
+      .live('ajax:complete', function(evt, xhr, status) {;
+        if (request_processed == true) {
+          bindService_trigger.eq(0).overlay().close();
+        }
+        $(this).find('.modalBox-submit input[type="submit"]').attr({value: 'Bind Service'});
+      });
+    $("#unbind-service-link")
+      .live('ajax:beforeSend', function(evt, xhr, settings) {
+        $(this).find('img').attr({ src : '<%= asset_path('wait.gif') %>'});
+      })
+      .live('ajax:error', function(evt, xhr, status, error) {
+        $('#flash').empty();
+        $('#flash').append('<div class="alert">An error occurred processing your request, please reload the page and try again.</div>');
+        $('#flash').fadeIn('slow');
+      })
+      .live('ajax:complete', function(evt, xhr, status) {
+        $(this).find('img').attr({ src : '<%= asset_path('delete.png') %>'});
+      });
+    $('#map-url-form')
+      .live('ajax:beforeSend', function(evt, xhr, settings) {
+        request_processed = false;
+        $(this).find('.modalBox-submit input[type="submit"]').attr({value: 'Processing ...'});
+      })
+      .live('ajax:success', function(evt, data, status, xhr) {
+        if (request_processed == true) {
+          $(this).find('input[type="url"]').val('');
+        }
+      })
+      .live('ajax:error', function(evt, xhr, status, error) {
+        request_processed = true;
+        $('#flash').empty();
+        $('#flash').append('<div class="alert">An error occurred processing your request, please reload the page and try again.</div>');
+        $('#flash').fadeIn('slow');
+      })
+      .live('ajax:complete', function(evt, xhr, status) {
+        if (request_processed == true) {
+          addURL_trigger.eq(0).overlay().close();
+        }
+        $(this).find('.modalBox-submit input[type="submit"]').attr({value: 'Add URL'});
+      });
+    $('#unmap-url-link')
+      .live('ajax:beforeSend', function(evt, xhr, settings) {
+        $(this).find('img').attr({ src : '<%= asset_path('wait.gif') %>'});
+      })
+      .live('ajax:error', function(evt, xhr, status, error) {
+        $('#flash').empty();
+        $('#flash').append('<div class="alert">An error occurred processing your request, please reload the page and try again.</div>');
+        $('#flash').fadeIn('slow');
+      })
+      .live('ajax:complete', function(evt, xhr, status) {
+        $(this).find('img').attr({ src : '<%= asset_path('delete.png') %>'});
+      });
+  }
+});

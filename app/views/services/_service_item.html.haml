@@ -1,0 +1,15 @@
+%tr.oddeven{:id => "service-" + service_item[:name]}
+  %td= service_item[:name]
+  %td= find_vendor_image(service_item[:vendor]).html_safe
+  %td= service_item[:version]
+  %td
+    - if !service_item[:bindedapps].nil?
+      - service_item[:bindedapps].each do |appname|
+        = link_to appname, app_info_url(appname)
+        %br/
+  %td= Time.at(service_item[:meta][:created]).strftime("%m/%d/%Y - %H:%M")
+  %td= Time.at(service_item[:meta][:updated]).strftime("%m/%d/%Y - %H:%M")
+  %td.tdcenter= link_to image_tag("delete.png", :alt => "Delete the provisioned service"),
+                service_delete_url(service_item[:name]),
+                :id => "delete-service-link", :remote => true,
+                :method => :delete , :confirm => "Are you sure?"

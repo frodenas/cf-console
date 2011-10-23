@@ -1,0 +1,45 @@
+.item
+  %table
+    %tbody
+      %tr
+        %td{:width => "20%"}
+          .legend{:title => "Number of running applications allowed for your account"} Applications
+        %td.usage
+          .bar.inuse{:title => "#{pct(@account_apps_inuse.to_f, @account_apps_total.to_f)}"}
+          .bar.unused{:title => "#{pct(@account_apps_unused.to_f, @account_apps_total.to_f)}"}
+          %table
+            %tbody
+              %tr
+                %td.inuse{:width => "30%"} In Use: #{@account_apps_inuse}
+                %td.unused{:width => "40%"} Unused: #{@account_apps_unused}
+                %td.total{:width => "30%"} Total: #{@account_apps_total}
+.item
+  %table
+    %tbody
+      %tr
+        %td{:width => "20%"}
+          .legend{:title => "Amount of memory resources allowed for your account"} Memory
+        %td.usage
+          .bar.inuse{:title => "#{pct(@account_mem_inuse.to_f, @account_mem_total.to_f)}"}
+          .bar.unused{:title => "#{pct(@account_mem_unused.to_f, @account_mem_total.to_f)}"}
+          %table
+            %tbody
+              %tr
+                %td.inuse{:width => "30%"} In Use: #{pretty_size(@account_mem_inuse * 1024 * 1024)}
+                %td.unused{:width => "40%"} Unused: #{pretty_size(@account_mem_unused * 1024 * 1024)}
+                %td.total{:width => "30%"} Total: #{pretty_size(@account_mem_total * 1024 * 1024)}
+.item
+  %table
+    %tbody
+      %tr
+        %td{:width => "20%"}
+          .legend{:title => "Number of services allowed for your account"} Services
+        %td.usage
+          .bar.inuse{:title => "#{pct(@account_services_inuse.to_f, @account_services_total.to_f)}"}
+          .bar.unused{:title => "#{pct(@account_services_unused.to_f, @account_services_total.to_f)}"}
+          %table
+            %tbody
+              %tr
+                %td.inuse{:width => "30%"} In Use: #{@account_services_inuse}
+                %td.unused{:width => "40%"} Unused: #{@account_services_unused}
+                %td.total{:width => "30%"} Total: #{@account_services_total}

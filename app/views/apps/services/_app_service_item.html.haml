@@ -1,0 +1,10 @@
+%tr.oddeven{:id => "app-" + @name + "-service-" + app_service_item[:name]}
+  %td= app_service_item[:name]
+  %td= find_vendor_image(app_service_item[:vendor]).html_safe
+  %td= app_service_item[:version]
+  %td.tdcenter= link_to image_tag("delete.png", :alt => "Unbind the service"),
+                app_unbind_service_url(@name, :service => app_service_item[:name]),
+                :id => "unbind-service-link", :remote => true,
+                :method => :put, :confirm => "Are you sure?"
+
+

@@ -1,0 +1,3 @@
+%tr.oddeven{:id => "app-" + @name + "-crashes-" + app_crash_item[:instance]}
+  %td= app_crash_item[:instance]
+  %td= Time.at(app_crash_item[:since]).strftime("%m/%d/%Y %H:%M")

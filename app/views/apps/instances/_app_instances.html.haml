@@ -1,0 +1,15 @@
+%table#app-instances-table
+  %thead
+    %tr
+      %th.thsort{:scope => "col"} Instance
+      %th.thsort{:scope => "col"} State
+      %th.thsort{:scope => "col"} CPU (Cores)
+      %th.thsort{:scope => "col"} Memory (limit)
+      %th.thsort{:scope => "col"} Disk (limit)
+      %th.thsort{:scope => "col"} Uptime
+      %th.thcenter{:scope => "col"} Logs
+  %tbody
+    = render :partial => "apps/instances/app_instance_item", :collection => @app[:instances_info]
+
+#overlayLog
+  .modalLog

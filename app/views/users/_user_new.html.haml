@@ -1,0 +1,17 @@
+.modalBox{:id => "add_user_modalBox"}
+  = form_tag user_create_url, :id => "new-user-form", :remote => true do
+    .modalBox-title Add User
+    .modalBox-flash
+    .modalBox-content
+      %table
+        %tbody
+          %tr
+            %td= label_tag 'Email:'
+            %td= email_field_tag :email, @email, :size => 50, :required => "required", :placeholder => "User email", :autofocus => "autofocus"
+          %tr
+            %td= label_tag 'Password:'
+            %td= password_field_tag :password, nil, :size => 50, :required => "required", :placeholder => "User password"
+          %tr
+            %td= label_tag 'Verify Password:'
+            %td= password_field_tag :vpassword, nil, :size => 50, :required => "required", :placeholder => "Verify user password"
+    .modalBox-submit= submit_tag "Add User"

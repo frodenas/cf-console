@@ -1,0 +1,16 @@
+%table#app-envvars-table
+  %thead
+    %tr
+      %th.thsort{:scope => "col", :width => "45%"} Name
+      %th.thsort{:scope => "col", :width => "45%"} Value
+      %th.thcenter{:scope => "col", :width => "10%"} Actions
+  %tbody
+    = render :partial => "apps/envvars/app_envvar_item", :collection => @app[:env]
+
+= render "apps/envvars/app_envvar_new"
+
+- content_for :javascripts do
+  :javascript
+    $(function() {
+      app_set_var_url = '#{app_set_var_url}.js';
+    });

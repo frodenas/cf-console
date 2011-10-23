@@ -1,0 +1,38 @@
+.modalLog-title File "#{@filename}" for instance #{@instance} of application #{@name}
+.modalLog-flash
+.modalLog-content
+  %table#app-logfile-table
+    %thead
+      %tr
+        %th Log
+    %tbody
+      - if !@file_contents.nil?
+        - @file_contents.each do |row|
+          %tr
+            %td= row
+
+- if flash[:alert]
+  :javascript
+    $(function() {
+      $('#flash').empty();
+      $('.modalLog-flash').empty();
+      $('.modalLog-flash').append('<div class="alert">#{escape_javascript(flash[:alert])}</div>');
+      $('.modalLog-flash').fadeIn('slow');
+    });
+- else
+  :javascript
+    $(function() {
+      $('#flash').empty();
+      $('.modalLog-flash').empty();
+      appLogfileTable_Settings = {
+        'bAutoWidth':      false,
+        'bProcessing':     true,
+        'bFilter':         true,
+        'bLengthChange':   false,
+        'bSort':           true,
+        'bStateSave':      false,
+        'iDisplayLength':  20,
+        'sPaginationType': 'full_numbers'
+      };
+      appLogfileTable = $('table#app-logfile-table').dataTable(appLogfileTable_Settings);
+    });

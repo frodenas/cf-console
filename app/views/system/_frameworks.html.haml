@@ -1,0 +1,22 @@
+%table#frameworks-table
+  %thead
+    %tr
+      %th.thsort{:scope => "col", :rowspan => 2} Framework
+      %th.thsort{:scope => "col", :rowspan => 2} AppServer
+      %th.thcenter{:scope => "col", :colspan => 3} Runtimes
+    %tr
+      %th.thsort{:scope => "col"} Name
+      %th.thsort{:scope => "col"} Version
+      %th.thsort{:scope => "col"} Description
+  %tbody
+    - @frameworks.each do |fwk_name, fwk|
+      - fwk[:runtimes].each do |run|
+        %tr.oddeven
+          %td= find_vendor_image(fwk[:name]).html_safe
+          %td
+            - fwk[:appservers].each do |appserver|
+              = appserver[:description]
+              %br/
+          %td= find_vendor_image(run[:name]).html_safe
+          %td= run[:version]
+          %td= run[:description]

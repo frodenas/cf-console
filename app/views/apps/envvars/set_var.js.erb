@@ -1,0 +1,24 @@
+<%- if !@edit.nil? %>
+<%- if flash[:alert] %>
+<%= escape_javascript(flash[:alert]) %>
+<%- else %>
+<%= escape_javascript @var_value  %>
+<%- end %>
+<%- else %>
+  $('#flash').empty();
+  $('.modalBox-flash').empty();
+  <%- if flash[:alert] %>
+    request_processed = false;
+    $('.modalBox-flash').append('<div class="alert"><%= escape_javascript(flash[:alert]) %></div>');
+    $('.modalBox-flash').fadeIn('slow');
+  <%- else %>
+    request_processed = true;
+    <%- if @var_exists %>
+      appEnvvarsTable.fnDeleteRow($('tr.#app-<%= @name %>-envvar-<%= @var_name %>').get(0));
+    <%- end %>
+    var row = $('#app-envvars-table').append('<%= escape_javascript( render :partial => "apps/envvars/app_envvar_item", :collection => @new_var ) %>').find('tr:last').addClass('highlight').hide();
+    row.fadeIn(1800, function() { $(this).removeClass('highlight'); });
+    appEnvvarsTable.dataTable().fnDestroy();
+    appEnvvarsTable.dataTable(appEnvvarsTable_Settings);
+  <%- end %>
+<%- end %>

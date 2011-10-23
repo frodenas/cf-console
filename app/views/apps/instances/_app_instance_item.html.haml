@@ -1,0 +1,19 @@
+%tr.oddeven{:id => "app-" + @name + "-instances-" + app_instance_item[:instance].to_s}
+  %td.tdcenter= app_instance_item[:instance]
+  %td.tdcenter= colorize_state(app_instance_item[:state]).html_safe
+  - if app_instance_item[:stats] && app_instance_item[:stats][:usage]
+    %td #{app_instance_item[:stats][:usage][:cpu]}% (#{app_instance_item[:stats][:cores]})
+    %td #{pretty_size(app_instance_item[:stats][:usage][:mem] * 1024)} (#{pretty_size(app_instance_item[:stats][:mem_quota], 0)})
+    %td #{pretty_size(app_instance_item[:stats][:usage][:disk])} (#{pretty_size(app_instance_item[:stats][:disk_quota], 0)})
+    %td= uptime_string(app_instance_item[:stats][:uptime])
+    %td.tdcenter
+      - if !app_instance_item[:logfiles].nil? && !app_instance_item[:logfiles].empty?
+        - app_instance_item[:logfiles].each do |logfile|
+          = link_to logfile[:name], app_view_file_url(@name, app_instance_item[:instance], Base64.encode64(logfile[:path]), :formatcode => false), :rel => "#overlayLog", :class => "viewLog"
+  - else
+    %td -
+    %td -
+    %td -
+    %td -
+    %td.tdcenter -
+

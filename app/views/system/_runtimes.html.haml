@@ -1,0 +1,12 @@
+%table#runtimes-table
+  %thead
+    %tr
+      %th.thsort{:scope => "col"} Name
+      %th.thsort{:scope => "col"} Version
+      %th.thsort{:scope => "col"} Description
+  %tbody
+    - @runtimes.each_value do |run|
+      %tr.oddeven
+        %td= find_vendor_image(run[:name]).html_safe
+        %td= run[:version]
+        %td= run[:description]

@@ -1,0 +1,35 @@
+%tr.oddeven{:id => "app-" + app_item[:name]}
+  %td= link_to app_item[:name], app_info_url(app_item[:name])
+  %td
+    %span{:id => "app-" + app_item[:name] + "-tooltip"}= health(app_item).html_safe
+    %div.tooltip{:id => "app-" + app_item[:name] + "-tooltipbox"}
+      %table
+        %thead
+          %tr
+            %th.thcenter{:scope => "col"} State
+            %th.thcenter{:scope => "col"} Instances
+        %tbody
+          - app_item[:instances_states].each do |instances_states_item|
+            %tr
+              %td.tdcenter
+                %span{:style => "color: #{instances_states_item[:color]}"}= instances_states_item[:label]
+              %td.tdcenter= instances_states_item[:data]
+  %td= app_item[:instances]
+  %td= pretty_size(app_item[:resources][:memory] * 1024 * 1024, 0)
+  %td= pretty_size(app_item[:resources][:disk] * 1024 * 1024, 0)
+  %td= find_vendor_image(app_item[:staging][:model]).html_safe
+  %td= find_vendor_image(app_item[:staging][:stack]).html_safe
+  %td
+    - app_item[:services].each do |service_name|
+      = find_vendor_image(service_name).html_safe
+      %br/
+  %td.tdcenter
+    - if app_item[:state] == "STARTED"
+      = link_to image_tag("restart.png", :alt => "Restart the application"), app_restart_url(app_item[:name]), :id => "restart-app-link", :method => :put, :remote => true
+      = link_to image_tag("stop.png", :alt => "Stop the application"), app_stop_url(app_item[:name]), :id => "stop-app-link", :method => :put, :remote => true
+    - else
+      = link_to image_tag("start.png", :alt => "Start the application"), app_start_url(app_item[:name]), :id => "start-app-link", :method => :put, :remote => true
+    = link_to image_tag("delete.png", :alt => "Delete the application"),
+      app_delete_url(app_item[:name]),
+      :id => "delete-app-link", :remote => true,
+      :method => :delete, :confirm => "Are you sure?"

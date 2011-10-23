@@ -1,0 +1,14 @@
+%table#system-services-table
+  %thead
+    %tr
+      %th.thsort{:scope => "col"} Name
+      %th.thsort{:scope => "col"} Version
+      %th.thsort{:scope => "col"} Description
+  %tbody
+    - @system_services.each do |service_type, service_value|
+      - service_value.each do |vendor, vendor_value|
+        - vendor_value.each do |version, service_info|
+          %tr.oddeven
+            %td= find_vendor_image(service_info[:vendor]).html_safe
+            %td= service_info[:version]
+            %td= service_info[:description]

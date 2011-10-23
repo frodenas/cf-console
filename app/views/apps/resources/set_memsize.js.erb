@@ -1,0 +1,5 @@
+<%- if flash[:alert] %>
+<%= escape_javascript(flash[:alert]) %>
+<%- else %>
+<%= escape_javascript @memsize  %>
+<%- end %>

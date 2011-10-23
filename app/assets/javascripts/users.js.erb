@@ -1,0 +1,80 @@
+$(function() {
+  if ($('body').hasClass('users')) {
+    $('#users-menu-link').addClass('menu-current');
+    usersTable_Settings = {
+      'bAutoWidth':      false,
+      'bFilter':         false,
+      'bLengthChange':   false,
+      'bStateSave':      true,
+      'sPaginationType': 'full_numbers',
+      'aoColumnDefs':    [{'bSortable': false, 'aTargets': [3]}, {'sType': 'string', 'aTargets': [2]}]
+    };
+    usersTable = $('#users-table').dataTable(usersTable_Settings);
+    var ultabs = $('ul.tabs');
+    ultabs.tabs('div.panels > div.panel', {effect: 'slide', tabs: 'li'});
+    ultabs
+      .live('onClick', function(event, tabIndex) {
+        var tab = $(this).find('li.current > a').attr('href');
+        if (tab == '#users') {
+          $('.invoke-modalBox').html('<button class="addUser" rel="#add_user_modalBox">Add User</button>').toggle();
+          addUser_trigger = $('.addUser').overlay({
+            'closeOnClick': false,
+            'mask': {color: '#404040', loadSpeed: 'normal', opacity: 0.7},
+            'top': '25%',
+            'onBeforeLoad': function(event) {
+              $('.modalBox-flash').empty();
+            }
+          });
+        }
+      });
+    $('#new-user-form')
+      .live('ajax:beforeSend', function(evt, xhr, settings) {
+        request_processed = false;
+        var password = $(this).find('#password');
+        var vpassword = $(this).find('#vpassword');
+        if (password.val() == "" || password.val() != vpassword.val()) {
+          return false;
+        }
+        $(this).find('.modalBox-submit input[type="submit"]').attr({value: 'Processing ...'});
+      })
+      .live('ajax:success', function(evt, data, status, xhr) {
+        if (request_processed == true) {
+          $(this).find('input[type="email"],input[type="password"]').val('');
+        }
+      })
+      .live('ajax:error', function(evt, xhr, status, error) {
+        request_processed = true;
+        $('#flash').empty();
+        $('#flash').append('<div class="alert">An error occurred processing your request, please reload the page and try again.</div>');
+        $('#flash').fadeIn('slow');
+      })
+      .live('ajax:complete', function(evt, xhr, status) {
+        if (request_processed == true) {
+          addUser_trigger.eq(0).overlay().close();
+        }
+        $(this).find('.modalBox-submit input[type="submit"]').attr({value: 'Add User'});
+      });
+    $('#delete-user-link')
+      .live('ajax:beforeSend', function(evt, xhr, settings) {
+        $(this).find('img').attr({ src : '<%= asset_path('wait.gif') %>'});
+      })
+      .live('ajax:error', function(evt, xhr, status, error) {
+        $('#flash').empty();
+        $('#flash').append('<div class="alert">An error occurred processing your request, please reload the page and try again.</div>');
+        $('#flash').fadeIn('slow');
+      })
+      .live('ajax:complete', function(evt, xhr, status) {
+        $(this).find('img').attr({ src : '<%= asset_path('delete.png') %>'});
+      });
+    $('#vpassword')
+      .live('keyup', function() {
+        var password = $('#password');
+        var vpassword = $(this);
+        if (password.val() != "" && password.val() == vpassword.val()) {
+          vpassword.removeClass('validation_alert');
+        } else {
+          vpassword.addClass('validation_alert');
+        }
+      });
+  }
+});

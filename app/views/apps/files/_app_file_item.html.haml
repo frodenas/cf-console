@@ -1,0 +1,9 @@
+%tr.oddeven{:id => "app-" + @name + "-files-" + app_file_item[:name]}
+  %td
+    - if app_file_item[:type] == "dir"
+      = image_tag("dir.png")
+      = link_to app_file_item[:name], app_files_url(@name, 0, Base64.encode64(app_file_item[:path] + app_file_item[:name])), :remote => :true
+    - else
+      = image_tag("file.png")
+      = link_to app_file_item[:name], app_view_file_url(@name, 0, Base64.encode64(app_file_item[:path] + app_file_item[:name]), :formatcode => true), :remote => :true
+  %td.tdright= app_file_item[:size]

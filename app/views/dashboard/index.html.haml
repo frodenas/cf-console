@@ -1,0 +1,13 @@
+= title("Dashboard")
+
+%ul.tabs
+  %li
+    %a{:href => "#account"} Account
+  %li
+    %a{:href => "#apps"} Applications
+
+%div.panels
+  %div.panel
+    = render "account_overview"
+  %div.panel
+    = render "apps_overview"

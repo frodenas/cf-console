@@ -1,0 +1,43 @@
+= title("Log in")
+
+%section#login
+  #registered-users
+    #shadow_box_content
+      %p
+        %b Enter your Cloud Foundry credentials:
+      = form_tag login_url do
+        %fieldset{:class => "field"}
+          = label_tag :email
+          = email_field_tag :email, @email, :size => 50, :required => "required", :placeholder => "Enter your email address", :autofocus => "autofocus"
+        %fieldset{:class => "field"}
+          = label_tag :password
+          = password_field_tag :password, nil, :size => 50, :required => "required", :placeholder => "Enter your password"
+        %fieldset{:class => "field"}
+          = label_tag :target_url
+          = url_field_tag :target_url, @target_url, :size => 50, :required => "required"
+        %fieldset{:class => "field"}
+          = check_box_tag :remember_me, true, @remember_me
+          = label_tag :remember_me
+        %fieldset{:class => "field"}
+          = submit_tag "Login"
+  #new-users
+    #shadow_box_content
+      %p
+        %b Don't have an account? Request an invite:
+      %p
+        %a.button{:href => "http://www.cloudfoundry.com/signup"}
+          %i Sign Up for
+          Cloud Foundry
+    #shadow_box_filler
+    #shadow_box_content
+      %p
+        %b Or learn more about Cloud Foundry at:
+      %ul
+        %li
+          %a{:href => "http://www.cloudfoundry.com/"}Cloud Foundry
+        %li
+          %a{:href => "http://www.cloudfoundry.com/faq"}Cloud Foundry FAQ
+        %li
+          %a{:href => "https://www.cloudfoundry.com/micro"}Micro Cloud Foundry
+        %li
+          %a{:href => "http://www.cloudfoundry.org/"}Cloud Foundry Open Source

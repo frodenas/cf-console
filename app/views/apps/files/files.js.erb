@@ -1,0 +1,10 @@
+$('#flash').empty();
+<%- if flash[:alert] %>
+  $('#flash').append('<div class="alert"><%= escape_javascript(flash[:alert]) %></div>');
+  $('#flash').fadeIn('slow');
+<%- else %>
+  $('#app-files').hide(150, function() {
+    $('#app-files').replaceWith('<%= escape_javascript(render "apps/files/app_files", :collection => @app_files) %>');
+    $('#app-files').show(150);
+  });
+<%- end %>

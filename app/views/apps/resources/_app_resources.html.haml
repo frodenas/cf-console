@@ -1,0 +1,37 @@
+%table#app-resources-table
+  %tbody
+    %tr
+      %td{:width => "20%"} Name
+      %td= @name
+    %tr
+      %td State
+      %td= colorize_state(@app[:state]).html_safe
+    %tr
+      %td Health
+      %td= health(@app).html_safe
+    %tr
+      %td Instances
+      %td.editableText{:id => "instances-" + @name}= @app[:instances]
+    %tr
+      %td Memory
+      %td.editableText{:id => "memory-" + @name}= pretty_size(@app[:resources][:memory] * 1024 * 1024, 0)
+    %tr
+      %td Disk
+      %td= pretty_size(@app[:resources][:disk] * 1024 * 1024, 0)
+    %tr
+      %td Framework
+      %td= find_vendor_image(@app[:staging][:model]).html_safe
+    %tr
+      %td Runtime
+      %td= find_vendor_image(@app[:staging][:stack]).html_safe
+
+- content_for :javascripts do
+  :javascript
+    $(function() {
+      resources_appname = '#{@name}';
+      resources_instances = #{@app[:instances]};
+      resources_available_instances = #{@available_instances};
+      resources_available_memsizes = #{@available_memsizes.to_json};
+      app_set_instances_url = '#{app_set_instances_url}.js';
+      app_set_memsize_url = '#{app_set_memsize_url}.js';
+    });

@@ -1,0 +1,13 @@
+$('#flash').empty();
+$('.modalBox-flash').empty();
+<%- if flash[:alert] %>
+  request_processed = false;
+  $('.modalBox-flash').append('<div class="alert"><%= escape_javascript(flash[:alert]) %></div>');
+  $('.modalBox-flash').fadeIn('slow');
+<%- else %>
+  request_processed = true;
+  var row = $('#services-table').append('<%= escape_javascript( render :partial => "service_item", :collection => @new_service ) %>').find('tr:last').addClass('highlight').hide();
+  row.fadeIn(1800, function() { $(this).removeClass('highlight'); });
+  servicesTable.dataTable().fnDestroy();
+  servicesTable.dataTable(servicesTable_Settings);
+<%- end %>

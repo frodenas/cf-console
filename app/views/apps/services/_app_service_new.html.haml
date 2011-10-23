@@ -1,0 +1,11 @@
+.modalBox{:id => "bind_service_modalBox"}
+  = form_tag app_bind_service_url, :id => "bind-service-form", :method => :put, :remote => true do
+    .modalBox-title Bind Service
+    .modalBox-flash
+    .modalBox-content
+      %table
+        %tbody
+          %tr
+            %td= label_tag 'Service:'
+            %td= select_tag :service, options_for_select(@available_services), :required => "required", :autofocus => "autofocus", :class => "service-selectBox"
+    .modalBox-submit= submit_tag "Bind Service"

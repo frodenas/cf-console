@@ -1,0 +1,17 @@
+.modalBox{:id => "add_envvar_modalBox"}
+  = form_tag app_set_var_url, :id => "set-var-form", :method => :put, :remote => true do
+    .modalBox-title Add Environment Var
+    .modalBox-flash
+    .modalBox-content
+      %table
+        %tbody
+          %tr
+            %td= label_tag 'Name:'
+            %td= text_field_tag :var_name, nil, :size => 30, :required => "required", :placeholder => "Name of the variable", :autofocus => "autofocus"
+          %tr
+            %td= label_tag 'Value:'
+            %td= text_field_tag :var_value, nil, :size => 30, :placeholder => "Value of the variable"
+          %tr
+            %td= label_tag 'Restart App:'
+            %td= check_box_tag :restart, true, true
+    .modalBox-submit= submit_tag "Add URL"

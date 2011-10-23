@@ -1,0 +1,84 @@
+$(function() {
+  if ($('body').hasClass('dashboard')) {
+    $('#dashboard-menu-link').addClass('menu-current');
+    var ultabs = $('ul.tabs');
+    ultabs.tabs('div.panels > div.panel', {effect: 'slide', tabs: 'li'});
+    ultabs
+      .live('onClick', function(event, tabIndex) {
+        var tab = $(this).find('li.current > a').attr('href');
+        if (tab == '#account') {
+          $('legend').tooltip({
+            'tip':          '.tooltip-legend',
+            'effect':       'fade',
+            'fadeOutSpeed': 100,
+            'predelay':     100,
+            'position':     'bottom right',
+            'offset':       [-50, -80]
+          });
+          $('td.usage').each(function() {
+            var tdwidth = parseInt($(this).width()) - 10;
+            if (tdwidth > 0) {
+              $(this).find('.bar').each(function() {
+                var pc = $(this).attr('title');
+                var len = tdwidth * parseFloat(pc) / 100.00;
+                $(this).animate({'width': len + 'px'}, 1000);
+              });
+            }
+          })
+        }
+        if (tab == '#apps') {
+          $('tr.pieCharts').each(function() {
+            var trwidth = parseInt($(this).width()) - 20;
+            var tdwidth = trwidth / 2;
+            $('.apps_states').width(tdwidth+'px').height('250px');
+            $('.instances_states').width(tdwidth+'px').height('250px');
+          });
+          if (typeof apps_states != 'undefined' && apps_states.length > 0) {
+            function apps_states_hover(event, pos, obj) {
+              if (!obj) return;
+              $('.apps_states_hover').html('<span style="color: '+obj.series.color+'">'+obj.series.data[0][1]+' Applications '+obj.series.label+'</span>');
+            }
+            $.plot($('.apps_states'), apps_states, {
+              'series': {
+                'pie': {
+                  'show': true,
+                  'label': {
+                    'show': true,
+                    'formatter': function(label, series) {
+                      return label+'<br/>'+Math.round(series.percent)+'%';
+                    }
+                  }
+                }
+              },
+              'legend': {'show': false},
+              'grid': {'hoverable': true}
+            });
+            $('.apps_states').bind('plothover', apps_states_hover);
+          }
+          if (typeof instances_states != 'undefined' && instances_states.length > 0) {
+            function instances_states_hover(event, pos, obj) {
+              if (!obj) return;
+              $('.instances_states_hover').html('<span style="color: '+obj.series.color+'">'+obj.series.data[0][1]+' Instances '+obj.series.label+'</span>');
+            }
+            $.plot($('.instances_states'), instances_states, {
+              'series': {
+                'pie': {
+                  'show': true,
+                  'label': {
+                    'show': true,
+                    'formatter': function(label, series) {
+                      return label+'<br/>'+Math.round(series.percent)+'%';
+                    }
+                  }
+                }
+              },
+              'legend': {'show': false},
+              'grid': {'hoverable': true}
+            });
+            $('.instances_states').bind('plothover', instances_states_hover);
+          }
+        }
+      });
+  }
+});
+

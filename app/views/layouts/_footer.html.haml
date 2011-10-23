@@ -1,0 +1,26 @@
+%section#buttons
+  %a{:href => "http://twitter.com/share", :class => "twitter-share-button", :"data-count" => "horizontal"}Tweet
+  :plain
+    <iframe src="http://www.facebook.com/plugins/like.php?app_id=180842668641176&amp;href=#{u(root_url)}&amp;send=false&amp;layout=button_count&amp;width=95&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=20" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:95px; height:20px;" allowTransparency="true"></iframe>
+  %div{:class => "g-plusone", :"data-size" => "medium"}
+  - content_for :javascripts do
+    :javascript
+      $(function() {
+        var fn = function() {
+          function addScript(url) {
+            var g = document.createElement('script'),
+                s = document.getElementsByTagName('body')[0];
+            g.async = true; g.src = url; s.appendChild(g);
+          }
+          addScript('http://platform.twitter.com/widgets.js');
+          addScript('https://apis.google.com/js/plusone.js');
+        };
+        (window.addEventListener) ? window.addEventListener('load',fn,false) : window.attachEvent('onload',fn);
+      });
+
+%section#copyright
+  %p Copyright &copy; #{Date.today.year} Ferran Rodenas. All rights reserved.
+  %p Cloud Foundry and VMware are registered trademarks of VMware, Inc
+  %p
+    The source code of this application is available on
+    %a{:href => "https://github.com/frodenas/cf-console"}github

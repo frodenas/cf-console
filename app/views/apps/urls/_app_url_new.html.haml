@@ -1,0 +1,11 @@
+.modalBox{:id => "add_url_modalBox"}
+  = form_tag app_map_url_url, :id => "map-url-form", :method => :put, :remote => true do
+    .modalBox-title Add URL
+    .modalBox-flash
+    .modalBox-content
+      %table
+        %tbody
+          %tr
+            %td= label_tag 'URL:'
+            %td= url_field_tag :url, @url, :size => 80, :required => "required", :placeholder => "URL to map", :autofocus => "autofocus"
+    .modalBox-submit= submit_tag "Add URL"

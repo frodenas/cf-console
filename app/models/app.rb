@@ -74,6 +74,8 @@ class App
 
   def find_app_instances_states(app_info)
     app_instances_states = []
+    return app_instances_states unless app_info
+
     states = {}
     if !app_info[:instances_info].empty?
       app_info[:instances_info].each do |instance_info|

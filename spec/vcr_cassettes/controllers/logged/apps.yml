@@ -1,0 +1,402 @@
+---
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: http://api.vcap.me:80/info
+    body: !!null 
+    headers:
+      accept:
+      - application/json
+      accept-encoding:
+      - gzip, deflate
+      authorization:
+      - 04085b084922117573657240766361702e6d65063a0645546c2b079c0dbb4e2219b76dc61978db73a8263f70f1208a2cc743d5d6ba
+      content-type:
+      - application/json
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx/0.7.65
+      date:
+      - Sun, 06 Nov 2011 00:09:40 GMT
+      content-type:
+      - application/json; charset=utf-8
+      transfer-encoding:
+      - chunked
+      connection:
+      - keep-alive
+      keep-alive:
+      - timeout=20
+      etag:
+      - ! '"d5311babdfaea80ad353c85002fc2935"'
+      cache-control:
+      - max-age=0, private, must-revalidate
+      x-ua-compatible:
+      - IE=Edge
+    body: ! '{"name":"vcap","build":2222,"support":"http://support.cloudfoundry.com","version":"0.999","description":"VMware''s
+      Cloud Application Platform","allow_debug":false,"user":"user@vcap.me","limits":{"memory":2048,"app_uris":4,"services":16,"apps":20},"usage":{"memory":256,"apps":1,"services":0},"frameworks":{"spring":{"name":"spring","runtimes":[{"name":"java","version":"1.6","description":"Java
+      6"}],"appservers":[{"name":"tomcat","description":"Tomcat"}],"detection":[{"*.war":true}]},"node":{"name":"node","runtimes":[{"name":"node","version":"0.4.5","description":"Node.js"}],"appservers":[],"detection":[{"*.js":"."}]},"sinatra":{"name":"sinatra","runtimes":[{"name":"ruby18","version":"1.8.7","description":"Ruby
+      1.8.7"},{"name":"ruby19","version":"1.9.2p180","description":"Ruby 1.9.2"}],"appservers":[{"name":"thin","description":"Thin"}],"detection":[{"*.rb":"require
+      ''sinatra''|require \"sinatra\""},{"config/environment.rb":false}]},"lift":{"name":"lift","runtimes":[{"name":"java","version":"1.6","description":"Java
+      6"}],"appservers":[{"name":"tomcat","description":"Tomcat"}],"detection":[{"*.war":true}]},"otp_rebar":{"name":"otp_rebar","runtimes":[{"name":"erlangR14B02","version":"R14B02","description":"Erlang
+      R14B02"}],"appservers":[],"detection":[{"releases/*/*.rel":"."}]},"rails3":{"name":"rails3","runtimes":[{"name":"ruby18","version":"1.8.7","description":"Ruby
+      1.8.7"},{"name":"ruby19","version":"1.9.2p180","description":"Ruby 1.9.2"}],"appservers":[{"name":"thin","description":"Thin"}],"detection":[{"config/application.rb":true},{"config/environment.rb":true}]},"java_web":{"name":"java_web","runtimes":[{"name":"java","version":"1.6","description":"Java
+      6"}],"appservers":[{"name":"tomcat","description":"Tomcat"}],"detection":[{"*.war":true}]},"grails":{"name":"grails","runtimes":[{"name":"java","version":"1.6","description":"Java
+      6"}],"appservers":[{"name":"tomcat","description":"Tomcat"}],"detection":[{"*.war":true}]}}}'
+    http_version: '1.1'
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: http://api.vcap.me:80/users
+    body: !!null 
+    headers:
+      accept:
+      - application/json
+      accept-encoding:
+      - gzip, deflate
+      authorization:
+      - 04085b084922117573657240766361702e6d65063a0645546c2b079c0dbb4e2219b76dc61978db73a8263f70f1208a2cc743d5d6ba
+      content-type:
+      - application/json
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 403
+      message: Forbidden
+    headers:
+      server:
+      - nginx/0.7.65
+      date:
+      - Sun, 06 Nov 2011 00:09:40 GMT
+      content-type:
+      - application/json; charset=utf-8
+      transfer-encoding:
+      - chunked
+      connection:
+      - keep-alive
+      keep-alive:
+      - timeout=20
+      cache-control:
+      - no-cache
+      x-ua-compatible:
+      - IE=Edge
+    body: ! '{"code":200,"description":"Operation not permitted"}'
+    http_version: '1.1'
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: http://api.vcap.me:80/apps
+    body: !!null 
+    headers:
+      accept:
+      - application/json
+      accept-encoding:
+      - gzip, deflate
+      authorization:
+      - 04085b084922117573657240766361702e6d65063a0645546c2b079c0dbb4e2219b76dc61978db73a8263f70f1208a2cc743d5d6ba
+      content-type:
+      - application/json
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx/0.7.65
+      date:
+      - Sun, 06 Nov 2011 00:09:40 GMT
+      content-type:
+      - application/json; charset=utf-8
+      transfer-encoding:
+      - chunked
+      connection:
+      - keep-alive
+      keep-alive:
+      - timeout=20
+      etag:
+      - ! '"2e907f910bd8a98b5b41c2ab8497a750"'
+      cache-control:
+      - max-age=0, private, must-revalidate
+      x-ua-compatible:
+      - IE=Edge
+    body: ! '[{"name":"app-mock-stopped","staging":{"model":"sinatra","stack":"ruby18"},"uris":["app-mock-stopped.vcap.me"],"instances":4,"runningInstances":null,"resources":{"memory":64,"disk":2048,"fds":256},"state":"STOPPED","services":[],"version":"946d7488427d90f0cef9a2993bd9a7520eec9a6e-1","env":[],"meta":{"debug":null,"version":6,"created":1320538180}},{"name":"app-mock-started","staging":{"model":"sinatra","stack":"ruby18"},"uris":["app-mock-started.vcap.me"],"instances":4,"runningInstances":4,"resources":{"memory":64,"disk":2048,"fds":256},"state":"STARTED","services":[],"version":"14b6fb795f1ff65355c2e06b91c21d997de40c49-1","env":[],"meta":{"debug":null,"version":51,"created":1320538180}}]'
+    http_version: '1.1'
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: http://api.vcap.me:80/apps/app-mock-stopped
+    body: !!null 
+    headers:
+      accept:
+      - application/json
+      accept-encoding:
+      - gzip, deflate
+      authorization:
+      - 04085b084922117573657240766361702e6d65063a0645546c2b079c0dbb4e2219b76dc61978db73a8263f70f1208a2cc743d5d6ba
+      content-type:
+      - application/json
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx/0.7.65
+      date:
+      - Sun, 06 Nov 2011 00:09:40 GMT
+      content-type:
+      - application/json; charset=utf-8
+      transfer-encoding:
+      - chunked
+      connection:
+      - keep-alive
+      keep-alive:
+      - timeout=20
+      etag:
+      - ! '"71eb8b8c24dbe8f98e7b9b9245ab545e"'
+      cache-control:
+      - max-age=0, private, must-revalidate
+      x-ua-compatible:
+      - IE=Edge
+    body: ! '{"name":"app-mock-stopped","staging":{"model":"sinatra","stack":"ruby18"},"uris":["app-mock-stopped.vcap.me"],"instances":4,"runningInstances":0,"resources":{"memory":64,"disk":2048,"fds":256},"state":"STOPPED","services":[],"version":"946d7488427d90f0cef9a2993bd9a7520eec9a6e-1","env":[],"meta":{"debug":null,"version":6,"created":1320538180}}'
+    http_version: '1.1'
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: http://api.vcap.me:80/apps/app-mock-stopped/instances
+    body: !!null 
+    headers:
+      accept:
+      - application/json
+      accept-encoding:
+      - gzip, deflate
+      authorization:
+      - 04085b084922117573657240766361702e6d65063a0645546c2b079c0dbb4e2219b76dc61978db73a8263f70f1208a2cc743d5d6ba
+      content-type:
+      - application/json
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx/0.7.65
+      date:
+      - Sun, 06 Nov 2011 00:09:40 GMT
+      content-type:
+      - application/json; charset=utf-8
+      transfer-encoding:
+      - chunked
+      connection:
+      - keep-alive
+      keep-alive:
+      - timeout=20
+      etag:
+      - ! '"1439580006f77fa0b8481cdc5a207b66"'
+      cache-control:
+      - max-age=0, private, must-revalidate
+      x-ua-compatible:
+      - IE=Edge
+    body: ! '{"instances":[]}'
+    http_version: '1.1'
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: http://api.vcap.me:80/apps/app-mock-stopped/crashes
+    body: !!null 
+    headers:
+      accept:
+      - application/json
+      accept-encoding:
+      - gzip, deflate
+      authorization:
+      - 04085b084922117573657240766361702e6d65063a0645546c2b079c0dbb4e2219b76dc61978db73a8263f70f1208a2cc743d5d6ba
+      content-type:
+      - application/json
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx/0.7.65
+      date:
+      - Sun, 06 Nov 2011 00:09:40 GMT
+      content-type:
+      - application/json; charset=utf-8
+      transfer-encoding:
+      - chunked
+      connection:
+      - keep-alive
+      keep-alive:
+      - timeout=20
+      etag:
+      - ! '"8f95df9c232fa5b8b530dcbe0687c0d0"'
+      cache-control:
+      - max-age=0, private, must-revalidate
+      x-ua-compatible:
+      - IE=Edge
+    body: ! '{"crashes":[]}'
+    http_version: '1.1'
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: http://api.vcap.me:80/apps/app-mock-started
+    body: !!null 
+    headers:
+      accept:
+      - application/json
+      accept-encoding:
+      - gzip, deflate
+      authorization:
+      - 04085b084922117573657240766361702e6d65063a0645546c2b079c0dbb4e2219b76dc61978db73a8263f70f1208a2cc743d5d6ba
+      content-type:
+      - application/json
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx/0.7.65
+      date:
+      - Sun, 06 Nov 2011 00:09:40 GMT
+      content-type:
+      - application/json; charset=utf-8
+      transfer-encoding:
+      - chunked
+      connection:
+      - keep-alive
+      keep-alive:
+      - timeout=20
+      etag:
+      - ! '"18faf97d0301d0e47b4676d5f20011c4"'
+      cache-control:
+      - max-age=0, private, must-revalidate
+      x-ua-compatible:
+      - IE=Edge
+    body: ! '{"name":"app-mock-started","staging":{"model":"sinatra","stack":"ruby18"},"uris":["app-mock-started.vcap.me"],"instances":4,"runningInstances":4,"resources":{"memory":64,"disk":2048,"fds":256},"state":"STARTED","services":[],"version":"14b6fb795f1ff65355c2e06b91c21d997de40c49-1","env":[],"meta":{"debug":null,"version":51,"created":1320538180}}'
+    http_version: '1.1'
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: http://api.vcap.me:80/apps/app-mock-started/instances
+    body: !!null 
+    headers:
+      accept:
+      - application/json
+      accept-encoding:
+      - gzip, deflate
+      authorization:
+      - 04085b084922117573657240766361702e6d65063a0645546c2b079c0dbb4e2219b76dc61978db73a8263f70f1208a2cc743d5d6ba
+      content-type:
+      - application/json
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx/0.7.65
+      date:
+      - Sun, 06 Nov 2011 00:09:40 GMT
+      content-type:
+      - application/json; charset=utf-8
+      transfer-encoding:
+      - chunked
+      connection:
+      - keep-alive
+      keep-alive:
+      - timeout=20
+      etag:
+      - ! '"ac9b546d9f1dec29a34caffdcb69e25a"'
+      cache-control:
+      - max-age=0, private, must-revalidate
+      x-ua-compatible:
+      - IE=Edge
+    body: ! '{"instances":[{"index":0,"state":"RUNNING","since":1320493901,"debug_port":null},{"index":1,"state":"RUNNING","since":1320493902,"debug_port":null},{"index":2,"state":"RUNNING","since":1320493902,"debug_port":null},{"index":3,"state":"RUNNING","since":1320493902,"debug_port":null}]}'
+    http_version: '1.1'
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: http://api.vcap.me:80/apps/app-mock-started/stats
+    body: !!null 
+    headers:
+      accept:
+      - application/json
+      accept-encoding:
+      - gzip, deflate
+      authorization:
+      - 04085b084922117573657240766361702e6d65063a0645546c2b079c0dbb4e2219b76dc61978db73a8263f70f1208a2cc743d5d6ba
+      content-type:
+      - application/json
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx/0.7.65
+      date:
+      - Sun, 06 Nov 2011 00:09:40 GMT
+      content-type:
+      - application/json; charset=utf-8
+      transfer-encoding:
+      - chunked
+      connection:
+      - keep-alive
+      keep-alive:
+      - timeout=20
+      etag:
+      - ! '"323357446dc463cee200e4c599190071"'
+      cache-control:
+      - max-age=0, private, must-revalidate
+      x-ua-compatible:
+      - IE=Edge
+    body: ! '{"1":{"state":"RUNNING","stats":{"name":"app-mock-started","host":"127.0.0.1","port":38396,"uris":["app-mock-started.vcap.me"],"uptime":44280.044522579,"mem_quota":67108864,"disk_quota":2147483648,"fds_quota":256,"cores":4,"usage":{"time":"2011-11-06
+      01:09:40 +0100","cpu":0.0,"mem":13680.0,"disk":40960}}},"3":{"state":"RUNNING","stats":{"name":"app-mock-started","host":"127.0.0.1","port":46001,"uris":["app-mock-started.vcap.me"],"uptime":44279.825584237,"mem_quota":67108864,"disk_quota":2147483648,"fds_quota":256,"cores":4,"usage":{"time":"2011-11-06
+      01:09:40 +0100","cpu":0.0,"mem":13680.0,"disk":40960}}},"2":{"state":"RUNNING","stats":{"name":"app-mock-started","host":"127.0.0.1","port":45086,"uris":["app-mock-started.vcap.me"],"uptime":44279.675951392,"mem_quota":67108864,"disk_quota":2147483648,"fds_quota":256,"cores":4,"usage":{"time":"2011-11-06
+      01:09:40 +0100","cpu":0.0,"mem":13676.0,"disk":40960}}},"0":{"state":"RUNNING","stats":{"name":"app-mock-started","host":"127.0.0.1","port":46030,"uris":["app-mock-started.vcap.me"],"uptime":44279.587282765,"mem_quota":67108864,"disk_quota":2147483648,"fds_quota":256,"cores":4,"usage":{"time":"2011-11-06
+      01:09:40 +0100","cpu":0.0,"mem":13676.0,"disk":40960}}}}'
+    http_version: '1.1'
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: http://api.vcap.me:80/apps/app-mock-started/crashes
+    body: !!null 
+    headers:
+      accept:
+      - application/json
+      accept-encoding:
+      - gzip, deflate
+      authorization:
+      - 04085b084922117573657240766361702e6d65063a0645546c2b079c0dbb4e2219b76dc61978db73a8263f70f1208a2cc743d5d6ba
+      content-type:
+      - application/json
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx/0.7.65
+      date:
+      - Sun, 06 Nov 2011 00:09:41 GMT
+      content-type:
+      - application/json; charset=utf-8
+      transfer-encoding:
+      - chunked
+      connection:
+      - keep-alive
+      keep-alive:
+      - timeout=20
+      etag:
+      - ! '"8f95df9c232fa5b8b530dcbe0687c0d0"'
+      cache-control:
+      - max-age=0, private, must-revalidate
+      x-ua-compatible:
+      - IE=Edge
+    body: ! '{"crashes":[]}'
+    http_version: '1.1'

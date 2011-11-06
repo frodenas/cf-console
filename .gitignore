@@ -1,9 +1,12 @@
 .bundle
 .DS_Store
 .idea
+.rbenv-version
 .sass-cache/
+bin/
 db/*.sqlite3
 log/*.log
 tmp/
+vendor/bundle/ruby/
 
 

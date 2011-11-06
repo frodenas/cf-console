@@ -1,0 +1,266 @@
+---
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: http://api.vcap.me:80/info
+    body: !!null 
+    headers:
+      accept:
+      - application/json
+      accept-encoding:
+      - gzip, deflate
+      authorization:
+      - 04085b084922117573657240766361702e6d65063a0645546c2b079c0dbb4e2219b76dc61978db73a8263f70f1208a2cc743d5d6ba
+      content-type:
+      - application/json
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx/0.7.65
+      date:
+      - Sun, 06 Nov 2011 00:09:54 GMT
+      content-type:
+      - application/json; charset=utf-8
+      transfer-encoding:
+      - chunked
+      connection:
+      - keep-alive
+      keep-alive:
+      - timeout=20
+      etag:
+      - ! '"d5311babdfaea80ad353c85002fc2935"'
+      cache-control:
+      - max-age=0, private, must-revalidate
+      x-ua-compatible:
+      - IE=Edge
+    body: !str
+      str: ! '{"name":"vcap","build":2222,"support":"http://support.cloudfoundry.com","version":"0.999","description":"VMware''s
+        Cloud Application Platform","allow_debug":false,"user":"user@vcap.me","limits":{"memory":2048,"app_uris":4,"services":16,"apps":20},"usage":{"memory":256,"apps":1,"services":0},"frameworks":{"spring":{"name":"spring","runtimes":[{"name":"java","version":"1.6","description":"Java
+        6"}],"appservers":[{"name":"tomcat","description":"Tomcat"}],"detection":[{"*.war":true}]},"node":{"name":"node","runtimes":[{"name":"node","version":"0.4.5","description":"Node.js"}],"appservers":[],"detection":[{"*.js":"."}]},"sinatra":{"name":"sinatra","runtimes":[{"name":"ruby18","version":"1.8.7","description":"Ruby
+        1.8.7"},{"name":"ruby19","version":"1.9.2p180","description":"Ruby 1.9.2"}],"appservers":[{"name":"thin","description":"Thin"}],"detection":[{"*.rb":"require
+        ''sinatra''|require \"sinatra\""},{"config/environment.rb":false}]},"lift":{"name":"lift","runtimes":[{"name":"java","version":"1.6","description":"Java
+        6"}],"appservers":[{"name":"tomcat","description":"Tomcat"}],"detection":[{"*.war":true}]},"otp_rebar":{"name":"otp_rebar","runtimes":[{"name":"erlangR14B02","version":"R14B02","description":"Erlang
+        R14B02"}],"appservers":[],"detection":[{"releases/*/*.rel":"."}]},"rails3":{"name":"rails3","runtimes":[{"name":"ruby18","version":"1.8.7","description":"Ruby
+        1.8.7"},{"name":"ruby19","version":"1.9.2p180","description":"Ruby 1.9.2"}],"appservers":[{"name":"thin","description":"Thin"}],"detection":[{"config/application.rb":true},{"config/environment.rb":true}]},"java_web":{"name":"java_web","runtimes":[{"name":"java","version":"1.6","description":"Java
+        6"}],"appservers":[{"name":"tomcat","description":"Tomcat"}],"detection":[{"*.war":true}]},"grails":{"name":"grails","runtimes":[{"name":"java","version":"1.6","description":"Java
+        6"}],"appservers":[{"name":"tomcat","description":"Tomcat"}],"detection":[{"*.war":true}]}}}'
+      net_http_res: &70248477122760 !ruby/object:Net::HTTPOK
+        http_version: '1.0'
+        code: '200'
+        message: OK
+        header:
+          server:
+          - nginx/0.7.65
+          date:
+          - Sun, 06 Nov 2011 00:09:54 GMT
+          content-type:
+          - application/json; charset=utf-8
+          transfer-encoding:
+          - chunked
+          connection:
+          - keep-alive
+          keep-alive:
+          - timeout=20
+          etag:
+          - ! '"d5311babdfaea80ad353c85002fc2935"'
+          cache-control:
+          - max-age=0, private, must-revalidate
+          x-ua-compatible:
+          - IE=Edge
+        body: !str
+          str: ! '{"name":"vcap","build":2222,"support":"http://support.cloudfoundry.com","version":"0.999","description":"VMware''s
+            Cloud Application Platform","allow_debug":false,"user":"user@vcap.me","limits":{"memory":2048,"app_uris":4,"services":16,"apps":20},"usage":{"memory":256,"apps":1,"services":0},"frameworks":{"spring":{"name":"spring","runtimes":[{"name":"java","version":"1.6","description":"Java
+            6"}],"appservers":[{"name":"tomcat","description":"Tomcat"}],"detection":[{"*.war":true}]},"node":{"name":"node","runtimes":[{"name":"node","version":"0.4.5","description":"Node.js"}],"appservers":[],"detection":[{"*.js":"."}]},"sinatra":{"name":"sinatra","runtimes":[{"name":"ruby18","version":"1.8.7","description":"Ruby
+            1.8.7"},{"name":"ruby19","version":"1.9.2p180","description":"Ruby 1.9.2"}],"appservers":[{"name":"thin","description":"Thin"}],"detection":[{"*.rb":"require
+            ''sinatra''|require \"sinatra\""},{"config/environment.rb":false}]},"lift":{"name":"lift","runtimes":[{"name":"java","version":"1.6","description":"Java
+            6"}],"appservers":[{"name":"tomcat","description":"Tomcat"}],"detection":[{"*.war":true}]},"otp_rebar":{"name":"otp_rebar","runtimes":[{"name":"erlangR14B02","version":"R14B02","description":"Erlang
+            R14B02"}],"appservers":[],"detection":[{"releases/*/*.rel":"."}]},"rails3":{"name":"rails3","runtimes":[{"name":"ruby18","version":"1.8.7","description":"Ruby
+            1.8.7"},{"name":"ruby19","version":"1.9.2p180","description":"Ruby 1.9.2"}],"appservers":[{"name":"thin","description":"Thin"}],"detection":[{"config/application.rb":true},{"config/environment.rb":true}]},"java_web":{"name":"java_web","runtimes":[{"name":"java","version":"1.6","description":"Java
+            6"}],"appservers":[{"name":"tomcat","description":"Tomcat"}],"detection":[{"*.war":true}]},"grails":{"name":"grails","runtimes":[{"name":"java","version":"1.6","description":"Java
+            6"}],"appservers":[{"name":"tomcat","description":"Tomcat"}],"detection":[{"*.war":true}]}}}'
+          net_http_res: *70248477122760
+          args: &70248477500700
+            :method: :get
+            :url: http://api.vcap.me/info
+            :payload: !!null 
+            :headers:
+              AUTHORIZATION: 04085b084922117573657240766361702e6d65063a0645546c2b079c0dbb4e2219b76dc61978db73a8263f70f1208a2cc743d5d6ba
+              Content-Type: application/json
+              Accept: application/json
+          code: 200
+          headers: &70248477075020
+            :server: nginx/0.7.65
+            :date: Sun, 06 Nov 2011 00:09:54 GMT
+            :content_type: application/json; charset=utf-8
+            :transfer_encoding: chunked
+            :connection: keep-alive
+            :keep_alive: timeout=20
+            :etag: ! '"d5311babdfaea80ad353c85002fc2935"'
+            :cache_control: max-age=0, private, must-revalidate
+            :x_ua_compatible: IE=Edge
+        read: true
+        __read_body_previously_called: true
+      args: *70248477500700
+      code: 200
+      headers: *70248477075020
+    http_version: '1.1'
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: http://api.vcap.me:80/users
+    body: !!null 
+    headers:
+      accept:
+      - application/json
+      accept-encoding:
+      - gzip, deflate
+      authorization:
+      - 04085b084922117573657240766361702e6d65063a0645546c2b079c0dbb4e2219b76dc61978db73a8263f70f1208a2cc743d5d6ba
+      content-type:
+      - application/json
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 403
+      message: Forbidden
+    headers:
+      server:
+      - nginx/0.7.65
+      date:
+      - Sun, 06 Nov 2011 00:09:54 GMT
+      content-type:
+      - application/json; charset=utf-8
+      transfer-encoding:
+      - chunked
+      connection:
+      - keep-alive
+      keep-alive:
+      - timeout=20
+      cache-control:
+      - no-cache
+      x-ua-compatible:
+      - IE=Edge
+    body: !str
+      str: ! '{"code":200,"description":"Operation not permitted"}'
+      net_http_res: &70248467638100 !ruby/object:Net::HTTPForbidden
+        http_version: '1.0'
+        code: '403'
+        message: Forbidden
+        header:
+          server:
+          - nginx/0.7.65
+          date:
+          - Sun, 06 Nov 2011 00:09:54 GMT
+          content-type:
+          - application/json; charset=utf-8
+          transfer-encoding:
+          - chunked
+          connection:
+          - keep-alive
+          keep-alive:
+          - timeout=20
+          cache-control:
+          - no-cache
+          x-ua-compatible:
+          - IE=Edge
+        body: !str
+          str: ! '{"code":200,"description":"Operation not permitted"}'
+          net_http_res: *70248467638100
+          args: &70248476993300
+            :method: :get
+            :url: http://api.vcap.me/users
+            :payload: !!null 
+            :headers:
+              AUTHORIZATION: 04085b084922117573657240766361702e6d65063a0645546c2b079c0dbb4e2219b76dc61978db73a8263f70f1208a2cc743d5d6ba
+              Content-Type: application/json
+              Accept: application/json
+          code: 403
+          headers: &70248467636740
+            :server: nginx/0.7.65
+            :date: Sun, 06 Nov 2011 00:09:54 GMT
+            :content_type: application/json; charset=utf-8
+            :transfer_encoding: chunked
+            :connection: keep-alive
+            :keep_alive: timeout=20
+            :cache_control: no-cache
+            :x_ua_compatible: IE=Edge
+        read: true
+        __read_body_previously_called: true
+      args: *70248476993300
+      code: 403
+      headers: *70248467636740
+    http_version: '1.1'
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :get
+    uri: http://api.vcap.me:80/users
+    body: !!null 
+    headers:
+      accept:
+      - application/json
+      accept-encoding:
+      - gzip, deflate
+      authorization:
+      - 04085b084922117573657240766361702e6d65063a0645546c2b079c0dbb4e2219b76dc61978db73a8263f70f1208a2cc743d5d6ba
+      content-type:
+      - application/json
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 403
+      message: Forbidden
+    headers:
+      server:
+      - nginx/0.7.65
+      date:
+      - Sun, 06 Nov 2011 00:09:54 GMT
+      content-type:
+      - application/json; charset=utf-8
+      transfer-encoding:
+      - chunked
+      connection:
+      - keep-alive
+      keep-alive:
+      - timeout=20
+      cache-control:
+      - no-cache
+      x-ua-compatible:
+      - IE=Edge
+    body: ! '{"code":200,"description":"Operation not permitted"}'
+    http_version: '1.1'
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :delete
+    uri: http://api.vcap.me:80/users/fakeuser@vcap.me
+    body: !!null 
+    headers:
+      accept:
+      - ! '*/*; q=0.5, application/xml'
+      accept-encoding:
+      - gzip, deflate
+      authorization:
+      - 04085b084922117573657240766361702e6d65063a0645546c2b079c0dbb4e2219b76dc61978db73a8263f70f1208a2cc743d5d6ba
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 403
+      message: Forbidden
+    headers:
+      server:
+      - nginx/0.7.65
+      date:
+      - Sun, 06 Nov 2011 00:09:54 GMT
+      content-type:
+      - application/json; charset=utf-8
+      transfer-encoding:
+      - chunked
+      connection:
+      - keep-alive
+      keep-alive:
+      - timeout=20
+      cache-control:
+      - no-cache
+      x-ua-compatible:
+      - IE=Edge
+    body: ! '{"code":200,"description":"Operation not permitted"}'
+    http_version: '1.1'

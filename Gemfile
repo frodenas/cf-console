@@ -13,6 +13,12 @@ group :assets do
   #gem 'therubyracer', '~> 0.9.8'
 end
 
-group :test, :development do
+# RSpec2 needs to be in the :development group to expose generators and rake tasks without having to type RAILS_ENV=test
+group :development, :test do
   gem "rspec-rails", "~> 2.7.0"
+end
+
+group :test do
+  gem "webmock", "~> 1.7.7"
+  gem "vcr", "~> 2.0.0.beta1"
 end

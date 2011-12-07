@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
     end
     if @cf_logged_in
       @cf_user = @cf_client.user
-      @cf_target = @cf_client.target_url
+      @cf_target_url = @cf_client.target_url
       begin
         user = User.new(@cf_client)
         @cf_admin_user = user.is_admin?(@cf_user)
@@ -29,6 +29,6 @@ class ApplicationController < ActionController::Base
 
   def cloudfoundry_client(cf_target_url, cf_auth_token = nil)
     cf_target_url ||= CloudFoundry::Client::DEFAULT_TARGET
-    @client = CloudFoundry::Client.new({:target => cf_target_url, :auth_token => cf_auth_token})
+    @client = CloudFoundry::Client.new({:target_url => cf_target_url, :auth_token => cf_auth_token})
   end
 end

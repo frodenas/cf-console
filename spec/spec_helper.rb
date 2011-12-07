@@ -1,15 +1,4 @@
 # This file is copied to spec/ when you run 'rails generate rspec:install'
-begin
-  require 'simplecov'
-rescue LoadError
-  # ignore
-else
-  SimpleCov.start 'rails' do
-    coverage_dir "doc/coverage"
-  end
-end
-
-
 ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'

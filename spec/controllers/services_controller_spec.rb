@@ -30,7 +30,7 @@ describe ServicesController do
 
   context "with a user logged in" do
     before(:each) do
-      vmc_set_user_cookies(VMC::DEFAULT_LOCAL_TARGET)
+      cloudfoundry_set_user_cookies(CloudFoundry::Client::DEFAULT_TARGET)
     end
 
     use_vcr_cassette "controllers/logged/services", :record => :new_episodes
@@ -101,7 +101,6 @@ describe ServicesController do
       it "redirects to services page with a flash alert when service does not exists" do
         delete :delete, :name => "redis-mock"
         flash[:alert].should_not be_empty
-        flash[:alert].should include("redis-mock")
         response.should redirect_to("/services")
       end
     end

@@ -3,8 +3,10 @@
 .idea
 .rbenv-version
 .sass-cache/
+Gemfile.lock
 bin/
 db/*.sqlite3
+doc/coverage/
 log/*.log
 tmp/
 vendor/bundle/ruby/

@@ -1,3 +1,5 @@
+require 'cloudfoundry'
+
 class ApplicationController < ActionController::Base
   protect_from_forgery
   before_filter :require_login
@@ -6,18 +8,18 @@ class ApplicationController < ActionController::Base
 
   def require_login
     begin
-      @cf_client = vmc_client(cookies[:vmc_target_url], cookies.signed[:vmc_auth_token])
+      @cf_client = cloudfoundry_client(cookies[:cf_target_url], cookies.signed[:cf_auth_token])
       @cf_logged_in = @cf_client.logged_in?
     rescue Exception => ex
       @cf_logged_in = false
     end
     if @cf_logged_in
       @cf_user = @cf_client.user
-      @cf_target = @cf_client.target
+      @cf_target = @cf_client.target_url
       begin
         user = User.new(@cf_client)
         @cf_admin_user = user.is_admin?(@cf_user)
-      rescue  VMC::Client::TargetError
+      rescue CloudFoundry::Client::Exception::Forbidden
         @cf_admin_user = false
       end
     else
@@ -25,8 +27,8 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def vmc_client(vmc_target_url, vmc_auth_token = nil)
-    vmc_target_url ||= VMC::DEFAULT_TARGET
-    @client = VMC::Client.new(vmc_target_url, vmc_auth_token)
+  def cloudfoundry_client(cf_target_url, cf_auth_token = nil)
+    cf_target_url ||= CloudFoundry::Client::DEFAULT_TARGET
+    @client = CloudFoundry::Client.new({:target => cf_target_url, :auth_token => cf_auth_token})
   end
 end

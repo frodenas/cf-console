@@ -1,0 +1,206 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://api.vcap.me:80/info/services
+    body: ''
+    headers:
+      User-Agent:
+      - cloudfoundry-client-0.1.1
+      Authorization:
+      - 04085b084922117573657240766361702e6d65063a0645546c2b07aa25e94e22193357f6e166053ef17797b5879877f6ca4542382f
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/0.7.65
+      Date:
+      - Wed, 07 Dec 2011 22:39:44 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Keep-Alive:
+      - timeout=20
+      Etag:
+      - ! '"c53736fe07a3f48b7e0f08c13d0649bd"'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Ua-Compatible:
+      - IE=Edge
+    body: ! '{"key-value":{"redis":{"2.2":{"id":1,"vendor":"redis","version":"2.2","tiers":{"free":{"options":{},"order":1}},"type":"key-value","description":"Redis
+      key-value store service"}},"mongodb":{"1.8":{"id":3,"vendor":"mongodb","version":"1.8","tiers":{"free":{"options":{},"order":1}},"type":"key-value","description":"MongoDB
+      NoSQL store"}}},"database":{"mysql":{"5.1":{"id":2,"vendor":"mysql","version":"5.1","tiers":{"free":{"options":{},"order":1}},"type":"database","description":"MySQL
+      database service"}}},"generic":{"neo4j":{"1.4":{"id":4,"vendor":"neo4j","version":"1.4","tiers":{"free":{"options":{},"order":1}},"type":"generic","description":"Neo4j
+      NOSQL store"}}}}'
+    http_version: !!null 
+  recorded_at: Wed, 07 Dec 2011 22:39:46 GMT
+- request:
+    method: post
+    uri: http://api.vcap.me:80/services
+    body: ! '{"type":"key-value","vendor":"redis","version":"2.2","tier":"free","name":"redis-mock"}'
+    headers:
+      User-Agent:
+      - cloudfoundry-client-0.1.1
+      Authorization:
+      - 04085b084922117573657240766361702e6d65063a0645546c2b07aa25e94e22193357f6e166053ef17797b5879877f6ca4542382f
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/0.7.65
+      Date:
+      - Wed, 07 Dec 2011 22:39:45 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Keep-Alive:
+      - timeout=20
+      Etag:
+      - ! '"99914b932bd37a50b983c5e7c90ae93b"'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Ua-Compatible:
+      - IE=Edge
+    body: ! '{}'
+    http_version: !!null 
+  recorded_at: Wed, 07 Dec 2011 22:39:47 GMT
+- request:
+    method: get
+    uri: http://api.vcap.me:80/apps/newapp
+    body: ''
+    headers:
+      User-Agent:
+      - cloudfoundry-client-0.1.1
+      Authorization:
+      - 04085b084922117573657240766361702e6d65063a0645546c2b07aa25e94e22193357f6e166053ef17797b5879877f6ca4542382f
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/0.7.65
+      Date:
+      - Wed, 07 Dec 2011 22:39:45 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Keep-Alive:
+      - timeout=20
+      Etag:
+      - ! '"a5e8ed60bf1039e09f210ef2205aa39e"'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Ua-Compatible:
+      - IE=Edge
+    body: ! '{"name":"newapp","staging":{"model":"node","stack":"node"},"uris":["newapp.vcap.me"],"instances":5,"runningInstances":0,"resources":{"memory":128,"disk":2048,"fds":256},"state":"STOPPED","services":[],"version":"1956f80f28364930be397a7333ca6035-0","env":[],"meta":{"debug":null,"version":6,"created":1323297585}}'
+    http_version: !!null 
+  recorded_at: Wed, 07 Dec 2011 22:39:47 GMT
+- request:
+    method: put
+    uri: http://api.vcap.me:80/apps/newapp
+    body: ! '{"name":"newapp","staging":{"model":"node","stack":"node"},"uris":["newapp.vcap.me"],"instances":5,"runningInstances":0,"resources":{"memory":128,"disk":2048,"fds":256},"state":"STOPPED","services":["redis-mock"],"version":"1956f80f28364930be397a7333ca6035-0","env":[],"meta":{"debug":null,"version":6,"created":1323297585}}'
+    headers:
+      User-Agent:
+      - cloudfoundry-client-0.1.1
+      Authorization:
+      - 04085b084922117573657240766361702e6d65063a0645546c2b07aa25e94e22193357f6e166053ef17797b5879877f6ca4542382f
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/0.7.65
+      Date:
+      - Wed, 07 Dec 2011 22:39:46 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Keep-Alive:
+      - timeout=20
+      Cache-Control:
+      - no-cache
+      X-Ua-Compatible:
+      - IE=Edge
+    body: ! ' '
+    http_version: !!null 
+  recorded_at: Wed, 07 Dec 2011 22:39:48 GMT
+- request:
+    method: get
+    uri: http://api.vcap.me:80/apps/newapp
+    body: ''
+    headers:
+      User-Agent:
+      - cloudfoundry-client-0.1.1
+      Authorization:
+      - 04085b084922117573657240766361702e6d65063a0645546c2b07aa25e94e22193357f6e166053ef17797b5879877f6ca4542382f
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/0.7.65
+      Date:
+      - Wed, 07 Dec 2011 22:39:46 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Keep-Alive:
+      - timeout=20
+      Etag:
+      - ! '"a3199d45b623d25946042cdc441e78a3"'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Ua-Compatible:
+      - IE=Edge
+    body: ! '{"name":"newapp","staging":{"model":"node","stack":"node"},"uris":["newapp.vcap.me"],"instances":5,"runningInstances":0,"resources":{"memory":128,"disk":2048,"fds":256},"state":"STOPPED","services":["redis-mock"],"version":"b47566edd6935af76fd9907af795ddb0-0","env":[],"meta":{"debug":null,"version":7,"created":1323297586}}'
+    http_version: !!null 
+  recorded_at: Wed, 07 Dec 2011 22:39:48 GMT
+recorded_with: VCR 2.0.0.beta2

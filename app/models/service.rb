@@ -1,41 +1,26 @@
 class Service
-  def initialize(cf_conn)
-    @cf_conn = cf_conn
+  def initialize(cf_client)
+    @cf_client = cf_client
   end
 
   def find_all_services()
-    return @cf_conn.services || []
+    return @cf_client.list_services || []
   end
 
   def find(name)
-    service_info = nil
-    services = find_all_services()
-    services.each do |service_item|
-      if service_item[:name] == name
-        service_info = service_item
-        break
-      end
-    end
-    return service_info
+    raise "Name cannot be blank" if name.nil? || name.empty?
+    return @cf_client.service_info(name) || nil
   end
 
   def create(name, ss)
-    if name.nil? || name.empty?
-      raise "Name cannot be blank"
-    end
-    if (name =~ /^[\w-]+$/).nil?
-      raise "Invalid service name: \"" + name + "\". Must contain only word characters (letter, number, underscore)."
-    end
-    if ss.nil? || ss.empty?
-      raise "Service cannot be blank"
-    end
-    @cf_conn.create_service(ss, name)
+    raise "Name cannot be blank" if name.nil? || name.empty?
+    raise "Invalid service name: \"" + name + "\". Must contain only word characters (letter, number, underscore)." if (name =~ /^[\w-]+$/).nil?
+    raise "Service cannot be blank" if ss.nil? || ss.empty?
+    @cf_client.create_service(ss, name)
   end
 
   def delete(name)
-    if name.nil? || name.empty?
-      raise "Name cannot be blank"
-    end
-    @cf_conn.delete_service(name)
+    raise "Name cannot be blank" if name.nil? || name.empty?
+    @cf_client.delete_service(name)
   end
 end

@@ -27,7 +27,7 @@ class AppsController < ApplicationController
       @available_instances = find_available_instances(@app[:state], @app[:resources][:memory], @app[:instances])
       @available_memsizes = find_available_memsizes(@app[:state], @app[:resources][:memory], @app[:instances])
       @available_services = find_available_services()
-    rescue VMC::Client::NotFound => ex
+    rescue CloudFoundry::Client::Exception::NotFound => ex
       flash[:alert] = ex.message
       redirect_to apps_info_url
     rescue Exception => ex

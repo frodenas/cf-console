@@ -1,0 +1,80 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://api.vcap.me:80/info
+    body: ''
+    headers:
+      User-Agent:
+      - cloudfoundry-client-0.1.1
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/0.7.65
+      Date:
+      - Wed, 07 Dec 2011 22:39:31 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Keep-Alive:
+      - timeout=20
+      Etag:
+      - ! '"cbc07ff8530919ca664fcfc8b21a398b"'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Ua-Compatible:
+      - IE=Edge
+    body: ! '{"name":"vcap","build":2222,"support":"http://support.cloudfoundry.com","version":"0.999","description":"VMware''s
+      Cloud Application Platform","allow_debug":true}'
+    http_version: !!null 
+  recorded_at: Wed, 07 Dec 2011 22:39:34 GMT
+- request:
+    method: post
+    uri: http://api.vcap.me:80/users/user@vcap.me/tokens
+    body: ! '{"password":"foobar"}'
+    headers:
+      User-Agent:
+      - cloudfoundry-client-0.1.1
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/0.7.65
+      Date:
+      - Wed, 07 Dec 2011 22:39:32 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Keep-Alive:
+      - timeout=20
+      Etag:
+      - ! '"8ea3ecd248344a5f921d841a1736eabf"'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Ua-Compatible:
+      - IE=Edge
+    body: ! '{"token":"04085b084922117573657240766361702e6d65063a0645546c2b07a425e94e22198e17a751fda8ef6bcd2cf5c6675d92f45694b012"}'
+    http_version: !!null 
+  recorded_at: Wed, 07 Dec 2011 22:39:34 GMT
+recorded_with: VCR 2.0.0.beta2

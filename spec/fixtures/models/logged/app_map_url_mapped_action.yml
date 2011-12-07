@@ -1,0 +1,44 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://api.vcap.me:80/apps/newapp
+    body: ''
+    headers:
+      User-Agent:
+      - cloudfoundry-client-0.1.1
+      Authorization:
+      - 04085b084922117573657240766361702e6d65063a0645546c2b07aa25e94e22193357f6e166053ef17797b5879877f6ca4542382f
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/0.7.65
+      Date:
+      - Wed, 07 Dec 2011 22:39:48 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Keep-Alive:
+      - timeout=20
+      Etag:
+      - ! '"75206285f269697427a162122e8faef1"'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Ua-Compatible:
+      - IE=Edge
+    body: ! '{"name":"newapp","staging":{"model":"node","stack":"node"},"uris":["newapp.vcap.me","newapp2.vcap.me"],"instances":5,"runningInstances":0,"resources":{"memory":128,"disk":2048,"fds":256},"state":"STOPPED","services":[],"version":"f2ade6d9106f1f38bfa827a6d0bc714a-0","env":[],"meta":{"debug":null,"version":10,"created":1323297588}}'
+    http_version: !!null 
+  recorded_at: Wed, 07 Dec 2011 22:39:50 GMT
+recorded_with: VCR 2.0.0.beta2

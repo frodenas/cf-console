@@ -1,0 +1,42 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: http://api.vcap.me:80/apps
+    body: ! '{"name":"newapp","uris":["newapp.vcap.me"],"instances":1,"staging":{"model":"node"},"resources":{"memory":64}}'
+    headers:
+      User-Agent:
+      - cloudfoundry-client-0.1.1
+      Authorization:
+      - 04085b084922117573657240766361702e6d65063a0645546c2b07aa25e94e22193357f6e166053ef17797b5879877f6ca4542382f
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 302
+      message: Moved Temporarily
+    headers:
+      Server:
+      - nginx/0.7.65
+      Date:
+      - Wed, 07 Dec 2011 22:39:38 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Keep-Alive:
+      - timeout=20
+      Location:
+      - http://api.vcap.me/apps/newapp
+      Cache-Control:
+      - no-cache
+      X-Ua-Compatible:
+      - IE=Edge
+    body: ! '{"result":"success","redirect":"http://api.vcap.me/apps/newapp"}'
+    http_version: !!null 
+  recorded_at: Wed, 07 Dec 2011 22:39:40 GMT
+recorded_with: VCR 2.0.0.beta2

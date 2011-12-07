@@ -1,0 +1,44 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://api.vcap.me:80/users
+    body: ''
+    headers:
+      User-Agent:
+      - cloudfoundry-client-0.1.1
+      Authorization:
+      - 04085b0849221261646d696e40766361702e6d65063a0645546c2b07b925e94e22197116564796f202d7c9ece57dc7d86c5db0e68ad6
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/0.7.65
+      Date:
+      - Wed, 07 Dec 2011 22:39:54 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Keep-Alive:
+      - timeout=20
+      Etag:
+      - ! '"83aaba0ee95e8379c17e88d2287f4f08"'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Ua-Compatible:
+      - IE=Edge
+    body: ! '[{"email":"admin@vcap.me","admin":true,"apps":[]},{"email":"user@vcap.me","admin":false,"apps":[]}]'
+    http_version: !!null 
+  recorded_at: Wed, 07 Dec 2011 22:39:56 GMT
+recorded_with: VCR 2.0.0.beta2

@@ -18,7 +18,11 @@ class ServicesController < ApplicationController
       if !@ss.nil? && !@ss.empty?
         begin
           service = Service.new(@cf_client)
-          service_info = service.find(@name)
+          begin
+            service_info = service.find(@name)
+          rescue
+            service_info = nil
+          end
           if service_info.nil?
             service.create(@name, @ss)
             service_info = service.find(@name)

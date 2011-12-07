@@ -30,7 +30,7 @@ describe UsersController do
 
   context "with a user logged in" do
     before(:each) do
-      vmc_set_user_cookies(VMC::DEFAULT_LOCAL_TARGET)
+      cloudfoundry_set_user_cookies(CloudFoundry::Client::DEFAULT_TARGET)
     end
 
     use_vcr_cassette "controllers/logged/users", :record => :new_episodes
@@ -73,7 +73,7 @@ describe UsersController do
 
   context "with an admin user logged in" do
     before(:each) do
-      vmc_set_admin_cookies(VMC::DEFAULT_LOCAL_TARGET)
+      cloudfoundry_set_admin_cookies(CloudFoundry::Client::DEFAULT_TARGET)
     end
 
     use_vcr_cassette "controllers/admin/users", :record => :new_episodes
@@ -134,9 +134,11 @@ describe UsersController do
       end
 
       it "redirects to users page with a flash alert when user already exists" do
-        post :create, :email => "fakeuser@vcap.me", :password => "foobar", :vpassword => "foobar"
-        flash[:alert].should_not be_empty
-        response.should redirect_to("/users")
+        VCR.use_cassette("controllers/admin/users_create_again_action", :record => :new_episodes, :exclusive => true) do
+          post :create, :email => "fakeuser@vcap.me", :password => "foobar", :vpassword => "foobar"
+          flash[:alert].should_not be_empty
+          response.should redirect_to("/users")
+        end
       end
     end
 

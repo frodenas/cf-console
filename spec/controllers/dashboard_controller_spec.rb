@@ -16,7 +16,7 @@ describe DashboardController do
 
   context "with a user logged in" do
     before(:each) do
-      vmc_set_user_cookies(VMC::DEFAULT_LOCAL_TARGET)
+      cloudfoundry_set_user_cookies(CloudFoundry::Client::DEFAULT_TARGET)
     end
 
     use_vcr_cassette "controllers/logged/dashboard", :record => :new_episodes

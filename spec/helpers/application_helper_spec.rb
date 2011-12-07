@@ -7,6 +7,16 @@ describe ApplicationHelper do
       status.should include("state-green")
     end
 
+    it "green a STARTED state" do
+      status = helper.colorize_state("STARTED")
+      status.should include("state-green")
+    end
+
+    it "green a STARTING state" do
+      status = helper.colorize_state("STARTING")
+      status.should include("state-green")
+    end
+
     it "orange a FLAPPING state" do
       status = helper.colorize_state("FLAPPING")
       status.should include("state-orange")
@@ -113,6 +123,13 @@ describe ApplicationHelper do
     it "Gigabytes" do
       size = helper.pretty_size(1024 * 1024 * 1024)
       size.should eql("1.0 Gb")
+    end
+  end
+
+  describe "for a title" do
+    it "inserts " do
+      # This should be tested in a view
+      helper.title("Test Title")
     end
   end
 

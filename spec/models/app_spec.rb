@@ -6,140 +6,179 @@ describe App do
   context "without a user logged in" do
     before(:all) do
       VCR.use_cassette("models/no_logged/client", :record => :new_episodes) do
-        cf_client = vmc_client(VMC::DEFAULT_LOCAL_TARGET)
+        cf_client = cloudfoundry_client(CloudFoundry::Client::DEFAULT_TARGET)
         @app = App.new(cf_client)
       end
     end
 
     use_vcr_cassette "models/no_logged/app", :record => :new_episodes
 
+    it 'raises an AuthError exception when creating an app' do
+      expect {
+        created = @app.create("newapp")
+      }.to raise_exception(CloudFoundry::Client::Exception::AuthError)
+    end
+
     it 'raises an AuthError exception when looking for all apps' do
       expect {
         apps = @app.find_all_apps()
-      }.to raise_exception(VMC::Client::AuthError)
+      }.to raise_exception(CloudFoundry::Client::Exception::AuthError)
     end
 
     it 'raises an AuthError exception when looking for all app states' do
       expect {
         apps_states = @app.find_all_states()
-      }.to raise_exception(VMC::Client::AuthError)
+      }.to raise_exception(CloudFoundry::Client::Exception::AuthError)
     end
 
     it 'raises an AuthError exception when looking for an app' do
       expect {
-        app_info = @app.find("app-mock-started")
-      }.to raise_exception(VMC::Client::AuthError)
+        app_info = @app.find("newapp")
+      }.to raise_exception(CloudFoundry::Client::Exception::AuthError)
     end
 
     it 'raises an AuthError exception when looking for app instances' do
       expect {
-        app_instances = @app.find_app_instances("app-mock-started")
-      }.to raise_exception(VMC::Client::AuthError)
+        app_instances = @app.find_app_instances("newapp")
+      }.to raise_exception(CloudFoundry::Client::Exception::AuthError)
     end
 
     it 'raises an AuthError exception when looking for app crashes' do
       expect {
-        app_crashes = @app.find_app_crashes("app-mock-started")
-      }.to raise_exception(VMC::Client::AuthError)
+        app_crashes = @app.find_app_crashes("newapp")
+      }.to raise_exception(CloudFoundry::Client::Exception::AuthError)
     end
 
-    it 'returns an empty list of app states' do
-      app_states = @app.find_app_instances_states(nil)
-      app_states.should be_empty
+    it 'returns an empty list of app instances states' do
+      app_instances_states = @app.find_app_instances_states(nil)
+      app_instances_states.should be_empty
     end
 
     it 'raises an AuthError exception when stopping an app' do
       expect {
-        app_info = @app.stop("app-mock-started")
-      }.to raise_exception(VMC::Client::AuthError)
+        app_info = @app.stop("newapp")
+      }.to raise_exception(CloudFoundry::Client::Exception::AuthError)
     end
 
     it 'raises an AuthError exception when starting an app' do
       expect {
-        app_info = @app.start("app-mock-started")
-      }.to raise_exception(VMC::Client::AuthError)
+        app_info = @app.start("newapp")
+      }.to raise_exception(CloudFoundry::Client::Exception::AuthError)
     end
 
     it 'raises an AuthError exception when restarting an app' do
       expect {
-        app_info = @app.restart("app-mock-started")
-      }.to raise_exception(VMC::Client::AuthError)
-    end
-
-    it 'raises an AuthError exception when deleting an app' do
-      expect {
-        app_info = @app.delete("app-mock-started")
-      }.to raise_exception(VMC::Client::AuthError)
+        app_info = @app.restart("newapp")
+      }.to raise_exception(CloudFoundry::Client::Exception::AuthError)
     end
 
     it 'raises an AuthError exception when setting app number of instances' do
       expect {
-        @app.set_instances("app-mock-started", "1")
-      }.to raise_exception(VMC::Client::AuthError)
+        updated = @app.set_instances("newapp", "1")
+      }.to raise_exception(CloudFoundry::Client::Exception::AuthError)
     end
 
     it 'raises an AuthError exception when setting app memory size' do
       expect {
-        @app.set_memsize("app-mock-started", "128")
-      }.to raise_exception(VMC::Client::AuthError)
+        updated = @app.set_memsize("newapp", "128")
+      }.to raise_exception(CloudFoundry::Client::Exception::AuthError)
     end
 
     it 'raises an AuthError exception when setting an app var' do
       expect {
-        var_exists = @app.set_var("app-mock-started", "var-mock", "value-mock")
-      }.to raise_exception(VMC::Client::AuthError)
+        var_exists = @app.set_var("newapp", "var-mock", "value-mock")
+      }.to raise_exception(CloudFoundry::Client::Exception::AuthError)
     end
 
     it 'raises an AuthError exception when unsetting an app var' do
       expect {
-        @app.unset_var("app-mock-started", "var-mock")
-      }.to raise_exception(VMC::Client::AuthError)
+        var_deleted = @app.unset_var("newapp", "var-mock")
+      }.to raise_exception(CloudFoundry::Client::Exception::AuthError)
     end
 
     it 'raises an AuthError exception when binding a service' do
       expect {
-        @app.bind_service("app-mock-started", "redis-mock")
-      }.to raise_exception(VMC::Client::AuthError)
+        binded = @app.bind_service("newapp", "redis-mock")
+      }.to raise_exception(CloudFoundry::Client::Exception::AuthError)
     end
 
     it 'raises an AuthError exception when unbinding a service' do
       expect {
-        @app.unbind_service("app-mock-started", "redis-mock")
-      }.to raise_exception(VMC::Client::AuthError)
+        unbinded = @app.unbind_service("newapp", "redis-mock")
+      }.to raise_exception(CloudFoundry::Client::Exception::AuthError)
     end
 
     it 'raises an AuthError exception when mapping a url' do
       expect {
-        app_url = @app.map_url("app-mock-started", "http://app-mock.vcap.me")
-      }.to raise_exception(VMC::Client::AuthError)
+        app_url = @app.map_url("newapp", "http://app-mock.vcap.me")
+      }.to raise_exception(CloudFoundry::Client::Exception::AuthError)
     end
 
     it 'raises an AuthError exception when unmapping a url' do
       expect {
-        app_url = @app.unmap_url("app-mock-started", "http://app-mock.vcap.me")
-      }.to raise_exception(VMC::Client::AuthError)
+        app_url = @app.unmap_url("newapp", "http://newapp.vcap.me")
+      }.to raise_exception(CloudFoundry::Client::Exception::AuthError)
     end
 
     it 'raises an AuthError exception when viewing a file' do
       expect {
-        files = @app.view_file("app-mock-started", "/", "0")
-      }.to raise_exception(VMC::Client::AuthError)
+        files = @app.view_file("newapp", "/", "0")
+      }.to raise_exception(CloudFoundry::Client::Exception::AuthError)
+    end
+
+    it 'raises an AuthError exception when deleting an app' do
+      expect {
+        deleted = @app.delete("newapp")
+      }.to raise_exception(CloudFoundry::Client::Exception::AuthError)
     end
   end
 
   context "with a user logged in" do
     before(:all) do
       VCR.use_cassette("models/logged/client", :record => :new_episodes) do
-        cf_client = vmc_client_user_logged(VMC::DEFAULT_LOCAL_TARGET)
+        cf_client = cloudfoundry_client_user_logged(CloudFoundry::Client::DEFAULT_TARGET)
         @app = App.new(cf_client)
+        @service = Service.new(cf_client)
       end
     end
 
     use_vcr_cassette "models/logged/app", :record => :new_episodes
 
+    it 'raises an exception when creating an app with a blank name' do
+      expect {
+        created = @app.create("")
+      }.to raise_exception
+    end
+
+    it 'raises an exception when creating an app with an invalid name' do
+      expect {
+        created = @app.create("new name")
+      }.to raise_exception
+    end
+
+    it 'raises an exception when creating an app with a blank manifest' do
+      expect {
+        created = @app.create("newapp")
+      }.to raise_exception
+    end
+
+    it 'can create a new app' do
+      VCR.use_cassette("models/logged/app_create_action", :record => :new_episodes, :exclusive => true) do
+       manifest = {
+          :name => "newapp",
+          :uris => ["newapp.vcap.me"],
+          :instances => 1,
+          :staging => {:model => "node"},
+          :resources => {:memory => 64}
+        }
+        created = @app.create("newapp", manifest)
+        created.should be_true
+      end
+    end
+
     it 'returns a proper list of all apps' do
       apps = @app.find_all_apps()
-      apps.should have_at_least(2).items
+      apps.should have_at_least(1).items
       app_info = apps.first
       app_info.should have_key :name
       app_info.should have_key :version
@@ -158,8 +197,8 @@ describe App do
       apps_states.should_not be_empty
     end
 
-    it 'returns info about a started app' do
-      app_info = @app.find("app-mock-started")
+    it 'returns info about an app' do
+      app_info = @app.find("newapp")
       app_info.should have_key :name
       app_info.should have_key :version
       app_info.should have_key :state
@@ -172,337 +211,434 @@ describe App do
       app_info.should have_key :meta
     end
 
-    it 'returns info about a stopped app' do
-      app_info = @app.find("app-mock-stopped")
-      app_info.should have_key :name
-      app_info.should have_key :version
-      app_info.should have_key :state
-      app_info.should have_key :instances
-      app_info.should have_key :runningInstances
-      app_info.should have_key :staging
-      app_info.should have_key :resources
-      app_info.should have_key :uris
-      app_info.should have_key :env
-      app_info.should have_key :meta
+    it 'raises an exception when looking for an app with a blank name' do
+      expect {
+        app_info = @app.find("")
+      }.to raise_exception
     end
 
     it 'raises a NotFound exception when looking for an app that does not exists' do
       expect {
-        app_info = @app.find("no-app-mock")
-      }.to raise_exception(VMC::Client::NotFound)
+        app_info = @app.find("noapp")
+      }.to raise_exception(CloudFoundry::Client::Exception::NotFound)
     end
 
-    it 'returns a proper list of instances if the app is started' do
-      app_instances = @app.find_app_instances("app-mock-started")
-      app_instances.should_not be_empty
-    end
-
-    it 'returns an empty list of instances if the app is stopped' do
-      app_instances = @app.find_app_instances("app-mock-stopped")
+    it 'returns a proper list of app instances' do
+      app_instances = @app.find_app_instances("newapp")
       app_instances.should be_empty
+    end
+
+    it 'raises a NotFound exception when looking for instances of an app with a blank name' do
+      expect {
+        app_instances = @app.find_app_instances("")
+      }.to raise_exception
     end
 
     it 'raises a NotFound exception when looking for instances of an app that does not exists' do
       expect {
-        app_instances = @app.find_app_instances("no-app-mock")
-      }.to raise_exception(VMC::Client::NotFound)
+        app_instances = @app.find_app_instances("noapp")
+      }.to raise_exception(CloudFoundry::Client::Exception::NotFound)
     end
 
-    it 'returns an empty list of crashes if the app is started' do
-      app_crashes = @app.find_app_crashes("app-mock-started")
+    it 'returns an empty list of app crashes' do
+      app_crashes = @app.find_app_crashes("newapp")
       app_crashes.should be_empty
     end
 
-    it 'returns an empty list of crashes if the app is stopped' do
-      app_crashes = @app.find_app_crashes("app-mock-stopped")
-      app_crashes.should be_empty
+    it 'raises a NotFound exception when looking for crashes of an app with a blank name' do
+      expect {
+        app_crashes = @app.find_app_app_crashes("")
+      }.to raise_exception
     end
 
     it 'raises a NotFound exception when looking for crashes of an app that does not exists' do
       expect {
-        app_crashes = @app.find_app_crashes("no-app-mock")
-      }.to raise_exception(VMC::Client::NotFound)
+        app_crashes = @app.find_app_crashes("noapp")
+      }.to raise_exception(CloudFoundry::Client::Exception::NotFound)
     end
 
     it 'returns a proper list of states if the app is started' do
-      app_info = @app.find("app-mock-started")
+      app_info = @app.find("newapp")
       app_states = @app.find_app_instances_states(app_info)
       app_states.should_not be_empty
     end
 
-    it 'returns a proper list of states if the app is stopped' do
-      app_info = @app.find("app-mock-stopped")
-      app_states = @app.find_app_instances_states(app_info)
-      app_states.should_not be_empty
+    it 'can stop an app' do
+      # TODO
+      # updated = @app.stop("newapp")
     end
 
-    it 'can stop an app if the app is started' do
-      VCR.use_cassette("models/logged/app_started_stop_action", :record => :new_episodes, :exclusive => true) do
-        # TODO
-        #app_info = @app.stop("app-mock-started")
-      end
-    end
-
-    it 'can start an app if the app is started' do
-      VCR.use_cassette("models/logged/app_started_start_action", :record => :new_episodes, :exclusive => true) do
-        # TODO
-        #app_info = @app.start("app-mock-started")
-      end
-    end
-
-    it 'can restart an app if the app is started' do
-      VCR.use_cassette("models/logged/app_started_restart_action", :record => :new_episodes, :exclusive => true) do
-        # TODO
-        #app_info = @app.restart("app-mock-started")
-      end
-    end
-
-    it 'can start an app if the app is stopped' do
-      VCR.use_cassette("models/logged/app_stopped_start_action", :record => :new_episodes, :exclusive => true) do
-        # TODO
-        #app_info = @app.start("app-mock-stopped")
-      end
-    end
-
-    it 'can restart an app if the app is stopped' do
-      VCR.use_cassette("models/logged/app_stopped_restart_action", :record => :new_episodes, :exclusive => true) do
-        # TODO
-        #app_info = @app.restart("app-mock-stopped")
-      end
-    end
-
-    it 'can stop an app if the app is stopped' do
-      VCR.use_cassette("models/logged/app_stopped_stop_action", :record => :new_episodes, :exclusive => true) do
-        # TODO
-        #app_info = @app.stop("app-mock-stopped")
-      end
+    it 'raises an exception when stopping an app with a blank name' do
+      expect {
+        updated = @app.stop("")
+      }.to raise_exception
     end
 
     it 'raises a NotFound exception when stopping an app that does not exists' do
       expect {
-        app_info = @app.stop("no-app-mock")
-      }.to raise_exception(VMC::Client::NotFound)
+        updated = @app.stop("noapp")
+      }.to raise_exception(CloudFoundry::Client::Exception::NotFound)
+    end
+
+    it 'can start an app' do
+      # TODO
+      # updated = @app.start("newapp")
+    end
+
+    it 'raises an exception when starting an app with a blank name' do
+      expect {
+        updated = @app.start("")
+      }.to raise_exception
     end
 
     it 'raises a NotFound exception when starting an app that does not exists' do
       expect {
-        app_info = @app.start("no-app-mock")
-      }.to raise_exception(VMC::Client::NotFound)
+        updated = @app.start("noapp")
+      }.to raise_exception(CloudFoundry::Client::Exception::NotFound)
+    end
+
+    it 'can restart an app' do
+      # TODO
+      # updated = @app.restart("newapp")
+    end
+
+    it 'raises an exception when restarting an app with a blank name' do
+      expect {
+        updated = @app.restart("")
+      }.to raise_exception
     end
 
     it 'raises a NotFound exception when restarting an app that does not exists' do
       expect {
-        app_info = @app.restart("no-app-mock")
-      }.to raise_exception(VMC::Client::NotFound)
+        updated = @app.restart("noapp")
+      }.to raise_exception(CloudFoundry::Client::Exception::NotFound)
     end
 
-    it 'can set a var if the app is started' do
-      VCR.use_cassette("models/logged/app_started_set_var_action", :record => :new_episodes, :exclusive => true) do
-        # TODO
-        #var_exists = @app.set_var("app-mock-started", "var-mock", "value-mock")
+    it 'can set number of instances' do
+      VCR.use_cassette("models/logged/app_set_instances_action", :record => :new_episodes, :exclusive => true) do
+        updated = @app.set_instances("newapp", "5")
+        updated.should be_true
       end
     end
 
-    it 'can set a var if the app is stopped' do
-      VCR.use_cassette("models/logged/app_stopped_set_var_action", :record => :new_episodes, :exclusive => true) do
-        # TODO
-        #var_exists = @app.set_var("app-mock-stopped", "var-mock", "value-mock")
+    it 'raises an exception when setting number of instances for an app with blank name' do
+      expect {
+        updated = @app.set_instances("", "1")
+      }.to raise_exception
+    end
+
+    it 'raises an exception when setting a blank number of instances for an app' do
+      expect {
+        updated = @app.set_instances("newapp", "")
+      }.to raise_exception
+    end
+
+    it 'raises an exception when setting a non-numeric instances for an app' do
+      expect {
+        updated = @app.set_instances("newapp", "A")
+      }.to raise_exception
+    end
+
+    it 'raises an exception when setting 0 instances for an app' do
+      expect {
+        updated = @app.set_instances("newapp", "0")
+      }.to raise_exception
+    end
+
+    it 'raises an exception when setting a number instances beyond limits for an app' do
+      expect {
+        updated = @app.set_instances("newapp", "1000000000000")
+      }.to raise_exception
+    end
+
+    it 'raises a NotFound exception setting number of instances for an app that does not exists' do
+      expect {
+        updated = @app.set_instances("noapp", "1")
+      }.to raise_exception(CloudFoundry::Client::Exception::NotFound)
+    end
+
+    it 'raises an AuthError exception when setting app memory size' do
+      VCR.use_cassette("models/logged/app_set_memory_action", :record => :new_episodes, :exclusive => true) do
+        updated = @app.set_memsize("newapp", "128")
+        updated.should be_true
       end
+    end
+
+    it 'raises an exception when setting memory size for an app with blank name' do
+      expect {
+        updated = @app.set_memsize("", "128")
+      }.to raise_exception
+    end
+
+    it 'raises an exception when setting a blank memory size for an app' do
+      expect {
+        updated = @app.set_memsize("newapp", "")
+      }.to raise_exception
+    end
+
+    it 'raises an exception when setting a non-numeric memory size for an app' do
+      expect {
+        updated = @app.set_memsize("newapp", "A")
+      }.to raise_exception
+    end
+
+    it 'raises an exception when setting memory size beyond limits for an app' do
+      expect {
+        updated = @app.set_memsize("newapp", "1000000000000")
+      }.to raise_exception
+    end
+
+    it 'raises a NotFound exception setting memory size for an app that does not exists' do
+      expect {
+        updated = @app.set_memsize("noapp", "128")
+      }.to raise_exception(CloudFoundry::Client::Exception::NotFound)
+    end
+
+    it 'can set a var' do
+      VCR.use_cassette("models/logged/app_set_var_action", :record => :new_episodes, :exclusive => true) do
+        var_exists = @app.set_var("newapp", "var-mock", "value-mock")
+        var_exists.should be_nil
+      end
+    end
+
+    it 'raises an exception when setting a var for an app with a blank name' do
+      expect {
+        var_exists = @app.set_var("", "var-mock", "value-mock")
+      }.to raise_exception
+    end
+
+    it 'raises an exception when setting a blank var for an app' do
+      expect {
+        var_exists = @app.set_var("newapp", "", "value-mock")
+      }.to raise_exception
+    end
+
+    it 'raises an exception when setting an invalid var name for an app' do
+      expect {
+        var_exists = @app.set_var("newapp", "var mock", "value-mock")
+      }.to raise_exception
     end
 
     it 'raises a NotFound exception when setting a var if the app does not exists' do
       expect {
-        var_exists = @app.set_var("no-app-mock", "var-mock", "value-mock")
-      }.to raise_exception(VMC::Client::NotFound)
+        var_exists = @app.set_var("noapp", "var-mock", "value-mock")
+      }.to raise_exception(CloudFoundry::Client::Exception::NotFound)
     end
 
-    it 'can modify a var if the app is started' do
-      VCR.use_cassette("models/logged/app_started_modify_var_action", :record => :new_episodes, :exclusive => true) do
-        # TODO
-        #var_exists = @app.set_var("app-mock-started", "var-mock", "value-mock-2")
+    it 'can modify a var' do
+      VCR.use_cassette("models/logged/app_modify_var_action", :record => :new_episodes, :exclusive => true) do
+        var_exists = @app.set_var("newapp", "var-mock", "value-mock-2")
+        var_exists.should_not be_empty
       end
     end
 
-    it 'can modify a var if the app is stopped' do
-      VCR.use_cassette("models/logged/app_stopped_modify_var_action", :record => :new_episodes, :exclusive => true) do
-        # TODO
-        #var_exists = @app.set_var("app-mock-stopped", "var-mock", "value-mock-2")
+    it 'can unset a var' do
+      VCR.use_cassette("models/logged/app_unset_var_action", :record => :new_episodes, :exclusive => true) do
+        var_deleted = @app.unset_var("newapp", "var-mock")
+        var_deleted.should be_true
       end
     end
 
-    it 'raises a NotFound exception when modifying a var if the app does not exists' do
+    it 'raises an exception when unsetting a var for an app with a blank name' do
       expect {
-        var_exists = @app.set_var("no-app-mock", "var-mock", "value-mock-2")
-      }.to raise_exception(VMC::Client::NotFound)
+        var_deleted = @app.unset_var("", "var-mock")
+      }.to raise_exception
     end
 
-    it 'can unset a var if the app is started' do
-      VCR.use_cassette("models/logged/app_started_unset_var_action", :record => :new_episodes, :exclusive => true) do
-        # TODO
-        #@app.unset_var("app-mock-started", "var-mock")
-      end
+    it 'raises an exception when setting a blank var for an app' do
+      expect {
+        var_deleted = @app.unset_var("newapp", "")
+      }.to raise_exception
     end
 
-    it 'can unset a var if the app is stopped' do
-      VCR.use_cassette("models/logged/app_stopped_unset_var_action", :record => :new_episodes, :exclusive => true) do
-        # TODO
-        #@app.unset_var("app-mock-stopped", "var-mock")
-      end
+    it 'raises an exception when unsetting a var that is not set' do
+      expect {
+        var_deleted = @app.unset_var("newapp", "novar")
+      }.to raise_exception
     end
 
     it 'raises a NotFound exception when unsetting a var if the app does not exists' do
       expect {
-        var_exists = @app.unset_var("no-app-mock", "var-mock")
-      }.to raise_exception(VMC::Client::NotFound)
+        var_deleted = @app.unset_var("noapp", "var-mock")
+      }.to raise_exception(CloudFoundry::Client::Exception::NotFound)
     end
 
-    it 'can bind a service if the app is started' do
-      VCR.use_cassette("models/logged/app_started_bind_service_action", :record => :new_episodes, :exclusive => true) do
-        # TODO
-        #@app.bind_service("app-mock-started", "redis-mock")
+    it 'can bind a service' do
+      VCR.use_cassette("models/logged/app_bind_service_action", :record => :new_episodes, :exclusive => true) do
+        created = @service.create("redis-mock", "redis")
+        binded = @app.bind_service("newapp", "redis-mock")
+        binded.should be_true
       end
     end
 
-    it 'raises a NotFound exception when binding a service that does not exists' do
+    it 'raises an exception when binding a service for an app with a blank name' do
       expect {
-        @app.bind_service("app-mock-started", "no-service")
-      }.to raise_exception(VMC::Client::NotFound)
+        binded = @app.bind_service("", "redis-mock")
+      }.to raise_exception
     end
 
-    it 'can bind a service if the app is stopped' do
-      VCR.use_cassette("models/logged/app_stopped_bind_service_action", :record => :new_episodes, :exclusive => true) do
-        # TODO
-        #@app.bind_service("app-mock-stopped", "redis-mock")
+    it 'raises an exception when binding a blank service' do
+      expect {
+        binded = @app.bind_service("newapp", "")
+      }.to raise_exception
+    end
+
+    it 'raises an exception when binding a service already binded' do
+      VCR.use_cassette("models/logged/app_bind_service_binded_action", :record => :new_episodes, :exclusive => true) do
+        expect {
+          binded = @app.bind_service("newapp", "redis-mock")
+        }.to raise_exception
       end
     end
 
     it 'raises a NotFound exception when binding a service if the app does not exists' do
       expect {
-        @app.bind_service("no-app-mock", "redis-mock")
-      }.to raise_exception(VMC::Client::NotFound)
+        binded = @app.bind_service("noapp", "redis-mock")
+      }.to raise_exception(CloudFoundry::Client::Exception::NotFound)
     end
 
-    it 'can unbind a service if the app is started' do
-      VCR.use_cassette("models/logged/app_started_unbind_service_action", :record => :new_episodes, :exclusive => true) do
-        # TODO
-        #@app.unbind_service("app-mock-started", "redis-mock")
+    it 'raises a NotFound exception when binding a service that does not exists' do
+      VCR.use_cassette("models/logged/app_bind_invalid_service_action", :record => :new_episodes, :exclusive => true) do
+        expect {
+          binded = @app.bind_service("newapp", "no-service")
+        }.to raise_exception(CloudFoundry::Client::Exception::NotFound)
       end
     end
 
-    it 'raises a RuntimeError exception when unbinding a service that is not binded' do
+    it 'can unbind a service' do
+      VCR.use_cassette("models/logged/app_unbind_service_action", :record => :new_episodes, :exclusive => true) do
+        unbinded = @app.unbind_service("newapp", "redis-mock")
+        unbinded.should be_true
+        deleted = @service.delete("redis-mock")
+      end
+    end
+
+    it 'raises an exception when unbinding a service from an app with a blank name' do
       expect {
-        @app.unbind_service("app-mock-started", "no-service")
-      }.to raise_exception(RuntimeError)
+        unbinded = @app.unbind_service("", "redis-mock")
+      }.to raise_exception
     end
 
-    it 'can unbind a service if the app is stopped' do
-      VCR.use_cassette("models/logged/app_stopped_unbind_service_action", :record => :new_episodes, :exclusive => true) do
-        # TODO
-        #@app.unbind_service("app-mock-stopped", "redis-mock")
-      end
+    it 'raises an exception when unbinding a blank service' do
+      expect {
+        unbinded = @app.unbind_service("newapp", "")
+      }.to raise_exception
+    end
+
+    it 'raises an exception when unbinding a service that is not binded' do
+      expect {
+        @app.unbind_service("newapp", "no-service")
+      }.to raise_exception
     end
 
     it 'raises a NotFound exception when unbinding a service if the app does not exists' do
       expect {
-        @app.unbind_service("no-app-mock", "redis-mock")
-      }.to raise_exception(VMC::Client::NotFound)
+        @app.unbind_service("noapp", "redis-mock")
+      }.to raise_exception(CloudFoundry::Client::Exception::NotFound)
     end
 
-    it 'can map a url if the app is started' do
-      VCR.use_cassette("models/logged/app_started_map_url_action", :record => :new_episodes, :exclusive => true) do
-        # TODO
-        #app_url = @app.map_url("app-mock-started", "http://app-mock.vcap.me")
+    it 'can map a url' do
+      VCR.use_cassette("models/logged/app_map_url_action", :record => :new_episodes, :exclusive => true) do
+        app_url = @app.map_url("newapp", "http://newapp2.vcap.me")
+        app_url.should_not be_empty
       end
     end
 
-    it 'can not map an external url' do
-      VCR.use_cassette("models/logged/app_started_map_external_url_action", :record => :new_episodes, :exclusive => true) do
-        # Disable this test only if app_uris - allow_external is true in cloud_controller.yml
+    it 'raises an exception when mapping a url for an app with a blank name' do
+      expect {
+        app_url = @app.map_url("", "http://newapp2.vcap.me")
+      }.to raise_exception
+    end
+
+    it 'raises an exception when mapping a blank url' do
+      expect {
+        app_url = @app.map_url("newapp", "")
+      }.to raise_exception
+    end
+
+    it 'raises an exception when mapping a url that is already mapped' do
+      VCR.use_cassette("models/logged/app_map_url_mapped_action", :record => :new_episodes, :exclusive => true) do
         expect {
-          app_url = @app.map_url("app-mock-started", "http://app-mock.example.com")
-        }.to raise_exception(VMC::Client::TargetError)
-      end
-    end
-
-    it 'can not map a reserved url' do
-      VCR.use_cassette("models/logged/app_started_map_reserved_url_action", :record => :new_episodes, :exclusive => true) do
-        # Disable this test only if app_uris - reserved_list is not set in cloud_controller.yml
-        expect {
-          app_url = @app.map_url("app-mock-started", "http://www.vcap.me")
-        }.to raise_exception(VMC::Client::NotFound)
-      end
-    end
-
-    it 'can map a url if the app is stopped' do
-      VCR.use_cassette("models/logged/app_stopped_map_url_action", :record => :new_episodes, :exclusive => true) do
-        # TODO
-        #app_url = @app.map_url("app-mock-stopped", "http://app-mock.vcap.me")
+          app_url = @app.map_url("newapp", "http://newapp2.vcap.me")
+        }.to raise_exception
       end
     end
 
     it 'raises a NotFound exception when mapping a url if the app does not exists' do
       expect {
-        app_url = @app.map_url("no-app-mock", "http://app-mock.vcap.me")
-      }.to raise_exception(VMC::Client::NotFound)
+        app_url = @app.map_url("noapp", "http://noapp.vcap.me")
+      }.to raise_exception(CloudFoundry::Client::Exception::NotFound)
     end
 
-    it 'can unmap a url if the app is started' do
-      VCR.use_cassette("models/logged/app_started_unmap_url_action", :record => :new_episodes, :exclusive => true) do
-        # TODO
-        #app_url = @app.unmap_url("app-mock-started", "http://app-mock.vcap.me")
+    it 'can unmap a url' do
+      VCR.use_cassette("models/logged/app_unmap_url_action", :record => :new_episodes, :exclusive => true) do
+        app_url = @app.unmap_url("newapp", "http://newapp2.vcap.me")
       end
     end
 
-    it 'raises a RuntimeError exception when unmapping a url that is not mapped' do
+    it 'raises an exception when unmapping a url for an app with a blank name' do
       expect {
-        @app.unmap_url("app-mock-started", "http://no-url.vcap.me")
-      }.to raise_exception(RuntimeError)
+        app_url = @app.unmap_url("", "http://newapp2.vcap.me")
+      }.to raise_exception
     end
 
-    it 'can unmap a url if the app is stopped' do
-      VCR.use_cassette("models/logged/app_stopped_unmap_url_action", :record => :new_episodes, :exclusive => true) do
-        # TODO
-        #app_url = @app.unmap_url("app-mock-stopped", "http://app-mock.vcap.me")
-      end
+    it 'raises an exception when unmapping a blank url' do
+      expect {
+        app_url = @app.unmap_url("newapp", "")
+      }.to raise_exception
+    end
+
+    it 'raises an exception when unmapping a url that is not mapped' do
+      expect {
+        app_url = @app.unmap_url("newapp", "http://no-url.vcap.me")
+      }.to raise_exception
     end
 
     it 'raises a NotFound exception when unmapping a url if the app does not exists' do
       expect {
-        app_url = @app.unmap_url("no-app-mock", "http://app-mock.vcap.me")
-      }.to raise_exception(VMC::Client::NotFound)
+        app_url = @app.unmap_url("noapp", "http://newapp2.vcap.me")
+      }.to raise_exception(CloudFoundry::Client::Exception::NotFound)
     end
 
-    it 'returns a proper list of files when viewing files of a started app' do
-      files = @app.view_file("app-mock-started", "/", "0")
-      files.should_not be_empty
-    end
-
-    it 'raises an NotFound exception when viewing files of a stopped app' do
+    it 'raises a BadRequest exception when viewing files of a stopped app' do
       expect {
-        files = @app.view_file("app-mock-stopped", "/", "0")
-      }.to raise_exception(VMC::Client::NotFound)
+        files = @app.view_file("newapp", "/", 0)
+      }.to raise_exception(CloudFoundry::Client::Exception::BadRequest)
     end
 
-    it 'raises an NotFound exception when viewing files of of an app that does not exists' do
+    it 'raises an exception when viewing files of an app with a blank name' do
       expect {
-        files = @app.view_file("no-app-mock", "/", "0")
-      }.to raise_exception(VMC::Client::NotFound)
+        files = @app.view_file("", "/", 0)
+      }.to raise_exception
     end
 
-    it 'can delete an app if the app is started' do
-      # TODO Disabled until a create method is developed
-      #app_info = @app.delete("app-mock-started")
+    it 'raises an exception when viewing files of an app from a blank path' do
+      expect {
+        files = @app.view_file("newapp", "", 0)
+      }.to raise_exception
     end
 
-    it 'can delete an app if the app is stopped' do
-      # TODO Disabled until a create method is developed
-      #app_info = @app.delete("app-mock-stopped")
+    it 'raises a NotFound exception when viewing files of an app that does not exists' do
+      expect {
+        files = @app.view_file("noapp", "/", 0)
+      }.to raise_exception(CloudFoundry::Client::Exception::NotFound)
+    end
+
+    it 'can delete an app' do
+      deleted = @app.delete("newapp")
+      deleted.should be_true
+    end
+
+    it 'raises an exception when deleting an app with a blank name' do
+      expect {
+        deleted = @app.delete("")
+      }.to raise_exception
     end
 
     it 'raises a NotFound exception when deleting an app that does not exists' do
       expect {
-        app_info = @app.delete("no-app-mock")
-      }.to raise_exception(VMC::Client::NotFound)
+        deleted = @app.delete("noapp")
+      }.to raise_exception(CloudFoundry::Client::Exception::NotFound)
     end
   end
 end

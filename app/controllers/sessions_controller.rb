@@ -2,10 +2,10 @@ class SessionsController < ApplicationController
   skip_before_filter :require_login, :only => [:new, :create]
 
   def new
-    if cookies[:vmc_target_url]
-      @target_url = cookies[:vmc_target_url]
+    if cookies[:cf_target_url]
+      @target_url = cookies[:cf_target_url]
     else
-      @target_url = VMC::DEFAULT_TARGET
+      @target_url = CloudFoundry::Client::DEFAULT_TARGET
     end
   end
 
@@ -15,7 +15,7 @@ class SessionsController < ApplicationController
     @target_url = params[:target_url]
     @remember_me = params[:remember_me]
     begin
-      cf = vmc_client(@target_url)
+      cf = cloudfoundry_client(@target_url)
       auth_token = cf.login(@email, @password)
     rescue
       auth_token = nil
@@ -23,11 +23,11 @@ class SessionsController < ApplicationController
 
     if auth_token
       if @remember_me
-        cookies.permanent[:vmc_target_url] = @target_url
-        cookies.permanent.signed[:vmc_auth_token] = auth_token
+        cookies.permanent[:cf_target_url] = @target_url
+        cookies.permanent.signed[:cf_auth_token] = auth_token
       else
-        cookies[:vmc_target_url] = @target_url
-        cookies.signed[:vmc_auth_token] = auth_token
+        cookies[:cf_target_url] = @target_url
+        cookies.signed[:cf_auth_token] = auth_token
       end
       redirect_to root_url
     else
@@ -37,7 +37,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    cookies.delete(:vmc_auth_token)
+    cookies.delete(:cf_auth_token)
     redirect_to root_url
   end
 end

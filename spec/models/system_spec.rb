@@ -6,7 +6,7 @@ describe System do
   context "without a user logged in" do
     before(:all) do
       VCR.use_cassette("models/no_logged/client", :record => :new_episodes) do
-        cf_client = vmc_client(VMC::DEFAULT_LOCAL_TARGET)
+        cf_client = cloudfoundry_client(CloudFoundry::Client::DEFAULT_TARGET)
         @system = System.new(cf_client)
       end
     end
@@ -35,7 +35,7 @@ describe System do
     it 'raises an AuthError exception when looking for all system services' do
       expect {
         system_services = @system.find_all_system_services()
-      }.to raise_exception(VMC::Client::AuthError)
+      }.to raise_exception(CloudFoundry::Client::Exception::AuthError)
     end
 
     it 'returns no available memory' do
@@ -48,7 +48,7 @@ describe System do
   context "with a user logged in" do
     before(:all) do
       VCR.use_cassette("models/logged/client", :record => :new_episodes) do
-        cf_client = vmc_client_user_logged(VMC::DEFAULT_LOCAL_TARGET)
+        cf_client = cloudfoundry_client_user_logged(CloudFoundry::Client::DEFAULT_TARGET)
         @system = System.new(cf_client)
       end
     end

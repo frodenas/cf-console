@@ -1,13 +1,14 @@
 class User
-  def initialize(cf_conn)
-    @cf_conn = cf_conn
+  def initialize(cf_client)
+    @cf_client = cf_client
   end
 
   def find_all_users()
-    return @cf_conn.users || []
+    return @cf_client.list_users || []
   end
 
   def find(username)
+    raise "Email cannot be blank" if username.nil? || username.empty?
     user_info = nil
     users = find_all_users()
     users.each do |user_item|
@@ -29,19 +30,13 @@ class User
   end
 
   def create(username, password)
-    if username.nil? || username.empty?
-      raise "Email cannot be blank"
-    end
-    if password.nil? || password.empty?
-      raise "Password cannot be blank"
-    end
-    @cf_conn.add_user(username, password)
+    raise "Email cannot be blank" if username.nil? || username.empty?
+    raise "Password cannot be blank" if password.nil? || password.empty?
+    @cf_client.create_user(username, password)
   end
 
   def delete(username)
-    if username.nil? || username.empty?
-      raise "Email cannot be blank"
-    end
-    @cf_conn.delete_user(username)
+    raise "Email cannot be blank" if username.nil? || username.empty?
+    @cf_client.delete_user(username)
   end
 end

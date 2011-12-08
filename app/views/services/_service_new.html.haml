@@ -10,5 +10,5 @@
             %td= text_field_tag :name, @name, :size => 30, :required => "required", :placeholder => "Provisioned Service Name", :autofocus => "autofocus"
           %tr
             %td= label_tag 'Service:'
-            %td= select_tag :ss, options_for_select(@available_system_services), :required => "required", :class => "service-selectBox"
+            %td= select_tag :ss, options_for_select(@available_system_services), :required => "required", :class => "service-uniform"
     .modalBox-submit= submit_tag "Add Service"

@@ -8,7 +8,7 @@
 //= require plugins
 //= require jquery.dataTables.min
 //= require jquery.jeditable.mini
-//= require jquery.selectBox.min
+//= require jquery.uniform.min
 //= require excanvas.min
 //= require jquery.flot.min
 //= require jquery.flot.pie.min

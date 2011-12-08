@@ -5,6 +5,7 @@
  *= require application-pre
  *= require_self
  *= require coderay
+ *= require uniform.aristo
  *= require application-media
  *= require application-post
 */
@@ -1121,88 +1122,4 @@ footer #copyright {
   font-size: 75%;
   padding-top: .5em;
   text-align: center;
-}
-
-.selectBox-dropdown {
-  background-color: #F2F2F2;
-  background-image: -moz-linear-gradient(top, #F8F8F8 1%, #E1E1E1 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#F8F8F8', endColorstr='#E1E1E1');
-  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#F8F8F8', endColorstr='#E1E1E1')";
-  background-image: -ms-linear-gradient(top, #F8F8F8 1%, #E1E1E1 100%);
-  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0.01, #F8F8F8), color-stop(1.00, #E1E1E1));
-  background-image: -webkit-linear-gradient(top, #F8F8F8 1%, #E1E1E1 100%);
-  background-image: linear-gradient(top, #F8F8F8 1%, #E1E1E1 100%);
-  border: solid .1em #BBBBBB;
-  -moz-border-radius: .1em;
-  -ms-border-radius: .1em;
-  -webkit-border-radius: .1em;
-  border-radius: .1em;
-  -moz-box-shadow: 0 .1em 0 rgba(255, 255, 255, .75);
-  -ms-box-shadow: 0 .1em 0 rgba(255, 255, 255, .75);
-  -webkit-box-shadow: 0 .1em 0 rgba(255, 255, 255, .75);
-  box-shadow: 0 .1em 0 rgba(255, 255, 255, .75);
-  cursor: default;
-  display: inline-block;
-  line-height: 1.5;
-  outline: none;
-  padding-right: 4em;
-  position: relative;
-  text-decoration: none;
-  vertical-align: middle;
-  width: 210px;
-}
-
-.selectBox-dropdown .selectBox-label {
-  display: inline-block;
-  overflow: hidden;
-  padding: .2em .3em;
-  width: 100%;
-  white-space: nowrap;
-}
-
-.selectBox-dropdown .selectBox-arrow {
-  background: image_url('jquery.selectBox-arrow.gif') 50% center no-repeat;
-  border-left: solid .1em #BBBBBB;
-  position: absolute;
-  height: 100%;
-  right: 0;
-  top: 0;
-  width: 23px;
-}
-
-.selectBox-dropdown-menu {
-  background-color: #FFFFFF;
-  border: solid .1em #BBBBBB;
-  -moz-box-shadow: 0 .2em .6em rgba(0, 0, 0, .2);
-  -ms-box-shadow: 0 .2em .6em rgba(0, 0, 0, .2);
-  -webkit-box-shadow: 0 .2em .6em rgba(0, 0, 0, .2);
-  box-shadow: 0 .2em .6em rgba(0, 0, 0, .2);
-  max-height: 200px;
-  overflow: auto;
-  position: absolute;
-  z-index: 99999;
-}
-
-.selectBox-options, .selectBox-options li, .selectBox-options li a {
-  cursor: default;
-  display: block;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.selectBox-options li a {
-  background: .6em center no-repeat;
-  line-height: 1.5;
-  overflow: hidden;
-  padding: 0 .5em;
-  white-space: nowrap;
-}
-
-.selectBox-options li.selectBox-hover a {
-  background-color: #EEE;
-}
-
-.selectBox-options li.selectBox-selected a {
-  background-color: #C8DEF4;
 }

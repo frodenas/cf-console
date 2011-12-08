@@ -7,5 +7,5 @@
         %tbody
           %tr
             %td= label_tag 'Service:'
-            %td= select_tag :service, options_for_select(@available_services), :required => "required", :autofocus => "autofocus", :class => "service-selectBox"
+            %td= select_tag :service, options_for_select(@available_services), :required => "required", :autofocus => "autofocus", :class => "service-uniform"
     .modalBox-submit= submit_tag "Bind Service"

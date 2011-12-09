@@ -183,6 +183,13 @@ $(function() {
               $('.modalBox-flash').empty();
             }
           });
+          $('#set-var-form .legend').tooltip({
+            'effect':       'fade',
+            'fadeOutSpeed': 100,
+            'predelay':     100,
+            'position':     'center left',
+            'offset':       [0, -200]
+          });
         }
         if (tab == '#services') {
           $('.invoke-modalBox').html('<button class="bindService" rel="#bind_service_modalBox">Bind Service</button>').show();
@@ -195,6 +202,13 @@ $(function() {
             }
           });
           $('.service-uniform').uniform();
+          $('#bind-service-form .legend').tooltip({
+            'effect':       'fade',
+            'fadeOutSpeed': 100,
+            'predelay':     100,
+            'position':     'center left',
+            'offset':       [0, -200]
+          });
         }
         if (tab == '#urls') {
           $('.invoke-modalBox').html('<button class="addURL" rel="#add_url_modalBox">Add URL</button>').show();
@@ -205,6 +219,13 @@ $(function() {
             'onBeforeLoad': function(event) {
               $('.modalBox-flash').empty();
             }
+          });
+          $('#map-url-form .legend').tooltip({
+            'effect':       'fade',
+            'fadeOutSpeed': 100,
+            'predelay':     100,
+            'position':     'center left',
+            'offset':       [0, -200]
           });
         }
         if (tab == '#files') {

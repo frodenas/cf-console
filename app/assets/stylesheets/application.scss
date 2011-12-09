@@ -938,6 +938,10 @@ header a:hover {
 #main .tooltip-legend {
   background-color: #FFFFAA;
   border: .1em solid #CCCC99;
+  -moz-border-radius: .5em;
+  -ms-border-radius: .5em;
+  -webkit-border-radius: .5em;
+  border-radius: .5em;
   -moz-box-shadow: .2em .2em 1.1em #666666;
   -ms-box-shadow: .2em .2em 1.1em #666666;
   -webkit-box-shadow: .2em .2em 1.1em #666666;
@@ -945,6 +949,8 @@ header a:hover {
   display: none;
   font-size: 75%;
   padding: .3em;
+  text-align: left;
+  width: 250px;
 }
 
 #main .legend {

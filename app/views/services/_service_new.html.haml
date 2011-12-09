@@ -6,9 +6,19 @@
       %table
         %tbody
           %tr
-            %td= label_tag 'Name:'
-            %td= text_field_tag :name, @name, :size => 30, :required => "required", :placeholder => "Provisioned Service Name", :autofocus => "autofocus"
+            %td
+              = label_tag "name", "Name:", :class => "legend"
+              .tooltip-legend
+                %p Enter the name that univocally will identify your service.
+                %p Must contain only word characters (letter, number, underscore).
+                %p Example: redis-service
+            %td
+              = text_field_tag :name, @name, :size => 30, :required => "required", :placeholder => "Provisioned Service Name", :autofocus => "autofocus"
           %tr
-            %td= label_tag 'Service:'
-            %td= select_tag :ss, options_for_select(@available_system_services), :required => "required", :class => "service-uniform"
+            %td
+              = label_tag "service", "Service:", :class => "legend"
+              .tooltip-legend
+                %p Select the system service you want to provision.
+            %td
+              = select_tag :ss, options_for_select(@available_system_services), :required => "required", :class => "service-uniform"
     .modalBox-submit= submit_tag "Add Service"

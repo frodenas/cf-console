@@ -390,11 +390,15 @@ class AppsController < ApplicationController
 
   def find_available_services
     available_services = []
-    available_services << ["Select a service to bind ...", ""]
     service = Service.new(@cf_client)
     provisioned_services = service.find_all_services()
-    provisioned_services.each do |service_info|
-      available_services << [service_info[:name] + " (" + service_info[:vendor] + " " + service_info[:version] + ")", service_info[:name]]
+    if provisioned_services.empty?
+      available_services << ["No available services", ""]
+    else
+      available_services << ["Select a service to bind ...", ""]
+      provisioned_services.each do |service_info|
+        available_services << [service_info[:name] + " (" + service_info[:vendor] + " " + service_info[:version] + ")", service_info[:name]]
+      end
     end
     return available_services
   end

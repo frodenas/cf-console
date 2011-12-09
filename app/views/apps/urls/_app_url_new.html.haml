@@ -6,6 +6,9 @@
       %table
         %tbody
           %tr
-            %td= label_tag 'URL:'
+            %td
+              = label_tag "url", "URL:", :class => "legend"
+              .tooltip-legend
+                %p Enter the URL you want to map to your application.
             %td= url_field_tag :url, @url, :size => 80, :required => "required", :placeholder => "URL to map", :autofocus => "autofocus"
     .modalBox-submit= submit_tag "Add URL"

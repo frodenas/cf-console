@@ -1,6 +1,8 @@
 $(function() {
   if ($('body').hasClass('sessions')) {
-    $('.target-uniform').uniform();
+    if (typeof target_uniform == 'undefined') {
+      target_uniform = $('.target-uniform').uniform();
+    }
     $('#new-session-form .legend').tooltip({
       'effect':       'fade',
       'fadeOutSpeed': 100,

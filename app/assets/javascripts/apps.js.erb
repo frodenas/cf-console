@@ -30,8 +30,12 @@ $(function() {
               $('.modalBox-flash').empty();
             }
           });
-          $('.memory-uniform').uniform();
-          $('.type-uniform').uniform();
+          if (typeof memory_uniform == 'undefined') {
+            memory_uniform = $('.memory-uniform').uniform();
+          }
+          if (typeof type_uniform == 'undefined') {
+            type_uniform = $('.type-uniform').uniform();
+          }
           $('#new-app-form .legend').tooltip({
             'effect':       'fade',
             'fadeOutSpeed': 100,

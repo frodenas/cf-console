@@ -201,7 +201,9 @@ $(function() {
               $('.modalBox-flash').empty();
             }
           });
-          $('.service-uniform').uniform();
+          if (typeof service_uniform == 'undefined') {
+            service_uniform = $('.service-uniform').uniform();
+          }
           $('#bind-service-form .legend').tooltip({
             'effect':       'fade',
             'fadeOutSpeed': 100,

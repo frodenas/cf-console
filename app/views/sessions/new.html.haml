@@ -5,19 +5,32 @@
     #shadow_box_content
       %p
         %b Enter your Cloud Foundry credentials:
-      = form_tag login_url do
+      = form_tag login_url, :id => "new-session-form" do
         %fieldset{:class => "field"}
-          = label_tag :email
+          .legend= label_tag :email, "Email"
+          .tooltip-legend
+            %p Enter you email.
           = email_field_tag :email, @email, :size => 50, :required => "required", :placeholder => "Enter your email address", :autofocus => "autofocus"
         %fieldset{:class => "field"}
-          = label_tag :password
+          .legend= label_tag :password, "Password:"
+          .tooltip-legend
+            %p Enter your password.
           = password_field_tag :password, nil, :size => 50, :required => "required", :placeholder => "Enter your password"
         %fieldset{:class => "field"}
-          = label_tag :target_url
-          = url_field_tag :target_url, @target_url, :size => 50, :required => "required"
+          .legend= label_tag :cloud_service, "Cloud Foundry Service:"
+          .tooltip-legend
+            %p Select your CloudFoundry service.
+          = select_tag :cloud_service, options_for_select(@available_targets, @selected_target), :required => "required", :class => "target-uniform"
+          = hidden_field_tag :target_url
+        %fieldset{:class => "field args"}
+          = label_tag :target_args, "Target Args:"
+          = text_field_tag :target_args, @target_args, :size => 50
         %fieldset{:class => "field"}
-          = check_box_tag :remember_me, true, @remember_me
-          = label_tag :remember_me
+          .legend
+            = check_box_tag :remember_me, true, @remember_me
+            = label_tag :remember_me
+          .tooltip-legend
+            %p Check to remember your credentials.
         %fieldset{:class => "field"}
           = submit_tag "Login"
   #new-users

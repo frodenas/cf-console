@@ -4,6 +4,7 @@ gem 'rails',   '3.1.3'
 gem 'haml',    '~> 3.1.4'
 gem 'coderay', '~> 1.0.4'
 gem 'cloudfoundry-client', '~> 0.1.1'
+gem 'configatron', '~> 2.9.0'
 
 group :assets do
   gem 'sass-rails',   '~> 3.1.5'

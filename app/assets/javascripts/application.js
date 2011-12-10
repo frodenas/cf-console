@@ -16,6 +16,7 @@
 //= require apps
 //= require appsshow
 //= require services
+//= require sessions
 //= require system
 //= require users
 //= require_self

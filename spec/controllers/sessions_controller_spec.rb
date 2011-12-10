@@ -71,6 +71,16 @@ describe SessionsController do
         get :new
         assigns(:target_url).should eql(CloudFoundry::Client::DEFAULT_TARGET)
       end
+
+      it "returns a list of available CloudFoundry providers" do
+        get :new
+        assigns(:available_targets).should have_at_least(1).items
+      end
+
+      it "assigns selected_target as DEFAULT_TARGET" do
+        get :new
+        assigns(:selected_target).should eql(CloudFoundry::Client::DEFAULT_TARGET)
+      end
     end
 
     describe "GET create" do

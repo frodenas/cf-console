@@ -7,11 +7,21 @@ class SessionsController < ApplicationController
     else
       @target_url = CloudFoundry::Client::DEFAULT_TARGET
     end
+    @available_targets = configatron.available_targets
+    @selected_target = nil
+    configatron.available_targets.each do |name, url|
+      if url == @target_url
+        @selected_target = url
+        break
+      end
+    end
   end
 
   def create
     @email = params[:email]
     @password = params[:password]
+    @cloud_service = params[:cloud_service]
+    @target_args = params[:target_args]
     @target_url = params[:target_url]
     @remember_me = params[:remember_me]
     begin
@@ -31,7 +41,15 @@ class SessionsController < ApplicationController
       end
       redirect_to root_url
     else
-      flash.now[:alert] = "Invalid email or password"
+      flash.now[:alert] = "Login failed. Check you credentials."
+      @available_targets = configatron.available_targets
+      @selected_target = nil
+      configatron.available_targets.each do |name, url|
+        if url == @cloud_service
+          @selected_target = url
+          break
+        end
+      end
       render "new"
     end
   end

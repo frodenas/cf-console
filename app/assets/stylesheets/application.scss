@@ -1065,6 +1065,10 @@ header a:hover {
   padding-bottom: 1em;
 }
 
+#main #login fieldset.args {
+  display: none;
+}
+
 #main #login label {
   font-weight: bold;
 }

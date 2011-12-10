@@ -1,0 +1,35 @@
+$(function() {
+  if ($('body').hasClass('sessions')) {
+    $('.target-uniform').uniform();
+    $('#new-session-form .legend').tooltip({
+      'effect':       'fade',
+      'fadeOutSpeed': 100,
+      'predelay':     100,
+      'position':     'center right',
+      'offset':       [0, -200]
+    });
+    $('#new-session-form #cloud_service').change(function () {
+      var args = $(this).val().match(/{[\d\w\s]+}/i);
+      if (args == null) {
+        $('#new-session-form fieldset.args').hide();
+      } else {
+        $('#new-session-form fieldset.args').show();
+        var new_label = args[0].replace(/{|}/g, '') + ':';
+        $('#new-session-form label[for="target_args"]').text(new_label);
+      }
+    });
+    $('#new-session-form #cloud_service').trigger('change');
+    $('#new-session-form').submit(function () {
+      var cloud_service = $(this).find('#cloud_service').val();
+      var args = cloud_service.match(/{[\d\w\s]+}/i);
+      if (args == null) {
+        var target_url = cloud_service
+      } else {
+        var target_args = $(this).find('#target_args').val();
+        var target_url = cloud_service.replace(/{[\d\w\s]+}/i, target_args);
+      }
+      $(this).find('#target_url').val(target_url);
+      return true;
+    });
+  }
+});

@@ -4,8 +4,56 @@ class AppsController < ApplicationController
       app = App.new(@cf_client)
       @apps = app.find_all_apps()
       @apps.collect! { |app_info| app.find(app_info[:name])}
+      @available_instances = find_available_instances('STOPPED', 1, 0)
+      available_memsizes = find_available_memsizes('STOPPED', 0, 1)
+      @available_memsizes = []
+      available_memsizes.each do |key, value|
+        @available_memsizes << [value, key]
+      end
+      @available_frameworks = find_available_frameworks_runtimes()
     rescue Exception => ex
       flash[:alert] = ex.message
+    end
+  end
+
+  def create
+    @name = params[:name]
+    @instances = params[:instances]
+    @memsize = params[:memsize]
+    @type = params[:type]
+    @url = params[:url]
+    if !@name.nil? && !@name.empty?
+      if !@instances.nil? && !@instances.empty?
+        if !@memsize.nil? && !@memsize.empty?
+          if !@type.nil? && !@type.empty?
+            if !@url.nil? && !@url.empty?
+              begin
+                framework, runtime = @type.split("/")
+                app = App.new(@cf_client)
+                app.create(@name.strip, @instances, @memsize, @url.strip.gsub(/^http(s*):\/\//i, '').downcase, framework, runtime)
+                @new_app = [] << app.find(@name.strip)
+                flash[:notice] = "Application created. You must upload applications bits via the vmc client."
+              rescue Exception => ex
+                flash[:alert] = ex.message
+              end
+            else
+              flash[:alert] = "URL cannot be blank"
+            end
+          else
+            flash[:alert] = "Type of application cannot be blank"
+          end
+        else
+          flash[:alert] = "Memory size cannot be blank"
+        end
+      else
+        flash[:alert] = "Number of instances cannot be blank"
+      end
+    else
+      flash[:alert] = "Application name cannot be blank"
+    end
+    respond_to do |format|
+      format.html { redirect_to apps_info_url }
+      format.js { flash.discard }
     end
   end
 
@@ -356,6 +404,23 @@ class AppsController < ApplicationController
 
   private
 
+  def find_available_frameworks_runtimes()
+    available_frameworks = []
+    system = System.new(@cf_client)
+    frameworks = system.find_all_frameworks()
+    if frameworks.empty?
+      available_frameworks << ["No available frameworks", ""]
+    else
+      available_frameworks << ["Select a framework ...", ""]
+      frameworks.each do |fwk_name, fwk|
+        fwk[:runtimes].each do |run|
+          available_frameworks << [fwk[:name].capitalize + " on " + run[:description], fwk_name.to_s + "/" + run[:name].to_s]
+        end
+      end
+    end
+    return available_frameworks
+  end
+
   def find_available_instances(app_state, app_memsize, app_instances)
     system = System.new(@cf_client)
     available_for_use = system.find_available_memory()
@@ -383,7 +448,9 @@ class AppsController < ApplicationController
     if available_memsizes.empty?
       available_memsizes[""] = "Not enough memory available"
     else
-      available_memsizes["selected"] = app_memsize
+      if app_memsize > 0
+        available_memsizes["selected"] = app_memsize
+      end
     end
     return available_memsizes
   end

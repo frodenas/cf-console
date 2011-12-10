@@ -1,0 +1,40 @@
+.modalBox{:id => "create_application_modalBox"}
+  = form_tag apps_create_url, :id => "new-app-form", :remote => true do
+    .modalBox-title Create Application
+    .modalBox-flash
+    .modalBox-content
+      %table
+        %tbody
+          %tr
+            %td
+              = label_tag "name", "Name:", :class => "legend"
+              .tooltip-legend
+                %p Enter the name that univocally will identify your application.
+                %p Must contain only word characters (letter, number, underscore).
+                %p Example: my_application
+            %td= text_field_tag :name, @name, :size => 50, :required => "required", :placeholder => "Enter the application name", :autofocus => "autofocus"
+          %tr
+            %td
+              = label_tag "instances", "Instances:", :class => "legend"
+              .tooltip-legend
+                %p Enter the number of instances of your application.
+            %td= number_field_tag :instances, @instances, :min => 1, :max => @available_instances, :required => "required"
+          %tr
+            %td
+              = label_tag "memsize", "Memory size:", :class => "legend"
+              .tooltip-legend
+                %p Select the memory size for each instance of your application.
+            %td= select_tag :memsize, options_for_select(@available_memsizes), :required => "required", :class => "memory-uniform"
+          %tr
+            %td
+              = label_tag "type", "Type:", :class => "legend"
+              .tooltip-legend
+                %p Select the type (framework and runtime) of application.
+            %td= select_tag :type, options_for_select(@available_frameworks), :required => "required", :class => "type-uniform"
+          %tr
+            %td
+              = label_tag "url", "URL:", :class => "legend"
+              .tooltip-legend
+                %p Enter the URL you want to map to your application.
+            %td= url_field_tag :url, @url, :size => 50, :required => "required", :placeholder => "Enter the URL for the application"
+    .modalBox-submit= submit_tag "Create Application"

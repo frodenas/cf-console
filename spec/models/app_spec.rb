@@ -13,10 +13,10 @@ describe App do
 
     use_vcr_cassette "models/no_logged/app", :record => :new_episodes
 
-    it 'raises an AuthError exception when creating an app' do
+    it 'raises an exception when creating an app' do
       expect {
-        created = @app.create("newapp")
-      }.to raise_exception(CloudFoundry::Client::Exception::AuthError)
+        created = @app.create("newapp", "1", "64", "newapp.vcap.me", "node", "node")
+      }.to raise_exception
     end
 
     it 'raises an AuthError exception when looking for all apps' do
@@ -146,32 +146,97 @@ describe App do
 
     it 'raises an exception when creating an app with a blank name' do
       expect {
-        created = @app.create("")
+        created = @app.create("", "1", "64", "newapp.vcap.me", "node", "node")
       }.to raise_exception
     end
 
     it 'raises an exception when creating an app with an invalid name' do
       expect {
-        created = @app.create("new name")
+        created = @app.create("new name", "1", "64", "newapp.vcap.me", "node", "node")
       }.to raise_exception
     end
 
-    it 'raises an exception when creating an app with a blank manifest' do
+    it 'raises an exception when creating an app with a blank number of instances' do
       expect {
-        created = @app.create("newapp")
+        created = @app.create("newapp", "", "64", "newapp.vcap.me", "node", "node")
+      }.to raise_exception
+    end
+
+    it 'raises an exception when creating an app with a non-numeric number of instances' do
+      expect {
+        created = @app.create("newapp", "A", "64", "newapp.vcap.me", "node", "node")
+      }.to raise_exception
+    end
+
+    it 'raises an exception when creating an app with a number of instances <= 0' do
+      expect {
+        created = @app.create("newapp", "0", "64", "newapp.vcap.me", "node", "node")
+      }.to raise_exception
+    end
+
+    it 'raises an exception when creating an app with a blank memory size' do
+      expect {
+        created = @app.create("newapp", "1", "", "newapp.vcap.me", "node", "node")
+      }.to raise_exception
+    end
+
+    it 'raises an exception when creating an app with a non-numeric memory size' do
+      expect {
+        created = @app.create("newapp", "1", "A", "newapp.vcap.me", "node", "node")
+      }.to raise_exception
+    end
+
+    it 'raises an exception when creating an app which exceeds account capacity due a high number of instances' do
+      expect {
+        created = @app.create("newapp", "1000000", "64", "newapp.vcap.me", "node", "node")
+      }.to raise_exception
+    end
+
+    it 'raises an exception when creating an app which exceeds account capacity due a high memory size' do
+      expect {
+        created = @app.create("newapp", "1", "64000000", "newapp.vcap.me", "node", "node")
+      }.to raise_exception
+    end
+
+    it 'raises an exception when creating an app with a blank url' do
+      expect {
+        created = @app.create("newapp", "1", "64", "", "node", "node")
+      }.to raise_exception
+    end
+
+    it 'raises an exception when creating an app with a blank framework' do
+      expect {
+        created = @app.create("newapp", "1", "64", "newapp.vcap.me", "", "node")
+      }.to raise_exception
+    end
+
+    it 'raises an exception when creating an app with a blank runtime' do
+      expect {
+        created = @app.create("newapp", "1", "64", "newapp.vcap.me", "node", "")
+      }.to raise_exception
+    end
+
+    it 'raises an exception when creating an app with an invalid framework' do
+      expect {
+        created = @app.create("newapp", "1", "64", "newapp.vcap.me", "noframework", "node")
+      }.to raise_exception
+    end
+
+    it 'raises an exception when creating an app with an invalid runtime' do
+      expect {
+        created = @app.create("newapp", "1", "64", "newapp.vcap.me", "node", "noruntime")
+      }.to raise_exception
+    end
+
+    it 'raises an exception when creating an app with an invalid combination of framework and runtime' do
+      expect {
+        created = @app.create("newapp", "1", "64", "newapp.vcap.me", "node", "java")
       }.to raise_exception
     end
 
     it 'can create a new app' do
       VCR.use_cassette("models/logged/app_create_action", :record => :new_episodes, :exclusive => true) do
-       manifest = {
-          :name => "newapp",
-          :uris => ["newapp.vcap.me"],
-          :instances => 1,
-          :staging => {:model => "node"},
-          :resources => {:memory => 64}
-        }
-        created = @app.create("newapp", manifest)
+        created = @app.create("newapp", "1", "64", "newapp.vcap.me", "node", "node")
         created.should be_true
       end
     end

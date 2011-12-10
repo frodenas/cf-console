@@ -6,6 +6,10 @@ describe AppsController do
       get("/apps").should route_to("apps#index")
     end
 
+    it "routes to #create" do
+      post("/apps").should route_to("apps#create")
+    end
+
     it "routes to #show" do
       get("/app/cf-console").should route_to("apps#show", :name => "cf-console")
     end

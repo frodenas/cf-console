@@ -13,6 +13,13 @@ describe AppsController do
       end
     end
 
+    describe "POST create" do
+      it "redirects to login page" do
+        post :create
+        response.should redirect_to("/login")
+      end
+    end
+
     describe "GET show" do
       it "redirects to login page" do
         get :show, :name => "newapp"

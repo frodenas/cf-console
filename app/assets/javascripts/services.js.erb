@@ -42,7 +42,7 @@ $(function() {
       })
       .live('ajax:success', function(evt, data, status, xhr) {
         if (request_processed == true) {
-          $(this).find('input[type="text"],select').val('');
+          $(this).find('input[type="text"]').val('');
         }
       })
       .live('ajax:error', function(evt, xhr, status, error) {

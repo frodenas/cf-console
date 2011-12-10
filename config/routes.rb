@@ -6,6 +6,7 @@ CfConsole::Application.routes.draw do
 
   # Applications
   get     'apps'                                    => 'apps#index',          :as => :apps_info
+  post    'apps'                                    => 'apps#create',         :as => :apps_create
   get     'app/:name'                               => 'apps#show',           :as => :app_info
   delete  'app/:name'                               => 'apps#delete',         :as => :app_delete
   put     'app/:name/start'                         => 'apps#start',          :as => :app_start

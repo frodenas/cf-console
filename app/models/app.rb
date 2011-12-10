@@ -100,9 +100,26 @@ class App
     return app_instances_states
   end
 
-  def create(name, manifest = {})
+  def create(name, instances, memsize, url, framework, runtime)
     raise "Application name cannot be blank" if name.nil? || name.empty?
     raise "Invalid application name: \"" + name + "\". Must contain only word characters (letter, number, underscore)" if (name =~ /^[\w-]+$/).nil?
+    raise "Number of instances cannot be blank" if instances.nil? || instances.empty?
+    raise "Number of instances must be numeric" if (instances =~ /^\d+$/).nil?
+    raise "There must be at least 1 instance" if instances.to_i < 1
+    raise "Memory size cannot be blank" if memsize.nil? || memsize.empty?
+    raise "Memory size must be numeric" if (memsize =~ /^\d+$/).nil?
+    raise "Not enough memory available" if !check_has_capacity_for(instances.to_i * memsize.to_i)
+    raise "URL cannot be blank" if url.nil? || url.empty?
+    raise "Framework cannot be blank" if framework.nil? || framework.empty?
+    raise "Runtime cannot be blank" if runtime.nil? || runtime.empty?
+    raise "Invalid Framework or Runtime" if !valid_framework_and_runtime?(framework, runtime)
+    manifest = {
+      :name => name,
+      :instances => instances,
+      :resources => {:memory => memsize},
+      :uris => [url],
+      :staging => {:framework => framework, :runtime => runtime}
+    }
     @cf_client.create_app(name, manifest)
   end
 
@@ -374,5 +391,16 @@ class App
       else "#F71823"
      end
     return color
+  end
+
+  def valid_framework_and_runtime?(framework, runtime)
+    system = System.new(@cf_client)
+    frameworks = system.find_all_frameworks()
+    frameworks.each do |fwk_name, fwk|
+      fwk[:runtimes].each do |run|
+         return true if (fwk[:name] == framework && run[:name] == runtime)
+      end
+    end
+    return false
   end
 end

@@ -4,7 +4,7 @@ $(function() {
     var ultabs = $('ul.tabs');
     ultabs.tabs('div.panels > div.panel', {effect: 'slide', tabs: 'li'});
     ultabs
-      .live('onClick', function(event, tabIndex) {
+      .on('onClick', function(event, tabIndex) {
         var tab = $(this).find('li.current > a').attr('href');
         if (tab == '#account') {
           $('.legend').tooltip({

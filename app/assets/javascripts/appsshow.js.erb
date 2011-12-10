@@ -40,7 +40,7 @@ $(function() {
     var ultabs = $('ul.tabs');
     ultabs.tabs('div.panels > div.panel', {effect: 'slide', tabs: 'li'});
     ultabs
-      .live('onClick', function(event, tabIndex) {
+      .on('onClick', function(event, tabIndex) {
         var tab = $(this).find('li.current > a').attr('href');
         if (tab == '#resources') {
           $('.invoke-modalBox').empty().hide();
@@ -233,105 +233,105 @@ $(function() {
         }
       });
     $('#set-var-form')
-      .live('ajax:beforeSend', function(evt, xhr, settings) {
+      .on('ajax:beforeSend', function(evt, xhr, settings) {
         request_processed = false;
         $(this).find('.modalBox-submit input[type="submit"]').attr({value: 'Processing ...'});
       })
-      .live('ajax:success', function(evt, data, status, xhr) {
+      .on('ajax:success', function(evt, data, status, xhr) {
         if (request_processed == true) {
           $(this).find('input[type="text"]').val('');
         }
       })
-      .live('ajax:error', function(evt, xhr, status, error) {
+      .on('ajax:error', function(evt, xhr, status, error) {
         request_processed = true;
         $('#flash').empty();
         $('#flash').append('<div class="alert">An error occurred processing your request, please reload the page and try again.</div>');
         $('#flash').fadeIn('slow');
       })
-      .live('ajax:complete', function(evt, xhr, status) {;
+      .on('ajax:complete', function(evt, xhr, status) {;
         if (request_processed == true) {
           addEnvvar_trigger.eq(0).overlay().close();
         }
         $(this).find('.modalBox-submit input[type="submit"]').attr({value: 'Add Var'});
       });
     $('#unset-var-link')
-      .live('ajax:beforeSend', function(evt, xhr, settings) {
+      .on('ajax:beforeSend', function(evt, xhr, settings) {
         $(this).find('img').attr({ src : '<%= asset_path('wait.gif') %>'});
       })
-      .live('ajax:error', function(evt, xhr, status, error) {
+      .on('ajax:error', function(evt, xhr, status, error) {
         $('#flash').empty();
         $('#flash').append('<div class="alert">An error occurred processing your request, please reload the page and try again.</div>');
         $('#flash').fadeIn('slow');
       })
-      .live('ajax:complete', function(evt, xhr, status) {
+      .on('ajax:complete', function(evt, xhr, status) {
         $(this).find('img').attr({ src : '<%= asset_path('delete.png') %>'});
       });
     $('#bind-service-form')
-      .live('ajax:beforeSend', function(evt, xhr, settings) {
+      .on('ajax:beforeSend', function(evt, xhr, settings) {
         request_processed = false;
         $(this).find('.modalBox-submit input[type="submit"]').attr({value: 'Processing ...'});
       })
-      .live('ajax:success', function(evt, data, status, xhr) {
+      .on('ajax:success', function(evt, data, status, xhr) {
         if (request_processed == true) {
           $(this).find('select').val('');
         }
       })
-      .live('ajax:error', function(evt, xhr, status, error) {
+      .on('ajax:error', function(evt, xhr, status, error) {
         request_processed = true;
         $('#flash').empty();
         $('#flash').append('<div class="alert">An error occurred processing your request, please reload the page and try again.</div>');
         $('#flash').fadeIn('slow');
       })
-      .live('ajax:complete', function(evt, xhr, status) {;
+      .on('ajax:complete', function(evt, xhr, status) {;
         if (request_processed == true) {
           bindService_trigger.eq(0).overlay().close();
         }
         $(this).find('.modalBox-submit input[type="submit"]').attr({value: 'Bind Service'});
       });
     $("#unbind-service-link")
-      .live('ajax:beforeSend', function(evt, xhr, settings) {
+      .on('ajax:beforeSend', function(evt, xhr, settings) {
         $(this).find('img').attr({ src : '<%= asset_path('wait.gif') %>'});
       })
-      .live('ajax:error', function(evt, xhr, status, error) {
+      .on('ajax:error', function(evt, xhr, status, error) {
         $('#flash').empty();
         $('#flash').append('<div class="alert">An error occurred processing your request, please reload the page and try again.</div>');
         $('#flash').fadeIn('slow');
       })
-      .live('ajax:complete', function(evt, xhr, status) {
+      .on('ajax:complete', function(evt, xhr, status) {
         $(this).find('img').attr({ src : '<%= asset_path('delete.png') %>'});
       });
     $('#map-url-form')
-      .live('ajax:beforeSend', function(evt, xhr, settings) {
+      .on('ajax:beforeSend', function(evt, xhr, settings) {
         request_processed = false;
         $(this).find('.modalBox-submit input[type="submit"]').attr({value: 'Processing ...'});
       })
-      .live('ajax:success', function(evt, data, status, xhr) {
+      .on('ajax:success', function(evt, data, status, xhr) {
         if (request_processed == true) {
           $(this).find('input[type="url"]').val('');
         }
       })
-      .live('ajax:error', function(evt, xhr, status, error) {
+      .on('ajax:error', function(evt, xhr, status, error) {
         request_processed = true;
         $('#flash').empty();
         $('#flash').append('<div class="alert">An error occurred processing your request, please reload the page and try again.</div>');
         $('#flash').fadeIn('slow');
       })
-      .live('ajax:complete', function(evt, xhr, status) {
+      .on('ajax:complete', function(evt, xhr, status) {
         if (request_processed == true) {
           addURL_trigger.eq(0).overlay().close();
         }
         $(this).find('.modalBox-submit input[type="submit"]').attr({value: 'Add URL'});
       });
     $('#unmap-url-link')
-      .live('ajax:beforeSend', function(evt, xhr, settings) {
+      .on('ajax:beforeSend', function(evt, xhr, settings) {
         $(this).find('img').attr({ src : '<%= asset_path('wait.gif') %>'});
       })
-      .live('ajax:error', function(evt, xhr, status, error) {
+      .on('ajax:error', function(evt, xhr, status, error) {
         $('#flash').empty();
         $('#flash').append('<div class="alert">An error occurred processing your request, please reload the page and try again.</div>');
         $('#flash').fadeIn('slow');
       })
-      .live('ajax:complete', function(evt, xhr, status) {
+      .on('ajax:complete', function(evt, xhr, status) {
         $(this).find('img').attr({ src : '<%= asset_path('delete.png') %>'});
       });
   }

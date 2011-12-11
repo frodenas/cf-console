@@ -11,6 +11,7 @@ class AppsController < ApplicationController
         @available_memsizes << [value, key]
       end
       @available_frameworks = find_available_frameworks_runtimes()
+      @available_services = find_available_services()
     rescue Exception => ex
       flash[:alert] = ex.message
     end
@@ -22,6 +23,7 @@ class AppsController < ApplicationController
     @memsize = params[:memsize]
     @type = params[:type]
     @url = params[:url]
+    @service = params[:service]
     if !@name.nil? && !@name.empty?
       if !@instances.nil? && !@instances.empty?
         if !@memsize.nil? && !@memsize.empty?
@@ -30,7 +32,7 @@ class AppsController < ApplicationController
               begin
                 framework, runtime = @type.split("/")
                 app = App.new(@cf_client)
-                app.create(@name.strip, @instances, @memsize, @url.strip.gsub(/^http(s*):\/\//i, '').downcase, framework, runtime)
+                app.create(@name.strip, @instances, @memsize, @url.strip.gsub(/^http(s*):\/\//i, '').downcase, framework, runtime, @service)
                 @new_app = [] << app.find(@name.strip)
                 flash[:notice] = "Application created. You must upload applications bits via the vmc client."
               rescue Exception => ex

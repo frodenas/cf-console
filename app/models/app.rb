@@ -100,7 +100,7 @@ class App
     return app_instances_states
   end
 
-  def create(name, instances, memsize, url, framework, runtime)
+  def create(name, instances, memsize, url, framework, runtime, service)
     raise "Application name cannot be blank" if name.nil? || name.empty?
     raise "Invalid application name: \"" + name + "\". Must contain only word characters (letter, number, underscore)" if (name =~ /^[\w-]+$/).nil?
     raise "Number of instances cannot be blank" if instances.nil? || instances.empty?
@@ -118,8 +118,9 @@ class App
       :instances => instances,
       :resources => {:memory => memsize},
       :uris => [url],
-      :staging => {:framework => framework, :runtime => runtime}
+      :staging => {:framework => framework, :runtime => runtime},
     }
+    manifest[:services] = [service] if !service.nil? && !service.empty?
     @cf_client.create_app(name, manifest)
   end
 

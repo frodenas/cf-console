@@ -37,4 +37,10 @@
               .tooltip-legend
                 %p Enter the URL you want to map to your application.
             %td= url_field_tag :url, @url, :size => 50, :required => "required", :placeholder => "Enter the URL for the application"
+          %tr
+            %td
+              = label_tag "service", "Service:", :class => "legend"
+              .tooltip-legend
+                %p Select the service you want to bind to the application.
+            %td= select_tag :service, options_for_select(@available_services), :class => "service-uniform"
     .modalBox-submit= submit_tag "Create Application"

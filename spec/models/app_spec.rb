@@ -247,6 +247,14 @@ describe App do
       end
     end
 
+    it 'raises an exception when creating an app that already exists' do
+      VCR.use_cassette("models/logged/app_create_duplicate_action", :record => :new_episodes, :exclusive => true) do
+        expect {
+          created = @app.create("newapp", "1", "64", "newapp.vcap.me", "node", "node", "")
+        }.to raise_exception
+      end
+    end
+
     it 'returns a proper list of all apps' do
       apps = @app.find_all_apps()
       apps.should have_at_least(1).items

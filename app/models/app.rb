@@ -103,6 +103,12 @@ class App
   def create(name, instances, memsize, url, framework, runtime, service)
     raise "Application name cannot be blank" if name.nil? || name.empty?
     raise "Invalid application name: \"" + name + "\". Must contain only word characters (letter, number, underscore)" if (name =~ /^[\w-]+$/).nil?
+    begin
+      app_info = @cf_client.app_info(name)
+    rescue
+      app_info = nil
+    end
+    raise "Application name already exists" if !app_info.nil?
     raise "Number of instances cannot be blank" if instances.nil? || instances.empty?
     raise "Number of instances must be numeric" if (instances =~ /^\d+$/).nil?
     raise "There must be at least 1 instance" if instances.to_i < 1

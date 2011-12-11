@@ -37,6 +37,18 @@ class DashboardController < ApplicationController
         @instances_states += "{'label': '" + state_value[:label] + "', 'color': '" + state_value[:color] + "', 'data': " + state_value[:data].to_s + "}, "
       end
       @instances_states += "]"
+
+      # Types of application
+      apps_types = {}
+      apps.each do |app_item|
+        app_type = app_item[:staging][:model]
+        apps_types[app_type] = apps_types[app_type] ? apps_types[app_type] + 1 : 1
+      end
+      @apps_types = "["
+      apps_types.each do |type_key, type_value|
+        @apps_types += "{'label': '" + type_key.capitalize + "', 'data': " + type_value.to_s + "}, "
+      end
+      @apps_types += "]"
     rescue Exception => ex
       flash[:alert] = ex.message
     end

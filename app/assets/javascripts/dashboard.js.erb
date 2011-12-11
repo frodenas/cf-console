@@ -28,9 +28,10 @@ $(function() {
         if (tab == '#apps') {
           $('tr.pieCharts').each(function() {
             var trwidth = parseInt($(this).width()) - 20;
-            var tdwidth = trwidth / 2;
+            var tdwidth = trwidth / 3;
             $('.apps_states').width(tdwidth+'px').height('250px');
             $('.instances_states').width(tdwidth+'px').height('250px');
+            $('.apps_types').width(tdwidth+'px').height('250px');
           });
           if (typeof apps_states != 'undefined' && apps_states.length > 0) {
             function apps_states_hover(event, pos, obj) {
@@ -53,6 +54,8 @@ $(function() {
               'grid': {'hoverable': true}
             });
             $('.apps_states').bind('plothover', apps_states_hover);
+          } else {
+            $('.apps_states').text("No available data");
           }
           if (typeof instances_states != 'undefined' && instances_states.length > 0) {
             function instances_states_hover(event, pos, obj) {
@@ -75,6 +78,32 @@ $(function() {
               'grid': {'hoverable': true}
             });
             $('.instances_states').bind('plothover', instances_states_hover);
+          } else {
+            $('.instances_states').text("No available data");
+          }
+          if (typeof apps_types != 'undefined' && apps_types.length > 0) {
+            function apps_types_hover(event, pos, obj) {
+              if (!obj) return;
+              $('.apps_types_hover').html('<span style="color: '+obj.series.color+'">'+obj.series.data[0][1]+' '+obj.series.label+' Application</span>');
+            }
+            $.plot($('.apps_types'), apps_types, {
+              'series': {
+                'pie': {
+                  'show': true,
+                  'label': {
+                    'show': true,
+                    'formatter': function(label, series) {
+                      return label+'<br/>'+Math.round(series.percent)+'%';
+                    }
+                  }
+                }
+              },
+              'legend': {'show': false},
+              'grid': {'hoverable': true}
+            });
+            $('.apps_types').bind('plothover', apps_types_hover);
+          } else {
+            $('.apps_types').text("No available data");
           }
         }
       });

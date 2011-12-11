@@ -2,19 +2,24 @@
   %table
     %tbody
       %tr.pieCharts
-        %td
+        %td.tdptop
           .apps_states
-        %td
+        %td.tdptop
           .instances_states
+        %td.tdptop
+          .apps_types
       %tr
         %td.tdptop
           .apps_states_hover Application's States
         %td.tdptop
           .instances_states_hover Instance's States
+        %td.tdptop
+          .apps_types_hover Types of Application
 
 - content_for :javascripts do
   :javascript
     $(function() {
       apps_states = #{@apps_states};
       instances_states = #{@instances_states};
+      apps_types = #{@apps_types};
     });

@@ -17,7 +17,7 @@ class System
     # Return runtimes from info Hash instead of runtimes_info Hash as there's more much runtime information
     # Info gets runtime information from staged plugins's
     # Runtime_info gets runtime information from cloud_controller.yml
-    runtimes = @cf_client.cloud_runtimes_info || {}
+    # runtimes = @cf_client.cloud_runtimes_info || {}
 
     runtimes = {}
     frameworks = find_all_frameworks()

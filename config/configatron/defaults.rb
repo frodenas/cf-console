@@ -10,6 +10,7 @@ configatron.available_targets << ["AppFog (HP Cloud service)", "http://api.hp.af
 configatron.available_targets << ["AppFog (Joyent service)", "http://api.joyent.af.cm"]
 configatron.available_targets << ["AppFog (Rackspace service)", "http://api.rackspace.af.cm"]
 configatron.available_targets << ["HP Cloud Services", "http://api.cloudfoundry.hpcloud.com/"]
+configatron.available_targets << ["Iron Foundry", "http://api.gofoundry.net"]
 configatron.available_targets << ["Stackato Sandbox", "http://api.sandbox.activestate.com"]
 configatron.available_targets << ["VMware CloudFoundry", "http://api.cloudfoundry.com"]
 configatron.available_targets << ["VMware Micro CloudFoundry", "http://api.{Domain}.cloudfoundry.me"]

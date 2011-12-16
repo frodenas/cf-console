@@ -1,8 +1,7 @@
 CF-Console
 ==========
 
-CF-Console is an easy-to-use web-based interface for [Cloud Foundry](http://cloudfoundry.org/),
-the industry’s first open Platform as a Service (PaaS) offering.
+CF-Console is an easy-to-use web-based interface for your [Cloud Foundry](http://cloudfoundry.org/) instances.
 
 Continuous Integration
 ----------------------
@@ -23,6 +22,7 @@ No DB required, just clone the project and start the server:
 
 If you plan to deploy this app to a production environment:
 
+* Set your brand details and Cloud Foundry providers at /config/configatron/defaults.rb
 * Insert your Google Analytics Web Property ID (UA-XXXXX-X) at /app/assets/javascripts/application.js
 * Change the secret token at /config/initializers/secret_token.rb
 * Remove "= render "layouts/forkapp"" at /app/views/layouts/application.html.haml

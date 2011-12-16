@@ -1025,14 +1025,14 @@ header a:hover {
   border-right: .1em solid #404040;
   display: table-cell;
   padding-right: 2em;
-  width: 50%;
+  width: 70%;
 }
 
 #main #login #new-users {
   border-left: .1em solid #404040;
   display: table-cell;
   padding-left: 2em;
-  width: 50%;
+  width: 30%;
 }
 
 #main #login #shadow_box_content {
@@ -1045,10 +1045,6 @@ header a:hover {
   padding: 1em;
 }
 
-#main #login #shadow_box_filler {
-  padding-bottom: 2.5em;
-}
-
 #main #login p {
   padding-bottom: 1em;
 }
@@ -1058,6 +1054,7 @@ header a:hover {
 }
 
 #main #login a {
+  color: #2779AA;
   text-decoration: none;
 }
 
@@ -1073,8 +1070,8 @@ header a:hover {
   font-weight: bold;
 }
 
-#main #login input {
-  display: block;
+#main #login .input-right {
+  float: right;
 }
 
 #main #login input[type="checkbox"] {
@@ -1094,6 +1091,7 @@ header a:hover {
   -ms-border-radius: .5em;
   -webkit-border-radius: .5em;
   border-radius: .5em;
+  float: right;
   font-size: 125%;
   font-weight: bold;
   padding: .6em;
@@ -1103,13 +1101,6 @@ header a:hover {
 
 #main #login input[type="submit"]:hover, #login a.button:hover {
   color: #2779AA;
-}
-
-#main #login a.button i {
-  color: #666666;
-  font-family: georgia;
-  font-style: italic;
-  font-weight: normal;
 }
 
 footer {

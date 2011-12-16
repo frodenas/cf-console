@@ -1,6 +1,12 @@
 # Put all your default configatron settings here.
 
-# Sets the available CloudFoundry Services showed at login page.
+# Branding
+configatron.brand.logo = "cflogo.png"
+configatron.brand.title = "CF Console"
+configatron.brand.description = "Cloud Foundry Web Management Console"
+configatron.brand.author = "Ferran Rodenas"
+
+# Sets the available Cloud Foundry providers showed at login page.
 # Admits dynamic parameters for the Cloud Controller URL.
 # Just put the parameter (only one) between brackets "{}" and the login page will ask the user for that parameter.
 configatron.available_targets = []

@@ -4,53 +4,47 @@
   #registered-users
     #shadow_box_content
       %p
-        %b Enter your Cloud Foundry credentials:
+        %b Enter your credentials:
       = form_tag login_url, :id => "new-session-form" do
         %fieldset{:class => "field"}
-          .legend= label_tag :email, "Email"
+          .legend
+            = label_tag :email, "Email:"
+            = email_field_tag :email, @email, :size => 50, :required => "required", :placeholder => "Enter your email address", :class => "input-right", :autofocus => "autofocus"
           .tooltip-legend
             %p Enter you email.
-          = email_field_tag :email, @email, :size => 50, :required => "required", :placeholder => "Enter your email address", :autofocus => "autofocus"
         %fieldset{:class => "field"}
-          .legend= label_tag :password, "Password:"
+          .legend
+            = label_tag :password, "Password:"
+            = password_field_tag :password, nil, :size => 50, :required => "required", :placeholder => "Enter your password", :class => "input-right"
           .tooltip-legend
             %p Enter your password.
-          = password_field_tag :password, nil, :size => 50, :required => "required", :placeholder => "Enter your password"
         %fieldset{:class => "field"}
-          .legend= label_tag :cloud_service, "Cloud Foundry Service:"
+          .legend
+            = label_tag :cloud_service, "Cloud Foundry Service:"
+            = select_tag :cloud_service, options_for_select(@available_targets, @selected_target), :required => "required", :class => "target-uniform"
+            = hidden_field_tag :target_url
           .tooltip-legend
-            %p Select your CloudFoundry service.
-          = select_tag :cloud_service, options_for_select(@available_targets, @selected_target), :required => "required", :class => "target-uniform"
-          = hidden_field_tag :target_url
+            %p Select your Cloud Foundry service.
         %fieldset{:class => "field args"}
           = label_tag :target_args, "Target Args:"
           = text_field_tag :target_args, @target_args, :size => 50
         %fieldset{:class => "field"}
+          = submit_tag "Login"
           .legend
             = check_box_tag :remember_me, true, @remember_me
             = label_tag :remember_me
           .tooltip-legend
             %p Check to remember your credentials.
-        %fieldset{:class => "field"}
-          = submit_tag "Login"
   #new-users
     #shadow_box_content
       %p
-        %b Don't have an account? Request an invite:
+        %b CF-Console is an easy-to-use web-based interface for your Cloud Foundry instances.
       %p
-        %a.button{:href => "http://www.cloudfoundry.com/signup"}
-          %i Sign Up for
-          Cloud Foundry
-    #shadow_box_filler
-    #shadow_box_content
+        %b
+          Get the source code at
+          %a{:href => "https://github.com/frodenas/cf-console"}Github
+          and make it better
       %p
-        %b Or learn more about Cloud Foundry at:
-      %ul
-        %li
-          %a{:href => "http://www.cloudfoundry.com/"}Cloud Foundry
-        %li
-          %a{:href => "http://www.cloudfoundry.com/faq"}Cloud Foundry FAQ
-        %li
-          %a{:href => "https://www.cloudfoundry.com/micro"}Micro Cloud Foundry
-        %li
-          %a{:href => "http://www.cloudfoundry.org/"}Cloud Foundry Open Source
+        %b
+          Or learn more about the open platform as a service project, at the
+          %a{:href => "http://www.cloudfoundry.org/"} Cloud Foundry Open Source Site

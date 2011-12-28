@@ -37,10 +37,37 @@
               .tooltip-legend
                 %p Enter the URL you want to map to your application.
             %td= url_field_tag :url, @url, :size => 50, :required => "required", :placeholder => "Enter the URL for the application"
+    .modalBox-title Optional Data
+    .modalBox-content
+      %table
+        %tbody
           %tr
             %td
-              = label_tag "service", "Service:", :class => "legend"
+              = label_tag "service", "Bind Service:", :class => "legend"
               .tooltip-legend
                 %p Select the service you want to bind to the application.
             %td= select_tag :service, options_for_select(@available_services), :class => "service-uniform"
+          - if git_deploy_available?
+            %tr
+              %td
+                = label_tag "deployfrom", "Deploy application from:", :class => "legend"
+                .tooltip-legend
+                  %p Select from where you want to deploy the application.
+              %td
+                = radio_button_tag :deployfrom, 'git', true, :disabled => true
+                Git
+            %tr
+              %td
+                = label_tag "gitrepo", "Git Repository URI:", :class => "legend"
+                .tooltip-legend
+                  %p Enter the Git Repository URI that contains the application you want to deploy.
+                  %p Example: git://github.com/user/repo.git
+              %td= url_field_tag :gitrepo, @gitrepo, :size => 50, :placeholder => "git://github.com/user/repo.git"
+            %tr
+              %td
+                = label_tag "gitrepo", "Git Repository Branch:", :class => "legend"
+                .tooltip-legend
+                  %p Enter the Git Repository Branch that contains the application you want to deploy.
+                  %p By default: master
+              %td= text_field_tag :gitbranch, @gitbranch, :size => 20, :placeholder => "master"
     .modalBox-submit= submit_tag "Create Application"

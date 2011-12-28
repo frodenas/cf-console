@@ -329,6 +329,30 @@ class App
     return url
   end
 
+  def upload_app(name, zipfile, resource_manifest = [])
+    raise "Application name cannot be blank" if name.nil? || name.empty?
+    raise "Zipfile cannot be blank" if zipfile.nil? || zipfile.empty?
+    @cf_client.upload_app(name, zipfile, resource_manifest)
+  end
+
+  def upload_app_from_git(name, gitrepo, gitbranch)
+    raise "Application name cannot be blank" if name.nil? || name.empty?
+    raise "Invalid application name: \"" + name + "\". Must contain only word characters (letter, number, underscore)" if (name =~ /^[\w-]+$/).nil?
+    raise "Git Repository URI cannot be blank" if gitrepo.nil? || gitrepo.empty?
+    raise "Git Repository Branch cannot be blank" if gitbranch.nil? || gitbranch.empty?
+    app_bits_tmpdir = get_app_bits_tmpdir()
+    repodir = app_bits_tmpdir.join(name).to_s
+    Utils::GitUtil.git_clone(gitrepo, gitbranch, repodir)
+    zipfile = app_bits_tmpdir.join(name + ".zip").to_s
+    files = get_files_to_pack(repodir)
+    Utils::ZipUtil.pack_files(zipfile, files)
+    files.each { |f| f[:fn] = f[:zn]}
+    upload_app(name, zipfile, files)
+  ensure
+    FileUtils.rm_f(zipfile) if zipfile
+    FileUtils.rm_rf(repodir, :secure => true) if repodir
+  end
+
   def view_file(name, path, instance = 0)
     raise "Application name cannot be blank" if name.nil? || name.empty?
     raise "Path cannot be blank" if path.nil? || path.empty?
@@ -366,6 +390,39 @@ class App
     system = System.new(@cf_client)
     available_for_use = system.find_available_memory()
     return (available_for_use - wanted_mem.to_i) >= 0
+  end
+
+  def check_resources(resources = [])
+    @cf_client.check_resources(resources)
+  end
+
+  def get_app_bits_tmpdir()
+    Rails.root.join('tmp').join('app-bits')
+  end
+
+  def get_files_to_pack(repodir)
+    files = []
+    total_size = 0
+    Dir.glob("#{repodir}/**/*", File::FNM_DOTMATCH).select do |f|
+      process = true
+      ['*/.git', '*/.git/*'].each { |e| process = false if File.fnmatch(e, f) }
+      ['..', '.', '*~', '#*#', '*.log'].each { |e| process = false if File.fnmatch(e, File.basename(f)) }
+      if process == true
+        if (!File.directory?(f) && File.exists?(f))
+          files << {:fn => f, :zn => f.sub("#{repodir}/", ""), :size => File.size(f), :sha1 => Digest::SHA1.file(f).hexdigest}
+          total_size += File.size(f)
+        end
+      end
+    end
+    if (total_size > (64*1024))
+      files = check_resources(files)
+    end
+    if files.empty?
+      f = repodir + "/.__empty__"
+      File.new(f, "w")
+      files << {:fn => f, :zn => f.sub("#{repodir}/", ""), :size => File.size(f), :sha1 => Digest::SHA1.file(f).hexdigest}
+    end
+    files
   end
 
   def health(app)

@@ -1,0 +1,30 @@
+.modalBox{:id => "update_application_bits_modalBox"}
+  = form_tag "#", :id => "upload-app-bits-form", :method => :put, :remote => true do
+    .modalBox-title Update Application Bits
+    .modalBox-flash
+    .modalBox-content
+      %table
+        %tbody
+          %tr
+            %td
+              = label_tag "deployfrom", "Deploy application from:", :class => "legend"
+              .tooltip-legend
+                %p Select from where you want to deploy the application.
+            %td
+              = radio_button_tag :deployfrom, 'git', true, :disabled => true
+              Git
+          %tr
+            %td
+              = label_tag "gitrepo", "Git Repository URI:", :class => "legend"
+              .tooltip-legend
+                %p Enter the Git Repository URI that contains the application you want to deploy.
+                %p Example: git://github.com/user/repo.git
+            %td= url_field_tag :gitrepo, @gitrepo, :size => 50, :required => "required", :placeholder => "git://github.com/user/repo.git", :autofocus => "autofocus"
+          %tr
+            %td
+              = label_tag "gitrepo", "Git Repository Branch:", :class => "legend"
+              .tooltip-legend
+                %p Enter the Git Repository Branch that contains the application you want to deploy.
+                %p By default: master
+            %td= text_field_tag :gitbranch, @gitbranch, :size => 20, :placeholder => "master"
+    .modalBox-submit= submit_tag "Update Application"

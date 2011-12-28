@@ -40,6 +40,13 @@ describe ApplicationHelper do
     end
   end
 
+  describe "checks if deploy from git is" do
+    it "available" do
+      available = helper.git_deploy_available?
+      available.should be_true
+    end
+  end
+
   describe "for an app returns" do
     it "a red N/A health when app info is empty" do
       app = {}

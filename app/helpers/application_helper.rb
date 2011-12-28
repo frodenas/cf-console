@@ -25,6 +25,12 @@ module ApplicationHelper
     end
   end
 
+  def git_deploy_available?
+    return false if configatron.deploy_from.git_available != true
+    return false if Utils::GitUtil.git_binary().nil?
+    true
+  end
+
   def health(app)
     return '<span class="state-red">N/A</span>' unless (app and app[:state])
     return '<span class="state-red">STOPPED</span>' if app[:state] == 'STOPPED'

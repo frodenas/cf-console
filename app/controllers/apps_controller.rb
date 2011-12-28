@@ -24,6 +24,10 @@ class AppsController < ApplicationController
     @type = params[:type]
     @url = params[:url]
     @service = params[:service]
+    @deployform = params[:deployform]
+    @gitrepo = params[:gitrepo]
+    @gitbranch = params[:gitbranch]
+    app_created = false
     if !@name.nil? && !@name.empty?
       if !@instances.nil? && !@instances.empty?
         if !@memsize.nil? && !@memsize.empty?
@@ -34,7 +38,8 @@ class AppsController < ApplicationController
                 app = App.new(@cf_client)
                 app.create(@name.strip, @instances, @memsize, @url.strip.gsub(/^http(s*):\/\//i, '').downcase, framework, runtime, @service)
                 @new_app = [] << app.find(@name.strip)
-                flash[:notice] = "Application created. You must upload applications bits via the vmc client."
+                flash[:notice] = "Application created. You must upload applications bits."
+                app_created = true
               rescue Exception => ex
                 flash[:alert] = ex.message
               end
@@ -52,6 +57,22 @@ class AppsController < ApplicationController
       end
     else
       flash[:alert] = "Application name cannot be blank"
+    end
+    if app_created == true
+      if !@gitrepo.nil? && !@gitrepo.strip.empty?
+        if Utils::GitUtil.git_uri_valid?(@gitrepo.strip)
+          begin
+            @gitbranch = "master" if @gitbranch.nil? || @gitbranch.strip.empty?
+            app = App.new(@cf_client)
+            app.upload_app_from_git(@name, @gitrepo, @gitbranch)
+            flash[:notice] = "Application created and bits uploaded."
+          rescue Exception => ex
+            flash[:notice] = "Application created but no bits were uploaded: " + ex.message
+          end
+        else
+          flash[:notice] = "Application created but no bits were uploaded: Invalid Git Repository URI."
+        end
+      end
     end
     respond_to do |format|
       format.html { redirect_to apps_info_url }
@@ -339,6 +360,37 @@ class AppsController < ApplicationController
         render "apps/urls/unmap_url"
         flash.discard
       }
+    end
+  end
+
+  def update_bits
+    @name = params[:name]
+    @deployform = params[:deployform]
+    @gitrepo = params[:gitrepo]
+    @gitbranch = params[:gitbranch]
+    if !@name.nil? && !@name.strip.empty?
+      if !@gitrepo.nil? && !@gitrepo.strip.empty?
+        if Utils::GitUtil.git_uri_valid?(@gitrepo.strip)
+          begin
+            @gitbranch = "master" if @gitbranch.nil? || @gitbranch.strip.empty?
+            app = App.new(@cf_client)
+            app.upload_app_from_git(@name, @gitrepo, @gitbranch)
+            flash[:notice] = "Application bits uploaded."
+          rescue Exception => ex
+            flash[:alert] = ex.message
+          end
+        else
+          flash[:alert] = "Invalid Git Repository URI"
+        end
+      else
+        flash[:alert] = "Git Repository cannot be blank"
+      end
+    else
+      flash[:alert] = "Application name cannot be blank"
+    end
+    respond_to do |format|
+      format.html { redirect_to apps_info_url }
+      format.js { flash.discard }
     end
   end
 

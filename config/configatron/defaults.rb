@@ -21,3 +21,6 @@ configatron.available_targets << ["Stackato Sandbox", "http://api.sandbox.active
 configatron.available_targets << ["VMware CloudFoundry", "http://api.cloudfoundry.com"]
 configatron.available_targets << ["VMware Micro CloudFoundry", "http://api.{Domain}.cloudfoundry.me"]
 configatron.available_targets << ["Other", "{Cloud Controller URL}"]
+
+# Deploy from options.
+configatron.deploy_from.git_available = true

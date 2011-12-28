@@ -62,6 +62,10 @@ describe AppsController do
       put("/app/cf-console/unmap_url").should route_to("apps#unmap_url", :name => "cf-console")
     end
 
+    it "routes to #update_bits" do
+      put("/app/cf-console/update_bits").should route_to("apps#update_bits", :name => "cf-console")
+    end
+
     it "routes to #files" do
       get("/app/cf-console/files/0/logs").should route_to("apps#files", :name => "cf-console", :instance => "0", :filename => "logs")
     end

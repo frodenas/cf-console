@@ -20,6 +20,7 @@ CfConsole::Application.routes.draw do
   put     'app/:name/unbind_service'                => 'apps#unbind_service', :as => :app_unbind_service
   put     'app/:name/map_url'                       => 'apps#map_url',        :as => :app_map_url
   put     'app/:name/unmap_url'                     => 'apps#unmap_url',      :as => :app_unmap_url
+  put     'app/:name/update_bits'                   => 'apps#update_bits',    :as => :app_update_bits
   get     'app/:name/files/:instance/:filename'     => 'apps#files',          :as => :app_files
   get     'app/:name/view_file/:instance/:filename' => 'apps#view_file',      :as => :app_view_file
 

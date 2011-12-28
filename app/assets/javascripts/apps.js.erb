@@ -12,6 +12,18 @@ $(function() {
         var appid = '#' + nRow.id + '-tooltip';
         $(appid).tooltip({'tip': appid + 'box'});
         return nRow;
+      },
+      'fnDrawCallback':  function() {
+        uploadAppBits_trigger = $('.uploadAppBits').overlay({
+          'closeOnClick': false,
+          'mask': {color: '#404040', loadSpeed: 'normal', opacity: 0.7},
+          'top': '25%',
+          'onBeforeLoad': function(event) {
+            $('.modalBox-flash').empty();
+            var form = this.getOverlay().find("#upload-app-bits-form");
+            form.attr("action", this.getTrigger().attr("href"));
+          }
+        });
       }
     };
     appsTable = $('#apps-table').dataTable(appsTable_Settings);
@@ -25,7 +37,7 @@ $(function() {
           createApplication_trigger = $('.createApplication').overlay({
             'closeOnClick': false,
             'mask': {color: '#404040', loadSpeed: 'normal', opacity: 0.7},
-            'top': '25%',
+            'top': '15%',
             'onBeforeLoad': function(event) {
               $('.modalBox-flash').empty();
             }
@@ -40,6 +52,13 @@ $(function() {
             service_uniform = $('.service-uniform').uniform();
           }
           $('#new-app-form .legend').tooltip({
+            'effect':       'fade',
+            'fadeOutSpeed': 100,
+            'predelay':     100,
+            'position':     'center left',
+            'offset':       [0, -200]
+          });
+          $('#upload-app-bits-form .legend').tooltip({
             'effect':       'fade',
             'fadeOutSpeed': 100,
             'predelay':     100,
@@ -113,6 +132,27 @@ $(function() {
         if (request_processed == false) {
           $(this).find('img').attr({ src : '<%= asset_path('restart.png') %>'});
         }
+      });
+    $('#upload-app-bits-form')
+      .on('ajax:beforeSend', function(evt, xhr, settings) {
+        request_processed = false;
+        $(this).find('.modalBox-submit input[type="submit"]').attr({value: 'Processing ...'});
+      })
+      .on('ajax:success', function(evt, data, status, xhr) {
+        if (request_processed == true) {
+          $(this).find('input[type="url"],input[type="text"]').val('');
+        }
+      })
+      .on('ajax:error', function(evt, xhr, status, error) {
+        $('#flash').empty();
+        $('#flash').append('<div class="alert">An error occurred processing your request, please reload the page and try again.</div>');
+        $('#flash').fadeIn('slow');
+      })
+      .on('ajax:complete', function(evt, xhr, status) {
+        if (request_processed == true) {
+          uploadAppBits_trigger.eq(0).overlay().close();
+        }
+        $(this).find('.modalBox-submit input[type="submit"]').attr({value: 'Update Application'});
       });
     $('#delete-app-link')
       .on('ajax:beforeSend', function(evt, xhr, settings) {

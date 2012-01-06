@@ -1,3 +1,5 @@
+require 'utils'
+
 class DashboardController < ApplicationController
   def index
     begin
@@ -22,7 +24,7 @@ class DashboardController < ApplicationController
       # Instances
       instances_states = {}
       apps = app.find_all_apps()
-      apps.each do |app_item|
+      Utils::FiberedIterator.each(apps, configatron.reactor_iterator.concurrency) do |app_item|
         app_info = app.find(app_item[:name])
         app_info[:instances_states].each do |instance_states|
           if !instances_states[instance_states[:label]]

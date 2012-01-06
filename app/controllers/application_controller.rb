@@ -29,6 +29,14 @@ class ApplicationController < ActionController::Base
 
   def cloudfoundry_client(cf_target_url, cf_auth_token = nil)
     cf_target_url ||= CloudFoundry::Client::DEFAULT_TARGET
-    @client = CloudFoundry::Client.new({:target_url => cf_target_url, :auth_token => cf_auth_token})
+    @client = CloudFoundry::Client.new({:adapter => which_faraday_adapter?, :target_url => cf_target_url, :auth_token => cf_auth_token})
+  end
+
+  def which_faraday_adapter?
+    if (defined?(EM::Synchrony) && EM.reactor_running?)
+      :em_synchrony
+    else
+      :net_http
+    end
   end
 end

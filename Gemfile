@@ -7,6 +7,11 @@ gem 'cloudfoundry-client', '~> 0.1.1'
 gem 'configatron', '~> 2.9.0'
 gem 'addressable', '~> 2.2.6'
 gem 'rubyzip', '~> 0.9.5'
+gem 'eventmachine', '~> 1.0.0.beta.4'
+gem 'rack-fiber_pool', '~> 0.9.2', :require => 'rack/fiber_pool'
+gem 'em-synchrony', '~> 1.0.0', :require => ['em-synchrony', 'em-synchrony/em-http', 'em-synchrony/fiber_iterator']
+gem 'em-http-request', '~> 1.0.0', :require => 'em-http'
+gem 'thin', '~> 1.3.1'
 
 group :assets do
   gem 'sass-rails',   '~> 3.1.5'

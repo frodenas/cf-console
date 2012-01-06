@@ -24,3 +24,6 @@ configatron.available_targets << ["Other", "{Cloud Controller URL}"]
 
 # Deploy from options.
 configatron.deploy_from.git_available = true
+
+# Sets the concurrency for the reactor parallel iterator (EM::Iterator).
+configatron.reactor_iterator.concurrency = 50

@@ -1,4 +1,56 @@
 module Utils
+  module FiberedIterator
+    def self.each(list, concurrency = 1, &blk)
+      raise "Argument must be an array" unless list.respond_to?(:to_a)
+      error = nil
+      foreach = Proc.new do |obj|
+        begin
+          blk.call(obj)
+        rescue => ex
+          error = ex
+        end
+      end
+      if (defined?(EM::Synchrony) && EM.reactor_running?)
+        begin
+          result = EM::Synchrony::FiberIterator.new(list, concurrency).each(foreach)
+        rescue => ex
+          error = "Internal error - EM::Synchrony::FiberIterator exception: " + ex.message
+        end
+      else
+        result = list.each { |obj| foreach.call(obj) }
+      end
+      raise error if !error.nil?
+      result
+    end
+
+    def self.map(list, concurrency = 1, &blk)
+      raise "Argument must be an array" unless list.respond_to?(:to_a)
+      error = nil
+      foreach = Proc.new do |obj, iter|
+        Fiber.new {
+          begin
+            res = blk.call(obj)
+            iter.return(res)
+          rescue => ex
+            error = ex
+            iter.return(nil)
+          end
+        }.resume
+      end
+      if (defined?(EM::Synchrony) && EM.reactor_running?)
+        begin
+          result = EM::Synchrony::Iterator.new(list, concurrency).map(&foreach)
+        rescue => ex
+          error = "Internal error - EM::Synchrony::Iterator exception: " + ex.message
+        end
+      else
+        result = list.map { |obj| foreach.call(obj) }
+      end
+      raise error if !error.nil?
+      result
+    end
+  end
+
   module GitUtil
     def self.git_binary()
       git_binary = ENV['PATH'].split(':').map { |p| File.join(p, 'git') }.find { |p| File.exist?(p) } || nil

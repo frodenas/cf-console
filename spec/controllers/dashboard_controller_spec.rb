@@ -65,6 +65,17 @@ describe DashboardController do
         assigns(:instances_states).should_not be_nil
         assigns(:instances_states).should_not be_empty
       end
+
+      it "using EM and Fibers assigns applications summary as @apps_state and @instances_states" do
+        EM.synchrony do
+          get :index
+          assigns(:apps_states).should_not be_nil
+          assigns(:apps_states).should_not be_empty
+          assigns(:instances_states).should_not be_nil
+          assigns(:instances_states).should_not be_empty
+          EM.stop
+        end
+      end
     end
   end
 end

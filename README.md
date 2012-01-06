@@ -18,7 +18,8 @@ No DB required, just clone the project and start the server:
 
 * git clone git://github.com/frodenas/cf-console.git
 * bundle install
-* rails s / thin start / ...
+* thin start <- It must be an app server with EventMachine and Ruby 1.9 support
+(e.g. [Thin](http://code.macournoyer.com/thin/) or [Rainbows!](http://rainbows.rubyforge.org/))
 
 If you plan to deploy this app to a production environment:
 

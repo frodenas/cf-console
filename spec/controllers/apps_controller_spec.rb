@@ -145,6 +145,15 @@ describe AppsController do
         assigns(:apps).should_not be_nil
         assigns(:apps).should be_empty
       end
+
+      it "using EM and Fibers assigns applications info as @apps" do
+        EM.synchrony do
+          get :index
+          assigns(:apps).should_not be_nil
+          assigns(:apps).should be_empty
+          EM.stop
+        end
+      end
     end
 
     # TODO

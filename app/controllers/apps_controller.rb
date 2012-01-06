@@ -1,9 +1,12 @@
+require 'utils'
+
 class AppsController < ApplicationController
   def index
     begin
       app = App.new(@cf_client)
-      @apps = app.find_all_apps()
-      @apps.collect! { |app_info| app.find(app_info[:name])}
+      @apps = Utils::FiberedIterator.map(app.find_all_apps(), configatron.reactor_iterator.concurrency) do |app_info|
+        app.find(app_info[:name])
+      end
       @available_instances = find_available_instances('STOPPED', 1, 0)
       available_memsizes = find_available_memsizes('STOPPED', 0, 1)
       @available_memsizes = []
@@ -14,7 +17,7 @@ class AppsController < ApplicationController
       @available_services = find_available_services()
     rescue Exception => ex
       flash[:alert] = ex.message
-    end
+  end
   end
 
   def create
@@ -85,15 +88,17 @@ class AppsController < ApplicationController
     begin
       app = App.new(@cf_client)
       @app = app.find(@name)
-      @app[:instances_info].collect! { |instance|
+      @app[:instances_info] = Utils::FiberedIterator.map(@app[:instances_info], configatron.reactor_iterator.concurrency) do |instance|
         if !instance[:stats].nil?
           instance[:logfiles] = find_log_files(@name, instance[:instance])
         else
           instance[:logfiles] = []
         end
         instance
-      }
-      @app[:services].collect! { |service| find_service_details(service) }
+      end
+      @app[:services] = Utils::FiberedIterator.map(@app[:services], configatron.reactor_iterator.concurrency) do |service|
+        find_service_details(service)
+      end
       @app_files = find_files(@name, "/")
       @available_instances = find_available_instances(@app[:state], @app[:resources][:memory], @app[:instances])
       @available_memsizes = find_available_memsizes(@app[:state], @app[:resources][:memory], @app[:instances])

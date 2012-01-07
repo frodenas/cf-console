@@ -1,4 +1,30 @@
 module Utils
+  module EMDeferredBlock
+    def self.defer_block(&blk)
+      f = Fiber.current
+
+      defer_proc = Proc.new do
+        begin
+          result = blk.call
+          [:success, result]
+        rescue => ex
+          [:error, ex]
+        end
+      end
+
+      callback_proc = Proc.new { |result| f.resume(result) }
+
+      EM.defer(defer_proc, callback_proc)
+
+      status, result = Fiber.yield
+      if status == :success
+        result
+      else
+        raise result
+      end
+    end
+  end
+
   module FiberedIterator
     def self.each(list, concurrency = 1, &blk)
       raise "Argument must be an array" unless list.respond_to?(:to_a)
@@ -89,11 +115,18 @@ module Utils
   module ZipUtil
     require 'zip/zip'
     def self.pack_files(zipfile, files)
-      FileUtils.rm_f(zipfile)
-      Zip::ZipFile::open(zipfile, true) do |zf|
-        files.each do |f|
-          zf.add(f[:zn], f[:fn])
+      pack_proc = Proc.new {
+        FileUtils.rm_f(zipfile)
+        Zip::ZipFile::open(zipfile, true) do |zf|
+          files.each do |f|
+            zf.add(f[:zn], f[:fn])
+          end
         end
+      }
+      if EM.reactor_running?
+        EMDeferredBlock::defer_block(&pack_proc)
+      else
+        pack_proc.call
       end
     end
   end

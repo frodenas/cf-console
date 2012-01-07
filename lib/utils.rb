@@ -60,8 +60,18 @@ module Utils
       FileUtils.rm_rf(repodir, :secure => true)
       git_binary = git_binary()
       raise "Unable to find git binary." if git_binary.nil?
-      stdout = `#{git_binary} --git-dir=#{repodir} clone --quiet --branch=#{gitbranch} #{gitrepo} #{repodir} 2>&1`
-      raise "Unable to clone the repository. Git error " + $?.exitstatus.to_s if $?.to_i != 0
+      cmd = "#{git_binary} --git-dir=#{repodir} clone --quiet --branch=#{gitbranch} #{gitrepo} #{repodir}"
+      if EM.reactor_running?
+        f = Fiber.current
+        EM.system(cmd) do |output, status|
+          f.resume({:status => status, :output => output})
+        end
+        git_clone_result = Fiber.yield
+        raise "Unable to clone the repository. Git error " + git_clone_result[:status].exitstatus.to_s if git_clone_result[:status].exitstatus != 0
+      else
+        stdout = `#{cmd} 2>&1`
+        raise "Unable to clone the repository. Git error " + $?.exitstatus.to_s if $?.to_i != 0
+      end
     end
 
     def self.git_uri_valid?(uri)

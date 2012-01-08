@@ -59,6 +59,14 @@ $(function() {
         }
         $(this).find('.modalBox-submit input[type="submit"]').attr({value: 'Add Service'});
       });
+    $('#new-service-form select#ss')
+      .on('change', function() {
+        var app_name = $('#new-service-form input#name');
+        var ss_name = $(this).val()
+        if (ss_name != '') {
+          app_name.val($(this).val() + '-' + Math.round(Math.random() * 0x0100000 ).toString(16));
+        }
+      });
     $('#delete-service-link')
       .on('ajax:beforeSend', function(evt, xhr, settings) {
         $(this).find('img').attr({ src : '<%= asset_path('wait.gif') %>'});

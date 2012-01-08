@@ -15,9 +15,14 @@ class AppsController < ApplicationController
       end
       @available_frameworks = find_available_frameworks_runtimes()
       @available_services = find_available_services()
+      if configatron.suggest.app.url == true
+        host = @cf_target_url.split("//")[1]
+        @newapp_default_urldomain = host.split(".").drop(1).join(".")
+      end
+      @instances = 1
     rescue Exception => ex
       flash[:alert] = ex.message
-  end
+    end
   end
 
   def create

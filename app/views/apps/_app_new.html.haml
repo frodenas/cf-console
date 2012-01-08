@@ -71,3 +71,16 @@
                   %p By default: master
               %td= text_field_tag :gitbranch, @gitbranch, :size => 20, :placeholder => "master"
     .modalBox-submit= submit_tag "Create Application"
+
+- if @newapp_default_urldomain
+  - content_for :javascripts do
+    :javascript
+      $(function() {
+        $('#new-app-form input#url')
+          .on('focus', function() {
+            if ($(this).val() == "") {
+              var app_name = $('#new-app-form input#name');
+              $(this).val('http://' + app_name.val() + '.#{@newapp_default_urldomain}');
+            }
+          });
+      });

@@ -28,5 +28,5 @@ configatron.deploy_from.git_available = true
 # Sets the concurrency for the reactor parallel iterator (EM::Iterator).
 configatron.reactor_iterator.concurrency = 50
 
-# Sets if we must suggest an url when creating a new application.
+# Sets if we must suggest an URL based on the CF target url when creating a new application.
 configatron.suggest.app.url = true

@@ -67,8 +67,11 @@ $(function() {
           });
         }
       });
+    $('#new-app-form').validator({'effect': 'below_field_error', 'inputEvent': 'keyup'});
     $('#new-app-form')
       .on('ajax:beforeSend', function(evt, xhr, settings) {
+        var validator = $('#new-app-form').data('validator');
+        if (!validator.checkValidity()) return false;
         request_processed = false;
         $(this).find('.modalBox-submit input[type="submit"]').attr({value: 'Processing ...'});
       })
@@ -133,8 +136,11 @@ $(function() {
           $(this).find('img').attr({ src : '<%= asset_path('restart.png') %>'});
         }
       });
+    $('#upload-app-bits-form').validator({'effect': 'below_field_error', 'inputEvent': 'keyup'});
     $('#upload-app-bits-form')
       .on('ajax:beforeSend', function(evt, xhr, settings) {
+        var validator = $('#upload-app-bits-form').data('validator');
+        if (!validator.checkValidity()) return false;
         request_processed = false;
         $(this).find('.modalBox-submit input[type="submit"]').attr({value: 'Processing ...'});
       })

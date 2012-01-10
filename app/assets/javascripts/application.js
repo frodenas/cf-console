@@ -12,6 +12,7 @@
 //= require excanvas.min
 //= require jquery.flot.min
 //= require jquery.flot.pie.min
+//= require jquery.tools.custom
 //= require dashboard
 //= require apps
 //= require appsshow

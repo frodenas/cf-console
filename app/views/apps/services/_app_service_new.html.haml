@@ -10,5 +10,8 @@
               = label_tag "service", "Service:", :class => "legend"
               .tooltip-legend
                 %p Select the service you want to bind to the application.
-            %td= select_tag :service, options_for_select(@available_services), :required => "required", :autofocus => "autofocus", :class => "service-uniform"
+            %td
+              = select_tag :service, options_for_select(@available_services), :required => "required",
+                :autofocus => "autofocus", :class => "service-uniform"
+              .form-field-error
     .modalBox-submit= submit_tag "Bind Service"

@@ -19,12 +19,19 @@
               .tooltip-legend
                 %p Enter the Git Repository URI that contains the application you want to deploy.
                 %p Example: git://github.com/user/repo.git
-            %td= url_field_tag :gitrepo, @gitrepo, :size => 50, :required => "required", :placeholder => "git://github.com/user/repo.git", :autofocus => "autofocus"
+            %td
+              = text_field_tag :gitrepo, @gitrepo, :size => 50, :required => "required", :autofocus => "autofocus",
+                :placeholder => "git://github.com/user/repo.git",
+                :pattern => "git://[a-z0-9]+([-.]{1}[a-z0-9]+)*.[a-z]{2,5}(([0-9]{1,5})?.*)?.git",
+                :title => "Must contain a git repository URI: git://github.com/user/repo.git"
+              .form-field-error
           %tr
             %td
               = label_tag "gitrepo", "Git Repository Branch:", :class => "legend"
               .tooltip-legend
                 %p Enter the Git Repository Branch that contains the application you want to deploy.
                 %p By default: master
-            %td= text_field_tag :gitbranch, @gitbranch, :size => 20, :placeholder => "master"
+            %td
+              = text_field_tag :gitbranch, @gitbranch, :size => 20, :placeholder => "master"
+              .form-field-error
     .modalBox-submit= submit_tag "Update Application"

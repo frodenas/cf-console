@@ -10,17 +10,26 @@
               = label_tag "email", "Email:", :class => "legend"
               .tooltip-legend
                 %p Enter the email address of the new user.
-            %td= email_field_tag :email, @email, :size => 50, :required => "required", :placeholder => "User email", :autofocus => "autofocus"
+            %td
+              = email_field_tag :email, @email, :size => 50, :required => "required", :autofocus => "autofocus",
+                :placeholder => "User email"
+              .form-field-error
           %tr
             %td
               = label_tag "password", "Password:", :class => "legend"
               .tooltip-legend
                 %p Enter the password of the new user.
-            %td= password_field_tag :password, nil, :size => 50, :required => "required", :placeholder => "User password"
+            %td
+              = password_field_tag :password, nil, :size => 50, :required => "required",
+                :placeholder => "User password"
+              .form-field-error
           %tr
             %td
               = label_tag "vpassword", "Verify Password:", :class => "legend"
               .tooltip-legend
                 %p Enter again the password of the new user.
-            %td= password_field_tag :vpassword, nil, :size => 50, :required => "required", :placeholder => "Verify user password"
+            %td
+              = password_field_tag :vpassword, nil, :size => 50, :required => "required", :data_equals => "password",
+                :placeholder => "Verify user password"
+              .form-field-error
     .modalBox-submit= submit_tag "Add User"

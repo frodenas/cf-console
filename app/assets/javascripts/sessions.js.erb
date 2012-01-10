@@ -10,6 +10,7 @@ $(function() {
       'position':     'center right',
       'offset':       [0, -200]
     });
+    $('#new-session-form').validator({'effect': 'below_field_error', 'inputEvent': 'keyup'});
     $('#new-session-form #cloud_service').change(function () {
       var args = $(this).val().match(/{[\d\w\s]+}/i);
       if (args == null) {

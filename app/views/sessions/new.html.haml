@@ -9,25 +9,32 @@
         %fieldset{:class => "field"}
           .legend
             = label_tag :email, "Email:"
-            = email_field_tag :email, @email, :size => 50, :required => "required", :placeholder => "Enter your email address", :class => "input-right", :autofocus => "autofocus"
+            = email_field_tag :email, @email, :size => 50, :required => "required", :autofocus => "autofocus",
+              :placeholder => "Enter your email address", :class => "input-right"
+            .form-field-error
           .tooltip-legend
             %p Enter you email.
         %fieldset{:class => "field"}
           .legend
             = label_tag :password, "Password:"
-            = password_field_tag :password, nil, :size => 50, :required => "required", :placeholder => "Enter your password", :class => "input-right"
+            = password_field_tag :password, nil, :size => 50, :required => "required",
+              :placeholder => "Enter your password", :class => "input-right"
+            .form-field-error
           .tooltip-legend
             %p Enter your password.
         %fieldset{:class => "field"}
           .legend
             = label_tag :cloud_service, "Cloud Foundry Service:"
-            = select_tag :cloud_service, options_for_select(@available_targets, @selected_target), :required => "required", :class => "target-uniform"
+            = select_tag :cloud_service, options_for_select(@available_targets, @selected_target), :required => "required",
+              :class => "target-uniform"
+            .form-field-error
             = hidden_field_tag :target_url
           .tooltip-legend
             %p Select your Cloud Foundry service.
         %fieldset{:class => "field args"}
           = label_tag :target_args, "Target Args:"
           = text_field_tag :target_args, @target_args, :size => 50
+          .form-field-error
         %fieldset{:class => "field"}
           = submit_tag "Login"
           .legend

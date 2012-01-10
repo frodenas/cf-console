@@ -11,7 +11,9 @@
               .tooltip-legend
                 %p Select the system service you want to provision.
             %td
-              = select_tag :ss, options_for_select(@available_system_services), :required => "required", :class => "service-uniform"
+              = select_tag :ss, options_for_select(@available_system_services), :required => "required",
+               :autofocus => "autofocus", :class => "service-uniform"
+              .form-field-error
           %tr
             %td
               = label_tag "name", "Name:", :class => "legend"
@@ -20,5 +22,7 @@
                 %p Must contain only word characters (letter, number, underscore).
                 %p Example: redis-service
             %td
-              = text_field_tag :name, @name, :size => 30, :required => "required", :placeholder => "Provisioned Service Name", :autofocus => "autofocus"
+              = text_field_tag :name, @name, :size => 30, :required => "required", :pattern => "[a-zA-Z0-9-]+",
+                :placeholder => "Provisioned Service Name", :title => "Must contain only word characters: letter, number, hyphen"
+              .form-field-error
     .modalBox-submit= submit_tag "Add Service"

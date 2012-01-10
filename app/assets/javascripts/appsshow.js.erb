@@ -234,8 +234,11 @@ $(function() {
           $('.invoke-modalBox').empty().hide();
         }
       });
+    $('#set-var-form').validator({'effect': 'below_field_error', 'inputEvent': 'keyup'});
     $('#set-var-form')
       .on('ajax:beforeSend', function(evt, xhr, settings) {
+        var validator = $('#set-var-form').data('validator');
+        if (!validator.checkValidity()) return false;
         request_processed = false;
         $(this).find('.modalBox-submit input[type="submit"]').attr({value: 'Processing ...'});
       })
@@ -268,8 +271,11 @@ $(function() {
       .on('ajax:complete', function(evt, xhr, status) {
         $(this).find('img').attr({ src : '<%= asset_path('delete.png') %>'});
       });
+    $('#bind-service-form').validator({'effect': 'below_field_error', 'inputEvent': 'keyup'});
     $('#bind-service-form')
       .on('ajax:beforeSend', function(evt, xhr, settings) {
+        var validator = $('#bind-service-form').data('validator');
+        if (!validator.checkValidity()) return false;
         request_processed = false;
         $(this).find('.modalBox-submit input[type="submit"]').attr({value: 'Processing ...'});
       })
@@ -302,8 +308,11 @@ $(function() {
       .on('ajax:complete', function(evt, xhr, status) {
         $(this).find('img').attr({ src : '<%= asset_path('delete.png') %>'});
       });
+    $('#map-url-form').validator({'effect': 'below_field_error', 'inputEvent': 'keyup'});
     $('#map-url-form')
       .on('ajax:beforeSend', function(evt, xhr, settings) {
+        var validator = $('#map-url-form').data('validator');
+        if (!validator.checkValidity()) return false;
         request_processed = false;
         $(this).find('.modalBox-submit input[type="submit"]').attr({value: 'Processing ...'});
       })

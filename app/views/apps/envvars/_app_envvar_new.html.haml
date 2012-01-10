@@ -11,14 +11,20 @@
               .tooltip-legend
                 %p Enter the name that univocally will identify your environment var.
                 %p Must contain only word characters (letter, number, underscore).
-            %td= text_field_tag :var_name, nil, :size => 30, :required => "required", :placeholder => "Name of the variable", :autofocus => "autofocus"
+            %td
+              = text_field_tag :var_name, nil, :size => 30, :required => "required", :autofocus => "autofocus",
+                :placeholder => "Name of the variable", :pattern => "[a-zA-Z0-9-]+",
+                :title => "Must contain only word characters: letter, number, hyphen"
+              .form-field-error
           %tr
             %td
               = label_tag "value", "Value:", :class => "legend"
               .tooltip-legend
                 %p Enter the value to be set for your environment var.
                 %p It can be blank.
-            %td= text_field_tag :var_value, nil, :size => 30, :placeholder => "Value of the variable"
+            %td
+              = text_field_tag :var_value, nil, :size => 30, :placeholder => "Value of the variable"
+              .form-field-error
           %tr
             %td
               = label_tag "restart", "Restart App:", :class => "legend"

@@ -37,8 +37,19 @@ $(function() {
           });
         }
       });
+    $('#new-service-form').validator({'effect': 'below_field_error', 'inputEvent': 'keyup'});
+    $('#new-service-form select#ss')
+      .on('change', function() {
+        var app_name = $('#new-service-form input#name');
+        var ss_name = $(this).val()
+        if (ss_name != '') {
+          app_name.val($(this).val() + '-' + Math.round(Math.random() * 0x0100000 ).toString(16));
+        }
+      });
     $('#new-service-form')
       .on('ajax:beforeSend', function(evt, xhr, settings) {
+        var validator = $('#new-service-form').data('validator');
+        if (!validator.checkValidity()) return false;
         request_processed = false;
         $(this).find('.modalBox-submit input[type="submit"]').attr({value: 'Processing ...'});
       })
@@ -58,14 +69,6 @@ $(function() {
           addService_trigger.eq(0).overlay().close();
         }
         $(this).find('.modalBox-submit input[type="submit"]').attr({value: 'Add Service'});
-      });
-    $('#new-service-form select#ss')
-      .on('change', function() {
-        var app_name = $('#new-service-form input#name');
-        var ss_name = $(this).val()
-        if (ss_name != '') {
-          app_name.val($(this).val() + '-' + Math.round(Math.random() * 0x0100000 ).toString(16));
-        }
       });
     $('#delete-service-link')
       .on('ajax:beforeSend', function(evt, xhr, settings) {

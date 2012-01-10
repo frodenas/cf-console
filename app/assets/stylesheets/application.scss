@@ -859,13 +859,6 @@ header a:hover {
   background-color: #FFFFFF;
 }
 
-#main .validation_alert {
-  background-image: image_url('red_alert.png');
-  background-position: center right;
-  background-repeat: no-repeat;
-  padding-right: 1.5em;
-}
-
 #main .state-green {
   background-color: #7FDB49;
   -moz-border-radius: .5em;
@@ -1014,6 +1007,18 @@ header a:hover {
   margin: .8em 0 0 1.5em;
   text-align: center;
   width: 3em;
+}
+
+#main .form-field-invalid {
+  border: .1em solid #F2BDB9;
+}
+
+#main .form-field-error {
+  background-color: #F2BDB9;
+  display: none;
+  font-size: 75%;
+  padding: .3em;
+  text-align: left;
 }
 
 #main #login {

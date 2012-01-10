@@ -34,14 +34,12 @@ $(function() {
           });
         }
       });
+    $('#new-user-form').validator({'effect': 'below_field_error', 'inputEvent': 'keyup'});
     $('#new-user-form')
       .on('ajax:beforeSend', function(evt, xhr, settings) {
+        var validator = $('#new-user-form').data('validator');
+        if (!validator.checkValidity()) return false;
         request_processed = false;
-        var password = $(this).find('#password');
-        var vpassword = $(this).find('#vpassword');
-        if (password.val() == "" || password.val() != vpassword.val()) {
-          return false;
-        }
         $(this).find('.modalBox-submit input[type="submit"]').attr({value: 'Processing ...'});
       })
       .on('ajax:success', function(evt, data, status, xhr) {
@@ -72,16 +70,6 @@ $(function() {
       })
       .on('ajax:complete', function(evt, xhr, status) {
         $(this).find('img').attr({ src : '<%= asset_path('delete.png') %>'});
-      });
-    $('#vpassword')
-      .on('keyup', function() {
-        var password = $('#password');
-        var vpassword = $(this);
-        if (password.val() != "" && password.val() == vpassword.val()) {
-          vpassword.removeClass('validation_alert');
-        } else {
-          vpassword.addClass('validation_alert');
-        }
       });
   }
 });

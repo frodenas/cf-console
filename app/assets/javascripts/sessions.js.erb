@@ -3,13 +3,7 @@ $(function() {
     if (typeof target_uniform == 'undefined') {
       target_uniform = $('.target-uniform').uniform();
     }
-    $('#new-session-form .legend').tooltip({
-      'effect':       'fade',
-      'fadeOutSpeed': 100,
-      'predelay':     100,
-      'position':     'center right',
-      'offset':       [0, -200]
-    });
+    $('#new-session-form .help').tooltip({'effect': 'fade', 'tipClass': 'help-tip'});
     $('#new-session-form').validator({'effect': 'below_field_error', 'inputEvent': 'keyup'});
     $('#new-session-form #cloud_service').change(function () {
       var args = $(this).val().match(/{[\d\w\s]+}/i);

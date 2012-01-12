@@ -7,11 +7,9 @@
         %tbody
           %tr
             %td
-              = label_tag "name", "Name:", :class => "legend"
-              .tooltip-legend
-                %p Enter the name that univocally will identify your application.
-                %p Must contain only word characters (letter, number, underscore).
-                %p Example: my_application
+              = image_tag("help.png", :alt => "?", :class=> "help",
+                :title => "Enter the name that univocally will identify your application.<br />Must contain only word characters (letter, number, hyphen).<br />Example: <i>my-application</i>.")
+              = label_tag "name", "Name:"
             %td
               = text_field_tag :name, @name, :size => 50, :required => "required", :autofocus => "autofocus",
                 :placeholder => "Enter the application name", :pattern => "[a-zA-Z0-9-]+",
@@ -19,33 +17,33 @@
               .form-field-error
           %tr
             %td
-              = label_tag "instances", "Instances:", :class => "legend"
-              .tooltip-legend
-                %p Enter the number of instances of your application.
+              = image_tag("help.png", :alt => "?", :class=> "help",
+                :title => "Enter the number of instances of your application.")
+              = label_tag "instances", "Instances:"
             %td
               = number_field_tag :instances, @instances, :min => 1, :max => @available_instances, :required => "required"
               .form-field-error
           %tr
             %td
-              = label_tag "memsize", "Memory size:", :class => "legend"
-              .tooltip-legend
-                %p Select the memory size for each instance of your application.
+              = image_tag("help.png", :alt => "?", :class=> "help",
+                :title => "Select the memory size for each instance of your application.")
+              = label_tag "memsize", "Memory size:"
             %td
               = select_tag :memsize, options_for_select(@available_memsizes), :required => "required", :class => "memory-uniform"
               .form-field-error
           %tr
             %td
-              = label_tag "type", "Type:", :class => "legend"
-              .tooltip-legend
-                %p Select the type (framework and runtime) of application.
+              = image_tag("help.png", :alt => "?", :class=> "help",
+                :title => "Select the type (framework and runtime) of your application.")
+              = label_tag "type", "Type:"
             %td
               = select_tag :type, options_for_select(@available_frameworks), :required => "required", :class => "type-uniform"
               .form-field-error
           %tr
             %td
-              = label_tag "url", "URL:", :class => "legend"
-              .tooltip-legend
-                %p Enter the URL you want to map to your application.
+              = image_tag("help.png", :alt => "?", :class=> "help",
+                :title => "Enter the URL you want to map to your application.")
+              = label_tag "url", "URL:"
             %td
               = url_field_tag :url, @url, :size => 50, :required => "required", :placeholder => "Enter the URL for the application"
               .form-field-error
@@ -55,27 +53,26 @@
         %tbody
           %tr
             %td
-              = label_tag "service", "Bind Service:", :class => "legend"
-              .tooltip-legend
-                %p Select the service you want to bind to the application.
+              = image_tag("help.png", :alt => "?", :class=> "help",
+                :title => "Select the service you want to bind to the application.")
+              = label_tag "service", "Bind Service:"
             %td
               = select_tag :service, options_for_select(@available_services), :class => "service-uniform"
               .form-field-error
           - if git_deploy_available?
             %tr
               %td
-                = label_tag "deployfrom", "Deploy application from:", :class => "legend"
-                .tooltip-legend
-                  %p Select from where you want to deploy the application.
+                = image_tag("help.png", :alt => "?", :class=> "help",
+                  :title => "Select from where you want to deploy the application.")
+                = label_tag "deployfrom", "Deploy application from:"
               %td
                 = radio_button_tag :deployfrom, 'git', true, :disabled => true
                 Git
             %tr
               %td
-                = label_tag "gitrepo", "Git Repository URI:", :class => "legend"
-                .tooltip-legend
-                  %p Enter the Git Repository URI that contains the application you want to deploy.
-                  %p Example: git://github.com/user/repo.git
+                = image_tag("help.png", :alt => "?", :class=> "help",
+                  :title => "Enter the Git Repository URI that contains the application you want to deploy.<br />Example: <i>git://github.com/user/repo.git</i>.")
+                = label_tag "gitrepo", "Git Repository URI:"
               %td
                 = text_field_tag :gitrepo, @gitrepo, :size => 50, :placeholder => "git://github.com/user/repo.git",
                   :pattern => "(git://[a-z0-9]+([-.]{1}[a-z0-9]+)*.[a-z]{2,5}(([0-9]{1,5})?.*)?.git)?",
@@ -83,10 +80,9 @@
                 .form-field-error
             %tr
               %td
-                = label_tag "gitrepo", "Git Repository Branch:", :class => "legend"
-                .tooltip-legend
-                  %p Enter the Git Repository Branch that contains the application you want to deploy.
-                  %p By default: master
+                = image_tag("help.png", :alt => "?", :class=> "help",
+                  :title => "Enter the Git Repository Branch that contains the application you want to deploy.<br />By default: <i>master</i>.")
+                = label_tag "gitrepo", "Git Repository Branch:"
               %td
                 = text_field_tag :gitbranch, @gitbranch, :size => 20, :placeholder => "master"
                 .form-field-error

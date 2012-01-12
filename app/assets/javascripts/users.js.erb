@@ -25,15 +25,9 @@ $(function() {
               $('.modalBox-flash').empty();
             }
           });
-          $('#new-user-form .legend').tooltip({
-            'effect':       'fade',
-            'fadeOutSpeed': 100,
-            'predelay':     100,
-            'position':     'center left',
-            'offset':       [0, -200]
-          });
         }
       });
+    $('#new-user-form .help').tooltip({'effect': 'fade', 'tipClass': 'help-tip'});
     $('#new-user-form').validator({'effect': 'below_field_error', 'inputEvent': 'keyup'});
     $('#new-user-form')
       .on('ajax:beforeSend', function(evt, xhr, settings) {

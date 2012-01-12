@@ -7,10 +7,9 @@
         %tbody
           %tr
             %td
-              = label_tag "name", "Name:", :class => "legend"
-              .tooltip-legend
-                %p Enter the name that univocally will identify your environment var.
-                %p Must contain only word characters (letter, number, underscore).
+              = image_tag("help.png", :alt => "?", :class=> "help",
+                :title => "Enter the name that univocally will identify your environment var.<br />Must contain only word characters (letter, number, hyphen).")
+              = label_tag "name", "Name:"
             %td
               = text_field_tag :var_name, nil, :size => 30, :required => "required", :autofocus => "autofocus",
                 :placeholder => "Name of the variable", :pattern => "[a-zA-Z0-9-]+",
@@ -18,17 +17,17 @@
               .form-field-error
           %tr
             %td
-              = label_tag "value", "Value:", :class => "legend"
-              .tooltip-legend
-                %p Enter the value to be set for your environment var.
-                %p It can be blank.
+              = image_tag("help.png", :alt => "?", :class=> "help",
+                :title => "Enter the value to be set for your environment var. It can be blank.")
+              = label_tag "value", "Value:"
             %td
               = text_field_tag :var_value, nil, :size => 30, :placeholder => "Value of the variable"
               .form-field-error
           %tr
             %td
-              = label_tag "restart", "Restart App:", :class => "legend"
-              .tooltip-legend
-                %p Check if you want to restart the application.
-            %td= check_box_tag :restart, true, true
+              = image_tag("help.png", :alt => "?", :class=> "help",
+                :title => "Check if you want to restart the application.")
+              = label_tag "restart", "Restart App:"
+            %td
+              = check_box_tag :restart, true, true
     .modalBox-submit= submit_tag "Add URL"

@@ -7,18 +7,17 @@
         %tbody
           %tr
             %td
-              = label_tag "deployfrom", "Deploy application from:", :class => "legend"
-              .tooltip-legend
-                %p Select from where you want to deploy the application.
+              = image_tag("help.png", :alt => "?", :class=> "help",
+                :title => "Select from where you want to deploy the application.")
+              = label_tag "deployfrom", "Deploy application from:"
             %td
               = radio_button_tag :deployfrom, 'git', true, :disabled => true
               Git
           %tr
             %td
-              = label_tag "gitrepo", "Git Repository URI:", :class => "legend"
-              .tooltip-legend
-                %p Enter the Git Repository URI that contains the application you want to deploy.
-                %p Example: git://github.com/user/repo.git
+              = image_tag("help.png", :alt => "?", :class=> "help",
+                :title => "Enter the Git Repository URI that contains the application you want to deploy.<br />Example: <i>git://github.com/user/repo.git</i>.")
+              = label_tag "gitrepo", "Git Repository URI:"
             %td
               = text_field_tag :gitrepo, @gitrepo, :size => 50, :required => "required", :autofocus => "autofocus",
                 :placeholder => "git://github.com/user/repo.git",
@@ -27,10 +26,9 @@
               .form-field-error
           %tr
             %td
-              = label_tag "gitrepo", "Git Repository Branch:", :class => "legend"
-              .tooltip-legend
-                %p Enter the Git Repository Branch that contains the application you want to deploy.
-                %p By default: master
+              = image_tag("help.png", :alt => "?", :class=> "help",
+                :title => "Enter the Git Repository Branch that contains the application you want to deploy.<br />By default: <i>master</i>.")
+              = label_tag "gitrepo", "Git Repository Branch:"
             %td
               = text_field_tag :gitbranch, @gitbranch, :size => 20, :placeholder => "master"
               .form-field-error

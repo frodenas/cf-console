@@ -183,13 +183,6 @@ $(function() {
               $('.modalBox-flash').empty();
             }
           });
-          $('#set-var-form .legend').tooltip({
-            'effect':       'fade',
-            'fadeOutSpeed': 100,
-            'predelay':     100,
-            'position':     'center left',
-            'offset':       [0, -200]
-          });
         }
         if (tab == '#services') {
           $('.invoke-modalBox').html('<button class="bindService" rel="#bind_service_modalBox">Bind Service</button>').show();
@@ -204,13 +197,6 @@ $(function() {
           if (typeof service_uniform == 'undefined') {
             service_uniform = $('.service-uniform').uniform();
           }
-          $('#bind-service-form .legend').tooltip({
-            'effect':       'fade',
-            'fadeOutSpeed': 100,
-            'predelay':     100,
-            'position':     'center left',
-            'offset':       [0, -200]
-          });
         }
         if (tab == '#urls') {
           $('.invoke-modalBox').html('<button class="addURL" rel="#add_url_modalBox">Add URL</button>').show();
@@ -222,18 +208,12 @@ $(function() {
               $('.modalBox-flash').empty();
             }
           });
-          $('#map-url-form .legend').tooltip({
-            'effect':       'fade',
-            'fadeOutSpeed': 100,
-            'predelay':     100,
-            'position':     'center left',
-            'offset':       [0, -200]
-          });
         }
         if (tab == '#files') {
           $('.invoke-modalBox').empty().hide();
         }
       });
+    $('#set-var-form .help').tooltip({'effect': 'fade', 'tipClass': 'help-tip'});
     $('#set-var-form').validator({'effect': 'below_field_error', 'inputEvent': 'keyup'});
     $('#set-var-form')
       .on('ajax:beforeSend', function(evt, xhr, settings) {
@@ -271,6 +251,7 @@ $(function() {
       .on('ajax:complete', function(evt, xhr, status) {
         $(this).find('img').attr({ src : '<%= asset_path('delete.png') %>'});
       });
+    $('#bind-service-form .help').tooltip({'effect': 'fade', 'tipClass': 'help-tip'});
     $('#bind-service-form').validator({'effect': 'below_field_error', 'inputEvent': 'keyup'});
     $('#bind-service-form')
       .on('ajax:beforeSend', function(evt, xhr, settings) {
@@ -308,6 +289,7 @@ $(function() {
       .on('ajax:complete', function(evt, xhr, status) {
         $(this).find('img').attr({ src : '<%= asset_path('delete.png') %>'});
       });
+    $('#map-url-form .help').tooltip({'effect': 'fade', 'tipClass': 'help-tip'});
     $('#map-url-form').validator({'effect': 'below_field_error', 'inputEvent': 'keyup'});
     $('#map-url-form')
       .on('ajax:beforeSend', function(evt, xhr, settings) {

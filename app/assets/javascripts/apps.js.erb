@@ -51,22 +51,9 @@ $(function() {
           if (typeof service_uniform == 'undefined') {
             service_uniform = $('.service-uniform').uniform();
           }
-          $('#new-app-form .legend').tooltip({
-            'effect':       'fade',
-            'fadeOutSpeed': 100,
-            'predelay':     100,
-            'position':     'center left',
-            'offset':       [0, -200]
-          });
-          $('#upload-app-bits-form .legend').tooltip({
-            'effect':       'fade',
-            'fadeOutSpeed': 100,
-            'predelay':     100,
-            'position':     'center left',
-            'offset':       [0, -200]
-          });
         }
       });
+    $('#new-app-form .help').tooltip({'effect': 'fade', 'tipClass': 'help-tip'});
     $('#new-app-form').validator({'effect': 'below_field_error', 'inputEvent': 'keyup'});
     $('#new-app-form')
       .on('ajax:beforeSend', function(evt, xhr, settings) {
@@ -136,6 +123,7 @@ $(function() {
           $(this).find('img').attr({ src : '<%= asset_path('restart.png') %>'});
         }
       });
+    $('#upload-app-bits-form .help').tooltip({'effect': 'fade', 'tipClass': 'help-tip'});
     $('#upload-app-bits-form').validator({'effect': 'below_field_error', 'inputEvent': 'keyup'});
     $('#upload-app-bits-form')
       .on('ajax:beforeSend', function(evt, xhr, settings) {

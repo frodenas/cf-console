@@ -7,13 +7,7 @@ $(function() {
       .on('onClick', function(event, tabIndex) {
         var tab = $(this).find('li.current > a').attr('href');
         if (tab == '#account') {
-          $('.legend').tooltip({
-            'effect':       'fade',
-            'fadeOutSpeed': 100,
-            'predelay':     100,
-            'position':     'center right',
-            'offset':       [0, -100]
-          });
+          $('.help').tooltip({'effect': 'fade', 'tipClass': 'help-tip'});
           $('td.usage').each(function() {
             var tdwidth = parseInt($(this).width()) - 10;
             if (tdwidth > 0) {

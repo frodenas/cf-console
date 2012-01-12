@@ -28,15 +28,9 @@ $(function() {
           if (typeof service_uniform == 'undefined') {
             service_uniform = $('.service-uniform').uniform();
           }
-          $('#new-service-form .legend').tooltip({
-            'effect':       'fade',
-            'fadeOutSpeed': 100,
-            'predelay':     100,
-            'position':     'center left',
-            'offset':       [0, -200]
-          });
         }
       });
+    $('#new-service-form .help').tooltip({'effect': 'fade', 'tipClass': 'help-tip'});
     $('#new-service-form').validator({'effect': 'below_field_error', 'inputEvent': 'keyup'});
     $('#new-service-form select#ss')
       .on('change', function() {

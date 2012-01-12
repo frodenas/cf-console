@@ -7,41 +7,37 @@
         %b Enter your credentials:
       = form_tag login_url, :id => "new-session-form" do
         %fieldset{:class => "field"}
-          .legend
-            = label_tag :email, "Email:"
-            = email_field_tag :email, @email, :size => 50, :required => "required", :autofocus => "autofocus",
-              :placeholder => "Enter your email address", :class => "input-right"
-            .form-field-error
-          .tooltip-legend
-            %p Enter you email.
+          = label_tag :email, "Email:"
+          = image_tag("help.png", :alt => "?", :class=> "help",
+            :title => "Enter your email address.")
+          = email_field_tag :email, @email, :size => 50, :required => "required", :autofocus => "autofocus",
+            :placeholder => "Enter your email address", :class => "input-right"
+          .form-field-error
         %fieldset{:class => "field"}
-          .legend
-            = label_tag :password, "Password:"
-            = password_field_tag :password, nil, :size => 50, :required => "required",
-              :placeholder => "Enter your password", :class => "input-right"
-            .form-field-error
-          .tooltip-legend
-            %p Enter your password.
+          = label_tag :password, "Password:"
+          = image_tag("help.png", :alt => "?", :class=> "help",
+            :title => "Enter your password.")
+          = password_field_tag :password, nil, :size => 50, :required => "required",
+            :placeholder => "Enter your password", :class => "input-right"
+          .form-field-error
         %fieldset{:class => "field"}
-          .legend
-            = label_tag :cloud_service, "Cloud Foundry Service:"
-            = select_tag :cloud_service, options_for_select(@available_targets, @selected_target), :required => "required",
-              :class => "target-uniform"
-            .form-field-error
-            = hidden_field_tag :target_url
-          .tooltip-legend
-            %p Select your Cloud Foundry service.
+          = label_tag :cloud_service, "Cloud Foundry Provider:"
+          = image_tag("help.png", :alt => "?", :class=> "help",
+            :title => "Select your Cloud Foundry provider.")
+          = select_tag :cloud_service, options_for_select(@available_targets, @selected_target), :required => "required",
+            :class => "target-uniform"
+          .form-field-error
+          = hidden_field_tag :target_url
         %fieldset{:class => "field args"}
           = label_tag :target_args, "Target Args:"
           = text_field_tag :target_args, @target_args, :size => 50
           .form-field-error
         %fieldset{:class => "field"}
           = submit_tag "Login"
-          .legend
-            = check_box_tag :remember_me, true, @remember_me
-            = label_tag :remember_me
-          .tooltip-legend
-            %p Check to remember your credentials.
+          = check_box_tag :remember_me, true, @remember_me
+          = label_tag :remember_me
+          = image_tag("help.png", :alt => "?", :class=> "help",
+            :title => "Check to remember your credentials in this browser.")
   #new-users
     #shadow_box_content
       %p

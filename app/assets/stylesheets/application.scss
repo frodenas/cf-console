@@ -666,6 +666,11 @@ header a:hover {
   float: right;
 }
 
+#main .modalBox-content .help {
+  float: right;
+  padding-left: .3em;
+}
+
 #main .modalBox-submit {
   background-color: #E6E7E8;
   border-top: .1em solid #D4D4D4;
@@ -928,7 +933,11 @@ header a:hover {
   color: #FFFFFF;
 }
 
-#main .tooltip-legend {
+#main .help {
+  cursor: help;
+}
+
+.help-tip {
   background-color: #FFFFAA;
   border: .1em solid #CCCC99;
   -moz-border-radius: .5em;
@@ -943,11 +952,7 @@ header a:hover {
   font-size: 75%;
   padding: .3em;
   text-align: left;
-  width: 250px;
-}
-
-#main .legend {
-  cursor: help;
+  z-index: 9999;
 }
 
 #main .pieLabel {

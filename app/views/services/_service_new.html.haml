@@ -7,20 +7,18 @@
         %tbody
           %tr
             %td
-              = label_tag "service", "Service:", :class => "legend"
-              .tooltip-legend
-                %p Select the system service you want to provision.
+              = image_tag("help.png", :alt => "?", :class=> "help",
+                :title => "Select the system service you want to provision.")
+              = label_tag "service", "Service:"
             %td
               = select_tag :ss, options_for_select(@available_system_services), :required => "required",
                :autofocus => "autofocus", :class => "service-uniform"
               .form-field-error
           %tr
             %td
-              = label_tag "name", "Name:", :class => "legend"
-              .tooltip-legend
-                %p Enter the name that univocally will identify your service.
-                %p Must contain only word characters (letter, number, underscore).
-                %p Example: redis-service
+              = image_tag("help.png", :alt => "?", :class=> "help",
+                :title => "Enter the name that univocally will identify your service.<br />Must contain only word characters (letter, number, hyphen).<br />Example: <i>redis-service</i>.")
+              = label_tag "name", "Name:"
             %td
               = text_field_tag :name, @name, :size => 30, :required => "required", :pattern => "[a-zA-Z0-9-]+",
                 :placeholder => "Provisioned Service Name", :title => "Must contain only word characters: letter, number, hyphen"

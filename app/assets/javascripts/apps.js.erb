@@ -81,7 +81,7 @@ $(function() {
     $('#start-app-link')
       .on('ajax:beforeSend', function(evt, xhr, settings) {
         request_processed = false;
-        $(this).find('img').attr({ src : '<%= asset_path('wait.gif') %>'});
+        $(this).find('img').attr({ src : '<%= asset_path('wait.gif') %>'}).removeClass('start');
       })
       .on('ajax:error', function(evt, xhr, status, error) {
         $('#flash').empty();
@@ -90,13 +90,13 @@ $(function() {
       })
       .on('ajax:complete', function(evt, xhr, status) {
         if (request_processed == false) {
-          $(this).find('img').attr({ src : '<%= asset_path('start.png') %>'});
+          $(this).find('img').attr({ src : '<%= asset_path('s.gif') %>'}).addClass('start');
         }
       });
     $('#stop-app-link')
       .on('ajax:beforeSend', function(evt, xhr, settings) {
         request_processed = false;
-        $(this).find('img').attr({ src : '<%= asset_path('wait.gif') %>'});
+        $(this).find('img').attr({ src : '<%= asset_path('wait.gif') %>'}).removeClass('stop');
       })
       .on('ajax:error', function(evt, xhr, status, error) {
         $('#flash').empty();
@@ -105,13 +105,13 @@ $(function() {
       })
       .on('ajax:complete', function(evt, xhr, status) {
         if (request_processed == false) {
-          $(this).find('img').attr({ src : '<%= asset_path('stop.png') %>'});
+          $(this).find('img').attr({ src : '<%= asset_path('s.gif') %>'}).addClass('stop');
         }
       });
     $('#restart-app-link')
       .on('ajax:beforeSend', function(evt, xhr, settings) {
         request_processed = false;
-        $(this).find('img').attr({ src : '<%= asset_path('wait.gif') %>'});
+        $(this).find('img').attr({ src : '<%= asset_path('wait.gif') %>'}).removeClass('restart');
       })
       .on('ajax:error', function(evt, xhr, status, error) {
         $('#flash').empty();
@@ -120,7 +120,7 @@ $(function() {
       })
       .on('ajax:complete', function(evt, xhr, status) {
         if (request_processed == false) {
-          $(this).find('img').attr({ src : '<%= asset_path('restart.png') %>'});
+          $(this).find('img').attr({ src : '<%= asset_path('s.gif') %>'}).addClass('restart');
         }
       });
     $('#upload-app-bits-form .help').tooltip({'effect': 'fade', 'tipClass': 'help-tip'});
@@ -150,7 +150,7 @@ $(function() {
       });
     $('#delete-app-link')
       .on('ajax:beforeSend', function(evt, xhr, settings) {
-        $(this).find('img').attr({ src : '<%= asset_path('wait.gif') %>'});
+        $(this).find('img').attr({ src : '<%= asset_path('wait.gif') %>'}).removeClass('delete');
       })
       .on('ajax:error', function(evt, xhr, status, error) {
         $('#flash').empty();
@@ -158,7 +158,7 @@ $(function() {
         $('#flash').fadeIn('slow');
       })
       .on('ajax:complete', function(evt, xhr, status) {
-        $(this).find('img').attr({ src : '<%= asset_path('delete.png') %>'});
+        $(this).find('img').attr({ src : '<%= asset_path('s.gif') %>'}).addClass('delete');
       });
   }
 });

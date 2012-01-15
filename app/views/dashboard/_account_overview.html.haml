@@ -4,7 +4,7 @@
       %tr
         %td{:width => "20%"}
           Applications
-          = image_tag("help.png", :alt => "?", :class=> "help",
+          = sprite_tag("help", :alt => "?", :class=> "help",
             :title => "Number of running applications allowed for your account.")
         %td.usage
           .bar.inuse{:title => "#{pct(@account_apps_inuse.to_f, @account_apps_total.to_f)}"}
@@ -21,7 +21,7 @@
       %tr
         %td{:width => "20%"}
           Memory
-          = image_tag("help.png", :alt => "?", :class=> "help",
+          = sprite_tag("help", :alt => "?", :class=> "help",
             :title => "Amount of memory resources allowed for your account.")
         %td.usage
           .bar.inuse{:title => "#{pct(@account_mem_inuse.to_f, @account_mem_total.to_f)}"}
@@ -38,7 +38,7 @@
       %tr
         %td{:width => "20%"}
           Services
-          = image_tag("help.png", :alt => "?", :class=> "help",
+          = sprite_tag("help", :alt => "?", :class=> "help",
             :title => "Number of services allowed for your account.")
         %td.usage
           .bar.inuse{:title => "#{pct(@account_services_inuse.to_f, @account_services_total.to_f)}"}

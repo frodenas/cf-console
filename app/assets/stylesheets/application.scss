@@ -6,9 +6,12 @@
  *= require_self
  *= require coderay
  *= require uniform.aristo
+ *= require vendor_images
  *= require application-media
  *= require application-post
 */
+
+@import 'icons';
 
 body {
   background-color: #FFFFFF;
@@ -310,8 +313,45 @@ header a:hover {
   border-right: none;
 }
 
-#main .thsort {
-  padding-left: 1.5em;
+#main th.thsort {
+  cursor: pointer;
+  padding: .4em;
+}
+
+#main th.thsort:after {
+  border-color: #000000 transparent;
+  border-style: solid;
+  border-width: 0 .3em .3em;
+  content: "";
+  float: right;
+  margin-top: .3em;
+  visibility: hidden;
+}
+
+#main th.thsort:hover:after {
+  visibility: visible;
+}
+
+#main table th.thsort.sorting_asc, #main th.thsort.sorting_desc {
+  background-color: rgba(141, 192, 219, 0.25);
+}
+
+#main th.thsort.sorting_asc:after, #main table th.thsort.sorting_asc:hover:after {
+  filter: alpha(opacity=60);
+  -moz-opacity: 0.6;
+  opacity: 0.6;
+  visibility: visible;
+}
+
+#main th.thsort.sorting_desc:after {
+  border-bottom: none;
+  border-left: .3em solid transparent;
+  border-right: .3em solid transparent;
+  border-top: .3em solid #000000;
+  filter: alpha(opacity=60);
+  -moz-opacity: 0.6;
+  opacity: 0.6;
+  visibility: visible;
 }
 
 #main .thcenter {
@@ -320,36 +360,6 @@ header a:hover {
 
 #main .thright {
   text-align: right;
-}
-
-#main th.sorting {
-  background-image: image_url('sort_both.png');
-  background-position: center left;
-  background-repeat: no-repeat;
-}
-
-#main th.sorting_asc {
-  background-image: image_url('sort_asc.png');
-  background-position: center left;
-  background-repeat: no-repeat;
-}
-
-#main th.sorting_desc {
-  background-image: image_url('sort_desc.png');
-  background-position: center left;
-  background-repeat: no-repeat;
-}
-
-#main th.sorting_asc_disabled {
-  background-image: image_url('sort_asc_disabled.png');
-  background-position: center left;
-  background-repeat: no-repeat;
-}
-
-#main th.sorting_desc_disabled {
-  background-image: image_url('sort_desc_disabled.png');
-  background-position: center left;
-  background-repeat: no-repeat;
 }
 
 #main td {
@@ -603,14 +613,11 @@ header a:hover {
 }
 
 #main .modalBox .close {
-  background-image: image_url('close.png');
-  background-repeat: no-repeat;
+  @extend img.close;
   cursor: pointer;
-  height: 30px;
   position: absolute;
   right: -15px;
   top: -10px;
-  width: 30px;
 }
 
 #main .modalBox-title {
@@ -668,7 +675,7 @@ header a:hover {
 
 #main .modalBox-content .help {
   float: right;
-  padding-left: .3em;
+  margin-left: .3em;
 }
 
 #main .modalBox-submit {
@@ -752,14 +759,11 @@ header a:hover {
 }
 
 #main #overlayLog .close {
-  background-image: image_url('close.png');
-  background-repeat: no-repeat;
+  @extend img.close;
   cursor: pointer;
-  height: 30px;
   position: absolute;
   right: -15px;
   top: -10px;
-  width: 30px;
 }
 
 #main .modalLog-title {

@@ -1,7 +1,7 @@
 %tr.oddeven{:id => "app-" + @name + "-url-" + app_url_item.hash.to_s}
   %td
     %a{:href => "http://" + app_url_item, :target => "_blank"}= app_url_item
-  %td.tdcenter= link_to image_tag("delete.png", :alt => "Unmap the URL"),
+  %td.tdcenter= link_to sprite_tag("delete", :alt => "Unmap the URL"),
                 app_unmap_url_url(@name, :url => app_url_item),
                 :id => "unmap-url-link", :remote => true,
                 :method => :put, :confirm => "Are you sure?"

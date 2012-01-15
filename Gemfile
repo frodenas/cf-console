@@ -14,8 +14,10 @@ gem 'em-http-request', '~> 1.0.0', :require => 'em-http'
 gem 'thin', '~> 1.3.1'
 
 group :assets do
-  gem 'sass-rails',   '~> 3.1.5'
-  gem 'uglifier',     '>= 1.2.1'
+  gem 'sass-rails', '~> 3.1.5'
+  gem 'uglifier', '>= 1.2.1'
+  gem 'sprite-factory', '>= 1.4.1'
+  gem 'chunky_png', '>= 1.2.5'
 end
 
 # RSpec2 needs to be in the :development group to expose generators and rake tasks without having to type RAILS_ENV=test

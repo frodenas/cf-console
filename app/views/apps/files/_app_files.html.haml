@@ -26,7 +26,7 @@
           - if @filename && !@filename.empty? && @filename != "/"
             %tr.oddeven
               %td
-                = image_tag("dir.png")
+                = sprite_tag("dir")
                 = link_to "..", app_files_url(@name, 0, Base64.encode64(File.join(File.dirname(@filename), "/"))), :remote => :true
               %td.tdright -
           - @app_files.select{ |file| file[:type] == "dir"}.each do |dir_item|

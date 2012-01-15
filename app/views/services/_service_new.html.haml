@@ -7,7 +7,7 @@
         %tbody
           %tr
             %td
-              = image_tag("help.png", :alt => "?", :class=> "help",
+              = sprite_tag("help", :alt => "?", :class=> "help",
                 :title => "Select the system service you want to provision.")
               = label_tag "service", "Service:"
             %td
@@ -16,7 +16,7 @@
               .form-field-error
           %tr
             %td
-              = image_tag("help.png", :alt => "?", :class=> "help",
+              = sprite_tag("help", :alt => "?", :class=> "help",
                 :title => "Enter the name that univocally will identify your service.<br />Must contain only word characters (letter, number, hyphen).<br />Example: <i>redis-service</i>.")
               = label_tag "name", "Name:"
             %td

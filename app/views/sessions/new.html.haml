@@ -8,21 +8,21 @@
       = form_tag login_url, :id => "new-session-form" do
         %fieldset{:class => "field"}
           = label_tag :email, "Email:"
-          = image_tag("help.png", :alt => "?", :class=> "help",
+          = sprite_tag("help", :alt => "?", :class=> "help",
             :title => "Enter your email address.")
           = email_field_tag :email, @email, :size => 50, :required => "required", :autofocus => "autofocus",
             :placeholder => "Enter your email address", :class => "input-right"
           .form-field-error
         %fieldset{:class => "field"}
           = label_tag :password, "Password:"
-          = image_tag("help.png", :alt => "?", :class=> "help",
+          = sprite_tag("help", :alt => "?", :class=> "help",
             :title => "Enter your password.")
           = password_field_tag :password, nil, :size => 50, :required => "required",
             :placeholder => "Enter your password", :class => "input-right"
           .form-field-error
         %fieldset{:class => "field"}
           = label_tag :cloud_service, "Cloud Foundry Provider:"
-          = image_tag("help.png", :alt => "?", :class=> "help",
+          = sprite_tag("help", :alt => "?", :class=> "help",
             :title => "Select your Cloud Foundry provider.")
           = select_tag :cloud_service, options_for_select(@available_targets, @selected_target), :required => "required",
             :class => "target-uniform"
@@ -36,7 +36,7 @@
           = submit_tag "Login"
           = check_box_tag :remember_me, true, @remember_me
           = label_tag :remember_me
-          = image_tag("help.png", :alt => "?", :class=> "help",
+          = sprite_tag("help", :alt => "?", :class=> "help",
             :title => "Check to remember your credentials in this browser.")
   #new-users
     #shadow_box_content

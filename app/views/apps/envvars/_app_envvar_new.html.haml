@@ -7,7 +7,7 @@
         %tbody
           %tr
             %td
-              = image_tag("help.png", :alt => "?", :class=> "help",
+              = sprite_tag("help", :alt => "?", :class=> "help",
                 :title => "Enter the name that univocally will identify your environment var.<br />Must contain only word characters (letter, number, hyphen).")
               = label_tag "name", "Name:"
             %td
@@ -17,7 +17,7 @@
               .form-field-error
           %tr
             %td
-              = image_tag("help.png", :alt => "?", :class=> "help",
+              = sprite_tag("help", :alt => "?", :class=> "help",
                 :title => "Enter the value to be set for your environment var. It can be blank.")
               = label_tag "value", "Value:"
             %td
@@ -25,7 +25,7 @@
               .form-field-error
           %tr
             %td
-              = image_tag("help.png", :alt => "?", :class=> "help",
+              = sprite_tag("help", :alt => "?", :class=> "help",
                 :title => "Check if you want to restart the application.")
               = label_tag "restart", "Restart App:"
             %td

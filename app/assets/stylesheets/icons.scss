@@ -1,0 +1,36 @@
+/*
+
+        Creating a sprite from following images:
+        
+        app/assets/images/icons/close.png (28x28)
+        app/assets/images/icons/nook.png (22x22)
+        app/assets/images/icons/dir.png (22x22)
+        app/assets/images/icons/file.png (22x22)
+        app/assets/images/icons/update-bits.png (22x22)
+        app/assets/images/icons/delete.png (22x22)
+        app/assets/images/icons/stop.png (22x22)
+        app/assets/images/icons/restart.png (22x22)
+        app/assets/images/icons/start.png (22x22)
+        app/assets/images/icons/ok.png (22x22)
+        app/assets/images/icons/help.png (16x16)
+
+        Output files:
+          app/assets/images/icons.png
+          app/assets/stylesheets/icons.scss
+
+        Output size:
+          94x72
+
+
+*/
+img.close { width: 28px; height: 28px; background: image_url('icons.png') 0px 0px no-repeat }
+img.nook { width: 22px; height: 22px; background: image_url('icons.png') -28px 0px no-repeat }
+img.dir { width: 22px; height: 22px; background: image_url('icons.png') 0px -28px no-repeat }
+img.file { width: 22px; height: 22px; background: image_url('icons.png') -22px -28px no-repeat }
+img.update-bits { width: 22px; height: 22px; background: image_url('icons.png') -50px 0px no-repeat }
+img.delete { width: 22px; height: 22px; background: image_url('icons.png') -50px -22px no-repeat }
+img.stop { width: 22px; height: 22px; background: image_url('icons.png') 0px -50px no-repeat }
+img.restart { width: 22px; height: 22px; background: image_url('icons.png') -22px -50px no-repeat }
+img.start { width: 22px; height: 22px; background: image_url('icons.png') -44px -50px no-repeat }
+img.ok { width: 22px; height: 22px; background: image_url('icons.png') -72px 0px no-repeat }
+img.help { width: 16px; height: 16px; background: image_url('icons.png') -72px -22px no-repeat }

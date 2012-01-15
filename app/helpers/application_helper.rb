@@ -11,18 +11,17 @@ module ApplicationHelper
   end
 
   def find_vendor_image(vendor)
-    asset_found = false
-    Rails.application.config.assets.paths.each do |path|
-      if FileTest.exist?(File.join(path, vendor.strip + ".png"))
-        asset_found = true
-        break
+    vendor_images = configatron.sprites.vendor_images || []
+    if vendor_images.include?(vendor.strip)
+      return image_tag("s.gif", {:class => vendor, :alt => vendor})
+    else
+      Rails.application.config.assets.paths.each do |path|
+        if FileTest.exist?(File.join(path, "vendor_images", vendor.strip + ".png"))
+          return image_tag("vendor_images/" + vendor.strip + ".png", :alt => vendor)
+        end
       end
     end
-    if asset_found == true
-      return image_tag(vendor + ".png", :alt => vendor)
-    else
-      return(vendor)
-    end
+    vendor
   end
 
   def git_deploy_available?
@@ -64,6 +63,10 @@ module ApplicationHelper
     return sprintf("%.#{prec}f Kb", size / 1024.0) if size < (1024 * 1024)
     return sprintf("%.#{prec}f Mb", size / (1024.0 * 1024.0)) if size < (1024 * 1024 * 1024)
     return sprintf("%.#{prec}f Gb", size / (1024.0 * 1024.0 * 1024.0))
+  end
+
+  def sprite_tag(klass, options = {})
+    image_tag("s.gif", {:class => klass, :alt => klass}.merge(options))
   end
 
   def title(page_title)

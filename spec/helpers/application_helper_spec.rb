@@ -31,7 +31,9 @@ describe ApplicationHelper do
   describe "returns a vendor" do
     it "image tag when vendor image exists" do
       image = helper.find_vendor_image("redis")
-      image.should include("redis.png")
+      image.should include("s.gif")
+      image.should include("class=\"redis\"")
+      image.should include("alt=\"redis\"")
     end
 
     it "text when vendor image does not exists" do
@@ -130,6 +132,23 @@ describe ApplicationHelper do
     it "Gigabytes" do
       size = helper.pretty_size(1024 * 1024 * 1024)
       size.should eql("1.0 Gb")
+    end
+  end
+
+  describe "returns a sprite" do
+    it "image tag with default options" do
+      image = helper.sprite_tag("start")
+      image.should include("s.gif")
+      image.should include("class=\"start\"")
+      image.should include("alt=\"start\"")
+    end
+
+    it "image tag with custom options" do
+      image = helper.sprite_tag("start", {:alt => "custom start", :title => "custom title"})
+      image.should include("s.gif")
+      image.should include("class=\"start\"")
+      image.should include("alt=\"custom start\"")
+      image.should include("title=\"custom title\"")
     end
   end
 

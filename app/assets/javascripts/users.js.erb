@@ -55,7 +55,7 @@ $(function() {
       });
     $('#delete-user-link')
       .on('ajax:beforeSend', function(evt, xhr, settings) {
-        $(this).find('img').attr({ src : '<%= asset_path('wait.gif') %>'});
+        $(this).find('img').attr({ src : '<%= asset_path('wait.gif') %>'}).removeClass('delete');
       })
       .on('ajax:error', function(evt, xhr, status, error) {
         $('#flash').empty();
@@ -63,7 +63,7 @@ $(function() {
         $('#flash').fadeIn('slow');
       })
       .on('ajax:complete', function(evt, xhr, status) {
-        $(this).find('img').attr({ src : '<%= asset_path('delete.png') %>'});
+        $(this).find('img').attr({ src : '<%= asset_path('s.gif') %>'}).addClass('delete');
       });
   }
 });

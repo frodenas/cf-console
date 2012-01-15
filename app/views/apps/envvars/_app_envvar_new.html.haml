@@ -8,12 +8,12 @@
           %tr
             %td
               = sprite_tag("help", :alt => "?", :class=> "help",
-                :title => "Enter the name that univocally will identify your environment var.<br />Must contain only word characters (letter, number, hyphen).")
+                :title => "Enter the name that univocally will identify your environment var.<br />Must contain only word characters (letter, number, hyphen, underscore).")
               = label_tag "name", "Name:"
             %td
               = text_field_tag :var_name, nil, :size => 30, :required => "required", :autofocus => "autofocus",
-                :placeholder => "Name of the variable", :pattern => "[a-zA-Z0-9-]+",
-                :title => "Must contain only word characters: letter, number, hyphen"
+                :placeholder => "Name of the variable", :pattern => "[a-zA-Z0-9-_]+",
+                :title => "Must contain only word characters: letter, number, hyphen, underscore"
               .form-field-error
           %tr
             %td

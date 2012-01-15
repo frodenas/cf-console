@@ -17,10 +17,10 @@
           %tr
             %td
               = sprite_tag("help", :alt => "?", :class=> "help",
-                :title => "Enter the name that univocally will identify your service.<br />Must contain only word characters (letter, number, hyphen).<br />Example: <i>redis-service</i>.")
+                :title => "Enter the name that univocally will identify your service.<br />Must contain only word characters (letter, number, hyphen, underscore).<br />Example: <i>redis-service</i>.")
               = label_tag "name", "Name:"
             %td
-              = text_field_tag :name, @name, :size => 30, :required => "required", :pattern => "[a-zA-Z0-9-]+",
-                :placeholder => "Provisioned Service Name", :title => "Must contain only word characters: letter, number, hyphen"
+              = text_field_tag :name, @name, :size => 30, :required => "required", :pattern => "[a-zA-Z0-9-_]+",
+                :placeholder => "Provisioned Service Name", :title => "Must contain only word characters: letter, number, hyphen, underscore"
               .form-field-error
     .modalBox-submit= submit_tag "Add Service"

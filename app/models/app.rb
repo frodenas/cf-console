@@ -102,7 +102,7 @@ class App
 
   def create(name, instances, memsize, url, framework, runtime, service)
     raise "Application name cannot be blank" if name.nil? || name.empty?
-    raise "Invalid application name: \"" + name + "\". Must contain only word characters (letter, number, underscore)" if (name =~ /^[\w-]+$/).nil?
+    raise "Invalid application name: \"" + name + "\". Must contain only word characters (letter, number, hyphen, underscore)" if (name =~ /^[\w-]+$/).nil?
     begin
       app_info = @cf_client.app_info(name)
     rescue
@@ -218,7 +218,7 @@ class App
   def set_var(name, var_name, var_value, restart = "true")
     raise "Application name cannot be blank" if name.nil? || name.empty?
     raise "Variable name cannot be blank" if var_name.nil? || var_name.empty?
-    raise "Invalid variable name: \"" + var_name + "\". Must contain only word characters (letter, number, underscore)" if (var_name =~ /^[\w-]+$/).nil?
+    raise "Invalid variable name: \"" + var_name + "\". Must contain only word characters (letter, number, hyphen, underscore)" if (var_name =~ /^[\w-]+$/).nil?
     app = @cf_client.app_info(name)
     envvars = app[:env] || []
     var_exists = nil
@@ -337,7 +337,7 @@ class App
 
   def upload_app_from_git(name, gitrepo, gitbranch)
     raise "Application name cannot be blank" if name.nil? || name.empty?
-    raise "Invalid application name: \"" + name + "\". Must contain only word characters (letter, number, underscore)" if (name =~ /^[\w-]+$/).nil?
+    raise "Invalid application name: \"" + name + "\". Must contain only word characters (letter, number, hyphen, underscore)" if (name =~ /^[\w-]+$/).nil?
     raise "Git Repository URI cannot be blank" if gitrepo.nil? || gitrepo.empty?
     raise "Git Repository Branch cannot be blank" if gitbranch.nil? || gitbranch.empty?
     app_bits_tmpdir = get_app_bits_tmpdir()

@@ -9,7 +9,7 @@
         %br/
   %td= Time.at(service_item[:meta][:created]).strftime("%m/%d/%Y - %H:%M")
   %td= Time.at(service_item[:meta][:updated]).strftime("%m/%d/%Y - %H:%M")
-  %td.tdcenter= link_to sprite_tag("delete", :alt => "Delete the provisioned service"),
+  %td.tdcenter= link_to sprite_tag("delete", :title => "Delete the provisioned service", :class => "delete icon-tip"),
                 service_delete_url(service_item[:name]),
                 :id => "delete-service-link", :remote => true,
                 :method => :delete , :confirm => "Are you sure?"

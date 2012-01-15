@@ -1,7 +1,7 @@
 %tr.oddeven{:id => "app-" + @name + "-envvar-" + app_envvar_item[:var_name]}
   %td= app_envvar_item[:var_name]
   %td.editableText= app_envvar_item[:var_value]
-  %td.tdcenter= link_to sprite_tag("delete", :alt => "Unset the variable"),
+  %td.tdcenter= link_to sprite_tag("delete", :title => "Unset the variable", :class => "delete icon-tip"),
                 app_unset_var_url(@name, :var_name => app_envvar_item[:var_name]),
                 :id => "unset-var-link", :remote => true,
                 :method => :put, :confirm => "Are you sure?"

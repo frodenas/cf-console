@@ -183,6 +183,7 @@ $(function() {
               $('.modalBox-flash').empty();
             }
           });
+          $('#app-envvars-table .icon-tip').tooltip({'effect': 'fade', 'tipClass': 'help-tip'});
         }
         if (tab == '#services') {
           $('.invoke-modalBox').html('<button class="bindService" rel="#bind_service_modalBox">Bind Service</button>').show();
@@ -197,6 +198,7 @@ $(function() {
           if (typeof service_uniform == 'undefined') {
             service_uniform = $('.service-uniform').uniform();
           }
+          $('#app-services-table .icon-tip').tooltip({'effect': 'fade', 'tipClass': 'help-tip'});
         }
         if (tab == '#urls') {
           $('.invoke-modalBox').html('<button class="addURL" rel="#add_url_modalBox">Add URL</button>').show();
@@ -208,6 +210,7 @@ $(function() {
               $('.modalBox-flash').empty();
             }
           });
+          $('#app-urls-table .icon-tip').tooltip({'effect': 'fade', 'tipClass': 'help-tip'});
         }
         if (tab == '#files') {
           $('.invoke-modalBox').empty().hide();

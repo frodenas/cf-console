@@ -5,7 +5,7 @@
 <%= escape_javascript @var_value  %>
 <%- end %>
 <%- else %>
-  $('#flash').empty();
+  $('#flash-content').empty();
   $('.modalBox-flash').empty();
   <%- if flash[:alert] %>
     request_processed = false;

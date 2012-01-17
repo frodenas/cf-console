@@ -14,7 +14,7 @@
 - if flash[:alert]
   :javascript
     $(function() {
-      $('#flash').empty();
+      $('#flash-content').empty();
       $('.modalLog-flash').empty();
       $('.modalLog-flash').append('<div class="alert">#{escape_javascript(flash[:alert])}</div>');
       $('.modalLog-flash').fadeIn('slow');
@@ -22,7 +22,7 @@
 - else
   :javascript
     $(function() {
-      $('#flash').empty();
+      $('#flash-content').empty();
       $('.modalLog-flash').empty();
       appLogfileTable_Settings = {
         'bAutoWidth':      false,

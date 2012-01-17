@@ -182,6 +182,23 @@ header a:hover {
   padding: 1em;
 }
 
+#main #flash .close {
+  color: #404040;
+  cursor: pointer;
+  float: right;
+  font-weight: bold;
+  opacity: 0.50;
+  padding: .5em;
+}
+
+#main #flash a.close, #main #flash a.close:active, #main #flash a.close:visited {
+  text-decoration: none;
+}
+
+#main #flash a.close:hover {
+  opacity: 0.75;
+}
+
 #main h1 {
   font-size: 150%;
   margin-bottom: 1em;

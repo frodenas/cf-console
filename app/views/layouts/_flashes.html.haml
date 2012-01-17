@@ -1,7 +1,9 @@
 #flash
-  - flash.each do |key, value|
-    .message{:class => key}
-      %p= value
+  %a.close{:href => "#"}x
+  #flash-content
+    - flash.each do |key, value|
+      .message{:class => key}
+        %p= value
 
 - if !flash.empty?
   - content_for :javascripts do

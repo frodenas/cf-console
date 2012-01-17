@@ -22,6 +22,15 @@
 //= require users
 //= require_self
 
+// JQuery handler to close flash messages
+$(function() {
+  $('body').on('click', '#flash .close', function(e) {
+    $(this).parent('#flash').fadeOut('slow');
+    e && e.preventDefault()
+  });
+});
+
+// Browser Update
 var $buoop = {vs:{i:8,f:4,o:11,s:5,n:9}}
 $buoop.ol = window.onload;
 window.onload=function(){
@@ -32,6 +41,7 @@ window.onload=function(){
   document.body.appendChild(e);
 }
 
+// Google Analytics
 var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview'],['_trackPageLoadTime']];
 (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
 g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';

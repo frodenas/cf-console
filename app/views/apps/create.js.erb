@@ -1,4 +1,4 @@
-$('#flash').empty();
+$('#flash-content').empty();
 $('.modalBox-flash').empty();
 <%- if flash[:alert] %>
   request_processed = false;
@@ -11,7 +11,7 @@ $('.modalBox-flash').empty();
   appsTable.dataTable().fnDestroy();
   appsTable.dataTable(appsTable_Settings);
   <%- if flash[:notice] %>
-    $('#flash').append('<div class="notice"><%= escape_javascript(flash[:notice]) %></div>');
+    $('#flash-content').append('<div class="notice"><%= escape_javascript(flash[:notice]) %></div>');
     $('#flash').fadeIn('slow');
   <%- end %>
 <%- end %>

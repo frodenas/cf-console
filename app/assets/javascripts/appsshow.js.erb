@@ -74,7 +74,7 @@ $(function() {
               row.fadeIn(1800, function() {
                 $(this).removeClass('highlight');
               });
-              $('#flash').empty();
+              $('#flash-content').empty();
             },
             'submitdata' : function(value, settings) {
               var value = rangeapi.getValue();
@@ -82,8 +82,8 @@ $(function() {
             },
             'onerror'   : function(settings, original, xhr) {
               original.reset();
-              $('#flash').empty();
-              $('#flash').append('<div class="alert">Error ' + xhr.status + ': ' + xhr.responseText + '</div>');
+              $('#flash-content').empty();
+              $('#flash-content').append('<div class="alert">Error ' + xhr.status + ': ' + xhr.responseText + '</div>');
               $('#flash').fadeIn('slow');
             }
           });
@@ -101,12 +101,12 @@ $(function() {
               row.fadeIn(1800, function() {
                 $(this).removeClass('highlight');
               });
-              $('#flash').empty();
+              $('#flash-content').empty();
             },
             'onerror'  : function(settings, original, xhr) {
               original.reset();
-              $('#flash').empty();
-              $('#flash').append('<div class="alert">Error ' + xhr.status + ': ' + xhr.responseText + '</div>');
+              $('#flash-content').empty();
+              $('#flash-content').append('<div class="alert">Error ' + xhr.status + ': ' + xhr.responseText + '</div>');
               $('#flash').fadeIn('slow');
             }
           });
@@ -155,7 +155,7 @@ $(function() {
                       $(this).removeClass('highlight');
                     });
                     appEnvvarsTable.fnUpdate(value, aPos[0], aPos[1]);
-                    $('#flash').empty();
+                    $('#flash-content').empty();
                   },
                   'submitdata': function(value, settings) {
                     return {
@@ -166,8 +166,8 @@ $(function() {
                   },
                   'onerror'   : function(settings, original, xhr) {
                     original.reset();
-                    $('#flash').empty();
-                    $('#flash').append('<div class="alert">Error ' + xhr.status + ': ' + xhr.responseText + '</div>');
+                    $('#flash-content').empty();
+                    $('#flash-content').append('<div class="alert">Error ' + xhr.status + ': ' + xhr.responseText + '</div>');
                     $('#flash').fadeIn('slow');
                   }
                 });
@@ -232,8 +232,8 @@ $(function() {
       })
       .on('ajax:error', function(evt, xhr, status, error) {
         request_processed = true;
-        $('#flash').empty();
-        $('#flash').append('<div class="alert">An error occurred processing your request, please reload the page and try again.</div>');
+        $('#flash-content').empty();
+        $('#flash-content').append('<div class="alert">An error occurred processing your request, please reload the page and try again.</div>');
         $('#flash').fadeIn('slow');
       })
       .on('ajax:complete', function(evt, xhr, status) {;
@@ -247,8 +247,8 @@ $(function() {
         $(this).find('img').attr({ src : '<%= asset_path('wait.gif') %>'}).removeClass('delete');
       })
       .on('ajax:error', function(evt, xhr, status, error) {
-        $('#flash').empty();
-        $('#flash').append('<div class="alert">An error occurred processing your request, please reload the page and try again.</div>');
+        $('#flash-content').empty();
+        $('#flash-content').append('<div class="alert">An error occurred processing your request, please reload the page and try again.</div>');
         $('#flash').fadeIn('slow');
       })
       .on('ajax:complete', function(evt, xhr, status) {
@@ -270,8 +270,8 @@ $(function() {
       })
       .on('ajax:error', function(evt, xhr, status, error) {
         request_processed = true;
-        $('#flash').empty();
-        $('#flash').append('<div class="alert">An error occurred processing your request, please reload the page and try again.</div>');
+        $('#flash-content').empty();
+        $('#flash-content').append('<div class="alert">An error occurred processing your request, please reload the page and try again.</div>');
         $('#flash').fadeIn('slow');
       })
       .on('ajax:complete', function(evt, xhr, status) {;
@@ -285,8 +285,8 @@ $(function() {
         $(this).find('img').attr({ src : '<%= asset_path('wait.gif') %>'}).removeClass('delete');
       })
       .on('ajax:error', function(evt, xhr, status, error) {
-        $('#flash').empty();
-        $('#flash').append('<div class="alert">An error occurred processing your request, please reload the page and try again.</div>');
+        $('#flash-content').empty();
+        $('#flash-content').append('<div class="alert">An error occurred processing your request, please reload the page and try again.</div>');
         $('#flash').fadeIn('slow');
       })
       .on('ajax:complete', function(evt, xhr, status) {
@@ -308,8 +308,8 @@ $(function() {
       })
       .on('ajax:error', function(evt, xhr, status, error) {
         request_processed = true;
-        $('#flash').empty();
-        $('#flash').append('<div class="alert">An error occurred processing your request, please reload the page and try again.</div>');
+        $('#flash-content').empty();
+        $('#flash-content').append('<div class="alert">An error occurred processing your request, please reload the page and try again.</div>');
         $('#flash').fadeIn('slow');
       })
       .on('ajax:complete', function(evt, xhr, status) {
@@ -323,8 +323,8 @@ $(function() {
         $(this).find('img').attr({ src : '<%= asset_path('wait.gif') %>'}).removeClass('delete');
       })
       .on('ajax:error', function(evt, xhr, status, error) {
-        $('#flash').empty();
-        $('#flash').append('<div class="alert">An error occurred processing your request, please reload the page and try again.</div>');
+        $('#flash-content').empty();
+        $('#flash-content').append('<div class="alert">An error occurred processing your request, please reload the page and try again.</div>');
         $('#flash').fadeIn('slow');
       })
       .on('ajax:complete', function(evt, xhr, status) {

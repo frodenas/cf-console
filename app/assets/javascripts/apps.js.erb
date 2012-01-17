@@ -69,8 +69,8 @@ $(function() {
         }
       })
       .on('ajax:error', function(evt, xhr, status, error) {
-        $('#flash').empty();
-        $('#flash').append('<div class="alert">An error occurred processing your request, please reload the page and try again.</div>');
+        $('#flash-content').empty();
+        $('#flash-content').append('<div class="alert">An error occurred processing your request, please reload the page and try again.</div>');
         $('#flash').fadeIn('slow');
       })
       .on('ajax:complete', function(evt, xhr, status) {
@@ -85,8 +85,8 @@ $(function() {
         $(this).find('img').attr({ src : '<%= asset_path('wait.gif') %>'}).removeClass('start');
       })
       .on('ajax:error', function(evt, xhr, status, error) {
-        $('#flash').empty();
-        $('#flash').append('<div class="alert">An error occurred processing your request, please reload the page and try again.</div>');
+        $('#flash-content').empty();
+        $('#flash-content').append('<div class="alert">An error occurred processing your request, please reload the page and try again.</div>');
         $('#flash').fadeIn('slow');
       })
       .on('ajax:complete', function(evt, xhr, status) {
@@ -100,8 +100,8 @@ $(function() {
         $(this).find('img').attr({ src : '<%= asset_path('wait.gif') %>'}).removeClass('stop');
       })
       .on('ajax:error', function(evt, xhr, status, error) {
-        $('#flash').empty();
-        $('#flash').append('<div class="alert">An error occurred processing your request, please reload the page and try again.</div>');
+        $('#flash-content').empty();
+        $('#flash-content').append('<div class="alert">An error occurred processing your request, please reload the page and try again.</div>');
         $('#flash').fadeIn('slow');
       })
       .on('ajax:complete', function(evt, xhr, status) {
@@ -115,8 +115,8 @@ $(function() {
         $(this).find('img').attr({ src : '<%= asset_path('wait.gif') %>'}).removeClass('restart');
       })
       .on('ajax:error', function(evt, xhr, status, error) {
-        $('#flash').empty();
-        $('#flash').append('<div class="alert">An error occurred processing your request, please reload the page and try again.</div>');
+        $('#flash-content').empty();
+        $('#flash-content').append('<div class="alert">An error occurred processing your request, please reload the page and try again.</div>');
         $('#flash').fadeIn('slow');
       })
       .on('ajax:complete', function(evt, xhr, status) {
@@ -139,8 +139,8 @@ $(function() {
         }
       })
       .on('ajax:error', function(evt, xhr, status, error) {
-        $('#flash').empty();
-        $('#flash').append('<div class="alert">An error occurred processing your request, please reload the page and try again.</div>');
+        $('#flash-content').empty();
+        $('#flash-content').append('<div class="alert">An error occurred processing your request, please reload the page and try again.</div>');
         $('#flash').fadeIn('slow');
       })
       .on('ajax:complete', function(evt, xhr, status) {
@@ -154,8 +154,8 @@ $(function() {
         $(this).find('img').attr({ src : '<%= asset_path('wait.gif') %>'}).removeClass('delete');
       })
       .on('ajax:error', function(evt, xhr, status, error) {
-        $('#flash').empty();
-        $('#flash').append('<div class="alert">An error occurred processing your request, please reload the page and try again.</div>');
+        $('#flash-content').empty();
+        $('#flash-content').append('<div class="alert">An error occurred processing your request, please reload the page and try again.</div>');
         $('#flash').fadeIn('slow');
       })
       .on('ajax:complete', function(evt, xhr, status) {

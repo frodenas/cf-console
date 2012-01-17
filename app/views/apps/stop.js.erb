@@ -1,7 +1,7 @@
-$('#flash').empty();
+$('#flash-content').empty();
 <%- if flash[:alert] %>
   request_processed = false;
-  $('#flash').append('<div class="alert"><%= escape_javascript(flash[:alert]) %></div>');
+  $('#flash-content').append('<div class="alert"><%= escape_javascript(flash[:alert]) %></div>');
   $('#flash').fadeIn('slow');
 <%- else %>
   request_processed = true;

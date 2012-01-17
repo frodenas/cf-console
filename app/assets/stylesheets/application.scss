@@ -1077,7 +1077,11 @@ header a:hover {
 }
 
 #main #login p {
-  padding-bottom: 1em;
+  text-align: center;
+}
+
+#main #login #new-users p {
+  padding-bottom: .8em;
 }
 
 #main #login ul {
@@ -1089,24 +1093,29 @@ header a:hover {
   text-decoration: none;
 }
 
-#main #login fieldset {
-  padding-bottom: 1em;
+#main #login tr {
+  display: table-row;
+  margin: .3em 0 .3em 0;
 }
 
-#main #login fieldset.args {
+#main #login tr.args {
   display: none;
 }
 
+#main #login td {
+  border: none;
+  display: table-cell;
+  padding: .5em .4em .5em .4em;
+}
+
 #main #login label {
+  float: right;
   font-weight: bold;
 }
 
-#main #login .input-right {
+#main #login .help {
   float: right;
-}
-
-#main #login input[type="checkbox"] {
-  display: inline;
+  margin-left: .3em;
 }
 
 #main #login input[type="submit"], #login a.button {

@@ -8,9 +8,9 @@ $(function() {
     $('#new-session-form #cloud_service').change(function () {
       var args = $(this).val().match(/{[\d\w\s]+}/i);
       if (args == null) {
-        $('#new-session-form fieldset.args').hide();
+        $('#new-session-form tr.args').hide();
       } else {
-        $('#new-session-form fieldset.args').show();
+        $('#new-session-form tr.args').show();
         var new_label = args[0].replace(/{|}/g, '') + ':';
         $('#new-session-form label[for="target_args"]').text(new_label);
       }

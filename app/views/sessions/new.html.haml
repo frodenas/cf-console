@@ -6,38 +6,52 @@
       %p
         %b Enter your credentials:
       = form_tag login_url, :id => "new-session-form" do
-        %fieldset{:class => "field"}
-          = label_tag :email, "Email:"
-          = sprite_tag("help", :alt => "?", :class=> "help",
-            :title => "Enter your email address.")
-          = email_field_tag :email, @email, :size => 50, :required => "required", :autofocus => "autofocus",
-            :placeholder => "Enter your email address", :class => "input-right"
-          .form-field-error
-        %fieldset{:class => "field"}
-          = label_tag :password, "Password:"
-          = sprite_tag("help", :alt => "?", :class=> "help",
-            :title => "Enter your password.")
-          = password_field_tag :password, nil, :size => 50, :required => "required",
-            :placeholder => "Enter your password", :class => "input-right"
-          .form-field-error
-        %fieldset{:class => "field"}
-          = label_tag :cloud_service, "Cloud Foundry Provider:"
-          = sprite_tag("help", :alt => "?", :class=> "help",
-            :title => "Select your Cloud Foundry provider.")
-          = select_tag :cloud_service, options_for_select(@available_targets, @selected_target), :required => "required",
-            :class => "target-uniform"
-          .form-field-error
-          = hidden_field_tag :target_url
-        %fieldset{:class => "field args"}
-          = label_tag :target_args, "Target Args:"
-          = text_field_tag :target_args, @target_args, :size => 50
-          .form-field-error
-        %fieldset{:class => "field"}
-          = submit_tag "Login"
-          = check_box_tag :remember_me, true, @remember_me
-          = label_tag :remember_me
-          = sprite_tag("help", :alt => "?", :class=> "help",
-            :title => "Check to remember your credentials in this browser.")
+        %table
+          %tbody
+            %tr
+              %td
+                = sprite_tag("help", :alt => "?", :class=> "help",
+                  :title => "Enter your email address.")
+                = label_tag :email, "Email:"
+              %td
+                = email_field_tag :email, @email, :size => 35, :required => "required", :autofocus => "autofocus",
+                  :placeholder => "Enter your email address"
+                .form-field-error
+            %tr
+              %td
+                = sprite_tag("help", :alt => "?", :class=> "help",
+                :title => "Enter your password.")
+                = label_tag :password, "Password:"
+              %td
+                = password_field_tag :password, nil, :size => 35, :required => "required",
+                  :placeholder => "Enter your password"
+                .form-field-error
+            %tr
+              %td
+                = sprite_tag("help", :alt => "?", :class=> "help",
+                  :title => "Select your Cloud Foundry provider.")
+                = label_tag :cloud_service, "Cloud Foundry Provider:"
+              %td
+                = select_tag :cloud_service, options_for_select(@available_targets, @selected_target), :required => "required",
+                  :class => "target-uniform"
+                .form-field-error
+                = hidden_field_tag :target_url
+            %tr.args
+              %td
+                = label_tag :target_args, "Target Args:"
+              %td
+                = text_field_tag :target_args, @target_args, :size => 35
+                .form-field-error
+            %tr
+              %td
+                = sprite_tag("help", :alt => "?", :class=> "help",
+                  :title => "Check to remember your credentials in this browser.")
+                = label_tag :remember_me
+              %td
+                = check_box_tag :remember_me, true, @remember_me
+            %tr
+              %td{:colspan => 2}
+                = submit_tag "Login"
   #new-users
     #shadow_box_content
       %p

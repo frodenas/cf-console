@@ -3,16 +3,15 @@ $(function() {
     $('#apps-menu-link').addClass('menu-current');
     appInstancesTable_Settings = {
       'bAutoWidth':      false,
-      'bFilter':         false,
       'bLengthChange':   false,
       'bStateSave':      false,
       'sPaginationType': 'full_numbers',
-      'aoColumnDefs':    [{'bSortable': false, 'aTargets': [7]}]
+      'aoColumnDefs':    [{'bSearchable': false, 'aTargets': [7]},
+                          {'bSortable': false, 'aTargets': [7]}]
     };
     appInstancesTable = $('#app-instances-table').dataTable(appInstancesTable_Settings);
     appCrashesTable_Settings = {
       'bAutoWidth':      false,
-      'bFilter':         false,
       'bLengthChange':   false,
       'bStateSave':      false,
       'sPaginationType': 'full_numbers',
@@ -21,20 +20,23 @@ $(function() {
     appCrashesTable = $('#app-crashes-table').dataTable(appCrashesTable_Settings);
     appServicesTable_Settings = {
       'bAutoWidth':      false,
-      'bFilter':         false,
       'bLengthChange':   false,
       'bStateSave':      false,
       'sPaginationType': 'full_numbers',
-      'aoColumnDefs':    [{'bSortable': false, 'aTargets': [3]}, {'sType': 'string', 'aTargets': [1]}]
+      'aoColumnDefs':    [{'bSearchable': false, 'aTargets': [3]},
+                          {'bSortable': false, 'aTargets': [3]},
+                          {'sType': 'string', 'aTargets': [1]}
+                         ]
     };
     appServicesTable = $('#app-services-table').dataTable(appServicesTable_Settings);
     appUrlsTable_Settings = {
       'bAutoWidth':      false,
-      'bFilter':         false,
       'bLengthChange':   false,
       'bStateSave':      false,
       'sPaginationType': 'full_numbers',
-      'aoColumnDefs':    [{'bSortable': false, 'aTargets': [1]}]
+      'aoColumnDefs':    [{'bSearchable': false, 'aTargets': [1]},
+                          {'bSortable': false, 'aTargets': [1]}
+                         ]
     };
     appUrlsTable = $('#app-urls-table').dataTable(appUrlsTable_Settings);
     var ultabs = $('ul.tabs');
@@ -134,11 +136,12 @@ $(function() {
           if (typeof appEnvvarsTable == 'undefined') {
             appEnvvarsTable_Settings = {
               'bAutoWidth':      false,
-              'bFilter':         false,
               'bLengthChange':   false,
               'bStateSave':      false,
               'sPaginationType': 'full_numbers',
-              'aoColumnDefs':    [{'bSortable': false, 'aTargets': [2]}],
+              'aoColumnDefs':    [{'bSearchable': false, 'aTargets': [2]},
+                                  {'bSortable': false, 'aTargets': [2]}
+                                 ],
               'fnDrawCallback':  function() {
                 $('td.editableText').editable(app_set_var_url, {
                   'method'    : 'PUT',

@@ -3,11 +3,13 @@ $(function() {
     $('#users-menu-link').addClass('menu-current');
     usersTable_Settings = {
       'bAutoWidth':      false,
-      'bFilter':         false,
       'bLengthChange':   false,
       'bStateSave':      true,
       'sPaginationType': 'full_numbers',
-      'aoColumnDefs':    [{'bSortable': false, 'aTargets': [3]}, {'sType': 'string', 'aTargets': [2]}]
+      'aoColumnDefs':    [{'bSearchable': false, 'aTargets': [2, 3]},
+                          {'bSortable': false, 'aTargets': [3]},
+                          {'sType': 'string', 'aTargets': [2]}
+                         ]
     };
     usersTable = $('#users-table').dataTable(usersTable_Settings);
     var ultabs = $('ul.tabs');

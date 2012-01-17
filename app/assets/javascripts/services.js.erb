@@ -3,11 +3,13 @@ $(function() {
     $('#services-menu-link').addClass('menu-current');
     servicesTable_Settings = {
       'bAutoWidth':      false,
-      'bFilter':         false,
       'bLengthChange':   false,
       'bStateSave':      true,
       'sPaginationType': 'full_numbers',
-      'aoColumnDefs':    [{'bSortable': false, 'aTargets': [6]}, {'sType': 'string', 'aTargets': [1]}]
+      'aoColumnDefs':    [{'bSearchable': false, 'aTargets': [6]},
+                          {'bSortable': false, 'aTargets': [6]},
+                          {'sType': 'string', 'aTargets': [1]}
+                         ]
     };
     servicesTable = $('#services-table').dataTable(servicesTable_Settings);
     var ultabs = $('ul.tabs');

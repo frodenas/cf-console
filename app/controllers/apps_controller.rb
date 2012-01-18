@@ -560,7 +560,7 @@ class AppsController < ApplicationController
     instance_logs = []
     logfiles = find_files(name, "/logs", instance.to_i)
     if !logfiles.empty?
-      ['stdout.log', 'stderr.log', 'startup.log', 'err.log', 'staging.log'].each do |log|
+      ['stdout.log', 'stderr.log', 'startup.log', 'err.log', 'staging.log', 'migration.log'].each do |log|
         logfiles.each do |logfile|
           if logfile[:name] == log && logfile[:size] != "0B"
             name = logfile[:name].split(".")

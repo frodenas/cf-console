@@ -216,7 +216,11 @@ $(function() {
           $('#app-urls-table .icon-tip').tooltip({'effect': 'fade', 'tipClass': 'help-tip'});
         }
         if (tab == '#files') {
-          $('.invoke-modalBox').empty().hide();
+          if (typeof app_download_bits_url == 'undefined') {
+            $('.invoke-modalBox').empty().hide();
+          } else {
+            $('.invoke-modalBox').html('<a href="' + app_download_bits_url + '" class="button">Download App</a>').show();
+          }
         }
       });
     $('#set-var-form .help').tooltip({'effect': 'fade', 'tipClass': 'help-tip'});

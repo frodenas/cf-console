@@ -353,6 +353,15 @@ class App
     FileUtils.rm_rf(repodir, :secure => true) if repodir
   end
 
+  def download_app(name)
+    raise "Application name cannot be blank" if name.nil? || name.empty?
+    app_bits_tmpdir = get_app_bits_tmpdir()
+    zipfile = app_bits_tmpdir.join(name + ".zip").to_s
+    app_bits = @cf_client.download_app(name)
+    File.open(zipfile, "w") {|f| f.write(app_bits.force_encoding("utf-8").encode) }
+    zipfile
+  end
+
   def view_file(name, path, instance = 0)
     raise "Application name cannot be blank" if name.nil? || name.empty?
     raise "Path cannot be blank" if path.nil? || path.empty?

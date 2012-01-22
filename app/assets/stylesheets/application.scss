@@ -589,7 +589,7 @@ header a:hover {
   display: none;
 }
 
-#main .invoke-modalBox button {
+#main .invoke-modalBox button, #main .invoke-modalBox .button {
   background-image: -moz-linear-gradient(top, #75C8F5 14%, #277AAA 77%);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#75C8F5', endColorstr='#277AAA');
   -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#75C8F5', endColorstr='#277AAA')";
@@ -607,7 +607,7 @@ header a:hover {
   padding: .4em;
 }
 
-#main .invoke-modalBox button:hover {
+#main .invoke-modalBox button:hover, #main .invoke-modalBox .button:hover {
   background-image: -moz-linear-gradient(top, #9DD6F5 14%, #508BAB 77%);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#9DD6F5', endColorstr='#508BAB');
   -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#9DD6F5', endColorstr='#508BAB')";
@@ -615,6 +615,11 @@ header a:hover {
   background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0.14, #9DD6F5), color-stop(0.77, #508BAB));
   background-image: -webkit-linear-gradient(top, #9DD6F5 14%, #508BAB 77%);
   background-image: linear-gradient(top, #9DD6F5 14%, #508BAB 77%);
+}
+
+#main .invoke-modalBox .button {
+  display: inline-block;
+  text-decoration: none;
 }
 
 #main .modalBox {

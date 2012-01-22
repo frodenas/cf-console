@@ -404,6 +404,31 @@ class AppsController < ApplicationController
     end
   end
 
+  def download_bits
+    @name = params[:name]
+    bits_sended = false
+    if !@name.nil? && !@name.strip.empty?
+      begin
+        app = App.new(@cf_client)
+        zipfile = app.download_app(@name)
+        send_file(zipfile, :type=>"application/zip")
+        bits_sended = true
+      rescue Exception => ex
+        flash[:alert] = ex.message
+      end
+    else
+      flash[:alert] = "Application name cannot be blank"
+    end
+    if !bits_sended
+      respond_to do |format|
+        format.html { redirect_to app_info_url(@name) }
+      end
+    end
+  ensure
+    # TODO Need to delete the zipfile in a delayed job
+    # FileUtils.rm_f(zipfile) if zipfile
+  end
+
   def files
     @name = params[:name]
     @instance = params[:instance] || 0

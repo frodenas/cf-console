@@ -35,3 +35,9 @@
             = render :partial => "apps/files/app_file_item", :object => file_item
     - if @file_contents
       = @file_contents.html_safe
+
+- content_for :javascripts do
+  :javascript
+    $(function() {
+      app_download_bits_url = '#{app_download_bits_url}';
+    });

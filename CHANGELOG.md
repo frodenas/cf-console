@@ -1,5 +1,28 @@
-0.3 - December 15, 2011
+0.4 - January 22, 2012
 ----------------------
+* [Upgrade to rails 3.2](https://github.com/frodenas/cf-console/commit/979382517f0741c09076d380eaf8efeb04be0eb1)
+* [Enable download application bits](https://github.com/frodenas/cf-console/commit/1f9633e0d971dd2dc5fe0a25aca0d0be82818ee6)
+* [Show migration log if exists](https://github.com/frodenas/cf-console/commit/510487e930258066aa33facbee3fe6525c47f783)
+* [Disable sorting for log files](https://github.com/frodenas/cf-console/commit/8cf113185a95b816c1707f11b04e1ba479cbaa91)
+* [Enable filtering of data in tables](https://github.com/frodenas/cf-console/commit/9320ad1e9c0af484a54e78e7a87de5018a11a8f4)
+* [Login layout](https://github.com/frodenas/cf-console/commit/6a7c4f5d0b6db813bae06d1f85dbef8676877521)
+* [Add handler to close flash messages](https://github.com/frodenas/cf-console/commit/ccafe50f19a353560e00d510ae5eb8b8a31fb23e)
+* [Add tooltips to icons](https://github.com/frodenas/cf-console/commit/09499f026ad3b7cb52d5622cbce32cbae3ee49c7)
+* [Fix an error checking application, envvars and services names](https://github.com/frodenas/cf-console/commit/99d2302c4c200077cf93002001808da076ce0b48)
+* [Use CSS Sprites for icons and vendor images](https://github.com/frodenas/cf-console/commit/bc960c4d8190b8fb09bf00e8563429b3ca21d26f)
+* [Improve field help tooltips](https://github.com/frodenas/cf-console/commit/7a13e50e0f437adda7c419b26bdd17e0e808d2d0)
+* [Add client-side form validations](https://github.com/frodenas/cf-console/commit/f21b2df4f7dc0cf0765532e05697de011f03d25b)
+* [Clarify description of suggest URL option](https://github.com/frodenas/cf-console/commit/6e99231699f94ea1f7e3cac81785da7537353dea)
+* [Suggest a name when creating a new service](https://github.com/frodenas/cf-console/commit/0f6a4b609ee42d26c9ef1577170ce2775217ed0c)
+* [Suggest an URL when creating new application](https://github.com/frodenas/cf-console/commit/02c3f1a092294552b15d0505e035545b57963b25)
+* [Run pack files inside an EM defer block](https://github.com/frodenas/cf-console/commit/3f2290c32c052741bb35c6d9a4f5efad7ba80007)
+* [Run git clone in EM reactor](https://github.com/frodenas/cf-console/commit/c609804aaf0f11d62df6c63303fbc58ce1df421a)
+* [Asynchronous and concurrent http requests](https://github.com/frodenas/cf-console/commit/64158943ee71a9d4099ec0ad559df86511d5aec6)
+* [Upgrade versions of some gems](https://github.com/frodenas/cf-console/commit/12c57681034a32eb9c4c7aea3ff7b327ade09c43)
+* [Allow to upload app bits from a git repository](https://github.com/frodenas/cf-console/commit/3762fbe98f16d946a91748a72da6f0360ca3b15c)
+
+0.3 - December 15, 2011
+-----------------------
 * [Fix typo errors at login screen](https://github.com/frodenas/cf-console/commit/0867b338ecdd09f2a697dc7f86e6d45b5ead1543)
 * [Make easier to rebrand the app](https://github.com/frodenas/cf-console/commit/792b3e4bb5c947581e6ca9c697ef989d08005ac0)
 * [Add MS Sql Server vendor logo](https://github.com/frodenas/cf-console/commit/c7d159b75c2585d392b41385047da8517f4d100c)

@@ -1,92 +1,84 @@
 .modalBox{:id => "create_application_modalBox"}
   = form_tag apps_create_url, :id => "new-app-form", :remote => true do
-    .modalBox-title Create Application
+    .modalBox-title=t('apps.add_app')
     .modalBox-flash
     .modalBox-content
       %table
         %tbody
           %tr
             %td
-              = sprite_tag("help", :alt => "?", :class=> "help",
-                :title => "Enter the name that univocally will identify your application.<br />Must contain only word characters (letter, number, hyphen, underscore).<br />Example: <i>my-application</i>.")
-              = label_tag "name", "Name:"
+              = sprite_tag("help", :alt => "?", :class=> "help", :title => t('apps.name_help_html'))
+              = label_tag "name", t('apps.name') + ":"
             %td
               = text_field_tag :name, @name, :size => 50, :required => "required", :autofocus => "autofocus",
-                :placeholder => "Enter the application name", :pattern => "[a-zA-Z0-9-_]+",
-                :title => "Must contain only word characters: letter, number, hyphen, underscore"
+                :placeholder => t('apps.name_placeholder'), :pattern => "[a-zA-Z0-9-_]+", :title => t('apps.name_title_html')
               .form-field-error
           %tr
             %td
-              = sprite_tag("help", :alt => "?", :class=> "help",
-                :title => "Enter the number of instances of your application.")
-              = label_tag "instances", "Instances:"
+              = sprite_tag("help", :alt => "?", :class=> "help", :title => t('apps.instances_num_help_html'))
+              = label_tag "instances", t('apps.instances_num') + ":"
             %td
               = number_field_tag :instances, @instances, :min => 1, :max => @available_instances, :required => "required"
               .form-field-error
           %tr
             %td
-              = sprite_tag("help", :alt => "?", :class=> "help",
-                :title => "Select the memory size for each instance of your application.")
-              = label_tag "memsize", "Memory size:"
+              = sprite_tag("help", :alt => "?", :class=> "help", :title => t('apps.memory_size_help_html'))
+              = label_tag "memsize", t('apps.memory_size') + ":"
             %td
-              = select_tag :memsize, options_for_select(@available_memsizes), :required => "required", :class => "memory-uniform"
+              = select_tag :memsize, options_for_select(@available_memsizes), :required => "required",
+                :class => "memory-chosen", :style => "width: 100px;"
               .form-field-error
           %tr
             %td
-              = sprite_tag("help", :alt => "?", :class=> "help",
-                :title => "Select the type (framework and runtime) of your application.")
-              = label_tag "type", "Type:"
+              = sprite_tag("help", :alt => "?", :class=> "help", :title => t('apps.type_help_html'))
+              = label_tag "type", t('apps.type') + ":"
             %td
-              = select_tag :type, options_for_select(@available_frameworks), :required => "required", :class => "type-uniform"
+              = select_tag :type, options_for_select(@available_frameworks), :required => "required",
+                :class => "type-chosen", :style => "width: 300px;"
               .form-field-error
           %tr
             %td
-              = sprite_tag("help", :alt => "?", :class=> "help",
-                :title => "Enter the URL you want to map to your application.")
-              = label_tag "url", "URL:"
+              = sprite_tag("help", :alt => "?", :class=> "help", :title => t('apps.url_help_html'))
+              = label_tag "url", t('apps.url') + ":"
             %td
-              = url_field_tag :url, @url, :size => 50, :required => "required", :placeholder => "Enter the URL for the application"
+              = url_field_tag :url, @url, :size => 50, :required => "required", :placeholder => t('apps.url_placeholder')
               .form-field-error
-    .modalBox-title Optional Data
+    .modalBox-title=t('apps.optional_data')
     .modalBox-content
       %table
         %tbody
           %tr
             %td
-              = sprite_tag("help", :alt => "?", :class=> "help",
-                :title => "Select the service you want to bind to the application.")
-              = label_tag "service", "Bind Service:"
+              = sprite_tag("help", :alt => "?", :class=> "help", :title => t('apps.bind_service_help_html'))
+              = label_tag "service", t('apps.bind_service') + ":"
             %td
-              = select_tag :service, options_for_select(@available_services), :class => "service-uniform"
+              = select_tag :service, options_for_select(@available_services), :class => "service-chosen", :style => "width: 300px;"
               .form-field-error
           - if git_deploy_available?
             %tr
               %td
-                = sprite_tag("help", :alt => "?", :class=> "help",
-                  :title => "Select from where you want to deploy the application.")
-                = label_tag "deployfrom", "Deploy application from:"
+                = sprite_tag("help", :alt => "?", :class=> "help", :title => t('apps.deploy_from_help_html'))
+                = label_tag "deployfrom", t('apps.deploy_from') + ":"
               %td
                 = radio_button_tag :deployfrom, 'git', true, :disabled => true
-                Git
+                = t('apps.git')
             %tr
               %td
-                = sprite_tag("help", :alt => "?", :class=> "help",
-                  :title => "Enter the Git Repository URI that contains the application you want to deploy.<br />Example: <i>git://github.com/user/repo.git</i>.")
-                = label_tag "gitrepo", "Git Repository URI:"
+                = sprite_tag("help", :alt => "?", :class=> "help", :title => t('apps.git_repo_help_html'))
+                = label_tag "gitrepo", t('apps.git_repo') + ":"
               %td
-                = text_field_tag :gitrepo, @gitrepo, :size => 50, :placeholder => "git://github.com/user/repo.git",
+                = text_field_tag :gitrepo, @gitrepo, :size => 50, :placeholder => t('apps.git_repo_placeholder'),
                   :pattern => "(git://[a-z0-9]+([-.]{1}[a-z0-9]+)*.[a-z]{2,5}(([0-9]{1,5})?.*)?.git)?",
-                  :title => "Must contain a git repository URI: git://github.com/user/repo.git"
+                  :title => t('apps.git_repo_title_html')
                 .form-field-error
             %tr
               %td
-                = sprite_tag("help", :alt => "?", :class=> "help",
-                  :title => "Enter the Git Repository Branch that contains the application you want to deploy.<br />By default: <i>master</i>.")
-                = label_tag "gitrepo", "Git Repository Branch:"
+                = sprite_tag("help", :alt => "?", :class=> "help", :title => t('apps.git_branch_help_html'))
+                = label_tag "gitrepo", t('apps.git_branch') + ":"
               %td
-                = text_field_tag :gitbranch, @gitbranch, :size => 20, :placeholder => "master"
+                = text_field_tag :gitbranch, @gitbranch, :size => 20, :placeholder => t('apps.git_branch_placeholder')
                 .form-field-error
-    .modalBox-submit= submit_tag "Create Application"
+    .modalBox-submit= submit_tag t('apps.add_app')
 
 - if @newapp_default_urldomain
   - content_for :javascripts do

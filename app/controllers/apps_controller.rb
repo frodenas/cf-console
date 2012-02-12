@@ -46,25 +46,25 @@ class AppsController < ApplicationController
                 app = App.new(@cf_client)
                 app.create(@name.strip, @instances, @memsize, @url.strip.gsub(/^http(s*):\/\//i, '').downcase, framework, runtime, @service)
                 @new_app = [] << app.find(@name.strip)
-                flash[:notice] = "Application created. You must upload applications bits."
+                flash[:notice] = t('apps.controller.app_created', :name => @name)
                 app_created = true
               rescue Exception => ex
                 flash[:alert] = ex.message
               end
             else
-              flash[:alert] = "URL cannot be blank"
+              flash[:alert] = t('apps.controller.url_blank')
             end
           else
-            flash[:alert] = "Type of application cannot be blank"
+            flash[:alert] = t('apps.controller.type_blank')
           end
         else
-          flash[:alert] = "Memory size cannot be blank"
+          flash[:alert] = t('apps.controller.memsize_blank')
         end
       else
-        flash[:alert] = "Number of instances cannot be blank"
+        flash[:alert] = t('apps.controller.instances_blank')
       end
     else
-      flash[:alert] = "Application name cannot be blank"
+      flash[:alert] = t('apps.controller.name_blank')
     end
     if app_created == true
       if !@gitrepo.nil? && !@gitrepo.strip.empty?
@@ -73,12 +73,12 @@ class AppsController < ApplicationController
             @gitbranch = "master" if @gitbranch.nil? || @gitbranch.strip.empty?
             app = App.new(@cf_client)
             app.upload_app_from_git(@name, @gitrepo, @gitbranch)
-            flash[:notice] = "Application created and bits uploaded."
+            flash[:notice] = t('apps.controller.app_created_bits_uploaded', :name => @name)
           rescue Exception => ex
-            flash[:notice] = "Application created but no bits were uploaded: " + ex.message
+            flash[:notice] = t('apps.controller.app_created_no_bits', :name => @name, :msg => ex.message)
           end
         else
-          flash[:notice] = "Application created but no bits were uploaded: Invalid Git Repository URI."
+          flash[:notice] = t('apps.controller.app_created_no_bits', :name => @name, :msg => "Invalid Git Repository URI.")
         end
       end
     end
@@ -122,7 +122,7 @@ class AppsController < ApplicationController
       app = App.new(@cf_client)
       @updated_app = [] << app.start(@name)
       @updated_app.collect! { |app_info| app.find(@name)}
-      flash[:notice] = "Application \"" + @name + "\" started"
+      flash[:notice] = t('apps.controller.app_started', :name => @name)
     rescue Exception => ex
       flash[:alert] = ex.message
     end
@@ -138,7 +138,7 @@ class AppsController < ApplicationController
       app = App.new(@cf_client)
       @updated_app = [] << app.stop(@name)
       @updated_app.collect! { |app_info| app.find(@name)}
-      flash[:notice] = "Application \"" + @name + "\" stopped"
+      flash[:notice] = t('apps.controller.app_stopped', :name => @name)
     rescue Exception => ex
       flash[:alert] = ex.message
     end
@@ -154,7 +154,7 @@ class AppsController < ApplicationController
       app = App.new(@cf_client)
       @updated_app = [] << app.restart(@name)
       @updated_app.collect! { |app_info| app.find(@name)}
-      flash[:notice] = "Application \"" + @name + "\" restarted"
+      flash[:notice] = t('apps.controller.app_restarted', :name => @name)
     rescue Exception => ex
       flash[:alert] = ex.message
     end
@@ -169,7 +169,7 @@ class AppsController < ApplicationController
     begin
       app = App.new(@cf_client)
       app.delete(@name)
-      flash[:notice] = "Application \"" + @name + "\" deleted"
+      flash[:notice] = t('apps.controller.app_deleted', :name => @name)
     rescue Exception => ex
       flash[:alert] = ex.message
     end
@@ -186,12 +186,12 @@ class AppsController < ApplicationController
       begin
         app = App.new(@cf_client)
         app.set_instances(@name, @instances)
-        flash[:notice] = "Number of instances set to " + @instances
+        flash[:notice] = t('apps.controller.instances_set', :instances => @instances)
       rescue Exception => ex
         flash[:alert] = ex.message
       end
     else
-      flash[:alert] = "Number of instances cannot be blank"
+      flash[:alert] = t('apps.controller.instances_blank')
     end
     respond_to do |format|
       format.html { redirect_to app_info_url(@name) }
@@ -213,12 +213,12 @@ class AppsController < ApplicationController
       begin
         app = App.new(@cf_client)
         app.set_memsize(@name, @memsize)
-        flash[:notice] = "Memory set to " + @memsize
+        flash[:notice] = t('apps.controller.memsize_set', :memsize => @memsize)
       rescue Exception => ex
         flash[:alert] = ex.message
       end
     else
-      flash[:alert] = "Memory size cannot be blank"
+      flash[:alert] = t('apps.controller.memsize_blank')
     end
     respond_to do |format|
       format.html { redirect_to app_info_url(@name) }
@@ -248,12 +248,12 @@ class AppsController < ApplicationController
         app = App.new(@cf_client)
         @var_exists = app.set_var(@name, @var_name, @var_value, @restart)
         @new_var = [] << {:var_name => @var_name, :var_value => @var_value}
-        flash[:notice] = "Environment variable \"" + @var_name + "\" set"
+        flash[:notice] = t('apps.controller.envvar_set', :var_name => @var_name)
       rescue Exception => ex
         flash[:alert] = ex.message
       end
     else
-      flash[:alert] = "Variable name cannot be blank"
+      flash[:alert] = t('apps.controller.varname_blank')
     end
     respond_to do |format|
       format.html { redirect_to app_info_url(@name) }
@@ -274,7 +274,7 @@ class AppsController < ApplicationController
     begin
       app = App.new(@cf_client)
       app.unset_var(@name, @var_name)
-      flash[:notice] = "Environment variable \"" + @var_name + "\" unset"
+      flash[:notice] = t('apps.controller.envvar_unset', :var_name => @var_name)
     rescue Exception => ex
       flash[:alert] = ex.message
     end
@@ -295,12 +295,12 @@ class AppsController < ApplicationController
         app = App.new(@cf_client)
         app.bind_service(@name, @service)
         @new_service = [] << find_service_details(@service)
-        flash[:notice] = "Service \"" + @service + "\" binded"
+        flash[:notice] = t('apps.controller.service_binded', :service => @service)
       rescue Exception => ex
         flash[:alert] = ex.message
       end
     else
-      flash[:alert] = "Service cannot be blank"
+      flash[:alert] = t('apps.controller.service_blank')
     end
     respond_to do |format|
       format.html { redirect_to app_info_url(@name) }
@@ -317,7 +317,7 @@ class AppsController < ApplicationController
     begin
       app = App.new(@cf_client)
       app.unbind_service(@name, @service)
-      flash[:notice] = "Service \"" + @service + "\" unbinded"
+      flash[:notice] = t('apps.controller.service_unbinded', :service => @service)
     rescue Exception => ex
       flash[:alert] = ex.message
     end
@@ -337,12 +337,12 @@ class AppsController < ApplicationController
       begin
         app = App.new(@cf_client)
         @new_url = [] << app.map_url(@name, @url)
-        flash[:notice] = "URL \"" + @url + "\" mapped"
+        flash[:notice] = t('apps.controller.url_mapped', :url => @url)
       rescue Exception => ex
         flash[:alert] = ex.message
       end
     else
-      flash[:alert] = "URL cannot be blank"
+      flash[:alert] = t('apps.controller.url_blank')
     end
     respond_to do |format|
       format.html { redirect_to app_info_url(@name) }
@@ -360,7 +360,7 @@ class AppsController < ApplicationController
       app = App.new(@cf_client)
       app.unmap_url(@name, @url)
       @url_hash = @url.hash.to_s
-      flash[:notice] = "URL \"" + @url + "\" unmapped"
+      flash[:notice] = t('apps.controller.url_unmapped', :url => @url)
     rescue Exception => ex
       flash[:alert] = ex.message
     end
@@ -385,18 +385,18 @@ class AppsController < ApplicationController
             @gitbranch = "master" if @gitbranch.nil? || @gitbranch.strip.empty?
             app = App.new(@cf_client)
             app.upload_app_from_git(@name, @gitrepo, @gitbranch)
-            flash[:notice] = "Application bits uploaded."
+            flash[:notice] = t('apps.controller.bits_uploaded')
           rescue Exception => ex
             flash[:alert] = ex.message
           end
         else
-          flash[:alert] = "Invalid Git Repository URI"
+          flash[:alert] = t('apps.controller.gitrepo_invalid')
         end
       else
-        flash[:alert] = "Git Repository cannot be blank"
+        flash[:alert] = t('apps.controller.gitrepo_blank')
       end
     else
-      flash[:alert] = "Application name cannot be blank"
+      flash[:alert] = t('apps.controller.name_blank')
     end
     respond_to do |format|
       format.html { redirect_to apps_info_url }
@@ -417,7 +417,7 @@ class AppsController < ApplicationController
         flash[:alert] = ex.message
       end
     else
-      flash[:alert] = "Application name cannot be blank"
+      flash[:alert] = t('apps.controller.name_blank')
     end
     if !bits_sended
       respond_to do |format|
@@ -441,7 +441,7 @@ class AppsController < ApplicationController
         flash[:alert] = ex.message
       end
     else
-      flash[:alert] = "Filename cannot be blank"
+      flash[:alert] = t('apps.controller.filename_blank')
     end
     respond_to do |format|
       format.html { redirect_to app_info_url(@name) }
@@ -472,13 +472,13 @@ class AppsController < ApplicationController
             @file_contents = contents.split("\n")
           end
         else
-          flash[:alert] = "Unable to display binary files"
+          flash[:alert] = t('apps.controller.file_binary')
         end
       rescue Exception => ex
-        flash[:alert] = "File not found"
+        flash[:alert] = t('apps.controller.file_not_found')
       end
     else
-      flash[:alert] = "Filename cannot be blank"
+      flash[:alert] = t('apps.controller.filename_blank')
     end
     respond_to do |format|
       format.html {
@@ -498,9 +498,9 @@ class AppsController < ApplicationController
     system = System.new(@cf_client)
     frameworks = system.find_all_frameworks()
     if frameworks.empty?
-      available_frameworks << ["No available frameworks", ""]
+      available_frameworks << [t('apps.controller.no_frameworks'), ""]
     else
-      available_frameworks << ["Select a framework ...", ""]
+      available_frameworks << [t('apps.controller.select_framework'), ""]
       frameworks.each do |fwk_name, fwk|
         fwk[:runtimes].each do |run|
           available_frameworks << [fwk[:name].capitalize + " on " + run[:description], fwk_name.to_s + "/" + run[:name].to_s]
@@ -535,7 +535,7 @@ class AppsController < ApplicationController
     available_memsizes[1024] = "1 Gb" if available_for_use >= (1024 * app_instances.to_i)
     available_memsizes[2048] = "2 Gb" if available_for_use >= (2048 * app_instances.to_i)
     if available_memsizes.empty?
-      available_memsizes[""] = "Not enough memory available"
+      available_memsizes[""] = t('apps.controller.no_memory')
     else
       if app_memsize > 0
         available_memsizes["selected"] = app_memsize
@@ -549,9 +549,9 @@ class AppsController < ApplicationController
     service = Service.new(@cf_client)
     provisioned_services = service.find_all_services()
     if provisioned_services.empty?
-      available_services << ["No available services", ""]
+      available_services << [t('apps.controller.no_services'), ""]
     else
-      available_services << ["Select a service to bind ...", ""]
+      available_services << [t('apps.controller.select_service'), ""]
       provisioned_services.each do |service_info|
         available_services << [service_info[:name] + " (" + service_info[:vendor] + " " + service_info[:version] + ")", service_info[:name]]
       end

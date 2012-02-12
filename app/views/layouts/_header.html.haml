@@ -6,7 +6,9 @@
   %section
     %ul
       - if @cf_logged_in
-        %li Welcome #{@cf_user}
-        %li= link_to "Logout", logout_url
+        %li= t('layouts.header.welcome', :user => @cf_user)
+        %li= link_to t('layouts.header.logout'), logout_url
       - else
-        %li= link_to "Login", login_url
+        %li= link_to t('layouts.header.login'), login_url
+        - if controller_name == "sessions"
+          = language_selector().html_safe

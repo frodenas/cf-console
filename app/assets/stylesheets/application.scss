@@ -4,8 +4,9 @@
  * the top of the compiled file, but it's generally better to create a new file per style scope.
  *= require application-pre
  *= require_self
+ *= require chosen
  *= require coderay
- *= require uniform.aristo
+ *= require flags
  *= require vendor_images
  *= require application-media
  *= require application-post
@@ -83,6 +84,52 @@ header a:link, header a:active, header a:visited {
 header a:hover {
   color: #2779AA;
   text-decoration: none;
+}
+
+header li#locale {
+  background-color: #E6E7E8;
+  -moz-border-radius: .3em;
+  -ms-border-radius: .3em;
+  -webkit-border-radius: .3em;
+  border-radius: .3em;
+  font-size: 80%;
+  margin-left: .3em;
+  padding: .3em;
+  position: relative;
+  width: 110px;
+}
+
+header li#locale a:link, header li#locale a:active, header li#locale a:visited {
+  color: #000000;
+  text-decoration: none;
+}
+
+header li#locale a:hover {
+  color: #2779AA;
+  text-decoration: none;
+}
+
+header li#locale a#locale-trigger span {
+  color: #404040;
+  font-size: 70%;
+}
+
+header li#locale ul#locale-switch {
+  background-color: #E6E7E8;
+  -moz-border-radius: .3em;
+  -ms-border-radius: .3em;
+  -webkit-border-radius: .3em;
+  border-radius: .3em;
+  display: none;
+  left: 0;
+  padding: .3em;
+  position: absolute;
+  width: 110px;
+}
+
+header li#locale ul#locale-switch li {
+  border: none;
+  padding: .3em 0;
 }
 
 #menu {
@@ -454,6 +501,13 @@ header a:hover {
   float: right;
   font-size: 75%;
   padding: .5em;
+}
+
+#main div.dataTables_filter input[type="text"]{
+  -moz-border-radius: .3em;
+  -ms-border-radius: .3em;
+  -webkit-border-radius: .3em;
+  border-radius: .3em;
 }
 
 #main div.dataTables_info {

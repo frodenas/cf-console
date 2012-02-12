@@ -1,14 +1,18 @@
-= title("System Information")
+= title(t('system.title'))
 
 %ul.tabs
   %li
-    %a{:href => "#target"} Target
+    %a{:href => "#target"}
+      = t('system.tab_target')
   %li
-    %a{:href => "#system_services"} System Services
+    %a{:href => "#system_services"}
+      = t('system.tab_system_services')
   %li
-    %a{:href => "#runtimes"} Runtimes
+    %a{:href => "#runtimes"}
+      = t('system.tab_runtimes')
   %li
-    %a{:href => "#frameworks"} Frameworks
+    %a{:href => "#frameworks"}
+      = t('system.tab_frameworks')
 
 %div.panels
   %div.panel

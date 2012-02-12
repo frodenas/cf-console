@@ -54,7 +54,7 @@ describe ApplicationHelper do
       app = {}
       health = helper.health(app)
       health.should include("state-red")
-      health.should include("N/A")
+      health.should include(t('helpers.na'))
     end
 
     it "a red STOPPED health when app state is STOPPED" do
@@ -62,7 +62,7 @@ describe ApplicationHelper do
       app[:state] = "STOPPED"
       health = helper.health(app)
       health.should include("state-red")
-      health.should include("STOPPED")
+      health.should include(t('helpers.stopped'))
     end
 
     it "a red 0% health when app state is STARTED and all instances are stopped" do
@@ -82,7 +82,7 @@ describe ApplicationHelper do
       app[:instances] = 2
       health = helper.health(app)
       health.should include("state-orange")
-      health.should include("Running at 50%")
+      health.should include(t('helpers.running_at') + " 50%")
     end
 
     it "a green RUNNING health when app state is STARTED and all instances are running" do
@@ -92,7 +92,7 @@ describe ApplicationHelper do
       app[:instances] = 2
       health = helper.health(app)
       health.should include("state-green")
-      health.should include("RUNNING")
+      health.should include(t('helpers.running'))
     end
 
     it "a red N/A health when app is RUNNING" do
@@ -102,7 +102,7 @@ describe ApplicationHelper do
       app[:instances] = 1
       health = helper.health(app)
       health.should include("state-red")
-      health.should include("N/A")
+      health.should include(t('helpers.na'))
     end
   end
 

@@ -1,13 +1,13 @@
 %table#services-table
   %thead
     %tr
-      %th.thsort{:scope => "col"} Name
-      %th.thsort{:scope => "col"} Service
-      %th.thsort{:scope => "col"} Version
-      %th.thsort{:scope => "col"} Binded Apps
-      %th.thsort{:scope => "col"} Created at
-      %th.thsort{:scope => "col"} Updated at
-      %th.thcenter{:scope => "col", :width => "10%"} Actions
+      %th.thsort{:scope => "col"}= t('services.name_head')
+      %th.thsort{:scope => "col"}= t('services.service_head')
+      %th.thsort{:scope => "col"}= t('services.version_head')
+      %th.thsort{:scope => "col"}= t('services.binded_apps_head')
+      %th.thsort{:scope => "col"}= t('services.created_head')
+      %th.thsort{:scope => "col"}= t('services.updated_head')
+      %th.thcenter{:scope => "col", :width => "10%"}= t('services.actions_head')
   %tbody
     = render :partial => "service_item", :collection => @services
 

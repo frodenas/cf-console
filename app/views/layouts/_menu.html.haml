@@ -1,9 +1,9 @@
 - if @cf_logged_in
   %nav
     %ul
-      %li#dashboard-menu-link= link_to "Dashboard", dashboard_url
-      %li#apps-menu-link= link_to "Applications", apps_info_url
-      %li#services-menu-link= link_to "Services", services_info_url
-      %li#system-menu-link= link_to "System", system_info_url
+      %li#dashboard-menu-link= link_to t('layouts.menu.dashboard'), dashboard_url
+      %li#apps-menu-link= link_to t('layouts.menu.apps'), apps_info_url
+      %li#services-menu-link= link_to t('layouts.menu.services'), services_info_url
+      %li#system-menu-link= link_to t('layouts.menu.system'), system_info_url
       - if @cf_admin_user
-        %li#users-menu-link= link_to "Users", users_info_url
+        %li#users-menu-link= link_to t('layouts.menu.users'), users_info_url

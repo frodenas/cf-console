@@ -1,10 +1,14 @@
 %table#users-table
   %thead
     %tr
-      %th.thsort{:scope => "col"} Email
-      %th.thsort{:scope => "col"} Applications
-      %th.thsort{:scope => "col", :width => "10%"} Admin
-      %th.thcenter{:scope => "col", :width => "10%"} Actions
+      %th.thsort{:scope => "col"}
+        = t('users.email_head')
+      %th.thsort{:scope => "col"}
+        = t('users.applications_head')
+      %th.thsort{:scope => "col", :width => "15%"}
+        = t('users.admin_head')
+      %th.thcenter{:scope => "col", :width => "10%"}
+        = t('users.actions_head')
   %tbody
     = render :partial => "user_item", :collection => @users
 

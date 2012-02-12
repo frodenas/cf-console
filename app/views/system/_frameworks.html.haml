@@ -1,13 +1,19 @@
 %table#frameworks-table
   %thead
     %tr
-      %th.thsort{:scope => "col", :rowspan => 2} Framework
-      %th.thsort{:scope => "col", :rowspan => 2} AppServer
-      %th.thcenter{:scope => "col", :colspan => 3} Runtimes
+      %th.thsort{:scope => "col", :rowspan => 2}
+        = t('system.frameworks.framework_head')
+      %th.thsort{:scope => "col", :rowspan => 2}
+        = t('system.frameworks.appserver_head')
+      %th.thcenter{:scope => "col", :colspan => 3}
+        = t('system.frameworks.runtimes_head')
     %tr
-      %th.thsort{:scope => "col"} Name
-      %th.thsort{:scope => "col"} Version
-      %th.thsort{:scope => "col"} Description
+      %th.thsort{:scope => "col"}
+        = t('system.frameworks.name_head')
+      %th.thsort{:scope => "col"}
+        = t('system.frameworks.version_head')
+      %th.thsort{:scope => "col"}
+        = t('system.frameworks.description_head')
   %tbody
     - @frameworks.each do |fwk_name, fwk|
       - fwk[:runtimes].each do |run|

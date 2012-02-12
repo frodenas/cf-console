@@ -7,9 +7,8 @@
         %br/
   %td.tdcenter
     - if user_item[:admin]
-      = sprite_tag("ok", :alt => "Admin user")
-  %td.tdcenter= link_to sprite_tag("delete", :title => "Delete the user", :class => "delete icon-tip"),
-                user_delete_url(Base64.encode64(user_item[:email])),
-                :id => "delete-user-link", :remote => true,
-                :method => :delete, :confirm => "Are you sure?"
+      = sprite_tag("ok", :alt => t('users.admin'))
+  %td.tdcenter= link_to sprite_tag("delete", :title => t('users.delete_user'), :class => "delete icon-tip"),
+                user_delete_url(Base64.encode64(user_item[:email])), :id => "delete-user-link", :remote => true,
+                :method => :delete, :confirm => t('users.delete_user_confirm')
 

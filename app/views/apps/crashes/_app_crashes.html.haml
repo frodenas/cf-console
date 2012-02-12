@@ -1,7 +1,7 @@
 %table#app-crashes-table
   %thead
     %tr
-      %th.thsort{:scope => "col"} Instance ID
-      %th.thsort{:scope => "col"} Crashed Time
+      %th.thsort{:scope => "col"}=t('apps.crashes.instance_id_head')
+      %th.thsort{:scope => "col"}=t('apps.crashes.crashed_time_head')
   %tbody
     = render :partial => "apps/crashes/app_crash_item", :collection => @app[:crashes]

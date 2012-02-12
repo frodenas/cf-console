@@ -1,10 +1,10 @@
-.modalLog-title File "#{@filename}" for instance #{@instance} of application #{@name}
+.modalLog-title=t('apps.files.log_title', :filename => @filename, :instance => @instance, :name => @name)
 .modalLog-flash
 .modalLog-content
   %table#app-logfile-table
     %thead
       %tr
-        %th Log
+        %th=t('apps.files.log_head')
     %tbody
       - if !@file_contents.nil?
         - @file_contents.each do |row|
@@ -32,6 +32,7 @@
         'bSort':           false,
         'bStateSave':      false,
         'iDisplayLength':  20,
+        'oLanguage':       dataTables_lang,
         'sPaginationType': 'full_numbers'
       };
       appLogfileTable = $('table#app-logfile-table').dataTable(appLogfileTable_Settings);

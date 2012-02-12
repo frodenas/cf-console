@@ -6,8 +6,8 @@
       %table
         %thead
           %tr
-            %th.thcenter{:scope => "col"} State
-            %th.thcenter{:scope => "col"} Instances
+            %th.thcenter{:scope => "col"}=t('apps.state_head')
+            %th.thcenter{:scope => "col"}=t('apps.instances_head')
         %tbody
           - app_item[:instances_states].each do |instances_states_item|
             %tr
@@ -25,16 +25,16 @@
       %br/
   %td.tdcenter
     - if app_item[:state] == "STARTED"
-      = link_to sprite_tag("restart", :title => "Restart the application", :class => "restart icon-tip"),
+      = link_to sprite_tag("restart", :title => t('apps.restart_app'), :class => "restart icon-tip"),
         app_restart_url(app_item[:name]), :id => "restart-app-link", :method => :put, :remote => true
-      = link_to sprite_tag("stop", :title => "Stop the application", :class => "stop icon-tip"),
+      = link_to sprite_tag("stop", :title => t('apps.stop_app'), :class => "stop icon-tip"),
         app_stop_url(app_item[:name]), :id => "stop-app-link", :method => :put, :remote => true
     - else
-      = link_to sprite_tag("start", :title => "Start the application", :class => "start icon-tip"),
+      = link_to sprite_tag("start", :title => t('apps.start_app'), :class => "start icon-tip"),
         app_start_url(app_item[:name]), :id => "start-app-link", :method => :put, :remote => true
     - if git_deploy_available?
-      = link_to sprite_tag("update-bits", :title => "Update the application bits", :class => "update-bits icon-tip"),
+      = link_to sprite_tag("update-bits", :title => t('apps.upload_bits'), :class => "update-bits icon-tip"),
         app_update_bits_url(app_item[:name]), :rel => "#update_application_bits_modalBox", :class => "uploadAppBits"
-    = link_to sprite_tag("delete", :title => "Delete the application", :class => "delete icon-tip"),
+    = link_to sprite_tag("delete", :title => t('apps.delete_app'), :class => "delete icon-tip"),
       app_delete_url(app_item[:name]), :id => "delete-app-link", :remote => true,
-      :method => :delete, :confirm => "Are you sure?"
+      :method => :delete, :confirm => t('apps.delete_app_confirm')

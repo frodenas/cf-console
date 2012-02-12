@@ -1,5 +1,3 @@
 %section#copyright
-  %p Copyright &copy; #{Date.today.year} Ferran Rodenas. All rights reserved.
-  %p
-    The source code of this application is available on
-    %a{:href => "https://github.com/frodenas/cf-console"}github
+  %p= t('layouts.footer.copyright_html', :year => Date.today.year)
+  %p= t('layouts.footer.source_code_html')

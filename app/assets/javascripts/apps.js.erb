@@ -1,3 +1,4 @@
+<%# encoding: utf-8%>
 $(function() {
   if ($('body').hasClass('apps') && !$('body').hasClass('show')) {
     $('#apps-menu-link').addClass('menu-current');
@@ -5,6 +6,7 @@ $(function() {
       'bAutoWidth':      false,
       'bLengthChange':   false,
       'bStateSave':      true,
+      'oLanguage':       dataTables_lang,
       'sPaginationType': 'full_numbers',
       'aoColumnDefs':    [{'bSearchable': false, 'aTargets': [8]},
                           {'bSortable': false, 'aTargets': [8]},
@@ -35,7 +37,7 @@ $(function() {
       .on('onClick', function(event, tabIndex) {
         var tab = $(this).find('li.current > a').attr('href');
         if (tab == '#apps') {
-          $('.invoke-modalBox').html('<button class="createApplication" rel="#create_application_modalBox">Create Application</button>').toggle();
+          $('.invoke-modalBox').html('<button class="createApplication" rel="#create_application_modalBox">' + I18n.t('apps.js.add_app') + '</button>').toggle();
           createApplication_trigger = $('.createApplication').overlay({
             'closeOnClick': false,
             'mask': {color: '#404040', loadSpeed: 'normal', opacity: 0.7},
@@ -44,26 +46,26 @@ $(function() {
               $('.modalBox-flash').empty();
             }
           });
-          if (typeof memory_uniform == 'undefined') {
-            memory_uniform = $('.memory-uniform').uniform();
+          if (typeof memory_chosen == 'undefined') {
+            memory_chosen = $('.memory-chosen').chosen({'no_results_text': I18n.t('assets.js.no_results')});
           }
-          if (typeof type_uniform == 'undefined') {
-            type_uniform = $('.type-uniform').uniform();
+          if (typeof type_chosen == 'undefined') {
+            type_chosen = $('.type-chosen').chosen({'no_results_text': I18n.t('assets.js.no_results')});
           }
-          if (typeof service_uniform == 'undefined') {
-            service_uniform = $('.service-uniform').uniform();
+          if (typeof service_chosen == 'undefined') {
+            service_chosen = $('.service-chosen').chosen({'no_results_text': I18n.t('assets.js.no_results')});
           }
           $('#apps-table .icon-tip').tooltip({'effect': 'fade', 'tipClass': 'help-tip'});
         }
       });
     $('#new-app-form .help').tooltip({'effect': 'fade', 'tipClass': 'help-tip'});
-    $('#new-app-form').validator({'effect': 'below_field_error', 'inputEvent': 'keyup'});
+    $('#new-app-form').validator({'effect': 'below_field_error', 'inputEvent': 'keyup', 'lang': validatorTools_lang});
     $('#new-app-form')
       .on('ajax:beforeSend', function(evt, xhr, settings) {
         var validator = $('#new-app-form').data('validator');
         if (!validator.checkValidity()) return false;
         request_processed = false;
-        $(this).find('.modalBox-submit input[type="submit"]').attr({value: 'Processing ...'});
+        $(this).find('.modalBox-submit input[type="submit"]').attr({value: I18n.t('assets.js.ajax_processing')});
       })
       .on('ajax:success', function(evt, data, status, xhr) {
         if (request_processed == true) {
@@ -72,14 +74,14 @@ $(function() {
       })
       .on('ajax:error', function(evt, xhr, status, error) {
         $('#flash-content').empty();
-        $('#flash-content').append('<div class="alert">An error occurred processing your request, please reload the page and try again.</div>');
+        $('#flash-content').append('<div class="alert">' + I18n.t('assets.js.ajax_error') + '</div>');
         $('#flash').fadeIn('slow');
       })
       .on('ajax:complete', function(evt, xhr, status) {
         if (request_processed == true) {
           createApplication_trigger.eq(0).overlay().close();
         }
-        $(this).find('.modalBox-submit input[type="submit"]').attr({value: 'Create Application'});
+        $(this).find('.modalBox-submit input[type="submit"]').attr({value: I18n.t('apps.js.add_app')});
       });
     $('#start-app-link')
       .on('ajax:beforeSend', function(evt, xhr, settings) {
@@ -88,7 +90,7 @@ $(function() {
       })
       .on('ajax:error', function(evt, xhr, status, error) {
         $('#flash-content').empty();
-        $('#flash-content').append('<div class="alert">An error occurred processing your request, please reload the page and try again.</div>');
+        $('#flash-content').append('<div class="alert">' + I18n.t('assets.js.ajax_error') + '</div>');
         $('#flash').fadeIn('slow');
       })
       .on('ajax:complete', function(evt, xhr, status) {
@@ -103,7 +105,7 @@ $(function() {
       })
       .on('ajax:error', function(evt, xhr, status, error) {
         $('#flash-content').empty();
-        $('#flash-content').append('<div class="alert">An error occurred processing your request, please reload the page and try again.</div>');
+        $('#flash-content').append('<div class="alert">' + I18n.t('assets.js.ajax_error') + '</div>');
         $('#flash').fadeIn('slow');
       })
       .on('ajax:complete', function(evt, xhr, status) {
@@ -118,7 +120,7 @@ $(function() {
       })
       .on('ajax:error', function(evt, xhr, status, error) {
         $('#flash-content').empty();
-        $('#flash-content').append('<div class="alert">An error occurred processing your request, please reload the page and try again.</div>');
+        $('#flash-content').append('<div class="alert">' + I18n.t('assets.js.ajax_error') + '</div>');
         $('#flash').fadeIn('slow');
       })
       .on('ajax:complete', function(evt, xhr, status) {
@@ -127,13 +129,13 @@ $(function() {
         }
       });
     $('#upload-app-bits-form .help').tooltip({'effect': 'fade', 'tipClass': 'help-tip'});
-    $('#upload-app-bits-form').validator({'effect': 'below_field_error', 'inputEvent': 'keyup'});
+    $('#upload-app-bits-form').validator({'effect': 'below_field_error', 'inputEvent': 'keyup', 'lang': validatorTools_lang});
     $('#upload-app-bits-form')
       .on('ajax:beforeSend', function(evt, xhr, settings) {
         var validator = $('#upload-app-bits-form').data('validator');
         if (!validator.checkValidity()) return false;
         request_processed = false;
-        $(this).find('.modalBox-submit input[type="submit"]').attr({value: 'Processing ...'});
+        $(this).find('.modalBox-submit input[type="submit"]').attr({value: I18n.t('assets.js.ajax_processing')});
       })
       .on('ajax:success', function(evt, data, status, xhr) {
         if (request_processed == true) {
@@ -142,14 +144,14 @@ $(function() {
       })
       .on('ajax:error', function(evt, xhr, status, error) {
         $('#flash-content').empty();
-        $('#flash-content').append('<div class="alert">An error occurred processing your request, please reload the page and try again.</div>');
+        $('#flash-content').append('<div class="alert">' + I18n.t('assets.js.ajax_error') + '</div>');
         $('#flash').fadeIn('slow');
       })
       .on('ajax:complete', function(evt, xhr, status) {
         if (request_processed == true) {
-          uploadAppBits_trigger.eq(0).overlay().close();
+            uploadAppBits_trigger.each(function() { $(this).overlay().close(); });
         }
-        $(this).find('.modalBox-submit input[type="submit"]').attr({value: 'Update Application'});
+        $(this).find('.modalBox-submit input[type="submit"]').attr({value: I18n.t('apps.js.upload_bits')});
       });
     $('#delete-app-link')
       .on('ajax:beforeSend', function(evt, xhr, settings) {
@@ -157,7 +159,7 @@ $(function() {
       })
       .on('ajax:error', function(evt, xhr, status, error) {
         $('#flash-content').empty();
-        $('#flash-content').append('<div class="alert">An error occurred processing your request, please reload the page and try again.</div>');
+        $('#flash-content').append('<div class="alert">' + I18n.t('assets.js.ajax_error') + '</div>');
         $('#flash').fadeIn('slow');
       })
       .on('ajax:complete', function(evt, xhr, status) {

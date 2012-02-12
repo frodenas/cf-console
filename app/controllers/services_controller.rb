@@ -28,21 +28,21 @@ class ServicesController < ApplicationController
             service_info = service.find(@name)
             if !service_info.nil?
               @new_service = [] << service_info
-              flash[:notice] = "Service \"" + @name + "\" provisioned"
+              flash[:notice] = t('services.controller.service_created', :name => @name)
             else
-              flash[:alert] = "An error occurred processing your request, please reload the page and try again."
+              flash[:alert] = t('services.controller.request_error')
             end
           else
-            flash[:alert] = "Service name already exists"
+            flash[:alert] = t('services.controller.already_exists')
           end
         rescue Exception => ex
           flash[:alert] = ex.message
         end
       else
-        flash[:alert] = "You must select a service"
+        flash[:alert] = t('services.controller.service_blank')
       end
     else
-      flash[:alert] = "Service name cannot be blank"
+      flash[:alert] = t('services.controller.name_blank')
     end
     respond_to do |format|
       format.html { redirect_to services_info_url }
@@ -55,7 +55,7 @@ class ServicesController < ApplicationController
     begin
       service = Service.new(@cf_client)
       service.delete(@name)
-      flash[:notice] = "Service \"" + @name + "\" deprovisioned"
+      flash[:notice] = t('services.controller.service_deleted', :name => @name)
     rescue Exception => ex
       flash[:alert] = ex.message
     end
@@ -81,7 +81,7 @@ class ServicesController < ApplicationController
 
   def find_available_system_services
     available_system_services = []
-    available_system_services << ["Select a system service ...", ""]
+    available_system_services << [t('services.controller.select_service'), ""]
     system = System.new(@cf_client)
     system_services = system.find_all_system_services()
     system_services.each do |service_type, service_value|

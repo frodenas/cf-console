@@ -1,17 +1,16 @@
 .modalBox{:id => "add_url_modalBox"}
   = form_tag app_map_url_url, :id => "map-url-form", :method => :put, :remote => true do
-    .modalBox-title Add URL
+    .modalBox-title=t('apps.urls.add_url')
     .modalBox-flash
     .modalBox-content
       %table
         %tbody
           %tr
             %td
-              = sprite_tag("help", :alt => "?", :class=> "help",
-                :title => "Enter the URL you want to map to your application.")
-              = label_tag "url", "URL:"
+              = sprite_tag("help", :alt => "?", :class=> "help", :title => t('apps.urls.url_help_html'))
+              = label_tag "url", t('apps.urls.url') + ":"
             %td
-              = url_field_tag :url, @url, :size => 80, :required => "required", :placeholder => "URL to map",
-                :autofocus => "autofocus"
+              = url_field_tag :url, @url, :size => 80, :required => "required", :autofocus => "autofocus",
+                :placeholder => t('apps.urls.url_placeholder')
               .form-field-error
-    .modalBox-submit= submit_tag "Add URL"
+    .modalBox-submit= submit_tag t('apps.urls.add_url')

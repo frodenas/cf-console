@@ -39,7 +39,7 @@ describe SessionsController do
           get :create, :email => "user@vcap.me", :password => "foobar", :target_url => CloudFoundry::Client::DEFAULT_TARGET, :remember_me => true
           response.cookies["cf_target_url"].should_not be_nil
           response.cookies["cf_auth_token"].should_not be_nil
-          response.should redirect_to("/")
+          response.should redirect_to("/" + I18n.locale.to_s)
         end
       end
     end
@@ -48,7 +48,7 @@ describe SessionsController do
       it "redirects to login page and deletes cookies" do
         get :destroy
         response.cookies["cf_auth_token"].should be_nil
-        response.should redirect_to("/login")
+        response.should redirect_to("/" + I18n.locale.to_s + "/login")
       end
     end
   end
@@ -103,7 +103,7 @@ describe SessionsController do
           get :create, :email => "user@vcap.me", :password => "foobar", :target_url => CloudFoundry::Client::DEFAULT_TARGET
           response.cookies["cf_target_url"].should_not be_nil
           response.cookies["cf_auth_token"].should_not be_nil
-          response.should redirect_to("/")
+          response.should redirect_to("/" + I18n.locale.to_s)
         end
       end
     end
@@ -112,7 +112,7 @@ describe SessionsController do
       it "redirects to root url and deletes cookies" do
         get :destroy
         response.cookies["cf_auth_token"].should be_nil
-        response.should redirect_to("/")
+        response.should redirect_to("/" + I18n.locale.to_s)
       end
     end
   end

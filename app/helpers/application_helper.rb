@@ -1,13 +1,14 @@
 module ApplicationHelper
   def colorize_state(state)
     status = case state
-      when "RUNNING"  then '<span class="state-green">' + state + '</span>'
-      when "STARTED"  then '<span class="state-green">' + state + '</span>'
-      when "STARTING" then '<span class="state-green">' + state + '</span>'
-      when "FLAPPING" then '<span class="state-orange">' + state + '</span>'
+      when "RUNNING"  then '<span class="state-green">' + t('helpers.running') + '</span>'
+      when "STARTED"  then '<span class="state-green">' + t('helpers.started') + '</span>'
+      when "STARTING" then '<span class="state-green">' + t('helpers.starting') + '</span>'
+      when "STOPPED" then '<span class="state-red">' + t('helpers.stopped') + '</span>'
+      when "FLAPPING" then '<span class="state-orange">' + t('helpers.flapping') + '</span>'
       else '<span class="state-red">' + state + '</span>'
      end
-    return status
+    status
   end
 
   def find_vendor_image(vendor)
@@ -31,8 +32,8 @@ module ApplicationHelper
   end
 
   def health(app)
-    return '<span class="state-red">N/A</span>' unless (app and app[:state])
-    return '<span class="state-red">STOPPED</span>' if app[:state] == 'STOPPED'
+    return '<span class="state-red">' + t('helpers.na') + '</span>' unless (app and app[:state])
+    return '<span class="state-red">' + t('helpers.stopped') + '</span>' if app[:state] == 'STOPPED'
 
     health = nil
     healthy_instances = app[:runningInstances]
@@ -45,12 +46,35 @@ module ApplicationHelper
       if health == 0
         return '<span class="state-red">0%</span>'
       elsif health == 1
-        return '<span class="state-green">RUNNING</span>'
+        return '<span class="state-green">' + t('helpers.running') + '</span>'
       else
-        return '<span class="state-orange">Running at ' + ((health * 100).round).to_s   + '%</span>'
+        return '<span class="state-orange">' + t('helpers.running_at') + ' ' + ((health * 100).round).to_s   + '%</span>'
       end
     end
-    return '<span class="state-red">N/A</span>'
+    return '<span class="state-red">' + t('helpers.na') + '</span>'
+  end
+
+  def language_selector
+    available_locales = (I18n.available_locales.collect { |lang| lang.to_s } & configatron.languages.available).sort
+    return "" if available_locales.length <= 1
+    selector = "<li id=\"locale\">"
+    selector += "<a id=\"locale-trigger\" href=\"#\">"
+    selector += image_tag("s.gif", {:class => "flag_" + I18n.locale.to_s, :alt => I18n.locale.to_s, :width => 20, :height => 12})
+    selector += " " + t('meta.language_name') + " <span>&#x25BC;</span>"
+    selector += "</a>"
+    selector += "<ul id=\"locale-switch\">"
+    available_locales.each do |locale|
+      if locale != I18n.locale.to_s
+        selector += "<li>"
+        selector += link_to image_tag("s.gif", {:class => "flag_" + locale, :alt => locale, :width => 20, :height => 12}) + " " +
+                            t('meta.language_name', :locale => locale.to_sym),
+                            login_url(:locale => locale)
+        selector += "</li>"
+      end
+    end
+    selector += "</ul>"
+    selector += "</li>"
+    selector
   end
 
   def pct(usage, limit)
@@ -82,6 +106,6 @@ module ApplicationHelper
     num_seconds -= hours * (60 * 60)
     minutes = num_seconds / 60
     num_seconds -= minutes * 60
-    "#{days}d:#{hours}h:#{minutes}m:#{num_seconds}s"
+    t('helpers.format.uptime', :days => days, :hours => hours, :minutes => minutes, :seconds => num_seconds)
   end
 end

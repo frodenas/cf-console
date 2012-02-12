@@ -1,10 +1,17 @@
+<%# encoding: utf-8%>
 $(function() {
   if ($('body').hasClass('sessions')) {
-    if (typeof target_uniform == 'undefined') {
-      target_uniform = $('.target-uniform').uniform();
+    if (typeof target_chosen == 'undefined') {
+      target_chosen = $('.target-chosen').chosen({'no_results_text': I18n.t('assets.js.no_results')});
     }
+    $('#locale-trigger').click(function () {
+      $(this).parent().find('#locale-switch').slideToggle('fast');
+      $(this).toggleClass('active');
+      if ($(this).hasClass('active')) $(this).find('span').html('&#x25B2;');
+      else $(this).find('span').html('&#x25BC;');
+    });
     $('#new-session-form .help').tooltip({'effect': 'fade', 'tipClass': 'help-tip'});
-    $('#new-session-form').validator({'effect': 'below_field_error', 'inputEvent': 'keyup'});
+    $('#new-session-form').validator({'effect': 'below_field_error', 'inputEvent': 'keyup', 'lang': validatorTools_lang});
     $('#new-session-form #cloud_service').change(function () {
       var args = $(this).val().match(/{[\d\w\s]+}/i);
       if (args == null) {

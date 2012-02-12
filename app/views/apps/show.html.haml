@@ -1,21 +1,28 @@
-= title("Application Details for \"#{@name}\"")
+= title(t('apps.title_app', :name => @name))
 
 .invoke-modalBox
 %ul.tabs
   %li
-    %a{:href => "#resources"} Resources
+    %a{:href => "#resources"}
+      = t('apps.tab_resources')
   %li
-    %a{:href => "#instances"} Instances
+    %a{:href => "#instances"}
+      = t('apps.tab_instances')
   %li
-    %a{:href => "#crashes"} Crashes
+    %a{:href => "#crashes"}
+      = t('apps.tab_crashes')
   %li
-    %a{:href => "#envvars"} Environment
+    %a{:href => "#envvars"}
+      = t('apps.tab_envvars')
   %li
-    %a{:href => "#services"} Services
+    %a{:href => "#services"}
+      = t('apps.tab_services')
   %li
-    %a{:href => "#urls"} URLs
+    %a{:href => "#urls"}
+      = t('apps.tab_urls')
   %li
-    %a{:href => "#files"} Files
+    %a{:href => "#files"}
+      = t('apps.tab_files')
 
 %div.panels
   %div.panel

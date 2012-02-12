@@ -1,4 +1,8 @@
 CfConsole::Application.routes.draw do
+  # Prepend the locale at the beginning of each URL
+  filter :locale
+
+  # Default path
   root :to => "dashboard#index"
 
   # Dashboard

@@ -7,9 +7,8 @@
       - service_item[:bindedapps].each do |appname|
         = link_to appname, app_info_url(appname)
         %br/
-  %td= Time.at(service_item[:meta][:created]).strftime("%m/%d/%Y - %H:%M")
-  %td= Time.at(service_item[:meta][:updated]).strftime("%m/%d/%Y - %H:%M")
-  %td.tdcenter= link_to sprite_tag("delete", :title => "Delete the provisioned service", :class => "delete icon-tip"),
-                service_delete_url(service_item[:name]),
-                :id => "delete-service-link", :remote => true,
-                :method => :delete , :confirm => "Are you sure?"
+  %td= Time.at(service_item[:meta][:created]).strftime(t('services.format.created'))
+  %td= Time.at(service_item[:meta][:updated]).strftime(t('services.format.updated'))
+  %td.tdcenter= link_to sprite_tag("delete", :title => t('services.delete_service'), :class => "delete icon-tip"),
+                service_delete_url(service_item[:name]), :id => "delete-service-link", :remote => true,
+                :method => :delete , :confirm => t('services.delete_service_confirm')

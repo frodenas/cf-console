@@ -9,7 +9,7 @@ describe SystemController do
     describe "GET index" do
       it "redirects to login page" do
         get :index
-        response.should redirect_to("/login")
+        response.should redirect_to("/" + I18n.locale.to_s + "/login")
       end
     end
   end

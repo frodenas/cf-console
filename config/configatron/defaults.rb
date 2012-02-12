@@ -3,7 +3,6 @@
 # Branding
 configatron.brand.logo = "cflogo.png"
 configatron.brand.title = "CF Console"
-configatron.brand.description = "Cloud Foundry Web Management Console"
 configatron.brand.author = "Ferran Rodenas"
 
 # Sets the available Cloud Foundry providers showed at login page.
@@ -38,3 +37,6 @@ configatron.sprites.vendor_images = [
   "python", "python26", "python27", "python32", "rabbitmq", "rails3", "redis", "ruby18", "ruby19",
   "sinatra", "spring"
 ]
+
+# Set which language translations are available.
+configatron.languages.available = ["en", "es", "ca"]

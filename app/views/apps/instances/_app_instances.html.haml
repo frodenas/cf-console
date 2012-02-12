@@ -1,14 +1,14 @@
 %table#app-instances-table
   %thead
     %tr
-      %th.thsort{:scope => "col"} Instance
-      %th.thsort{:scope => "col"} State
-      %th.thsort{:scope => "col"} Port
-      %th.thsort{:scope => "col"} CPU (Cores)
-      %th.thsort{:scope => "col"} Memory (limit)
-      %th.thsort{:scope => "col"} Disk (limit)
-      %th.thsort{:scope => "col"} Uptime
-      %th.thcenter{:scope => "col"} Logs
+      %th.thsort{:scope => "col"}=t('apps.instances.id_head')
+      %th.thsort{:scope => "col"}=t('apps.instances.state_head')
+      %th.thsort{:scope => "col"}=t('apps.instances.port_head')
+      %th.thsort{:scope => "col"}=t('apps.instances.cpu_head')
+      %th.thsort{:scope => "col"}=t('apps.instances.memory_head')
+      %th.thsort{:scope => "col"}=t('apps.instances.disk_head')
+      %th.thsort{:scope => "col"}=t('apps.instances.uptime_head')
+      %th.thcenter{:scope => "col"}=t('apps.instances.logs_head')
   %tbody
     = render :partial => "apps/instances/app_instance_item", :collection => @app[:instances_info]
 

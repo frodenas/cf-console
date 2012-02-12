@@ -1,10 +1,10 @@
 %table#app-services-table
   %thead
     %tr
-      %th.thsort{:scope => "col"} Name
-      %th.thsort{:scope => "col"} Service
-      %th.thsort{:scope => "col"} Version
-      %th.thcenter{:scope => "col", :width => "10%"} Actions
+      %th.thsort{:scope => "col"}=t('apps.services.name_head')
+      %th.thsort{:scope => "col"}=t('apps.services.service_head')
+      %th.thsort{:scope => "col"}=t('apps.services.version_head')
+      %th.thcenter{:scope => "col", :width => "10%"}=t('apps.services.actions_head')
   %tbody
     = render :partial => "apps/services/app_service_item", :collection => @app[:services]
 

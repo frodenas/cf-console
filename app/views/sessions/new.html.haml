@@ -1,67 +1,58 @@
-= title("Log in")
+= title(t('sessions.title'))
 
 %section#login
   #registered-users
     #shadow_box_content
       %p
-        %b Enter your credentials:
+        %b= t('sessions.enter_credentials')
       = form_tag login_url, :id => "new-session-form" do
         %table
           %tbody
             %tr
               %td
-                = sprite_tag("help", :alt => "?", :class=> "help",
-                  :title => "Enter your email address.")
-                = label_tag :email, "Email:"
+                = sprite_tag("help", :alt => "?", :class=> "help", :title => t('sessions.email_help_html'))
+                = label_tag :email, t('sessions.email')
               %td
                 = email_field_tag :email, @email, :size => 35, :required => "required", :autofocus => "autofocus",
-                  :placeholder => "Enter your email address"
+                  :placeholder => t('sessions.email_placeholder')
                 .form-field-error
             %tr
               %td
-                = sprite_tag("help", :alt => "?", :class=> "help",
-                :title => "Enter your password.")
-                = label_tag :password, "Password:"
+                = sprite_tag("help", :alt => "?", :class=> "help", :title => t('sessions.password_help_html'))
+                = label_tag :password, t('sessions.password')
               %td
                 = password_field_tag :password, nil, :size => 35, :required => "required",
-                  :placeholder => "Enter your password"
+                  :placeholder => t('sessions.password_placeholder')
                 .form-field-error
             %tr
               %td
-                = sprite_tag("help", :alt => "?", :class=> "help",
-                  :title => "Select your Cloud Foundry provider.")
-                = label_tag :cloud_service, "Cloud Foundry Provider:"
+                = sprite_tag("help", :alt => "?", :class=> "help", :title => t('sessions.provider_help_html'))
+                = label_tag :cloud_service, t('sessions.provider')
               %td
-                = select_tag :cloud_service, options_for_select(@available_targets, @selected_target), :required => "required",
-                  :class => "target-uniform"
+                = select_tag :cloud_service, options_for_select(@available_targets, @selected_target),
+                  :required => "required", :class => "target-chosen", :style => "width: 300px;"
                 .form-field-error
                 = hidden_field_tag :target_url
             %tr.args
               %td
-                = label_tag :target_args, "Target Args:"
+                = label_tag :target_args,  t('sessions.target_args')
               %td
                 = text_field_tag :target_args, @target_args, :size => 35
                 .form-field-error
             %tr
               %td
-                = sprite_tag("help", :alt => "?", :class=> "help",
-                  :title => "Check to remember your credentials in this browser.")
-                = label_tag :remember_me
+                = sprite_tag("help", :alt => "?", :class=> "help", :title => t('sessions.remember_help_html'))
+                = label_tag :remember_me, t('sessions.remember')
               %td
                 = check_box_tag :remember_me, true, @remember_me
             %tr
               %td{:colspan => 2}
-                = submit_tag "Login"
+                = submit_tag t('sessions.login')
   #new-users
     #shadow_box_content
       %p
-        %b CF-Console is an easy-to-use web-based interface for your Cloud Foundry instances.
+        %b= t('sessions.description_html')
       %p
-        %b
-          Get the source code at
-          %a{:href => "https://github.com/frodenas/cf-console"}Github
-          and make it better.
+        %b= t('sessions.source_code_html')
       %p
-        %b
-          Or learn more about the open platform as a service project at the
-          %a{:href => "http://www.cloudfoundry.org/"} Cloud Foundry Open Source Site
+        %b= t('sessions.learn_more_html')

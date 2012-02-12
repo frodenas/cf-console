@@ -1,3 +1,4 @@
+<%# encoding: utf-8%>
 $(function() {
   if ($('body').hasClass('system')) {
     $('#system-menu-link').addClass('menu-current');
@@ -5,6 +6,7 @@ $(function() {
       'bAutoWidth':      false,
       'bLengthChange':   false,
       'bStateSave':      true,
+      'oLanguage':       dataTables_lang,
       'sPaginationType': 'full_numbers',
       'aoColumnDefs':    [{'sType': 'string', 'aTargets': [0]}]
     };
@@ -13,6 +15,7 @@ $(function() {
       'bAutoWidth':      false,
       'bLengthChange':   false,
       'bStateSave':      true,
+      'oLanguage':       dataTables_lang,
       'sPaginationType': 'full_numbers',
       'aoColumnDefs':    [{'sType': 'string', 'aTargets': [0]}]
     };
@@ -21,6 +24,7 @@ $(function() {
       'bAutoWidth':      false,
       'bLengthChange':   false,
       'bStateSave':      true,
+      'oLanguage':       dataTables_lang,
       'sPaginationType': 'full_numbers',
       'aoColumnDefs':    [{'sType': 'string', 'aTargets': [0, 2]}]
     };

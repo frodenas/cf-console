@@ -3,8 +3,10 @@ module Utils
     def self.defer_block(&blk)
       f = Fiber.current
 
+      locale = I18n.locale
       defer_proc = Proc.new do
         begin
+          I18n.locale = locale
           result = blk.call
           [:success, result]
         rescue => ex
@@ -27,10 +29,12 @@ module Utils
 
   module FiberedIterator
     def self.each(list, concurrency = 1, &blk)
-      raise "Argument must be an array" unless list.respond_to?(:to_a)
+      raise I18n.t('utils.argument_not_array') unless list.respond_to?(:to_a)
       error = nil
+      locale = I18n.locale
       foreach = Proc.new do |obj|
         begin
+          I18n.locale = locale
           blk.call(obj)
         rescue => ex
           error = ex
@@ -40,7 +44,7 @@ module Utils
         begin
           result = EM::Synchrony::FiberIterator.new(list, concurrency).each(foreach)
         rescue => ex
-          error = "Internal error - EM::Synchrony::FiberIterator exception: " + ex.message
+          error = I18n.t('utils.fiberiterator_exception', :msg => ex.message)
         end
       else
         result = list.each { |obj| foreach.call(obj) }
@@ -50,11 +54,13 @@ module Utils
     end
 
     def self.map(list, concurrency = 1, &blk)
-      raise "Argument must be an array" unless list.respond_to?(:to_a)
+      raise I18n.t('utils.argument_not_array') unless list.respond_to?(:to_a)
       error = nil
+      locale = I18n.locale
       foreach = Proc.new do |obj, iter|
         Fiber.new {
           begin
+            I18n.locale = locale
             res = blk.call(obj)
             iter.return(res)
           rescue => ex
@@ -67,7 +73,7 @@ module Utils
         begin
           result = EM::Synchrony::Iterator.new(list, concurrency).map(&foreach)
         rescue => ex
-          error = "Internal error - EM::Synchrony::Iterator exception: " + ex.message
+          error = I18n.t('utils.iterator_exception', :msg => ex.message)
         end
       else
         result = list.map { |obj| foreach.call(obj) }
@@ -85,7 +91,7 @@ module Utils
     def self.git_clone(gitrepo, gitbranch, repodir)
       FileUtils.rm_rf(repodir, :secure => true)
       git_binary = git_binary()
-      raise "Unable to find git binary." if git_binary.nil?
+      raise I18n.t('utils.git_not_found') if git_binary.nil?
       cmd = "#{git_binary} --git-dir=#{repodir} clone --quiet --branch=#{gitbranch} #{gitrepo} #{repodir}"
       if EM.reactor_running?
         f = Fiber.current
@@ -93,10 +99,10 @@ module Utils
           f.resume({:status => status, :output => output})
         end
         git_clone_result = Fiber.yield
-        raise "Unable to clone the repository. Git error " + git_clone_result[:status].exitstatus.to_s if git_clone_result[:status].exitstatus != 0
+        raise I18n.t('utils.git_clone_error', :msg => git_clone_result[:status].exitstatus.to_s) if git_clone_result[:status].exitstatus != 0
       else
         stdout = `#{cmd} 2>&1`
-        raise "Unable to clone the repository. Git error " + $?.exitstatus.to_s if $?.to_i != 0
+        raise I18n.t('utils.git_clone_error', :msg => $?.exitstatus.to_s) if $?.to_i != 0
       end
     end
 

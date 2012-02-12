@@ -23,24 +23,24 @@ class UsersController < ApplicationController
               user_info = user.find(@email)
               if !user_info.nil?
                 @new_user = [] << user_info
-                flash[:notice] = "User \"" + @email + "\" created"
+                flash[:notice] = t('users.controller.user_created', :email => @email)
               else
-                flash[:alert] = "An error occurred processing your request, please reload the page and try again."
+                flash[:alert] = t('users.controller.request_error')
               end
             else
-              flash[:alert] = "User already exists"
+              flash[:alert] = t('users.controller.already_exists')
             end
           rescue Exception => ex
             flash[:alert] = ex.message
           end
         else
-          flash[:alert] = "Passwords do not match"
+          flash[:alert] = t('users.controller.passwords_match')
         end
       else
-        flash[:alert] = "Password cannot be blank"
+        flash[:alert] = t('users.controller.password_blank')
       end
     else
-      flash[:alert] = "Email cannot be blank"
+      flash[:alert] = t('users.controller.email_blank')
     end
     respond_to do |format|
       format.html { redirect_to users_info_url }
@@ -53,7 +53,7 @@ class UsersController < ApplicationController
     begin
       user = User.new(@cf_client)
       user.delete(@email)
-      flash[:notice] = "User \"" + @email + "\" deleted"
+      flash[:notice] = t('users.controller.user_deleted', :email => @email)
     rescue Exception => ex
       flash[:alert] = ex.message
     end

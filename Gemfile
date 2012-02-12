@@ -12,6 +12,8 @@ gem 'rack-fiber_pool', '~> 0.9.2', :require => 'rack/fiber_pool'
 gem 'em-synchrony', '~> 1.0.0', :require => ['em-synchrony', 'em-synchrony/em-http', 'em-synchrony/fiber_iterator']
 gem 'em-http-request', '~> 1.0.1', :require => 'em-http'
 gem 'thin', '~> 1.3.1'
+gem 'i18n-js', '~> 2.1.2'
+gem 'routing-filter', '~> 0.3.0'
 
 group :assets do
   gem 'sass-rails', '~> 3.2.3'

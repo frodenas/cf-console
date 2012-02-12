@@ -1,3 +1,4 @@
+<%# encoding: utf-8%>
 $(function() {
   if ($('body').hasClass('services')) {
     $('#services-menu-link').addClass('menu-current');
@@ -5,6 +6,7 @@ $(function() {
       'bAutoWidth':      false,
       'bLengthChange':   false,
       'bStateSave':      true,
+      'oLanguage':       dataTables_lang,
       'sPaginationType': 'full_numbers',
       'aoColumnDefs':    [{'bSearchable': false, 'aTargets': [6]},
                           {'bSortable': false, 'aTargets': [6]},
@@ -18,7 +20,7 @@ $(function() {
       .on('onClick', function(event, tabIndex) {
         var tab = $(this).find('li.current > a').attr('href');
         if (tab == '#services') {
-          $('.invoke-modalBox').html('<button class="addService" rel="#add_service_modalBox">Add Service</button>').toggle();
+          $('.invoke-modalBox').html('<button class="addService" rel="#add_service_modalBox">' + I18n.t('services.js.add_service') + '</button>').toggle();
           addService_trigger = $('.addService').overlay({
             'closeOnClick': false,
             'mask': {color: '#404040', loadSpeed: 'normal', opacity: 0.7},
@@ -27,14 +29,14 @@ $(function() {
               $('.modalBox-flash').empty();
             }
           });
-          if (typeof service_uniform == 'undefined') {
-            service_uniform = $('.service-uniform').uniform();
+          if (typeof service_chosen == 'undefined') {
+            service_chosen = $('.service-chosen').chosen({'no_results_text': I18n.t('assets.js.no_results')});
           }
           $('#services-table .icon-tip').tooltip({'effect': 'fade', 'tipClass': 'help-tip'});
         }
       });
     $('#new-service-form .help').tooltip({'effect': 'fade', 'tipClass': 'help-tip'});
-    $('#new-service-form').validator({'effect': 'below_field_error', 'inputEvent': 'keyup'});
+    $('#new-service-form').validator({'effect': 'below_field_error', 'inputEvent': 'keyup', 'lang': validatorTools_lang});
     $('#new-service-form select#ss')
       .on('change', function() {
         var app_name = $('#new-service-form input#name');
@@ -48,7 +50,7 @@ $(function() {
         var validator = $('#new-service-form').data('validator');
         if (!validator.checkValidity()) return false;
         request_processed = false;
-        $(this).find('.modalBox-submit input[type="submit"]').attr({value: 'Processing ...'});
+        $(this).find('.modalBox-submit input[type="submit"]').attr({value: I18n.t('assets.js.ajax_processing')});
       })
       .on('ajax:success', function(evt, data, status, xhr) {
         if (request_processed == true) {
@@ -58,14 +60,14 @@ $(function() {
       .on('ajax:error', function(evt, xhr, status, error) {
         request_processed = true;
         $('#flash-content').empty();
-        $('#flash-content').append('<div class="alert">An error occurred processing your request, please reload the page and try again.</div>');
+        $('#flash-content').append('<div class="alert">' + I18n.t('assets.js.ajax_error') + '</div>');
         $('#flash').fadeIn('slow');
       })
       .on('ajax:complete', function(evt, xhr, status) {
         if (request_processed == true) {
           addService_trigger.eq(0).overlay().close();
         }
-        $(this).find('.modalBox-submit input[type="submit"]').attr({value: 'Add Service'});
+        $(this).find('.modalBox-submit input[type="submit"]').attr({value: I18n.t('services.js.add_service')});
       });
     $('#delete-service-link')
       .on('ajax:beforeSend', function(evt, xhr, settings) {
@@ -73,7 +75,7 @@ $(function() {
       })
       .on('ajax:error', function(evt, xhr, status, error) {
         $('#flash-content').empty();
-        $('#flash-content').append('<div class="alert">An error occurred processing your request, please reload the page and try again.</div>');
+        $('#flash-content').append('<div class="alert">' + I18n.t('assets.js.ajax_error') + '</div>');
         $('#flash').fadeIn('slow');
       })
       .on('ajax:complete', function(evt, xhr, status) {

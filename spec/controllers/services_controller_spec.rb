@@ -9,21 +9,21 @@ describe ServicesController do
     describe "GET index" do
       it "redirects to login page" do
         get :index
-        response.should redirect_to("/login")
+        response.should redirect_to("/" + I18n.locale.to_s + "/login")
       end
     end
 
     describe "POST create" do
       it "redirects to login page" do
         post :create, :name => "redis-mock", :ss => "redis"
-        response.should redirect_to("/login")
+        response.should redirect_to("/" + I18n.locale.to_s + "/login")
       end
     end
 
     describe "DELETE delete" do
       it "redirects to login page" do
         delete :delete, :name => "redis-mock"
-        response.should redirect_to("/login")
+        response.should redirect_to("/" + I18n.locale.to_s + "/login")
       end
     end
   end
@@ -55,13 +55,13 @@ describe ServicesController do
       it "redirects to services page with a flash alert when service name is blank" do
         post :create, :name => "", :ss => "redis"
         flash[:alert].should_not be_empty
-        response.should redirect_to("/services")
+        response.should redirect_to("/" + I18n.locale.to_s + "/services")
       end
 
       it "redirects to services page with a flash alert when system service is blank" do
         post :create, :name => "redis-mock", :ss => ""
         flash[:alert].should_not be_empty
-        response.should redirect_to("/services")
+        response.should redirect_to("/" + I18n.locale.to_s + "/services")
       end
 
       it "redirects to services page with a flash notice when service is created" do
@@ -69,7 +69,7 @@ describe ServicesController do
           post :create, :name => "redis-mock", :ss => "redis"
           flash[:notice].should_not be_empty
           flash[:notice].should include("redis-mock")
-          response.should redirect_to("/services")
+          response.should redirect_to("/" + I18n.locale.to_s + "/services")
         end
       end
 
@@ -84,7 +84,7 @@ describe ServicesController do
       it "redirects to services page with a flash alert when service name already exists" do
         post :create, :name => "redis-mock", :ss => "redis"
         flash[:alert].should_not be_empty
-        response.should redirect_to("/services")
+        response.should redirect_to("/" + I18n.locale.to_s + "/services")
       end
     end
 
@@ -94,14 +94,14 @@ describe ServicesController do
           delete :delete, :name => "redis-mock"
           flash[:notice].should_not be_empty
           flash[:notice].should include("redis-mock")
-          response.should redirect_to("/services")
+          response.should redirect_to("/" + I18n.locale.to_s + "/services")
         end
       end
 
       it "redirects to services page with a flash alert when service does not exists" do
         delete :delete, :name => "redis-mock"
         flash[:alert].should_not be_empty
-        response.should redirect_to("/services")
+        response.should redirect_to("/" + I18n.locale.to_s + "/services")
       end
     end
   end

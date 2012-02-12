@@ -24,6 +24,13 @@ namespace :assets do
         end
         output.join("\n")
       end
+      SpriteFactory.run!('app/assets/images/flags', :output_style => 'app/assets/stylesheets/flags.scss') do |flags|
+        output = []
+        flags.each do |name, metadata|
+          output << "img.flag_" + name.to_s + " { " + metadata[:style].gsub(/url\(flags.png\)/, "image_url('flags.png')") + " }"
+        end
+        output.join("\n")
+      end
     end
   end
 end

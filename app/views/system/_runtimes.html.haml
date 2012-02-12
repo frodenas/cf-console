@@ -1,9 +1,12 @@
 %table#runtimes-table
   %thead
     %tr
-      %th.thsort{:scope => "col"} Name
-      %th.thsort{:scope => "col"} Version
-      %th.thsort{:scope => "col"} Description
+      %th.thsort{:scope => "col"}
+        = t('system.runtimes.name_head')
+      %th.thsort{:scope => "col"}
+        = t('system.runtimes.version_head')
+      %th.thsort{:scope => "col"}
+        = t('system.runtimes.description_head')
   %tbody
     - @runtimes.each_value do |run|
       %tr.oddeven

@@ -1,28 +1,28 @@
 %table#app-resources-table
   %tbody
     %tr
-      %td{:width => "20%"} Name
+      %td{:width => "20%"}=t('apps.resources.name')
       %td= @name
     %tr
-      %td State
+      %td=t('apps.resources.state')
       %td= colorize_state(@app[:state]).html_safe
     %tr
-      %td Health
+      %td=t('apps.resources.health')
       %td= health(@app).html_safe
     %tr
-      %td Instances
+      %td=t('apps.resources.instances')
       %td.editableText{:id => "instances-" + @name}= @app[:instances]
     %tr
-      %td Memory
+      %td=t('apps.resources.memory')
       %td.editableText{:id => "memory-" + @name}= pretty_size(@app[:resources][:memory] * 1024 * 1024, 0)
     %tr
-      %td Disk
+      %td=t('apps.resources.disk')
       %td= pretty_size(@app[:resources][:disk] * 1024 * 1024, 0)
     %tr
-      %td Framework
+      %td=t('apps.resources.framework')
       %td= find_vendor_image(@app[:staging][:model]).html_safe
     %tr
-      %td Runtime
+      %td=t('apps.resources.runtime')
       %td= find_vendor_image(@app[:staging][:stack]).html_safe
 
 - content_for :javascripts do

@@ -2,7 +2,7 @@ require 'cloudfoundry'
 
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  before_filter :require_login
+  before_filter :set_locale, :require_login
 
   private
 
@@ -38,5 +38,27 @@ class ApplicationController < ActionController::Base
     else
       :net_http
     end
+  end
+
+  def set_locale
+    available_locales = (I18n.available_locales.collect { |lang| lang.to_s } & configatron.languages.available)
+    params_locale = ([params[:locale]] & available_locales).first
+    cookies_locale = ([cookies[:cf_locale]] & available_locales).first
+    browser_locale = (user_agent_locale & available_locales).first
+    I18n.locale = params_locale || cookies_locale || browser_locale || I18n.default_locale
+    cookies.permanent[:cf_locale] = I18n.locale
+  end
+
+  def user_agent_locale
+    user_agent_languages ||= env['HTTP_ACCEPT_LANGUAGE'].split(/\s*,\s*/).collect do |lang|
+      lang += ";q=1.0" unless lang =~ /;q=\d+\.\d+$/
+      lang.split(";q=")
+    end.sort do |x, y|
+      y.last.to_f <=> x.last.to_f
+    end.collect do |lang|
+      lang.first.downcase.gsub(/-[a-z]+$/i) { |x| x.upcase }
+    end
+  rescue
+    []
   end
 end

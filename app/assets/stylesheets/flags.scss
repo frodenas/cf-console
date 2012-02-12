@@ -1,0 +1,120 @@
+/*
+
+        Creating a sprite from following images:
+        
+        app/assets/images/flags/ar.png (20x12)
+        app/assets/images/flags/bg.png (20x12)
+        app/assets/images/flags/ca.png (20x12)
+        app/assets/images/flags/cs.png (20x12)
+        app/assets/images/flags/da.png (20x12)
+        app/assets/images/flags/de.png (20x12)
+        app/assets/images/flags/el.png (20x12)
+        app/assets/images/flags/en.png (20x12)
+        app/assets/images/flags/eo.png (20x12)
+        app/assets/images/flags/es.png (20x12)
+        app/assets/images/flags/et.png (20x12)
+        app/assets/images/flags/eu.png (20x12)
+        app/assets/images/flags/fa.png (20x12)
+        app/assets/images/flags/fi.png (20x12)
+        app/assets/images/flags/fo.png (20x12)
+        app/assets/images/flags/fr.png (20x12)
+        app/assets/images/flags/ga.png (20x12)
+        app/assets/images/flags/gl.png (20x12)
+        app/assets/images/flags/he.png (20x12)
+        app/assets/images/flags/hi.png (20x12)
+        app/assets/images/flags/hr.png (20x12)
+        app/assets/images/flags/hu.png (20x12)
+        app/assets/images/flags/id.png (20x12)
+        app/assets/images/flags/is.png (20x12)
+        app/assets/images/flags/it.png (20x12)
+        app/assets/images/flags/ja.png (20x12)
+        app/assets/images/flags/km.png (20x12)
+        app/assets/images/flags/lb.png (20x12)
+        app/assets/images/flags/lt.png (20x12)
+        app/assets/images/flags/lv.png (20x12)
+        app/assets/images/flags/mn.png (20x12)
+        app/assets/images/flags/nb.png (20x12)
+        app/assets/images/flags/nl.png (20x12)
+        app/assets/images/flags/nn.png (20x12)
+        app/assets/images/flags/pl.png (20x12)
+        app/assets/images/flags/pt-br.png (20x12)
+        app/assets/images/flags/pt-pt.png (20x12)
+        app/assets/images/flags/ro.png (20x12)
+        app/assets/images/flags/ru.png (20x12)
+        app/assets/images/flags/sco.png (20x12)
+        app/assets/images/flags/se.png (20x12)
+        app/assets/images/flags/sk.png (20x12)
+        app/assets/images/flags/sl.png (20x12)
+        app/assets/images/flags/sq.png (20x12)
+        app/assets/images/flags/sv.png (20x12)
+        app/assets/images/flags/tg.png (20x12)
+        app/assets/images/flags/th.png (20x12)
+        app/assets/images/flags/tl.png (20x12)
+        app/assets/images/flags/tr.png (20x12)
+        app/assets/images/flags/uk.png (20x12)
+        app/assets/images/flags/vi.png (20x12)
+        app/assets/images/flags/zh-hans.png (20x12)
+        app/assets/images/flags/zh-hant.png (20x12)
+
+        Output files:
+          app/assets/images/flags.png
+          app/assets/stylesheets/flags.scss
+
+        Output size:
+          120x108
+
+
+*/
+img.flag_ar { width: 20px; height: 12px; background: image_url('flags.png') 0px 0px no-repeat }
+img.flag_bg { width: 20px; height: 12px; background: image_url('flags.png') -20px 0px no-repeat }
+img.flag_ca { width: 20px; height: 12px; background: image_url('flags.png') 0px -12px no-repeat }
+img.flag_cs { width: 20px; height: 12px; background: image_url('flags.png') -20px -12px no-repeat }
+img.flag_da { width: 20px; height: 12px; background: image_url('flags.png') 0px -24px no-repeat }
+img.flag_de { width: 20px; height: 12px; background: image_url('flags.png') -20px -24px no-repeat }
+img.flag_el { width: 20px; height: 12px; background: image_url('flags.png') -40px 0px no-repeat }
+img.flag_en { width: 20px; height: 12px; background: image_url('flags.png') -40px -12px no-repeat }
+img.flag_eo { width: 20px; height: 12px; background: image_url('flags.png') -40px -24px no-repeat }
+img.flag_es { width: 20px; height: 12px; background: image_url('flags.png') 0px -36px no-repeat }
+img.flag_et { width: 20px; height: 12px; background: image_url('flags.png') -20px -36px no-repeat }
+img.flag_eu { width: 20px; height: 12px; background: image_url('flags.png') -40px -36px no-repeat }
+img.flag_fa { width: 20px; height: 12px; background: image_url('flags.png') 0px -48px no-repeat }
+img.flag_fi { width: 20px; height: 12px; background: image_url('flags.png') -20px -48px no-repeat }
+img.flag_fo { width: 20px; height: 12px; background: image_url('flags.png') -40px -48px no-repeat }
+img.flag_fr { width: 20px; height: 12px; background: image_url('flags.png') -60px 0px no-repeat }
+img.flag_ga { width: 20px; height: 12px; background: image_url('flags.png') -60px -12px no-repeat }
+img.flag_gl { width: 20px; height: 12px; background: image_url('flags.png') -60px -24px no-repeat }
+img.flag_he { width: 20px; height: 12px; background: image_url('flags.png') -60px -36px no-repeat }
+img.flag_hi { width: 20px; height: 12px; background: image_url('flags.png') -60px -48px no-repeat }
+img.flag_hr { width: 20px; height: 12px; background: image_url('flags.png') 0px -60px no-repeat }
+img.flag_hu { width: 20px; height: 12px; background: image_url('flags.png') -20px -60px no-repeat }
+img.flag_id { width: 20px; height: 12px; background: image_url('flags.png') -40px -60px no-repeat }
+img.flag_is { width: 20px; height: 12px; background: image_url('flags.png') -60px -60px no-repeat }
+img.flag_it { width: 20px; height: 12px; background: image_url('flags.png') -80px 0px no-repeat }
+img.flag_ja { width: 20px; height: 12px; background: image_url('flags.png') -80px -12px no-repeat }
+img.flag_km { width: 20px; height: 12px; background: image_url('flags.png') -80px -24px no-repeat }
+img.flag_lb { width: 20px; height: 12px; background: image_url('flags.png') -80px -36px no-repeat }
+img.flag_lt { width: 20px; height: 12px; background: image_url('flags.png') -80px -48px no-repeat }
+img.flag_lv { width: 20px; height: 12px; background: image_url('flags.png') -80px -60px no-repeat }
+img.flag_mn { width: 20px; height: 12px; background: image_url('flags.png') 0px -72px no-repeat }
+img.flag_nb { width: 20px; height: 12px; background: image_url('flags.png') -20px -72px no-repeat }
+img.flag_nl { width: 20px; height: 12px; background: image_url('flags.png') -40px -72px no-repeat }
+img.flag_nn { width: 20px; height: 12px; background: image_url('flags.png') -60px -72px no-repeat }
+img.flag_pl { width: 20px; height: 12px; background: image_url('flags.png') -80px -72px no-repeat }
+img.flag_pt-br { width: 20px; height: 12px; background: image_url('flags.png') 0px -84px no-repeat }
+img.flag_pt-pt { width: 20px; height: 12px; background: image_url('flags.png') -20px -84px no-repeat }
+img.flag_ro { width: 20px; height: 12px; background: image_url('flags.png') -40px -84px no-repeat }
+img.flag_ru { width: 20px; height: 12px; background: image_url('flags.png') -60px -84px no-repeat }
+img.flag_sco { width: 20px; height: 12px; background: image_url('flags.png') -80px -84px no-repeat }
+img.flag_se { width: 20px; height: 12px; background: image_url('flags.png') -100px 0px no-repeat }
+img.flag_sk { width: 20px; height: 12px; background: image_url('flags.png') -100px -12px no-repeat }
+img.flag_sl { width: 20px; height: 12px; background: image_url('flags.png') -100px -24px no-repeat }
+img.flag_sq { width: 20px; height: 12px; background: image_url('flags.png') -100px -36px no-repeat }
+img.flag_sv { width: 20px; height: 12px; background: image_url('flags.png') -100px -48px no-repeat }
+img.flag_tg { width: 20px; height: 12px; background: image_url('flags.png') -100px -60px no-repeat }
+img.flag_th { width: 20px; height: 12px; background: image_url('flags.png') -100px -72px no-repeat }
+img.flag_tl { width: 20px; height: 12px; background: image_url('flags.png') -100px -84px no-repeat }
+img.flag_tr { width: 20px; height: 12px; background: image_url('flags.png') 0px -96px no-repeat }
+img.flag_uk { width: 20px; height: 12px; background: image_url('flags.png') -20px -96px no-repeat }
+img.flag_vi { width: 20px; height: 12px; background: image_url('flags.png') -40px -96px no-repeat }
+img.flag_zh-hans { width: 20px; height: 12px; background: image_url('flags.png') -60px -96px no-repeat }
+img.flag_zh-hant { width: 20px; height: 12px; background: image_url('flags.png') -80px -96px no-repeat }

@@ -10,11 +10,14 @@
           .apps_types
       %tr
         %td.tdptop
-          .apps_states_hover Application's States
+          =t('dashboard.apps.apps_states')
+          .apps_states_hover
         %td.tdptop
-          .instances_states_hover Instance's States
+          =t('dashboard.apps.instances_states')
+          .instances_states_hover
         %td.tdptop
-          .apps_types_hover Types of Application
+          =t('dashboard.apps.apps_types')
+          .apps_types_hover
 
 - content_for :javascripts do
   :javascript

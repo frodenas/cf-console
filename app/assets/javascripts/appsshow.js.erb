@@ -1,3 +1,4 @@
+<%# encoding: utf-8%>
 $(function() {
   if ($('body').hasClass('apps') && $('body').hasClass('show')) {
     $('#apps-menu-link').addClass('menu-current');
@@ -5,6 +6,7 @@ $(function() {
       'bAutoWidth':      false,
       'bLengthChange':   false,
       'bStateSave':      false,
+      'oLanguage':       dataTables_lang,
       'sPaginationType': 'full_numbers',
       'aoColumnDefs':    [{'bSearchable': false, 'aTargets': [7]},
                           {'bSortable': false, 'aTargets': [7]}]
@@ -14,6 +16,7 @@ $(function() {
       'bAutoWidth':      false,
       'bLengthChange':   false,
       'bStateSave':      false,
+      'oLanguage':       dataTables_lang,
       'sPaginationType': 'full_numbers',
       'aaSorting':       [[ 1, 'desc']]
     };
@@ -22,6 +25,7 @@ $(function() {
       'bAutoWidth':      false,
       'bLengthChange':   false,
       'bStateSave':      false,
+      'oLanguage':       dataTables_lang,
       'sPaginationType': 'full_numbers',
       'aoColumnDefs':    [{'bSearchable': false, 'aTargets': [3]},
                           {'bSortable': false, 'aTargets': [3]},
@@ -33,6 +37,7 @@ $(function() {
       'bAutoWidth':      false,
       'bLengthChange':   false,
       'bStateSave':      false,
+      'oLanguage':       dataTables_lang,
       'sPaginationType': 'full_numbers',
       'aoColumnDefs':    [{'bSearchable': false, 'aTargets': [1]},
                           {'bSortable': false, 'aTargets': [1]}
@@ -67,10 +72,10 @@ $(function() {
             'method'   : 'PUT',
             'name'     : 'instances',
             'type'     : 'range',
-            'submit'   : 'Update',
-            'cancel'   : 'Cancel',
+            'submit'   : I18n.t('assets.js.update'),
+            'cancel'   : I18n.t('assets.js.cancel'),
             'indicator': '<%= image_tag('wait.gif') %>',
-            'tooltip'  : 'Click to edit ...',
+            'tooltip'  : I18n.t('assets.js.click2edit'),
             'callback'  : function(value, settings) {
               var row = $(this.parentNode).addClass('highlight').hide();
               row.fadeIn(1800, function() {
@@ -93,10 +98,10 @@ $(function() {
             'method'   : 'PUT',
             'name'     : 'memsize',
             'type'     : 'select',
-            'submit'   : 'Update',
-            'cancel'   : 'Cancel',
+            'submit'   : I18n.t('assets.js.update'),
+            'cancel'   : I18n.t('assets.js.cancel'),
             'indicator': '<%= image_tag('wait.gif') %>',
-            'tooltip'  : 'Click to edit ...',
+            'tooltip'  : I18n.t('assets.js.click2edit'),
             'data'     : resources_available_memsizes,
             'callback' : function(value, settings) {
               var row = $(this.parentNode).addClass('highlight').hide();
@@ -132,12 +137,13 @@ $(function() {
           $('.invoke-modalBox').empty().hide();
         }
         if (tab == '#envvars') {
-          $('.invoke-modalBox').html('<button class="addEnvvar" rel="#add_envvar_modalBox">Add Var</button>').show();
+          $('.invoke-modalBox').html('<button class="addEnvvar" rel="#add_envvar_modalBox">' + I18n.t('apps.js.add_envvar') + '</button>').show();
           if (typeof appEnvvarsTable == 'undefined') {
             appEnvvarsTable_Settings = {
               'bAutoWidth':      false,
               'bLengthChange':   false,
               'bStateSave':      false,
+              'oLanguage':       dataTables_lang,
               'sPaginationType': 'full_numbers',
               'aoColumnDefs':    [{'bSearchable': false, 'aTargets': [2]},
                                   {'bSortable': false, 'aTargets': [2]}
@@ -147,10 +153,11 @@ $(function() {
                   'method'    : 'PUT',
                   'name'      : 'var_value',
                   'type'      : 'text',
-                  'submit'    : 'Update',
-                  'cancel'    : 'Cancel',
+                  'submit'    : I18n.t('assets.js.update'),
+                  'cancel'    : I18n.t('assets.js.cancel'),
                   'indicator' : '<%= image_tag('wait.gif') %>',
-                  'tooltip'   : 'Click to edit ...',
+                  'tooltip'   : I18n.t('assets.js.click2edit'),
+                  'placeholder' : I18n.t('assets.js.click2edit'),
                   'callback'  : function(value, settings) {
                     var aPos = appEnvvarsTable.fnGetPosition(this);
                     var row = $(this.parentNode).addClass('highlight').hide();
@@ -189,7 +196,7 @@ $(function() {
           $('#app-envvars-table .icon-tip').tooltip({'effect': 'fade', 'tipClass': 'help-tip'});
         }
         if (tab == '#services') {
-          $('.invoke-modalBox').html('<button class="bindService" rel="#bind_service_modalBox">Bind Service</button>').show();
+          $('.invoke-modalBox').html('<button class="bindService" rel="#bind_service_modalBox">' + I18n.t('apps.js.add_service') + '</button>').show();
           bindService_trigger = $('.bindService').overlay({
             'closeOnClick': false,
             'mask': {color: '#404040', loadSpeed: 'normal', opacity: 0.7},
@@ -198,13 +205,13 @@ $(function() {
               $('.modalBox-flash').empty();
             }
           });
-          if (typeof service_uniform == 'undefined') {
-            service_uniform = $('.service-uniform').uniform();
+          if (typeof service_chosen == 'undefined') {
+            service_chosen = $('.service-chosen').chosen({'no_results_text': I18n.t('assets.js.no_results')});
           }
           $('#app-services-table .icon-tip').tooltip({'effect': 'fade', 'tipClass': 'help-tip'});
         }
         if (tab == '#urls') {
-          $('.invoke-modalBox').html('<button class="addURL" rel="#add_url_modalBox">Add URL</button>').show();
+          $('.invoke-modalBox').html('<button class="addURL" rel="#add_url_modalBox">' + I18n.t('apps.js.add_url') + '</button>').show();
           addURL_trigger = $('.addURL').overlay({
             'closeOnClick': false,
             'mask': {color: '#404040', loadSpeed: 'normal', opacity: 0.7},
@@ -219,18 +226,18 @@ $(function() {
           if (typeof app_download_bits_url == 'undefined') {
             $('.invoke-modalBox').empty().hide();
           } else {
-            $('.invoke-modalBox').html('<a href="' + app_download_bits_url + '" class="button">Download App</a>').show();
+            $('.invoke-modalBox').html('<a href="' + app_download_bits_url + '" class="button">' + I18n.t('apps.js.download_bits') + '</a>').show();
           }
         }
       });
     $('#set-var-form .help').tooltip({'effect': 'fade', 'tipClass': 'help-tip'});
-    $('#set-var-form').validator({'effect': 'below_field_error', 'inputEvent': 'keyup'});
+    $('#set-var-form').validator({'effect': 'below_field_error', 'inputEvent': 'keyup', 'lang': validatorTools_lang});
     $('#set-var-form')
       .on('ajax:beforeSend', function(evt, xhr, settings) {
         var validator = $('#set-var-form').data('validator');
         if (!validator.checkValidity()) return false;
         request_processed = false;
-        $(this).find('.modalBox-submit input[type="submit"]').attr({value: 'Processing ...'});
+        $(this).find('.modalBox-submit input[type="submit"]').attr({value: I18n.t('assets.js.ajax_processing')});
       })
       .on('ajax:success', function(evt, data, status, xhr) {
         if (request_processed == true) {
@@ -240,14 +247,14 @@ $(function() {
       .on('ajax:error', function(evt, xhr, status, error) {
         request_processed = true;
         $('#flash-content').empty();
-        $('#flash-content').append('<div class="alert">An error occurred processing your request, please reload the page and try again.</div>');
+        $('#flash-content').append('<div class="alert">' + I18n.t('assets.js.ajax_error') + '</div>');
         $('#flash').fadeIn('slow');
       })
       .on('ajax:complete', function(evt, xhr, status) {;
         if (request_processed == true) {
           addEnvvar_trigger.eq(0).overlay().close();
         }
-        $(this).find('.modalBox-submit input[type="submit"]').attr({value: 'Add Var'});
+        $(this).find('.modalBox-submit input[type="submit"]').attr({value: I18n.t('apps.js.add_envvar')});
       });
     $('#unset-var-link')
       .on('ajax:beforeSend', function(evt, xhr, settings) {
@@ -255,20 +262,20 @@ $(function() {
       })
       .on('ajax:error', function(evt, xhr, status, error) {
         $('#flash-content').empty();
-        $('#flash-content').append('<div class="alert">An error occurred processing your request, please reload the page and try again.</div>');
+        $('#flash-content').append('<div class="alert">' + I18n.t('assets.js.ajax_error') + '</div>');
         $('#flash').fadeIn('slow');
       })
       .on('ajax:complete', function(evt, xhr, status) {
         $(this).find('img').attr({ src : '<%= asset_path('s.gif') %>'}).addClass('delete');
       });
     $('#bind-service-form .help').tooltip({'effect': 'fade', 'tipClass': 'help-tip'});
-    $('#bind-service-form').validator({'effect': 'below_field_error', 'inputEvent': 'keyup'});
+    $('#bind-service-form').validator({'effect': 'below_field_error', 'inputEvent': 'keyup', 'lang': validatorTools_lang});
     $('#bind-service-form')
       .on('ajax:beforeSend', function(evt, xhr, settings) {
         var validator = $('#bind-service-form').data('validator');
         if (!validator.checkValidity()) return false;
         request_processed = false;
-        $(this).find('.modalBox-submit input[type="submit"]').attr({value: 'Processing ...'});
+        $(this).find('.modalBox-submit input[type="submit"]').attr({value: I18n.t('assets.js.ajax_processing')});
       })
       .on('ajax:success', function(evt, data, status, xhr) {
         if (request_processed == true) {
@@ -278,14 +285,14 @@ $(function() {
       .on('ajax:error', function(evt, xhr, status, error) {
         request_processed = true;
         $('#flash-content').empty();
-        $('#flash-content').append('<div class="alert">An error occurred processing your request, please reload the page and try again.</div>');
+        $('#flash-content').append('<div class="alert">' + I18n.t('assets.js.ajax_error') + '</div>');
         $('#flash').fadeIn('slow');
       })
-      .on('ajax:complete', function(evt, xhr, status) {;
+      .on('ajax:complete', function(evt, xhr, status) {
         if (request_processed == true) {
           bindService_trigger.eq(0).overlay().close();
         }
-        $(this).find('.modalBox-submit input[type="submit"]').attr({value: 'Bind Service'});
+        $(this).find('.modalBox-submit input[type="submit"]').attr({value: I18n.t('apps.js.add_service')});
       });
     $("#unbind-service-link")
       .on('ajax:beforeSend', function(evt, xhr, settings) {
@@ -293,20 +300,20 @@ $(function() {
       })
       .on('ajax:error', function(evt, xhr, status, error) {
         $('#flash-content').empty();
-        $('#flash-content').append('<div class="alert">An error occurred processing your request, please reload the page and try again.</div>');
+        $('#flash-content').append('<div class="alert">' + I18n.t('assets.js.ajax_error') + '</div>');
         $('#flash').fadeIn('slow');
       })
       .on('ajax:complete', function(evt, xhr, status) {
         $(this).find('img').attr({ src : '<%= asset_path('s.gif') %>'}).addClass('delete');
       });
     $('#map-url-form .help').tooltip({'effect': 'fade', 'tipClass': 'help-tip'});
-    $('#map-url-form').validator({'effect': 'below_field_error', 'inputEvent': 'keyup'});
+    $('#map-url-form').validator({'effect': 'below_field_error', 'inputEvent': 'keyup', 'lang': validatorTools_lang});
     $('#map-url-form')
       .on('ajax:beforeSend', function(evt, xhr, settings) {
         var validator = $('#map-url-form').data('validator');
         if (!validator.checkValidity()) return false;
         request_processed = false;
-        $(this).find('.modalBox-submit input[type="submit"]').attr({value: 'Processing ...'});
+        $(this).find('.modalBox-submit input[type="submit"]').attr({value: I18n.t('assets.js.ajax_processing')});
       })
       .on('ajax:success', function(evt, data, status, xhr) {
         if (request_processed == true) {
@@ -316,14 +323,14 @@ $(function() {
       .on('ajax:error', function(evt, xhr, status, error) {
         request_processed = true;
         $('#flash-content').empty();
-        $('#flash-content').append('<div class="alert">An error occurred processing your request, please reload the page and try again.</div>');
+        $('#flash-content').append('<div class="alert">' + I18n.t('assets.js.ajax_error') + '</div>');
         $('#flash').fadeIn('slow');
       })
       .on('ajax:complete', function(evt, xhr, status) {
         if (request_processed == true) {
           addURL_trigger.eq(0).overlay().close();
         }
-        $(this).find('.modalBox-submit input[type="submit"]').attr({value: 'Add URL'});
+        $(this).find('.modalBox-submit input[type="submit"]').attr({value: I18n.t('apps.js.add_url')});
       });
     $('#unmap-url-link')
       .on('ajax:beforeSend', function(evt, xhr, settings) {
@@ -331,7 +338,7 @@ $(function() {
       })
       .on('ajax:error', function(evt, xhr, status, error) {
         $('#flash-content').empty();
-        $('#flash-content').append('<div class="alert">An error occurred processing your request, please reload the page and try again.</div>');
+        $('#flash-content').append('<div class="alert">' + I18n.t('assets.js.ajax_error') + '</div>');
         $('#flash').fadeIn('slow');
       })
       .on('ajax:complete', function(evt, xhr, status) {

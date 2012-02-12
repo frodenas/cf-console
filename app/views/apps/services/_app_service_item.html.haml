@@ -2,9 +2,8 @@
   %td= app_service_item[:name]
   %td= find_vendor_image(app_service_item[:vendor]).html_safe
   %td= app_service_item[:version]
-  %td.tdcenter= link_to sprite_tag("delete", :title => "Unbind the service", :class => "delete icon-tip"),
-                app_unbind_service_url(@name, :service => app_service_item[:name]),
-                :id => "unbind-service-link", :remote => true,
-                :method => :put, :confirm => "Are you sure?"
+  %td.tdcenter= link_to sprite_tag("delete", :title => t('apps.services.delete_service'), :class => "delete icon-tip"),
+                app_unbind_service_url(@name, :service => app_service_item[:name]), :id => "unbind-service-link",
+                :remote => true, :method => :put, :confirm => t('apps.services.delete_service_confirm')
 
 

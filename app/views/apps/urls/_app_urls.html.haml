@@ -1,8 +1,8 @@
 %table#app-urls-table
   %thead
     %tr
-      %th.thsort{:scope => "col"} Application URL
-      %th.thcenter{:scope => "col", :width => "10%"} Actions
+      %th.thsort{:scope => "col"}=t('apps.urls.url_head')
+      %th.thcenter{:scope => "col", :width => "10%"}=t('apps.urls.actions_head')
   %tbody
     = render :partial => "apps/urls/app_url_item", :collection => @app[:uris]
 

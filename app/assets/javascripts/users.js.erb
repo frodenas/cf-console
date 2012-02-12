@@ -1,3 +1,4 @@
+<%# encoding: utf-8%>
 $(function() {
   if ($('body').hasClass('users')) {
     $('#users-menu-link').addClass('menu-current');
@@ -5,6 +6,7 @@ $(function() {
       'bAutoWidth':      false,
       'bLengthChange':   false,
       'bStateSave':      true,
+      'oLanguage':       dataTables_lang,
       'sPaginationType': 'full_numbers',
       'aoColumnDefs':    [{'bSearchable': false, 'aTargets': [2, 3]},
                           {'bSortable': false, 'aTargets': [3]},
@@ -18,7 +20,7 @@ $(function() {
       .on('onClick', function(event, tabIndex) {
         var tab = $(this).find('li.current > a').attr('href');
         if (tab == '#users') {
-          $('.invoke-modalBox').html('<button class="addUser" rel="#add_user_modalBox">Add User</button>').toggle();
+          $('.invoke-modalBox').html('<button class="addUser" rel="#add_user_modalBox">' + I18n.t('users.js.add_user') + '</button>').toggle();
           addUser_trigger = $('.addUser').overlay({
             'closeOnClick': false,
             'mask': {color: '#404040', loadSpeed: 'normal', opacity: 0.7},
@@ -31,13 +33,13 @@ $(function() {
         }
       });
     $('#new-user-form .help').tooltip({'effect': 'fade', 'tipClass': 'help-tip'});
-    $('#new-user-form').validator({'effect': 'below_field_error', 'inputEvent': 'keyup'});
+    $('#new-user-form').validator({'effect': 'below_field_error', 'inputEvent': 'keyup', 'lang': validatorTools_lang});
     $('#new-user-form')
       .on('ajax:beforeSend', function(evt, xhr, settings) {
         var validator = $('#new-user-form').data('validator');
         if (!validator.checkValidity()) return false;
         request_processed = false;
-        $(this).find('.modalBox-submit input[type="submit"]').attr({value: 'Processing ...'});
+        $(this).find('.modalBox-submit input[type="submit"]').attr({value: I18n.t('assets.js.ajax_processing')});
       })
       .on('ajax:success', function(evt, data, status, xhr) {
         if (request_processed == true) {
@@ -47,14 +49,14 @@ $(function() {
       .on('ajax:error', function(evt, xhr, status, error) {
         request_processed = true;
         $('#flash-content').empty();
-        $('#flash-content').append('<div class="alert">An error occurred processing your request, please reload the page and try again.</div>');
+        $('#flash-content').append('<div class="alert">' + I18n.t('assets.js.ajax_error') + '</div>');
         $('#flash').fadeIn('slow');
       })
       .on('ajax:complete', function(evt, xhr, status) {
         if (request_processed == true) {
           addUser_trigger.eq(0).overlay().close();
         }
-        $(this).find('.modalBox-submit input[type="submit"]').attr({value: 'Add User'});
+        $(this).find('.modalBox-submit input[type="submit"]').attr({value: I18n.t('users.js.add_user')});
       });
     $('#delete-user-link')
       .on('ajax:beforeSend', function(evt, xhr, settings) {
@@ -62,7 +64,7 @@ $(function() {
       })
       .on('ajax:error', function(evt, xhr, status, error) {
         $('#flash-content').empty();
-        $('#flash-content').append('<div class="alert">An error occurred processing your request, please reload the page and try again.</div>');
+        $('#flash-content').append('<div class="alert">' + I18n.t('assets.js.ajax_error') + '</div>');
         $('#flash').fadeIn('slow');
       })
       .on('ajax:complete', function(evt, xhr, status) {

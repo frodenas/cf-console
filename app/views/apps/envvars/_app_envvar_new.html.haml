@@ -1,33 +1,30 @@
 .modalBox{:id => "add_envvar_modalBox"}
   = form_tag app_set_var_url, :id => "set-var-form", :method => :put, :remote => true do
-    .modalBox-title Add Environment Var
+    .modalBox-title=t('apps.envvars.add_envvar')
     .modalBox-flash
     .modalBox-content
       %table
         %tbody
           %tr
             %td
-              = sprite_tag("help", :alt => "?", :class=> "help",
-                :title => "Enter the name that univocally will identify your environment var.<br />Must contain only word characters (letter, number, hyphen, underscore).")
-              = label_tag "name", "Name:"
+              = sprite_tag("help", :alt => "?", :class=> "help", :title => t('apps.envvars.name_help_html'))
+              = label_tag "name", t('apps.envvars.name') + ":"
             %td
               = text_field_tag :var_name, nil, :size => 30, :required => "required", :autofocus => "autofocus",
-                :placeholder => "Name of the variable", :pattern => "[a-zA-Z0-9-_]+",
-                :title => "Must contain only word characters: letter, number, hyphen, underscore"
+                :placeholder => t('apps.envvars.name_placeholder'), :pattern => "[a-zA-Z0-9-_]+",
+                :title => t('apps.envvars.name_title_html')
               .form-field-error
           %tr
             %td
-              = sprite_tag("help", :alt => "?", :class=> "help",
-                :title => "Enter the value to be set for your environment var. It can be blank.")
-              = label_tag "value", "Value:"
+              = sprite_tag("help", :alt => "?", :class=> "help", :title => t('apps.envvars.value_help_html'))
+              = label_tag "value", t('apps.envvars.value') + ":"
             %td
-              = text_field_tag :var_value, nil, :size => 30, :placeholder => "Value of the variable"
+              = text_field_tag :var_value, nil, :size => 30, :placeholder => t('apps.envvars.value_placeholder')
               .form-field-error
           %tr
             %td
-              = sprite_tag("help", :alt => "?", :class=> "help",
-                :title => "Check if you want to restart the application.")
-              = label_tag "restart", "Restart App:"
+              = sprite_tag("help", :alt => "?", :class=> "help", :title => t('apps.envvars.restart_app_help'))
+              = label_tag "restart", t('apps.envvars.restart_app') + ":"
             %td
               = check_box_tag :restart, true, true
-    .modalBox-submit= submit_tag "Add URL"
+    .modalBox-submit= submit_tag t('apps.envvars.add_envvar')

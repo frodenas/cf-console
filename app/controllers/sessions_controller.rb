@@ -41,7 +41,7 @@ class SessionsController < ApplicationController
       end
       redirect_to root_url
     else
-      flash.now[:alert] = "Login failed. Check you credentials."
+      flash.now[:alert] = t('sessions.controller.login_failed')
       @available_targets = configatron.available_targets
       @selected_target = nil
       configatron.available_targets.each do |name, url|

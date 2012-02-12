@@ -7,12 +7,15 @@
 //= require rails
 //= require plugins
 //= require jquery.dataTables.min
+//= require jquery.dataTables.languages
 //= require jquery.jeditable.mini
-//= require jquery.uniform.min
+//= require chosen.jquery.min
 //= require excanvas.min
 //= require jquery.flot.min
 //= require jquery.flot.pie.min
 //= require jquery.tools.custom
+//= require i18n
+//= require i18n/translations
 //= require dashboard
 //= require apps
 //= require appsshow

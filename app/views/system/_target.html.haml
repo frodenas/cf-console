@@ -2,8 +2,9 @@
   %tbody
     %tr
       %td
-        Target: #{@cf_target_url} (v#{@info[:version]})
+        = t('system.target.target') + " " + @cf_target_url + " v" + @info[:version]
         %br
         = @info[:description]
         %br
-        For support visit #{@info[:support]}
+        = t('system.target.support') + " "
+        %a{:href => @info[:support]} #{@info[:support]}

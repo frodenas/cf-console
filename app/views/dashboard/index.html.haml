@@ -1,10 +1,12 @@
-= title("Dashboard")
+= title(t('dashboard.title'))
 
 %ul.tabs
   %li
-    %a{:href => "#account"} Account
+    %a{:href => "#account"}
+      = t('dashboard.tab_account')
   %li
-    %a{:href => "#apps"} Applications
+    %a{:href => "#apps"}
+      = t('dashboard.tab_apps')
 
 %div.panels
   %div.panel

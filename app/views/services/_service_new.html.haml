@@ -1,26 +1,24 @@
 .modalBox{:id => "add_service_modalBox"}
   = form_tag service_create_url, :id => "new-service-form", :remote => true do
-    .modalBox-title Add Service
+    .modalBox-title=t('services.add_service')
     .modalBox-flash
     .modalBox-content
       %table
         %tbody
           %tr
             %td
-              = sprite_tag("help", :alt => "?", :class=> "help",
-                :title => "Select the system service you want to provision.")
-              = label_tag "service", "Service:"
+              = sprite_tag("help", :alt => "?", :class=> "help", :title => t('services.service_help_html'))
+              = label_tag "service", t('services.service') + ":"
             %td
               = select_tag :ss, options_for_select(@available_system_services), :required => "required",
-               :autofocus => "autofocus", :class => "service-uniform"
+               :autofocus => "autofocus", :class => "service-chosen", :style => "width: 305px;"
               .form-field-error
           %tr
             %td
-              = sprite_tag("help", :alt => "?", :class=> "help",
-                :title => "Enter the name that univocally will identify your service.<br />Must contain only word characters (letter, number, hyphen, underscore).<br />Example: <i>redis-service</i>.")
-              = label_tag "name", "Name:"
+              = sprite_tag("help", :alt => "?", :class=> "help", :title => t('services.name_help_html'))
+              = label_tag "name",  t('services.name') + ":"
             %td
               = text_field_tag :name, @name, :size => 30, :required => "required", :pattern => "[a-zA-Z0-9-_]+",
-                :placeholder => "Provisioned Service Name", :title => "Must contain only word characters: letter, number, hyphen, underscore"
+                :placeholder => t('services.name_placeholder'), :title => t('services.name_title_html')
               .form-field-error
-    .modalBox-submit= submit_tag "Add Service"
+    .modalBox-submit= submit_tag t('services.add_service')

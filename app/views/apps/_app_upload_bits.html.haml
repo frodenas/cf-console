@@ -1,35 +1,32 @@
 .modalBox{:id => "update_application_bits_modalBox"}
   = form_tag "#", :id => "upload-app-bits-form", :method => :put, :remote => true do
-    .modalBox-title Update Application Bits
+    .modalBox-title=t('apps.upload_bits')
     .modalBox-flash
     .modalBox-content
       %table
         %tbody
           %tr
             %td
-              = sprite_tag("help", :alt => "?", :class=> "help",
-                :title => "Select from where you want to deploy the application.")
-              = label_tag "deployfrom", "Deploy application from:"
+              = sprite_tag("help", :alt => "?", :class=> "help", :title => t('apps.deploy_from_help_html'))
+              = label_tag "deployfrom", t('apps.deploy_from') + ":"
             %td
               = radio_button_tag :deployfrom, 'git', true, :disabled => true
-              Git
+              = t('apps.git')
           %tr
             %td
-              = sprite_tag("help", :alt => "?", :class=> "help",
-                :title => "Enter the Git Repository URI that contains the application you want to deploy.<br />Example: <i>git://github.com/user/repo.git</i>.")
-              = label_tag "gitrepo", "Git Repository URI:"
+              = sprite_tag("help", :alt => "?", :class=> "help", :title => t('apps.git_repo_help_html'))
+              = label_tag "gitrepo", t('apps.git_repo') + ":"
             %td
               = text_field_tag :gitrepo, @gitrepo, :size => 50, :required => "required", :autofocus => "autofocus",
-                :placeholder => "git://github.com/user/repo.git",
+                :placeholder => t('apps.git_repo_placeholder'),
                 :pattern => "git://[a-z0-9]+([-.]{1}[a-z0-9]+)*.[a-z]{2,5}(([0-9]{1,5})?.*)?.git",
-                :title => "Must contain a git repository URI: git://github.com/user/repo.git"
+                :title => t('apps.git_repo_title_html')
               .form-field-error
           %tr
             %td
-              = sprite_tag("help", :alt => "?", :class=> "help",
-                :title => "Enter the Git Repository Branch that contains the application you want to deploy.<br />By default: <i>master</i>.")
-              = label_tag "gitrepo", "Git Repository Branch:"
+              = sprite_tag("help", :alt => "?", :class=> "help", :title => t('apps.git_branch_help_html'))
+              = label_tag "gitrepo", t('apps.git_branch') + ":"
             %td
-              = text_field_tag :gitbranch, @gitbranch, :size => 20, :placeholder => "master"
+              = text_field_tag :gitbranch, @gitbranch, :size => 20, :placeholder => t('apps.git_branch_placeholder')
               .form-field-error
-    .modalBox-submit= submit_tag "Update Application"
+    .modalBox-submit= submit_tag t('apps.upload_bits')

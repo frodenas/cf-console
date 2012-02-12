@@ -20,8 +20,8 @@
       %table#app-files-table
         %thead
           %tr
-            %th{:scope => "col"} Name
-            %th.tdright{:scope => "col", :width => "10%"} Size
+            %th{:scope => "col"}=t('apps.files.name_head')
+            %th.tdright{:scope => "col", :width => "10%"}=t('apps.files.size_head')
         %tbody
           - if @filename && !@filename.empty? && @filename != "/"
             %tr.oddeven

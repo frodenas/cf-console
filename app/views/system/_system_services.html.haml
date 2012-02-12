@@ -1,9 +1,12 @@
 %table#system-services-table
   %thead
     %tr
-      %th.thsort{:scope => "col"} Name
-      %th.thsort{:scope => "col"} Version
-      %th.thsort{:scope => "col"} Description
+      %th.thsort{:scope => "col"}
+        = t('system.system_services.name_head')
+      %th.thsort{:scope => "col"}
+        = t('system.system_services.version_head')
+      %th.thsort{:scope => "col"}
+        = t('system.system_services.description_head')
   %tbody
     - @system_services.each do |service_type, service_value|
       - service_value.each do |vendor, vendor_value|

@@ -25,14 +25,15 @@ class App
     end
     states.each do |state_key, state_value|
       if state_value > 0
-        app_states << {:label => state_key.capitalize, :color => state_color(state_key), :data => state_value}
+        app_states << {:label => I18n.t('apps.model.' + state_key.to_s, :default => state_key.capitalize),
+                       :color => state_color(state_key), :data => state_value}
       end
     end
     return app_states
   end
 
   def find(name)
-    raise "Application name cannot be blank" if name.nil? || name.empty?
+    raise t('apps.model.name_blank') if name.nil? || name.empty?
     app_info = @cf_client.app_info(name) || {}
     if !app_info.empty?
       app_info[:instances_info] = find_app_instances(name)
@@ -47,7 +48,7 @@ class App
   end
 
   def find_app_instances(name)
-    raise "Application name cannot be blank" if name.nil? || name.empty?
+    raise t('apps.model.name_blank') if name.nil? || name.empty?
     app_instances = []
     instances_info = @cf_client.app_instances(name) || {}
     if !instances_info.empty? && !instances_info[:instances].empty?
@@ -71,7 +72,7 @@ class App
   end
 
   def find_app_crashes(name)
-    raise "Application name cannot be blank" if name.nil? || name.empty?
+    raise t('apps.model.name_blank') if name.nil? || name.empty?
     return @cf_client.app_crashes(name)[:crashes] || {}
   end
 
@@ -94,31 +95,32 @@ class App
     states["CRASHED"] = app_info[:crashes].length
     states.each do |state_key, state_value|
       if state_value > 0
-        app_instances_states << {:label => state_key.capitalize, :color => state_color(state_key), :data => state_value}
+        app_instances_states << {:label => I18n.t('apps.model.' + state_key.to_s, :default => state_key.capitalize),
+                                 :color => state_color(state_key), :data => state_value}
       end
     end
     return app_instances_states
   end
 
   def create(name, instances, memsize, url, framework, runtime, service)
-    raise "Application name cannot be blank" if name.nil? || name.empty?
-    raise "Invalid application name: \"" + name + "\". Must contain only word characters (letter, number, hyphen, underscore)" if (name =~ /^[\w-]+$/).nil?
+    raise t('apps.model.name_blank') if name.nil? || name.empty?
+    raise t('apps.model.name_invalid', :name => name) if (name =~ /^[\w-]+$/).nil?
     begin
       app_info = @cf_client.app_info(name)
     rescue
       app_info = nil
     end
-    raise "Application name already exists" if !app_info.nil?
-    raise "Number of instances cannot be blank" if instances.nil? || instances.empty?
-    raise "Number of instances must be numeric" if (instances =~ /^\d+$/).nil?
-    raise "There must be at least 1 instance" if instances.to_i < 1
-    raise "Memory size cannot be blank" if memsize.nil? || memsize.empty?
-    raise "Memory size must be numeric" if (memsize =~ /^\d+$/).nil?
-    raise "Not enough memory available" if !check_has_capacity_for(instances.to_i * memsize.to_i)
-    raise "URL cannot be blank" if url.nil? || url.empty?
-    raise "Framework cannot be blank" if framework.nil? || framework.empty?
-    raise "Runtime cannot be blank" if runtime.nil? || runtime.empty?
-    raise "Invalid Framework or Runtime" if !valid_framework_and_runtime?(framework, runtime)
+    raise t('apps.model.already_exists') if !app_info.nil?
+    raise t('apps.model.instances_blank') if instances.nil? || instances.empty?
+    raise t('apps.model.instances_numeric') if (instances =~ /^\d+$/).nil?
+    raise t('apps.model.instances_lt1') if instances.to_i < 1
+    raise t('apps.model.memsize_blank') if memsize.nil? || memsize.empty?
+    raise t('apps.model.memsize_numeric') if (memsize =~ /^\d+$/).nil?
+    raise t('apps.model.memsize_unavailable') if !check_has_capacity_for(instances.to_i * memsize.to_i)
+    raise t('apps.model.url_blank') if url.nil? || url.empty?
+    raise t('apps.model.framework_blank') if framework.nil? || framework.empty?
+    raise t('apps.model.runtime_blank') if runtime.nil? || runtime.empty?
+    raise t('apps.model.framework_invalid') if !valid_framework_and_runtime?(framework, runtime)
     manifest = {
       :name => name,
       :instances => instances,
@@ -131,7 +133,7 @@ class App
   end
 
   def start(name)
-    raise "Application name cannot be blank" if name.nil? || name.empty?
+    raise t('apps.model.name_blank') if name.nil? || name.empty?
     app = @cf_client.app_info(name)
     app[:state] = "STARTED"
     @cf_client.update_app(name, app)
@@ -141,12 +143,12 @@ class App
       sleep SLEEP_TIME
       break if app_started_properly(name, count < HEALTH_TICKS)
       if !app_crashes(name, start_time).empty?
-        raise "Application failed to start, check your logs"
+        raise t('apps.model.start_failed')
         break
       end
       count += 1
       if count > GIVEUP_TICKS
-        raise "Application is taking too long to start, check your logs"
+        raise t('apps.model.start_too_long')
         break
       end
     end
@@ -154,7 +156,7 @@ class App
   end
 
   def stop(name)
-    raise "Application name cannot be blank" if name.nil? || name.empty?
+    raise t('apps.model.name_blank') if name.nil? || name.empty?
     app = @cf_client.app_info(name)
     app[:state] = "STOPPED"
     @cf_client.update_app(name, app)
@@ -162,22 +164,22 @@ class App
   end
 
   def restart(name)
-    raise "Application name cannot be blank" if name.nil? || name.empty?
+    raise t('apps.model.name_blank') if name.nil? || name.empty?
     app = stop(name)
     app = start(name)
     return app
   end
 
   def delete(name)
-    raise "Application name cannot be blank" if name.nil? || name.empty?
+    raise t('apps.model.name_blank') if name.nil? || name.empty?
     @cf_client.delete_app(name)
   end
 
   def set_instances(name, instances)
-    raise "Application name cannot be blank" if name.nil? || name.empty?
-    raise "Number of instances cannot be blank" if instances.nil? || instances.empty?
-    raise "Number of instances must be numeric" if (instances =~ /^\d+$/).nil?
-    raise "There must be at least 1 instance" if instances.to_i < 1
+    raise t('apps.model.name_blank') if name.nil? || name.empty?
+    raise t('apps.model.instances_blank') if instances.nil? || instances.empty?
+    raise t('apps.model.instances_numeric') if (instances =~ /^\d+$/).nil?
+    raise t('apps.model.instances_lt1') if instances.to_i < 1
     app = @cf_client.app_info(name)
     current_instances = app[:instances]
     wanted_mem = instances.to_i * app[:resources][:memory]
@@ -185,7 +187,7 @@ class App
       wanted_mem = wanted_mem - (current_instances * app[:resources][:memory])
     end
     if !check_has_capacity_for(wanted_mem)
-      raise "Not enough memory available"
+      raise t('apps.model.memsize_unavailable')
     end
     if (instances.to_i != current_instances.to_i)
       app[:instances] = instances
@@ -195,9 +197,9 @@ class App
   end
 
   def set_memsize(name, memsize)
-    raise "Application name cannot be blank" if name.nil? || name.empty?
-    raise "Memory size cannot be blank" if memsize.nil? || memsize.empty?
-    raise "Memory size must be numeric" if (memsize =~ /^\d+$/).nil?
+    raise t('apps.model.name_blank') if name.nil? || name.empty?
+    raise t('apps.model.memsize_blank') if memsize.nil? || memsize.empty?
+    raise t('apps.model.memsize_numeric') if (memsize =~ /^\d+$/).nil?
     app = @cf_client.app_info(name)
     current_memory = app[:resources][:memory]
     wanted_mem = memsize.to_i * app[:instances]
@@ -205,7 +207,7 @@ class App
       wanted_mem = wanted_mem - (current_memory * app[:instances])
     end
     if !check_has_capacity_for(wanted_mem)
-      raise "Not enough memory available"
+      raise t('apps.model.memsize_unavailable')
     end
     if (memsize.to_i != current_memory.to_i)
       app[:resources][:memory] = memsize
@@ -216,9 +218,9 @@ class App
   end
 
   def set_var(name, var_name, var_value, restart = "true")
-    raise "Application name cannot be blank" if name.nil? || name.empty?
-    raise "Variable name cannot be blank" if var_name.nil? || var_name.empty?
-    raise "Invalid variable name: \"" + var_name + "\". Must contain only word characters (letter, number, hyphen, underscore)" if (var_name =~ /^[\w-]+$/).nil?
+    raise t('apps.model.name_blank') if name.nil? || name.empty?
+    raise t('apps.model.envvar_blank') if var_name.nil? || var_name.empty?
+    raise t('apps.model.envvar_invalid', :var_name => var_name) if (var_name =~ /^[\w-]+$/).nil?
     app = @cf_client.app_info(name)
     envvars = app[:env] || []
     var_exists = nil
@@ -242,8 +244,8 @@ class App
   end
 
   def unset_var(name, var_name)
-    raise "Application name cannot be blank" if name.nil? || name.empty?
-    raise "Variable name cannot be blank" if var_name.nil? || var_name.empty?
+    raise t('apps.model.name_blank') if name.nil? || name.empty?
+    raise t('apps.model.envvar_blank') if var_name.nil? || var_name.empty?
     app = @cf_client.app_info(name)
     envvars = app[:env] || []
     var_deleted = nil
@@ -260,14 +262,14 @@ class App
       @cf_client.update_app(name, app)
       check_app_for_restart(name)
     else
-      raise "Environment variable \"" + var_name + "\" is not set"
+      raise t('apps.model.envvar_not_set', :var_name => var_name)
     end
     return var_deleted
   end
 
   def bind_service(name, service)
-    raise "Application name cannot be blank" if name.nil? || name.empty?
-    raise "Service cannot be blank" if service.nil? || service.empty?
+    raise t('apps.model.name_blank') if name.nil? || name.empty?
+    raise t('apps.model.service_blank') if service.nil? || service.empty?
     app = @cf_client.app_info(name)
     services = app[:services] || []
     service_exists = services.index(service)
@@ -276,14 +278,14 @@ class App
       @cf_client.update_app(name, app)
       check_app_for_restart(name)
     else
-      raise "Service \"" + service + "\" already binded"
+      raise t('apps.model.service_exists', :service => service)
     end
     return true
   end
 
   def unbind_service(name, service)
-    raise "Application name cannot be blank" if name.nil? || name.empty?
-    raise "Service cannot be blank" if service.nil? || service.empty?
+    raise t('apps.model.name_blank') if name.nil? || name.empty?
+    raise t('apps.model.service_blank') if service.nil? || service.empty?
     app = @cf_client.app_info(name)
     services = app[:services] || []
     service_deleted = services.delete(service)
@@ -292,14 +294,14 @@ class App
       @cf_client.update_app(name, app)
       check_app_for_restart(name)
     else
-      raise "Service \"" + service + "\" is not binded"
+      raise t('apps.model.service_not_binded', :service => service)
     end
     return true
   end
 
   def map_url(name, url)
-    raise "Application name cannot be blank" if name.nil? || name.empty?
-    raise "URL cannot be blank" if url.nil? || url.empty?
+    raise t('apps.model.name_blank') if name.nil? || name.empty?
+    raise t('apps.model.url_blank') if url.nil? || url.empty?
     url = url.strip.gsub(/^http(s*):\/\//i, '').downcase
     app = @cf_client.app_info(name)
     uris = app[:uris] || []
@@ -308,14 +310,14 @@ class App
       app[:uris] = uris << url
       @cf_client.update_app(name, app)
     else
-      raise "URL \"" + url + "\" already mapped"
+      raise t('apps.model.url_exists', :url => url)
     end
     return url
   end
 
   def unmap_url(name, url)
-    raise "Application name cannot be blank" if name.nil? || name.empty?
-    raise "URL cannot be blank" if url.nil? || url.empty?
+    raise t('apps.model.name_blank') if name.nil? || name.empty?
+    raise t('apps.model.url_blank') if url.nil? || url.empty?
     url = url.strip.gsub(/^http(s*):\/\//i, '').downcase
     app = @cf_client.app_info(name)
     uris = app[:uris] || []
@@ -324,22 +326,22 @@ class App
       app[:uris] = uris
       @cf_client.update_app(name, app)
     else
-      raise "URL \"" + url + "\" is not mapped"
+      raise t('apps.model.url_not_mapped', :url => url)
     end
     return url
   end
 
   def upload_app(name, zipfile, resource_manifest = [])
-    raise "Application name cannot be blank" if name.nil? || name.empty?
-    raise "Zipfile cannot be blank" if zipfile.nil? || zipfile.empty?
+    raise t('apps.model.name_blank') if name.nil? || name.empty?
+    raise t('apps.model.zipfile_blank') if zipfile.nil? || zipfile.empty?
     @cf_client.upload_app(name, zipfile, resource_manifest)
   end
 
   def upload_app_from_git(name, gitrepo, gitbranch)
-    raise "Application name cannot be blank" if name.nil? || name.empty?
-    raise "Invalid application name: \"" + name + "\". Must contain only word characters (letter, number, hyphen, underscore)" if (name =~ /^[\w-]+$/).nil?
-    raise "Git Repository URI cannot be blank" if gitrepo.nil? || gitrepo.empty?
-    raise "Git Repository Branch cannot be blank" if gitbranch.nil? || gitbranch.empty?
+    raise t('apps.model.name_blank') if name.nil? || name.empty?
+    raise t('apps.model.name_invalid', :name => name) if (name =~ /^[\w-]+$/).nil?
+    raise t('apps.model.gitrepo_blank') if gitrepo.nil? || gitrepo.empty?
+    raise t('apps.model.gitbranch_blank') if gitbranch.nil? || gitbranch.empty?
     app_bits_tmpdir = get_app_bits_tmpdir()
     repodir = app_bits_tmpdir.join(name).to_s
     Utils::GitUtil.git_clone(gitrepo, gitbranch, repodir)
@@ -354,7 +356,7 @@ class App
   end
 
   def download_app(name)
-    raise "Application name cannot be blank" if name.nil? || name.empty?
+    raise t('apps.model.name_blank') if name.nil? || name.empty?
     app_bits_tmpdir = get_app_bits_tmpdir()
     zipfile = app_bits_tmpdir.join(name + ".zip").to_s
     app_bits = @cf_client.download_app(name)
@@ -363,8 +365,8 @@ class App
   end
 
   def view_file(name, path, instance = 0)
-    raise "Application name cannot be blank" if name.nil? || name.empty?
-    raise "Path cannot be blank" if path.nil? || path.empty?
+    raise t('apps.model.name_blank') if name.nil? || name.empty?
+    raise t('apps.model.path_blank') if path.nil? || path.empty?
     contents = @cf_client.app_files(name, path, instance) || []
     return contents
   end
@@ -381,7 +383,7 @@ class App
     app = @cf_client.app_info(name)
     case health(app)
       when 'N/A'
-        raise "Application state is undetermined, not enough information available" if error_on_health
+        raise t('apps.model.undetermined_state') if error_on_health
         return false
       when 'RUNNING'
         return true

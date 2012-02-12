@@ -1,0 +1,5 @@
+In order to add a new language translation you must:
+- Add a localization file at config/locales
+- Add translations at app/assets/javascripts/jquery.tools.custom.js
+- Add translations at app/assets/javascripts/jquery.dataTables.languages.js
+- Add the new available language at config/configatron/defaults.rb

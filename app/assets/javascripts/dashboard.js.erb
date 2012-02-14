@@ -4,8 +4,8 @@ $(function() {
     $('#dashboard-menu-link').addClass('menu-current');
     var ultabs = $('ul.tabs');
     ultabs.tabs('div.panels > div.panel', {effect: 'slide', tabs: 'li'});
-    ultabs
-      .on('onClick', function(event, tabIndex) {
+    $(document)
+      .on('onClick', ultabs, function(event, tabIndex) {
         var tab = $(this).find('li.current > a').attr('href');
         if (tab == '#account') {
           $('.help').tooltip({'effect': 'fade', 'tipClass': 'help-tip'});

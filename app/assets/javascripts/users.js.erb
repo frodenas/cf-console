@@ -16,8 +16,8 @@ $(function() {
     usersTable = $('#users-table').dataTable(usersTable_Settings);
     var ultabs = $('ul.tabs');
     ultabs.tabs('div.panels > div.panel', {effect: 'slide', tabs: 'li'});
-    ultabs
-      .on('onClick', function(event, tabIndex) {
+    $(document)
+      .on('onClick', ultabs, function(event, tabIndex) {
         var tab = $(this).find('li.current > a').attr('href');
         if (tab == '#users') {
           $('.invoke-modalBox').html('<button class="addUser" rel="#add_user_modalBox">' + I18n.t('users.js.add_user') + '</button>').toggle();
@@ -34,40 +34,40 @@ $(function() {
       });
     $('#new-user-form .help').tooltip({'effect': 'fade', 'tipClass': 'help-tip'});
     $('#new-user-form').validator({'effect': 'below_field_error', 'inputEvent': 'blur', 'lang': validatorTools_lang});
-    $('#new-user-form')
-      .on('ajax:beforeSend', function(evt, xhr, settings) {
+    $(document)
+      .on('ajax:beforeSend', '#new-user-form', function(evt, xhr, settings) {
         var validator = $('#new-user-form').data('validator');
         if (!validator.checkValidity()) return false;
         request_processed = false;
         $(this).find('.modalBox-submit input[type="submit"]').attr({value: I18n.t('assets.js.ajax_processing')});
       })
-      .on('ajax:success', function(evt, data, status, xhr) {
+      .on('ajax:success', '#new-user-form', function(evt, data, status, xhr) {
         if (request_processed == true) {
           $(this).find('input[type="email"],input[type="password"]').val('');
         }
       })
-      .on('ajax:error', function(evt, xhr, status, error) {
+      .on('ajax:error', '#new-user-form', function(evt, xhr, status, error) {
         request_processed = true;
         $('#flash-content').empty();
         $('#flash-content').append('<div class="alert">' + I18n.t('assets.js.ajax_error') + '</div>');
         $('#flash').fadeIn('slow');
       })
-      .on('ajax:complete', function(evt, xhr, status) {
+      .on('ajax:complete', '#new-user-form', function(evt, xhr, status) {
         if (request_processed == true) {
           addUser_trigger.eq(0).overlay().close();
         }
         $(this).find('.modalBox-submit input[type="submit"]').attr({value: I18n.t('users.js.add_user')});
       });
-    $('#delete-user-link')
-      .on('ajax:beforeSend', function(evt, xhr, settings) {
+    $(document)
+      .on('ajax:beforeSend', '#delete-user-link', function(evt, xhr, settings) {
         $(this).find('img').attr({ src : '<%= asset_path('wait.gif') %>'}).removeClass('delete');
       })
-      .on('ajax:error', function(evt, xhr, status, error) {
+      .on('ajax:error', '#delete-user-link', function(evt, xhr, status, error) {
         $('#flash-content').empty();
         $('#flash-content').append('<div class="alert">' + I18n.t('assets.js.ajax_error') + '</div>');
         $('#flash').fadeIn('slow');
       })
-      .on('ajax:complete', function(evt, xhr, status) {
+      .on('ajax:complete', '#delete-user-link', function(evt, xhr, status) {
         $(this).find('img').attr({ src : '<%= asset_path('s.gif') %>'}).addClass('delete');
       });
   }

@@ -46,8 +46,8 @@ $(function() {
     appUrlsTable = $('#app-urls-table').dataTable(appUrlsTable_Settings);
     var ultabs = $('ul.tabs');
     ultabs.tabs('div.panels > div.panel', {effect: 'slide', tabs: 'li'});
-    ultabs
-      .on('onClick', function(event, tabIndex) {
+    $(document)
+      .on('onClick', ultabs, function(event, tabIndex) {
         var tab = $(this).find('li.current > a').attr('href');
         if (tab == '#resources') {
           $('.invoke-modalBox').empty().hide();
@@ -232,116 +232,116 @@ $(function() {
       });
     $('#set-var-form .help').tooltip({'effect': 'fade', 'tipClass': 'help-tip'});
     $('#set-var-form').validator({'effect': 'below_field_error', 'inputEvent': 'blur', 'lang': validatorTools_lang});
-    $('#set-var-form')
-      .on('ajax:beforeSend', function(evt, xhr, settings) {
+    $(document)
+      .on('ajax:beforeSend', '#set-var-form', function(evt, xhr, settings) {
         var validator = $('#set-var-form').data('validator');
         if (!validator.checkValidity()) return false;
         request_processed = false;
         $(this).find('.modalBox-submit input[type="submit"]').attr({value: I18n.t('assets.js.ajax_processing')});
       })
-      .on('ajax:success', function(evt, data, status, xhr) {
+      .on('ajax:success', '#set-var-form', function(evt, data, status, xhr) {
         if (request_processed == true) {
           $(this).find('input[type="text"]').val('');
         }
       })
-      .on('ajax:error', function(evt, xhr, status, error) {
+      .on('ajax:error', '#set-var-form', function(evt, xhr, status, error) {
         request_processed = true;
         $('#flash-content').empty();
         $('#flash-content').append('<div class="alert">' + I18n.t('assets.js.ajax_error') + '</div>');
         $('#flash').fadeIn('slow');
       })
-      .on('ajax:complete', function(evt, xhr, status) {;
+      .on('ajax:complete', '#set-var-form', function(evt, xhr, status) {;
         if (request_processed == true) {
           addEnvvar_trigger.eq(0).overlay().close();
         }
         $(this).find('.modalBox-submit input[type="submit"]').attr({value: I18n.t('apps.js.add_envvar')});
       });
-    $('#unset-var-link')
-      .on('ajax:beforeSend', function(evt, xhr, settings) {
+    $(document)
+      .on('ajax:beforeSend', '#unset-var-link', function(evt, xhr, settings) {
         $(this).find('img').attr({ src : '<%= asset_path('wait.gif') %>'}).removeClass('delete');
       })
-      .on('ajax:error', function(evt, xhr, status, error) {
+      .on('ajax:error', '#unset-var-link', function(evt, xhr, status, error) {
         $('#flash-content').empty();
         $('#flash-content').append('<div class="alert">' + I18n.t('assets.js.ajax_error') + '</div>');
         $('#flash').fadeIn('slow');
       })
-      .on('ajax:complete', function(evt, xhr, status) {
+      .on('ajax:complete', '#unset-var-link', function(evt, xhr, status) {
         $(this).find('img').attr({ src : '<%= asset_path('s.gif') %>'}).addClass('delete');
       });
     $('#bind-service-form .help').tooltip({'effect': 'fade', 'tipClass': 'help-tip'});
     $('#bind-service-form').validator({'effect': 'below_field_error', 'inputEvent': 'blur', 'lang': validatorTools_lang});
-    $('#bind-service-form')
-      .on('ajax:beforeSend', function(evt, xhr, settings) {
+    $(document)
+      .on('ajax:beforeSend', '#bind-service-form', function(evt, xhr, settings) {
         var validator = $('#bind-service-form').data('validator');
         if (!validator.checkValidity()) return false;
         request_processed = false;
         $(this).find('.modalBox-submit input[type="submit"]').attr({value: I18n.t('assets.js.ajax_processing')});
       })
-      .on('ajax:success', function(evt, data, status, xhr) {
+      .on('ajax:success', '#bind-service-form', function(evt, data, status, xhr) {
         if (request_processed == true) {
           $(this).find('select').val('');
         }
       })
-      .on('ajax:error', function(evt, xhr, status, error) {
+      .on('ajax:error', '#bind-service-form', function(evt, xhr, status, error) {
         request_processed = true;
         $('#flash-content').empty();
         $('#flash-content').append('<div class="alert">' + I18n.t('assets.js.ajax_error') + '</div>');
         $('#flash').fadeIn('slow');
       })
-      .on('ajax:complete', function(evt, xhr, status) {
+      .on('ajax:complete', '#bind-service-form', function(evt, xhr, status) {
         if (request_processed == true) {
           bindService_trigger.eq(0).overlay().close();
         }
         $(this).find('.modalBox-submit input[type="submit"]').attr({value: I18n.t('apps.js.add_service')});
       });
-    $("#unbind-service-link")
-      .on('ajax:beforeSend', function(evt, xhr, settings) {
+    $(document)
+      .on('ajax:beforeSend', '#unbind-service-link', function(evt, xhr, settings) {
         $(this).find('img').attr({ src : '<%= asset_path('wait.gif') %>'}).removeClass('delete');
       })
-      .on('ajax:error', function(evt, xhr, status, error) {
+      .on('ajax:error', '#unbind-service-link', function(evt, xhr, status, error) {
         $('#flash-content').empty();
         $('#flash-content').append('<div class="alert">' + I18n.t('assets.js.ajax_error') + '</div>');
         $('#flash').fadeIn('slow');
       })
-      .on('ajax:complete', function(evt, xhr, status) {
+      .on('ajax:complete', '#unbind-service-link', function(evt, xhr, status) {
         $(this).find('img').attr({ src : '<%= asset_path('s.gif') %>'}).addClass('delete');
       });
     $('#map-url-form .help').tooltip({'effect': 'fade', 'tipClass': 'help-tip'});
     $('#map-url-form').validator({'effect': 'below_field_error', 'inputEvent': 'blur', 'lang': validatorTools_lang});
-    $('#map-url-form')
-      .on('ajax:beforeSend', function(evt, xhr, settings) {
+    $(document)
+      .on('ajax:beforeSend', '#map-url-form', function(evt, xhr, settings) {
         var validator = $('#map-url-form').data('validator');
         if (!validator.checkValidity()) return false;
         request_processed = false;
         $(this).find('.modalBox-submit input[type="submit"]').attr({value: I18n.t('assets.js.ajax_processing')});
       })
-      .on('ajax:success', function(evt, data, status, xhr) {
+      .on('ajax:success', '#map-url-form', function(evt, data, status, xhr) {
         if (request_processed == true) {
           $(this).find('input[type="url"]').val('');
         }
       })
-      .on('ajax:error', function(evt, xhr, status, error) {
+      .on('ajax:error', '#map-url-form', function(evt, xhr, status, error) {
         request_processed = true;
         $('#flash-content').empty();
         $('#flash-content').append('<div class="alert">' + I18n.t('assets.js.ajax_error') + '</div>');
         $('#flash').fadeIn('slow');
       })
-      .on('ajax:complete', function(evt, xhr, status) {
+      .on('ajax:complete', '#map-url-form', function(evt, xhr, status) {
         if (request_processed == true) {
           addURL_trigger.eq(0).overlay().close();
         }
         $(this).find('.modalBox-submit input[type="submit"]').attr({value: I18n.t('apps.js.add_url')});
       });
-    $('#unmap-url-link')
-      .on('ajax:beforeSend', function(evt, xhr, settings) {
+    $(document)
+      .on('ajax:beforeSend', '#unmap-url-link', function(evt, xhr, settings) {
         $(this).find('img').attr({ src : '<%= asset_path('wait.gif') %>'}).removeClass('delete');
       })
-      .on('ajax:error', function(evt, xhr, status, error) {
+      .on('ajax:error', '#unmap-url-link', function(evt, xhr, status, error) {
         $('#flash-content').empty();
         $('#flash-content').append('<div class="alert">' + I18n.t('assets.js.ajax_error') + '</div>');
         $('#flash').fadeIn('slow');
       })
-      .on('ajax:complete', function(evt, xhr, status) {
+      .on('ajax:complete', '#unmap-url-link', function(evt, xhr, status) {
         $(this).find('img').attr({ src : '<%= asset_path('s.gif') %>'}).addClass('delete');
       });
   }

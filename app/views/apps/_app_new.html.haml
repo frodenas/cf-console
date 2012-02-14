@@ -84,8 +84,8 @@
   - content_for :javascripts do
     :javascript
       $(function() {
-        $('#new-app-form input#url')
-          .on('focus', function() {
+        $(document)
+          .on('focus', '#new-app-form input#url', function() {
             if ($(this).val() == "") {
               var app_name = $('#new-app-form input#name');
               $(this).val('http://' + app_name.val() + '.#{@newapp_default_urldomain}');

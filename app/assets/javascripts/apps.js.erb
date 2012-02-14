@@ -33,8 +33,8 @@ $(function() {
     appsTable = $('#apps-table').dataTable(appsTable_Settings);
     var ultabs = $('ul.tabs');
     ultabs.tabs('div.panels > div.panel', {effect: 'slide', tabs: 'li'});
-    ultabs
-      .on('onClick', function(event, tabIndex) {
+    $(document)
+      .on('onClick', ultabs, function(event, tabIndex) {
         var tab = $(this).find('li.current > a').attr('href');
         if (tab == '#apps') {
           $('.invoke-modalBox').html('<button class="createApplication" rel="#create_application_modalBox">' + I18n.t('apps.js.add_app') + '</button>').toggle();
@@ -60,109 +60,109 @@ $(function() {
       });
     $('#new-app-form .help').tooltip({'effect': 'fade', 'tipClass': 'help-tip'});
     $('#new-app-form').validator({'effect': 'below_field_error', 'inputEvent': 'blur', 'lang': validatorTools_lang});
-    $('#new-app-form')
-      .on('ajax:beforeSend', function(evt, xhr, settings) {
+    $(document)
+      .on('ajax:beforeSend', '#new-app-form', function(evt, xhr, settings) {
         var validator = $('#new-app-form').data('validator');
         if (!validator.checkValidity()) return false;
         request_processed = false;
         $(this).find('.modalBox-submit input[type="submit"]').attr({value: I18n.t('assets.js.ajax_processing')});
       })
-      .on('ajax:success', function(evt, data, status, xhr) {
+      .on('ajax:success', '#new-app-form', function(evt, data, status, xhr) {
         if (request_processed == true) {
           $(this).find('input[type="text"],input[type="number"],input[type="url"]').val('');
         }
       })
-      .on('ajax:error', function(evt, xhr, status, error) {
+      .on('ajax:error', '#new-app-form', function(evt, xhr, status, error) {
         $('#flash-content').empty();
         $('#flash-content').append('<div class="alert">' + I18n.t('assets.js.ajax_error') + '</div>');
         $('#flash').fadeIn('slow');
       })
-      .on('ajax:complete', function(evt, xhr, status) {
+      .on('ajax:complete', '#new-app-form', function(evt, xhr, status) {
         if (request_processed == true) {
           createApplication_trigger.eq(0).overlay().close();
         }
         $(this).find('.modalBox-submit input[type="submit"]').attr({value: I18n.t('apps.js.add_app')});
       });
-    $('#start-app-link')
-      .on('ajax:beforeSend', function(evt, xhr, settings) {
+    $(document)
+      .on('ajax:beforeSend', '#start-app-link', function(evt, xhr, settings) {
         request_processed = false;
         $(this).find('img').attr({ src : '<%= asset_path('wait.gif') %>'}).removeClass('start');
       })
-      .on('ajax:error', function(evt, xhr, status, error) {
+      .on('ajax:error', '#start-app-link', function(evt, xhr, status, error) {
         $('#flash-content').empty();
         $('#flash-content').append('<div class="alert">' + I18n.t('assets.js.ajax_error') + '</div>');
         $('#flash').fadeIn('slow');
       })
-      .on('ajax:complete', function(evt, xhr, status) {
+      .on('ajax:complete', '#start-app-link', function(evt, xhr, status) {
         if (request_processed == false) {
           $(this).find('img').attr({ src : '<%= asset_path('s.gif') %>'}).addClass('start');
         }
       });
-    $('#stop-app-link')
-      .on('ajax:beforeSend', function(evt, xhr, settings) {
+    $(document)
+      .on('ajax:beforeSend', '#stop-app-link', function(evt, xhr, settings) {
         request_processed = false;
         $(this).find('img').attr({ src : '<%= asset_path('wait.gif') %>'}).removeClass('stop');
       })
-      .on('ajax:error', function(evt, xhr, status, error) {
+      .on('ajax:error', '#stop-app-link', function(evt, xhr, status, error) {
         $('#flash-content').empty();
         $('#flash-content').append('<div class="alert">' + I18n.t('assets.js.ajax_error') + '</div>');
         $('#flash').fadeIn('slow');
       })
-      .on('ajax:complete', function(evt, xhr, status) {
+      .on('ajax:complete', '#stop-app-link', function(evt, xhr, status) {
         if (request_processed == false) {
           $(this).find('img').attr({ src : '<%= asset_path('s.gif') %>'}).addClass('stop');
         }
       });
-    $('#restart-app-link')
-      .on('ajax:beforeSend', function(evt, xhr, settings) {
+    $(document)
+      .on('ajax:beforeSend', '#restart-app-link', function(evt, xhr, settings) {
         request_processed = false;
         $(this).find('img').attr({ src : '<%= asset_path('wait.gif') %>'}).removeClass('restart');
       })
-      .on('ajax:error', function(evt, xhr, status, error) {
+      .on('ajax:error', '#restart-app-link', function(evt, xhr, status, error) {
         $('#flash-content').empty();
         $('#flash-content').append('<div class="alert">' + I18n.t('assets.js.ajax_error') + '</div>');
         $('#flash').fadeIn('slow');
       })
-      .on('ajax:complete', function(evt, xhr, status) {
+      .on('ajax:complete', '#restart-app-link', function(evt, xhr, status) {
         if (request_processed == false) {
           $(this).find('img').attr({ src : '<%= asset_path('s.gif') %>'}).addClass('restart');
         }
       });
     $('#upload-app-bits-form .help').tooltip({'effect': 'fade', 'tipClass': 'help-tip'});
     $('#upload-app-bits-form').validator({'effect': 'below_field_error', 'inputEvent': 'blur', 'lang': validatorTools_lang});
-    $('#upload-app-bits-form')
-      .on('ajax:beforeSend', function(evt, xhr, settings) {
+    $(document)
+      .on('ajax:beforeSend', '#upload-app-bits-form', function(evt, xhr, settings) {
         var validator = $('#upload-app-bits-form').data('validator');
         if (!validator.checkValidity()) return false;
         request_processed = false;
         $(this).find('.modalBox-submit input[type="submit"]').attr({value: I18n.t('assets.js.ajax_processing')});
       })
-      .on('ajax:success', function(evt, data, status, xhr) {
+      .on('ajax:success', '#upload-app-bits-form', function(evt, data, status, xhr) {
         if (request_processed == true) {
           $(this).find('input[type="url"],input[type="text"]').val('');
         }
       })
-      .on('ajax:error', function(evt, xhr, status, error) {
+      .on('ajax:error', '#upload-app-bits-form', function(evt, xhr, status, error) {
         $('#flash-content').empty();
         $('#flash-content').append('<div class="alert">' + I18n.t('assets.js.ajax_error') + '</div>');
         $('#flash').fadeIn('slow');
       })
-      .on('ajax:complete', function(evt, xhr, status) {
+      .on('ajax:complete', '#upload-app-bits-form', function(evt, xhr, status) {
         if (request_processed == true) {
             uploadAppBits_trigger.each(function() { $(this).overlay().close(); });
         }
         $(this).find('.modalBox-submit input[type="submit"]').attr({value: I18n.t('apps.js.upload_bits')});
       });
-    $('#delete-app-link')
-      .on('ajax:beforeSend', function(evt, xhr, settings) {
+    $(document)
+      .on('ajax:beforeSend', '#delete-app-link', function(evt, xhr, settings) {
         $(this).find('img').attr({ src : '<%= asset_path('wait.gif') %>'}).removeClass('delete');
       })
-      .on('ajax:error', function(evt, xhr, status, error) {
+      .on('ajax:error', '#delete-app-link', function(evt, xhr, status, error) {
         $('#flash-content').empty();
         $('#flash-content').append('<div class="alert">' + I18n.t('assets.js.ajax_error') + '</div>');
         $('#flash').fadeIn('slow');
       })
-      .on('ajax:complete', function(evt, xhr, status) {
+      .on('ajax:complete', '#delete-app-link', function(evt, xhr, status) {
         $(this).find('img').attr({ src : '<%= asset_path('s.gif') %>'}).addClass('delete');
       });
   }

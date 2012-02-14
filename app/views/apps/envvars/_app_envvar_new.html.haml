@@ -21,10 +21,11 @@
             %td
               = text_field_tag :var_value, nil, :size => 30, :placeholder => t('apps.envvars.value_placeholder')
               .form-field-error
-          %tr
-            %td
-              = sprite_tag("help", :alt => "?", :class=> "help", :title => t('apps.envvars.restart_app_help'))
-              = label_tag "restart", t('apps.envvars.restart_app') + ":"
-            %td
-              = check_box_tag :restart, true, true
+          - if @app[:state] == "STARTED"
+            %tr
+              %td
+                = sprite_tag("help", :alt => "?", :class=> "help", :title => t('apps.envvars.restart_app_help'))
+                = label_tag "restart", t('apps.envvars.restart_app') + ":"
+              %td
+                = check_box_tag :restart, true, true
     .modalBox-submit= submit_tag t('apps.envvars.add_envvar')

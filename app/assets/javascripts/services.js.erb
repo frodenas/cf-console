@@ -36,7 +36,7 @@ $(function() {
         }
       });
     $('#new-service-form .help').tooltip({'effect': 'fade', 'tipClass': 'help-tip'});
-    $('#new-service-form').validator({'effect': 'below_field_error', 'inputEvent': 'keyup', 'lang': validatorTools_lang});
+    $('#new-service-form').validator({'effect': 'below_field_error', 'inputEvent': 'blur', 'lang': validatorTools_lang});
     $('#new-service-form select#ss')
       .on('change', function() {
         var app_name = $('#new-service-form input#name');

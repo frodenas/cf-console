@@ -231,7 +231,7 @@ $(function() {
         }
       });
     $('#set-var-form .help').tooltip({'effect': 'fade', 'tipClass': 'help-tip'});
-    $('#set-var-form').validator({'effect': 'below_field_error', 'inputEvent': 'keyup', 'lang': validatorTools_lang});
+    $('#set-var-form').validator({'effect': 'below_field_error', 'inputEvent': 'blur', 'lang': validatorTools_lang});
     $('#set-var-form')
       .on('ajax:beforeSend', function(evt, xhr, settings) {
         var validator = $('#set-var-form').data('validator');
@@ -269,7 +269,7 @@ $(function() {
         $(this).find('img').attr({ src : '<%= asset_path('s.gif') %>'}).addClass('delete');
       });
     $('#bind-service-form .help').tooltip({'effect': 'fade', 'tipClass': 'help-tip'});
-    $('#bind-service-form').validator({'effect': 'below_field_error', 'inputEvent': 'keyup', 'lang': validatorTools_lang});
+    $('#bind-service-form').validator({'effect': 'below_field_error', 'inputEvent': 'blur', 'lang': validatorTools_lang});
     $('#bind-service-form')
       .on('ajax:beforeSend', function(evt, xhr, settings) {
         var validator = $('#bind-service-form').data('validator');
@@ -307,7 +307,7 @@ $(function() {
         $(this).find('img').attr({ src : '<%= asset_path('s.gif') %>'}).addClass('delete');
       });
     $('#map-url-form .help').tooltip({'effect': 'fade', 'tipClass': 'help-tip'});
-    $('#map-url-form').validator({'effect': 'below_field_error', 'inputEvent': 'keyup', 'lang': validatorTools_lang});
+    $('#map-url-form').validator({'effect': 'below_field_error', 'inputEvent': 'blur', 'lang': validatorTools_lang});
     $('#map-url-form')
       .on('ajax:beforeSend', function(evt, xhr, settings) {
         var validator = $('#map-url-form').data('validator');

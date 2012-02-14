@@ -11,7 +11,7 @@ $(function() {
       else $(this).find('span').html('&#x25BC;');
     });
     $('#new-session-form .help').tooltip({'effect': 'fade', 'tipClass': 'help-tip'});
-    $('#new-session-form').validator({'effect': 'below_field_error', 'inputEvent': 'keyup', 'lang': validatorTools_lang});
+    $('#new-session-form').validator({'effect': 'below_field_error', 'inputEvent': 'blur', 'lang': validatorTools_lang});
     $('#new-session-form #cloud_service').change(function () {
       var args = $(this).val().match(/{[\d\w\s]+}/i);
       if (args == null) {

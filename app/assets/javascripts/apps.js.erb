@@ -59,7 +59,7 @@ $(function() {
         }
       });
     $('#new-app-form .help').tooltip({'effect': 'fade', 'tipClass': 'help-tip'});
-    $('#new-app-form').validator({'effect': 'below_field_error', 'inputEvent': 'keyup', 'lang': validatorTools_lang});
+    $('#new-app-form').validator({'effect': 'below_field_error', 'inputEvent': 'blur', 'lang': validatorTools_lang});
     $('#new-app-form')
       .on('ajax:beforeSend', function(evt, xhr, settings) {
         var validator = $('#new-app-form').data('validator');
@@ -129,7 +129,7 @@ $(function() {
         }
       });
     $('#upload-app-bits-form .help').tooltip({'effect': 'fade', 'tipClass': 'help-tip'});
-    $('#upload-app-bits-form').validator({'effect': 'below_field_error', 'inputEvent': 'keyup', 'lang': validatorTools_lang});
+    $('#upload-app-bits-form').validator({'effect': 'below_field_error', 'inputEvent': 'blur', 'lang': validatorTools_lang});
     $('#upload-app-bits-form')
       .on('ajax:beforeSend', function(evt, xhr, settings) {
         var validator = $('#upload-app-bits-form').data('validator');

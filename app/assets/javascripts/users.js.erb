@@ -33,7 +33,7 @@ $(function() {
         }
       });
     $('#new-user-form .help').tooltip({'effect': 'fade', 'tipClass': 'help-tip'});
-    $('#new-user-form').validator({'effect': 'below_field_error', 'inputEvent': 'keyup', 'lang': validatorTools_lang});
+    $('#new-user-form').validator({'effect': 'below_field_error', 'inputEvent': 'blur', 'lang': validatorTools_lang});
     $('#new-user-form')
       .on('ajax:beforeSend', function(evt, xhr, settings) {
         var validator = $('#new-user-form').data('validator');

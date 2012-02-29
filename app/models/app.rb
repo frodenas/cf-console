@@ -385,8 +385,8 @@ class App
     total_size = 0
     Dir.glob("#{repodir}/**/*", File::FNM_DOTMATCH).select do |f|
       process = true
-      %w(*/.git, */.git/*).each { |e| process = false if File.fnmatch(e, f) }
-      %w(.., ., *~, #*#, *.log).each { |e| process = false if File.fnmatch(e, File.basename(f)) }
+      %w(*/.git */.git/*).each { |e| process = false if File.fnmatch(e, f) }
+      %w(.. . *~ #*# *.log).each { |e| process = false if File.fnmatch(e, File.basename(f)) }
       if process
         if !File.directory?(f) && File.exists?(f)
           files << {:fn => f, :zn => f.sub("#{repodir}/", ""), :size => File.size(f), :sha1 => Digest::SHA1.file(f).hexdigest}

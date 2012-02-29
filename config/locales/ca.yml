@@ -3,6 +3,7 @@
 ca:
   meta:
     language_name: "Català"
+    operation_not_permitted: "Operació no permessa"
   dashboard:
     title: "Escriptori"
     tab_account: "Compte"
@@ -207,6 +208,7 @@ ca:
       zipfile_blank: "L'arxiu Zip no pot estar en blanc."
       gitrepo_blank: "La URI del repositori Git no pot estar en blanc."
       gitbranch_blank: "La branca del repositori Git no pot estar en blanc."
+      no_files: "No hi han arxius a actualitzar."
       path_blank: "La ruta no pot estar en blanc."
       undetermined_state: "L'estat de l'aplicació es indeterminat, no hi ha suficient informació disponible."
       RUNNING: "En Execució"
@@ -366,3 +368,8 @@ ca:
     iterator_exception: "Error intern - EM::Synchrony::Iterator exception: %{msg}."
     git_not_found: "No es possible trobar l'executable git."
     git_clone_error: "No es possible clonar el repositori. Error Git %{msg}."
+    zipfile_blank: "L'arxiu Zip no pot estar en blanc."
+    files_empty: "La llista dels arxius a empaquetar no pot estar buida."
+    gitrepo_blank: "La URI del repositori Git no pot estar en blanc."
+    gitbranch_blank: "La branca del repositori Git no pot estar en blanc."
+    repodir_blank: "El directorio del repositori Git no pot estar en blanc."

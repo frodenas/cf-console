@@ -1,8 +1,8 @@
-require "spec_helper"
+require 'spec_helper'
 
 describe DashboardController do
-  describe "routing" do
-    it "routes to #index" do
+  describe 'routes to' do
+    it 'dashboard#index' do
       get("/dashboard").should route_to("dashboard#index")
     end
   end

@@ -12,37 +12,33 @@ class ServicesController < ApplicationController
   end
 
   def create
-    @name = params[:name].strip.downcase
+    @name = params[:name]
     @ss = params[:ss]
-    if !@name.nil? && !@name.empty?
-      if !@ss.nil? && !@ss.empty?
-        begin
-          service = Service.new(@cf_client)
-          begin
-            service_info = service.find(@name)
-          rescue
-            service_info = nil
-          end
-          if service_info.nil?
-            service.create(@name, @ss)
-            service_info = service.find(@name)
-            if !service_info.nil?
-              @new_service = [] << service_info
-              flash[:notice] = t('services.controller.service_created', :name => @name)
-            else
-              flash[:alert] = t('services.controller.request_error')
-            end
-          else
-            flash[:alert] = t('services.controller.already_exists')
-          end
-        rescue Exception => ex
-          flash[:alert] = ex.message
-        end
-      else
-        flash[:alert] = t('services.controller.service_blank')
-      end
+    if @name.blank?
+      flash[:alert] = I18n.t('services.controller.name_blank')
+    elsif @ss.blank?
+      flash[:alert] = I18n.t('services.controller.service_blank')
     else
-      flash[:alert] = t('services.controller.name_blank')
+      begin
+        @name = @name.strip.downcase
+        @ss = @ss.strip
+        service = Service.new(@cf_client)
+        begin
+          service_info = service.find(@name)
+        rescue
+          service_info = nil
+        end
+        if service_info.nil?
+          service.create(@name, @ss)
+          service_info = service.find(@name)
+          @new_service = [] << service_info
+          flash[:notice] = I18n.t('services.controller.service_created', :name => @name)
+        else
+          flash[:alert] = I18n.t('services.controller.already_exists')
+        end
+      rescue Exception => ex
+        flash[:alert] = ex.message
+      end
     end
     respond_to do |format|
       format.html { redirect_to services_info_url }
@@ -52,12 +48,17 @@ class ServicesController < ApplicationController
 
   def delete
     @name = params[:name]
-    begin
-      service = Service.new(@cf_client)
-      service.delete(@name)
-      flash[:notice] = t('services.controller.service_deleted', :name => @name)
-    rescue Exception => ex
-      flash[:alert] = ex.message
+    if @name.blank?
+      flash[:alert] = I18n.t('services.controller.name_blank')
+    else
+      begin
+        @name = @name.strip.downcase
+        service = Service.new(@cf_client)
+        service.delete(@name)
+        flash[:notice] = I18n.t('services.controller.service_deleted', :name => @name)
+      rescue Exception => ex
+        flash[:alert] = ex.message
+      end
     end
     respond_to do |format|
       format.html { redirect_to services_info_url }
@@ -76,12 +77,12 @@ class ServicesController < ApplicationController
         bindedapps[service_item] << app_item[:name]
       end
     end
-    return bindedapps
+    bindedapps
   end
 
   def find_available_system_services
     available_system_services = []
-    available_system_services << [t('services.controller.select_service'), ""]
+    available_system_services << [I18n.t('services.controller.select_service'), ""]
     system = System.new(@cf_client)
     system_services = system.find_all_system_services()
     system_services.each do |service_type, service_value|
@@ -91,6 +92,6 @@ class ServicesController < ApplicationController
         end
       end
     end
-    return available_system_services
+    available_system_services
   end
 end

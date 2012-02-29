@@ -1,0 +1,89 @@
+--- 
+http_interactions: 
+- request: 
+    method: get
+    uri: http://api.vcap.me/apps/fakeapp
+    body: 
+      encoding: US-ASCII
+      string: ""
+    headers: 
+      User-Agent: 
+      - cloudfoundry-client-0.2.0
+      Authorization: 
+      - 04085b084922117573657240766361702e6d65063a0645546c2b07c547554f22195ac7b777ec1ed86057ee09ec9a97e38e61ce119b
+      Accept: 
+      - application/json
+      Content-Type: 
+      - application/json
+      Accept-Encoding: 
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response: 
+    status: 
+      code: 200
+      message: OK
+    headers: 
+      Server: 
+      - nginx/0.7.65
+      Date: 
+      - Mon, 27 Feb 2012 23:10:15 GMT
+      Content-Type: 
+      - application/json; charset=utf-8
+      Transfer-Encoding: 
+      - chunked
+      Connection: 
+      - keep-alive
+      Keep-Alive: 
+      - timeout=20
+      Etag: 
+      - "\"2e8d4c6ed89247fb83adf79620cb1b3f\""
+      Cache-Control: 
+      - max-age=0, private, must-revalidate
+      X-Ua-Compatible: 
+      - IE=Edge
+    body: 
+      encoding: US-ASCII
+      string: "{\"name\":\"fakeapp\",\"staging\":{\"model\":\"sinatra\",\"stack\":\"ruby18\"},\"uris\":[\"fakeapp.vcap.me\"],\"instances\":5,\"runningInstances\":5,\"resources\":{\"memory\":128,\"disk\":2048,\"fds\":256},\"state\":\"STARTED\",\"services\":[\"fakeservice\"],\"version\":\"36024617e2f7c8e016dce6b92df741b75e2d7c3a-1\",\"env\":[\"fakevar=fakevalue2\"],\"meta\":{\"debug\":null,\"version\":15,\"created\":1330384215}}"
+    http_version: 
+  recorded_at: Mon, 27 Feb 2012 23:10:14 GMT
+- request: 
+    method: put
+    uri: http://api.vcap.me/apps/fakeapp
+    body: 
+      encoding: US-ASCII
+      string: "{\"name\":\"fakeapp\",\"staging\":{\"model\":\"sinatra\",\"stack\":\"ruby18\"},\"uris\":[\"fakeapp.vcap.me\"],\"instances\":5,\"runningInstances\":5,\"resources\":{\"memory\":128,\"disk\":2048,\"fds\":256},\"state\":\"STARTED\",\"services\":[\"fakeservice\",\"noservice\"],\"version\":\"36024617e2f7c8e016dce6b92df741b75e2d7c3a-1\",\"env\":[\"fakevar=fakevalue2\"],\"meta\":{\"debug\":null,\"version\":15,\"created\":1330384215}}"
+    headers: 
+      User-Agent: 
+      - cloudfoundry-client-0.2.0
+      Authorization: 
+      - 04085b084922117573657240766361702e6d65063a0645546c2b07c547554f22195ac7b777ec1ed86057ee09ec9a97e38e61ce119b
+      Accept: 
+      - application/json
+      Content-Type: 
+      - application/json
+  response: 
+    status: 
+      code: 404
+      message: Not Found
+    headers: 
+      Server: 
+      - nginx/0.7.65
+      Date: 
+      - Mon, 27 Feb 2012 23:10:16 GMT
+      Content-Type: 
+      - application/json; charset=utf-8
+      Transfer-Encoding: 
+      - chunked
+      Connection: 
+      - keep-alive
+      Keep-Alive: 
+      - timeout=20
+      Cache-Control: 
+      - no-cache
+      X-Ua-Compatible: 
+      - IE=Edge
+    body: 
+      encoding: US-ASCII
+      string: "{\"code\":500,\"description\":\"Service not found\"}"
+    http_version: 
+  recorded_at: Mon, 27 Feb 2012 23:10:15 GMT
+recorded_with: VCR 2.0.0.rc2

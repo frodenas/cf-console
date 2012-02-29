@@ -1,0 +1,66 @@
+--- 
+http_interactions: 
+- request: 
+    method: put
+    uri: http://api.vcap.me/apps/fakeapp/application
+    body: 
+      encoding: ASCII-8BIT
+      string: !binary |
+        LS0tLS0tLS0tLS0tLVJ1YnlNdWx0aXBhcnRQb3N0DQpDb250ZW50LURpc3Bv
+        c2l0aW9uOiBmb3JtLWRhdGE7IG5hbWU9ImFwcGxpY2F0aW9uIjsgZmlsZW5h
+        bWU9ImNmLXNpbmF0cmEtc2FtcGxlLnppcCINCkNvbnRlbnQtTGVuZ3RoOiA0
+        MTINCkNvbnRlbnQtVHlwZTogYXBwbGljYXRpb24vemlwDQpDb250ZW50LVRy
+        YW5zZmVyLUVuY29kaW5nOiBiaW5hcnkNCg0KUEsDBBQAAAAIANCgNkD2sFGF
+        3gAAADcBAAAUABwAY2Ytc2luYXRyYS1zYW1wbGUucmJVVAkAAzdeHE/BSUpP
+        dXgLAAEE9QEAAAQUAAAAZY9Na8MwDIbv/hXCPegQmGHHkgRK6dgua9hGL1sp
+        SeOlZqu8yfYglP73yQk77WJ9PHr1ymy/k2MLyKkbB3sOqPivFRy1kVtUarAR
+        0CD0XgGcfIhQweZx94q79ao5rJrmcL99fsG90C/P/2mzfZop2yAQUdJ3z/Bh
+        R3CUh28kDdKdR4oKdNnVGopppJDKzKWu8pu3C9hPpGNTv5EWsaUeQKIuT7f1
+        +tOn/s4n6nmEBwqxpaMFTkSOBmgjLC75J9fl4pJvvpZGRLIMTJ3lG/px7Ols
+        KS4nJBZiJ9cpsfkFUEsBAh4DFAAAAAgA0KA2QPawUYXeAAAANwEAABQAGAAA
+        AAAAAQAAAKSBAAAAAGNmLXNpbmF0cmEtc2FtcGxlLnJiVVQFAAM3XhxPdXgL
+        AAEE9QEAAAQUAAAAUEsFBgAAAAABAAEAWgAAACwBAAAAAA0KLS0tLS0tLS0t
+        LS0tLVJ1YnlNdWx0aXBhcnRQb3N0DQpDb250ZW50LURpc3Bvc2l0aW9uOiBm
+        b3JtLWRhdGE7IG5hbWU9InJlc291cmNlcyINCg0KW10NCi0tLS0tLS0tLS0t
+        LS1SdWJ5TXVsdGlwYXJ0UG9zdC0tDQoNCg==
+
+    headers: 
+      User-Agent: 
+      - cloudfoundry-client-0.2.0
+      Authorization: 
+      - 04085b084922117573657240766361702e6d65063a0645546c2b07c547554f22195ac7b777ec1ed86057ee09ec9a97e38e61ce119b
+      Content-Type: 
+      - multipart/form-data;boundary=-----------RubyMultipartPost
+      Content-Length: 
+      - "745"
+      Accept: 
+      - "*/*"
+  response: 
+    status: 
+      code: 200
+      message: OK
+    headers: 
+      Server: 
+      - nginx/0.7.65
+      Date: 
+      - Mon, 27 Feb 2012 23:09:59 GMT
+      Content-Type: 
+      - text/html; charset=utf-8
+      Transfer-Encoding: 
+      - chunked
+      Connection: 
+      - keep-alive
+      Keep-Alive: 
+      - timeout=20
+      Vary: 
+      - Accept-Encoding
+      Cache-Control: 
+      - no-cache
+      X-Ua-Compatible: 
+      - IE=Edge
+    body: 
+      encoding: US-ASCII
+      string: " "
+    http_version: 
+  recorded_at: Mon, 27 Feb 2012 23:09:58 GMT
+recorded_with: VCR 2.0.0.rc2

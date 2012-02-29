@@ -17,14 +17,14 @@ module CfConnectionHelper
 
   def cloudfoundry_set_user_cookies(cf_target_url)
     jar = @request.cookie_jar
-    jar.signed[:cf_auth_token] = "04085b084922117573657240766361702e6d65063a0645546c2b07eb05e54e22197d37e42a4b8e7215eba234b86b601342203c3800"
+    jar.signed[:cf_auth_token] = "04085b084922117573657240766361702e6d65063a0645546c2b07b7fc514f2219d196b0898b1885eeae68a4b2ae77ad04a407f168"
     request.cookies[:cf_target_url] = cf_target_url
     request.cookies[:cf_auth_token] = jar[:cf_auth_token]
   end
 
   def cloudfoundry_set_admin_cookies(cf_target_url)
     jar = @request.cookie_jar
-    jar.signed[:cf_auth_token] = "04085b0849221261646d696e40766361702e6d65063a0645546c2b07b108e54e221912a91b37781faa5c88a9ffea3b0b6abd0c28983b"
+    jar.signed[:cf_auth_token] = "04085b0849221261646d696e40766361702e6d65063a0645546c2b07fbfc514f22198b59e9fc1452aab8b7ae85c5f0ba2a0e2cf36d75"
     request.cookies[:cf_target_url] = cf_target_url
     request.cookies[:cf_auth_token] = jar[:cf_auth_token]
   end

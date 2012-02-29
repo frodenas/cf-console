@@ -40,14 +40,14 @@ module Utils
           error = ex
         end
       end
-      if (defined?(EM::Synchrony) && EM.reactor_running?)
+      if defined?(EM::Synchrony) && EM.reactor_running?
         begin
           result = EM::Synchrony::FiberIterator.new(list, concurrency).each(foreach)
         rescue => ex
           error = I18n.t('utils.fiberiterator_exception', :msg => ex.message)
         end
       else
-        result = list.each { |obj| foreach.call(obj) }
+        result = list.each { |obj| blk.call(obj) }
       end
       raise error if !error.nil?
       result
@@ -69,14 +69,14 @@ module Utils
           end
         }.resume
       end
-      if (defined?(EM::Synchrony) && EM.reactor_running?)
+      if defined?(EM::Synchrony) && EM.reactor_running?
         begin
           result = EM::Synchrony::Iterator.new(list, concurrency).map(&foreach)
         rescue => ex
           error = I18n.t('utils.iterator_exception', :msg => ex.message)
         end
       else
-        result = list.map { |obj| foreach.call(obj) }
+        result = list.map { |obj| blk.call(obj) }
       end
       raise error if !error.nil?
       result
@@ -89,6 +89,9 @@ module Utils
     end
 
     def self.git_clone(gitrepo, gitbranch, repodir)
+      raise I18n.t('utils.gitrepo_blank') if gitrepo.blank?
+      raise I18n.t('utils.gitbranch_blank') if gitbranch.blank?
+      raise I18n.t('utils.repodir_blank') if repodir.blank?
       FileUtils.rm_rf(repodir, :secure => true)
       git_binary = git_binary()
       raise I18n.t('utils.git_not_found') if git_binary.nil?
@@ -107,11 +110,9 @@ module Utils
     end
 
     def self.git_uri_valid?(uri)
+      Addressable::URI.parse(uri)
       uri_regex = Regexp.new("^git://[a-z0-9]+([-.]{1}[a-z0-9]+)*.[a-z]{2,5}(([0-9]{1,5})?/.*)?.git$", Regexp::IGNORECASE)
-      if uri =~ uri_regex
-        Addressable::URI.parse(uri)
-        return true
-      end
+      return true if uri =~ uri_regex
       false
     rescue Addressable::URI::InvalidURIError
       false
@@ -121,6 +122,9 @@ module Utils
   module ZipUtil
     require 'zip/zip'
     def self.pack_files(zipfile, files)
+      raise I18n.t('utils.zipfile_blank') if zipfile.blank?
+      raise I18n.t('utils.argument_not_array') unless files.respond_to?(:to_a)
+      raise I18n.t('utils.files_empty') if files.empty?
       pack_proc = Proc.new {
         FileUtils.rm_f(zipfile)
         Zip::ZipFile::open(zipfile, true) do |zf|

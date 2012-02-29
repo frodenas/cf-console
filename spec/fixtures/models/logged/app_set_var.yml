@@ -1,0 +1,396 @@
+--- 
+http_interactions: 
+- request: 
+    method: get
+    uri: http://api.vcap.me/apps/fakeapp
+    body: 
+      encoding: US-ASCII
+      string: ""
+    headers: 
+      User-Agent: 
+      - cloudfoundry-client-0.2.0
+      Authorization: 
+      - 04085b084922117573657240766361702e6d65063a0645546c2b07c547554f22195ac7b777ec1ed86057ee09ec9a97e38e61ce119b
+      Accept: 
+      - application/json
+      Content-Type: 
+      - application/json
+      Accept-Encoding: 
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response: 
+    status: 
+      code: 200
+      message: OK
+    headers: 
+      Server: 
+      - nginx/0.7.65
+      Date: 
+      - Mon, 27 Feb 2012 23:10:05 GMT
+      Content-Type: 
+      - application/json; charset=utf-8
+      Transfer-Encoding: 
+      - chunked
+      Connection: 
+      - keep-alive
+      Keep-Alive: 
+      - timeout=20
+      Etag: 
+      - "\"ced5dc07bb6c127f285a94e967ed2d63\""
+      Cache-Control: 
+      - max-age=0, private, must-revalidate
+      X-Ua-Compatible: 
+      - IE=Edge
+    body: 
+      encoding: US-ASCII
+      string: "{\"name\":\"fakeapp\",\"staging\":{\"model\":\"sinatra\",\"stack\":\"ruby18\"},\"uris\":[\"fakeapp.vcap.me\"],\"instances\":5,\"runningInstances\":5,\"resources\":{\"memory\":128,\"disk\":2048,\"fds\":256},\"state\":\"STARTED\",\"services\":[],\"version\":\"3c42f840a4777613b1d75b59de9baca4073fd858-2\",\"env\":[],\"meta\":{\"debug\":null,\"version\":6,\"created\":1330384205}}"
+    http_version: 
+  recorded_at: Mon, 27 Feb 2012 23:10:04 GMT
+- request: 
+    method: put
+    uri: http://api.vcap.me/apps/fakeapp
+    body: 
+      encoding: US-ASCII
+      string: "{\"name\":\"fakeapp\",\"staging\":{\"model\":\"sinatra\",\"stack\":\"ruby18\"},\"uris\":[\"fakeapp.vcap.me\"],\"instances\":5,\"runningInstances\":5,\"resources\":{\"memory\":128,\"disk\":2048,\"fds\":256},\"state\":\"STARTED\",\"services\":[],\"version\":\"3c42f840a4777613b1d75b59de9baca4073fd858-2\",\"env\":[\"fakevar=fakevalue\"],\"meta\":{\"debug\":null,\"version\":6,\"created\":1330384205}}"
+    headers: 
+      User-Agent: 
+      - cloudfoundry-client-0.2.0
+      Authorization: 
+      - 04085b084922117573657240766361702e6d65063a0645546c2b07c547554f22195ac7b777ec1ed86057ee09ec9a97e38e61ce119b
+      Accept: 
+      - application/json
+      Content-Type: 
+      - application/json
+  response: 
+    status: 
+      code: 200
+      message: OK
+    headers: 
+      Server: 
+      - nginx/0.7.65
+      Date: 
+      - Mon, 27 Feb 2012 23:10:05 GMT
+      Content-Type: 
+      - application/json; charset=utf-8
+      Transfer-Encoding: 
+      - chunked
+      Connection: 
+      - keep-alive
+      Keep-Alive: 
+      - timeout=20
+      Cache-Control: 
+      - no-cache
+      X-Ua-Compatible: 
+      - IE=Edge
+    body: 
+      encoding: US-ASCII
+      string: " "
+    http_version: 
+  recorded_at: Mon, 27 Feb 2012 23:10:04 GMT
+- request: 
+    method: get
+    uri: http://api.vcap.me/apps/fakeapp
+    body: 
+      encoding: US-ASCII
+      string: ""
+    headers: 
+      User-Agent: 
+      - cloudfoundry-client-0.2.0
+      Authorization: 
+      - 04085b084922117573657240766361702e6d65063a0645546c2b07c547554f22195ac7b777ec1ed86057ee09ec9a97e38e61ce119b
+      Accept: 
+      - application/json
+      Content-Type: 
+      - application/json
+      Accept-Encoding: 
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response: 
+    status: 
+      code: 200
+      message: OK
+    headers: 
+      Server: 
+      - nginx/0.7.65
+      Date: 
+      - Mon, 27 Feb 2012 23:10:06 GMT
+      Content-Type: 
+      - application/json; charset=utf-8
+      Transfer-Encoding: 
+      - chunked
+      Connection: 
+      - keep-alive
+      Keep-Alive: 
+      - timeout=20
+      Etag: 
+      - "\"2d60863f7b90928f6357dd93e7dce986\""
+      Cache-Control: 
+      - max-age=0, private, must-revalidate
+      X-Ua-Compatible: 
+      - IE=Edge
+    body: 
+      encoding: US-ASCII
+      string: "{\"name\":\"fakeapp\",\"staging\":{\"model\":\"sinatra\",\"stack\":\"ruby18\"},\"uris\":[\"fakeapp.vcap.me\"],\"instances\":5,\"runningInstances\":5,\"resources\":{\"memory\":128,\"disk\":2048,\"fds\":256},\"state\":\"STARTED\",\"services\":[],\"version\":\"3c42f840a4777613b1d75b59de9baca4073fd858-2\",\"env\":[\"fakevar=fakevalue\"],\"meta\":{\"debug\":null,\"version\":7,\"created\":1330384206}}"
+    http_version: 
+  recorded_at: Mon, 27 Feb 2012 23:10:05 GMT
+- request: 
+    method: get
+    uri: http://api.vcap.me/apps/fakeapp
+    body: 
+      encoding: US-ASCII
+      string: ""
+    headers: 
+      User-Agent: 
+      - cloudfoundry-client-0.2.0
+      Authorization: 
+      - 04085b084922117573657240766361702e6d65063a0645546c2b07c547554f22195ac7b777ec1ed86057ee09ec9a97e38e61ce119b
+      Accept: 
+      - application/json
+      Content-Type: 
+      - application/json
+      Accept-Encoding: 
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response: 
+    status: 
+      code: 200
+      message: OK
+    headers: 
+      Server: 
+      - nginx/0.7.65
+      Date: 
+      - Mon, 27 Feb 2012 23:10:06 GMT
+      Content-Type: 
+      - application/json; charset=utf-8
+      Transfer-Encoding: 
+      - chunked
+      Connection: 
+      - keep-alive
+      Keep-Alive: 
+      - timeout=20
+      Etag: 
+      - "\"2d60863f7b90928f6357dd93e7dce986\""
+      Cache-Control: 
+      - max-age=0, private, must-revalidate
+      X-Ua-Compatible: 
+      - IE=Edge
+    body: 
+      encoding: US-ASCII
+      string: "{\"name\":\"fakeapp\",\"staging\":{\"model\":\"sinatra\",\"stack\":\"ruby18\"},\"uris\":[\"fakeapp.vcap.me\"],\"instances\":5,\"runningInstances\":5,\"resources\":{\"memory\":128,\"disk\":2048,\"fds\":256},\"state\":\"STARTED\",\"services\":[],\"version\":\"3c42f840a4777613b1d75b59de9baca4073fd858-2\",\"env\":[\"fakevar=fakevalue\"],\"meta\":{\"debug\":null,\"version\":7,\"created\":1330384206}}"
+    http_version: 
+  recorded_at: Mon, 27 Feb 2012 23:10:05 GMT
+- request: 
+    method: put
+    uri: http://api.vcap.me/apps/fakeapp
+    body: 
+      encoding: US-ASCII
+      string: "{\"name\":\"fakeapp\",\"staging\":{\"model\":\"sinatra\",\"stack\":\"ruby18\"},\"uris\":[\"fakeapp.vcap.me\"],\"instances\":5,\"runningInstances\":5,\"resources\":{\"memory\":128,\"disk\":2048,\"fds\":256},\"state\":\"STOPPED\",\"services\":[],\"version\":\"3c42f840a4777613b1d75b59de9baca4073fd858-2\",\"env\":[\"fakevar=fakevalue\"],\"meta\":{\"debug\":null,\"version\":7,\"created\":1330384206}}"
+    headers: 
+      User-Agent: 
+      - cloudfoundry-client-0.2.0
+      Authorization: 
+      - 04085b084922117573657240766361702e6d65063a0645546c2b07c547554f22195ac7b777ec1ed86057ee09ec9a97e38e61ce119b
+      Accept: 
+      - application/json
+      Content-Type: 
+      - application/json
+  response: 
+    status: 
+      code: 200
+      message: OK
+    headers: 
+      Server: 
+      - nginx/0.7.65
+      Date: 
+      - Mon, 27 Feb 2012 23:10:06 GMT
+      Content-Type: 
+      - application/json; charset=utf-8
+      Transfer-Encoding: 
+      - chunked
+      Connection: 
+      - keep-alive
+      Keep-Alive: 
+      - timeout=20
+      Cache-Control: 
+      - no-cache
+      X-Ua-Compatible: 
+      - IE=Edge
+    body: 
+      encoding: US-ASCII
+      string: " "
+    http_version: 
+  recorded_at: Mon, 27 Feb 2012 23:10:05 GMT
+- request: 
+    method: get
+    uri: http://api.vcap.me/apps/fakeapp
+    body: 
+      encoding: US-ASCII
+      string: ""
+    headers: 
+      User-Agent: 
+      - cloudfoundry-client-0.2.0
+      Authorization: 
+      - 04085b084922117573657240766361702e6d65063a0645546c2b07c547554f22195ac7b777ec1ed86057ee09ec9a97e38e61ce119b
+      Accept: 
+      - application/json
+      Content-Type: 
+      - application/json
+      Accept-Encoding: 
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response: 
+    status: 
+      code: 200
+      message: OK
+    headers: 
+      Server: 
+      - nginx/0.7.65
+      Date: 
+      - Mon, 27 Feb 2012 23:10:06 GMT
+      Content-Type: 
+      - application/json; charset=utf-8
+      Transfer-Encoding: 
+      - chunked
+      Connection: 
+      - keep-alive
+      Keep-Alive: 
+      - timeout=20
+      Etag: 
+      - "\"f38bb8d283304039699d74e86e493168\""
+      Cache-Control: 
+      - max-age=0, private, must-revalidate
+      X-Ua-Compatible: 
+      - IE=Edge
+    body: 
+      encoding: US-ASCII
+      string: "{\"name\":\"fakeapp\",\"staging\":{\"model\":\"sinatra\",\"stack\":\"ruby18\"},\"uris\":[\"fakeapp.vcap.me\"],\"instances\":5,\"runningInstances\":0,\"resources\":{\"memory\":128,\"disk\":2048,\"fds\":256},\"state\":\"STOPPED\",\"services\":[],\"version\":\"3c42f840a4777613b1d75b59de9baca4073fd858-2\",\"env\":[\"fakevar=fakevalue\"],\"meta\":{\"debug\":null,\"version\":8,\"created\":1330384206}}"
+    http_version: 
+  recorded_at: Mon, 27 Feb 2012 23:10:05 GMT
+- request: 
+    method: put
+    uri: http://api.vcap.me/apps/fakeapp
+    body: 
+      encoding: US-ASCII
+      string: "{\"name\":\"fakeapp\",\"staging\":{\"model\":\"sinatra\",\"stack\":\"ruby18\"},\"uris\":[\"fakeapp.vcap.me\"],\"instances\":5,\"runningInstances\":0,\"resources\":{\"memory\":128,\"disk\":2048,\"fds\":256},\"state\":\"STARTED\",\"services\":[],\"version\":\"3c42f840a4777613b1d75b59de9baca4073fd858-2\",\"env\":[\"fakevar=fakevalue\"],\"meta\":{\"debug\":null,\"version\":8,\"created\":1330384206}}"
+    headers: 
+      User-Agent: 
+      - cloudfoundry-client-0.2.0
+      Authorization: 
+      - 04085b084922117573657240766361702e6d65063a0645546c2b07c547554f22195ac7b777ec1ed86057ee09ec9a97e38e61ce119b
+      Accept: 
+      - application/json
+      Content-Type: 
+      - application/json
+  response: 
+    status: 
+      code: 200
+      message: OK
+    headers: 
+      Server: 
+      - nginx/0.7.65
+      Date: 
+      - Mon, 27 Feb 2012 23:10:06 GMT
+      Content-Type: 
+      - application/json; charset=utf-8
+      Transfer-Encoding: 
+      - chunked
+      Connection: 
+      - keep-alive
+      Keep-Alive: 
+      - timeout=20
+      Cache-Control: 
+      - no-cache
+      X-Ua-Compatible: 
+      - IE=Edge
+    body: 
+      encoding: US-ASCII
+      string: " "
+    http_version: 
+  recorded_at: Mon, 27 Feb 2012 23:10:05 GMT
+- request: 
+    method: get
+    uri: http://api.vcap.me/apps/fakeapp
+    body: 
+      encoding: US-ASCII
+      string: ""
+    headers: 
+      User-Agent: 
+      - cloudfoundry-client-0.2.0
+      Authorization: 
+      - 04085b084922117573657240766361702e6d65063a0645546c2b07c547554f22195ac7b777ec1ed86057ee09ec9a97e38e61ce119b
+      Accept: 
+      - application/json
+      Content-Type: 
+      - application/json
+      Accept-Encoding: 
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response: 
+    status: 
+      code: 200
+      message: OK
+    headers: 
+      Server: 
+      - nginx/0.7.65
+      Date: 
+      - Mon, 27 Feb 2012 23:10:07 GMT
+      Content-Type: 
+      - application/json; charset=utf-8
+      Transfer-Encoding: 
+      - chunked
+      Connection: 
+      - keep-alive
+      Keep-Alive: 
+      - timeout=20
+      Etag: 
+      - "\"e2acceb1dce27e0e3ca5c39cab81d7a8\""
+      Cache-Control: 
+      - max-age=0, private, must-revalidate
+      X-Ua-Compatible: 
+      - IE=Edge
+    body: 
+      encoding: US-ASCII
+      string: "{\"name\":\"fakeapp\",\"staging\":{\"model\":\"sinatra\",\"stack\":\"ruby18\"},\"uris\":[\"fakeapp.vcap.me\"],\"instances\":5,\"runningInstances\":5,\"resources\":{\"memory\":128,\"disk\":2048,\"fds\":256},\"state\":\"STARTED\",\"services\":[],\"version\":\"3c42f840a4777613b1d75b59de9baca4073fd858-3\",\"env\":[\"fakevar=fakevalue\"],\"meta\":{\"debug\":null,\"version\":9,\"created\":1330384207}}"
+    http_version: 
+  recorded_at: Mon, 27 Feb 2012 23:10:06 GMT
+- request: 
+    method: get
+    uri: http://api.vcap.me/apps/fakeapp
+    body: 
+      encoding: US-ASCII
+      string: ""
+    headers: 
+      User-Agent: 
+      - cloudfoundry-client-0.2.0
+      Authorization: 
+      - 04085b084922117573657240766361702e6d65063a0645546c2b07c547554f22195ac7b777ec1ed86057ee09ec9a97e38e61ce119b
+      Accept: 
+      - application/json
+      Content-Type: 
+      - application/json
+      Accept-Encoding: 
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response: 
+    status: 
+      code: 200
+      message: OK
+    headers: 
+      Server: 
+      - nginx/0.7.65
+      Date: 
+      - Mon, 27 Feb 2012 23:10:07 GMT
+      Content-Type: 
+      - application/json; charset=utf-8
+      Transfer-Encoding: 
+      - chunked
+      Connection: 
+      - keep-alive
+      Keep-Alive: 
+      - timeout=20
+      Etag: 
+      - "\"e2acceb1dce27e0e3ca5c39cab81d7a8\""
+      Cache-Control: 
+      - max-age=0, private, must-revalidate
+      X-Ua-Compatible: 
+      - IE=Edge
+    body: 
+      encoding: US-ASCII
+      string: "{\"name\":\"fakeapp\",\"staging\":{\"model\":\"sinatra\",\"stack\":\"ruby18\"},\"uris\":[\"fakeapp.vcap.me\"],\"instances\":5,\"runningInstances\":5,\"resources\":{\"memory\":128,\"disk\":2048,\"fds\":256},\"state\":\"STARTED\",\"services\":[],\"version\":\"3c42f840a4777613b1d75b59de9baca4073fd858-3\",\"env\":[\"fakevar=fakevalue\"],\"meta\":{\"debug\":null,\"version\":9,\"created\":1330384207}}"
+    http_version: 
+  recorded_at: Mon, 27 Feb 2012 23:10:06 GMT
+recorded_with: VCR 2.0.0.rc2

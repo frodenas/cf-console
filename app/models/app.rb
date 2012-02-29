@@ -9,7 +9,7 @@ class App
   end
 
   def find_all_apps()
-    return @cf_client.list_apps || []
+    @cf_client.list_apps || []
   end
 
   def find_all_states()
@@ -17,11 +17,7 @@ class App
     states = {}
     apps = find_all_apps()
     apps.each do |app_info|
-      if states[app_info[:state]]
-        states[app_info[:state]] += 1
-      else
-        states[app_info[:state]] = 1
-      end
+      states[app_info[:state]] ? states[app_info[:state]] += 1 : states[app_info[:state]] = 1
     end
     states.each do |state_key, state_value|
       if state_value > 0
@@ -29,13 +25,13 @@ class App
                        :color => state_color(state_key), :data => state_value}
       end
     end
-    return app_states
+    app_states
   end
 
   def find(name)
-    raise t('apps.model.name_blank') if name.nil? || name.empty?
+    raise I18n.t('apps.model.name_blank') if name.blank?
     app_info = @cf_client.app_info(name) || {}
-    if !app_info.empty?
+    unless app_info.empty?
       app_info[:instances_info] = find_app_instances(name)
       app_info[:crashes] = find_app_crashes(name)
       app_info[:instances_states] = find_app_instances_states(app_info)
@@ -44,18 +40,14 @@ class App
         {:var_name => var, :var_value => value}
       }
     end
-    return app_info
+    app_info
   end
 
   def find_app_instances(name)
-    raise t('apps.model.name_blank') if name.nil? || name.empty?
+    raise I18n.t('apps.model.name_blank') if name.blank?
     app_instances = []
     instances_info = @cf_client.app_instances(name) || {}
-    if !instances_info.empty? && !instances_info[:instances].empty?
-      instances_stats = @cf_client.app_stats(name) || []
-    else
-      instances_stats = []
-    end
+    instances_stats = instances_info[:instances].blank? ? [] : @cf_client.app_stats(name) || []
     instances_info.each do |instances, instances_value|
       instances_value.each do |info|
         stats = nil
@@ -68,12 +60,12 @@ class App
         app_instances << {:instance => info[:index], :state => info[:state], :stats => stats}
       end
     end
-    return app_instances
+    app_instances
   end
 
   def find_app_crashes(name)
-    raise t('apps.model.name_blank') if name.nil? || name.empty?
-    return @cf_client.app_crashes(name)[:crashes] || {}
+    raise I18n.t('apps.model.name_blank') if name.blank?
+    @cf_client.app_crashes(name)[:crashes] || {}
   end
 
   def find_app_instances_states(app_info)
@@ -81,16 +73,12 @@ class App
     return app_instances_states unless app_info
 
     states = {}
-    if !app_info[:instances_info].empty?
-      app_info[:instances_info].each do |instance_info|
-        if states[instance_info[:state]]
-          states[instance_info[:state]] += 1
-        else
-          states[instance_info[:state]] = 1
-        end
-      end
-    else
+    if app_info[:instances_info].empty?
       states["STOPPED"] = app_info[:instances]
+    else
+      app_info[:instances_info].each do |instance_info|
+        states[instance_info[:state]] ? states[instance_info[:state]] += 1 : states[instance_info[:state]] = 1
+      end
     end
     states["CRASHED"] = app_info[:crashes].length
     states.each do |state_key, state_value|
@@ -99,28 +87,28 @@ class App
                                  :color => state_color(state_key), :data => state_value}
       end
     end
-    return app_instances_states
+    app_instances_states
   end
 
   def create(name, instances, memsize, url, framework, runtime, service)
-    raise t('apps.model.name_blank') if name.nil? || name.empty?
-    raise t('apps.model.name_invalid', :name => name) if (name =~ /^[\w-]+$/).nil?
+    raise I18n.t('apps.model.name_blank') if name.blank?
+    raise I18n.t('apps.model.name_invalid', :name => name) if (name =~ /^[\w-]+$/).nil?
     begin
       app_info = @cf_client.app_info(name)
     rescue
       app_info = nil
     end
-    raise t('apps.model.already_exists') if !app_info.nil?
-    raise t('apps.model.instances_blank') if instances.nil? || instances.empty?
-    raise t('apps.model.instances_numeric') if (instances =~ /^\d+$/).nil?
-    raise t('apps.model.instances_lt1') if instances.to_i < 1
-    raise t('apps.model.memsize_blank') if memsize.nil? || memsize.empty?
-    raise t('apps.model.memsize_numeric') if (memsize =~ /^\d+$/).nil?
-    raise t('apps.model.memsize_unavailable') if !check_has_capacity_for(instances.to_i * memsize.to_i)
-    raise t('apps.model.url_blank') if url.nil? || url.empty?
-    raise t('apps.model.framework_blank') if framework.nil? || framework.empty?
-    raise t('apps.model.runtime_blank') if runtime.nil? || runtime.empty?
-    raise t('apps.model.framework_invalid') if !valid_framework_and_runtime?(framework, runtime)
+    raise I18n.t('apps.model.already_exists') unless app_info.nil?
+    raise I18n.t('apps.model.instances_blank') if instances.blank?
+    raise I18n.t('apps.model.instances_numeric') if (instances =~ /^\d+$/).nil?
+    raise I18n.t('apps.model.instances_lt1') if instances.to_i < 1
+    raise I18n.t('apps.model.memsize_blank') if memsize.blank?
+    raise I18n.t('apps.model.memsize_numeric') if (memsize =~ /^\d+$/).nil?
+    raise I18n.t('apps.model.memsize_unavailable') unless check_has_capacity_for(instances.to_i * memsize.to_i)
+    raise I18n.t('apps.model.url_blank') if url.blank?
+    raise I18n.t('apps.model.framework_blank') if framework.blank?
+    raise I18n.t('apps.model.runtime_blank') if runtime.blank?
+    raise I18n.t('apps.model.framework_invalid') unless valid_framework_and_runtime?(framework, runtime)
     manifest = {
       :name => name,
       :instances => instances,
@@ -128,12 +116,12 @@ class App
       :uris => [url],
       :staging => {:framework => framework, :runtime => runtime},
     }
-    manifest[:services] = [service] if !service.nil? && !service.empty?
+    manifest[:services] = [service] unless service.blank?
     @cf_client.create_app(name, manifest)
   end
 
   def start(name)
-    raise t('apps.model.name_blank') if name.nil? || name.empty?
+    raise I18n.t('apps.model.name_blank') if name.blank?
     app = @cf_client.app_info(name)
     app[:state] = "STARTED"
     @cf_client.update_app(name, app)
@@ -141,117 +129,98 @@ class App
     start_time = Time.now.to_i
     loop do
       sleep SLEEP_TIME
-      break if app_started_properly(name, count < HEALTH_TICKS)
-      if !app_crashes(name, start_time).empty?
-        raise t('apps.model.start_failed')
-        break
-      end
+      break if app_started_properly(name, count > HEALTH_TICKS)
+      raise I18n.t('apps.model.start_failed') unless app_crashes(name, start_time).empty?
       count += 1
-      if count > GIVEUP_TICKS
-        raise t('apps.model.start_too_long')
-        break
-      end
+      raise I18n.t('apps.model.start_too_long') if count > GIVEUP_TICKS
     end
-    return @cf_client.app_info(name) || {}
+    @cf_client.app_info(name) || {}
   end
 
   def stop(name)
-    raise t('apps.model.name_blank') if name.nil? || name.empty?
+    raise I18n.t('apps.model.name_blank') if name.blank?
     app = @cf_client.app_info(name)
     app[:state] = "STOPPED"
     @cf_client.update_app(name, app)
-    return app
+    app
   end
 
   def restart(name)
-    raise t('apps.model.name_blank') if name.nil? || name.empty?
+    raise I18n.t('apps.model.name_blank') if name.blank?
     app = stop(name)
     app = start(name)
-    return app
   end
 
   def delete(name)
-    raise t('apps.model.name_blank') if name.nil? || name.empty?
+    raise I18n.t('apps.model.name_blank') if name.blank?
     @cf_client.delete_app(name)
   end
 
   def set_instances(name, instances)
-    raise t('apps.model.name_blank') if name.nil? || name.empty?
-    raise t('apps.model.instances_blank') if instances.nil? || instances.empty?
-    raise t('apps.model.instances_numeric') if (instances =~ /^\d+$/).nil?
-    raise t('apps.model.instances_lt1') if instances.to_i < 1
+    raise I18n.t('apps.model.name_blank') if name.blank?
+    raise I18n.t('apps.model.instances_blank') if instances.blank?
+    raise I18n.t('apps.model.instances_numeric') if (instances =~ /^\d+$/).nil?
+    raise I18n.t('apps.model.instances_lt1') if instances.to_i < 1
     app = @cf_client.app_info(name)
     current_instances = app[:instances]
     wanted_mem = instances.to_i * app[:resources][:memory]
-    if app[:state] != 'STOPPED'
-      wanted_mem = wanted_mem - (current_instances * app[:resources][:memory])
-    end
-    if !check_has_capacity_for(wanted_mem)
-      raise t('apps.model.memsize_unavailable')
-    end
-    if (instances.to_i != current_instances.to_i)
+    wanted_mem = wanted_mem - (current_instances * app[:resources][:memory]) if app[:state] != 'STOPPED'
+    raise I18n.t('apps.model.memsize_unavailable') unless check_has_capacity_for(wanted_mem)
+    if instances.to_i != current_instances.to_i
       app[:instances] = instances
       @cf_client.update_app(name, app)
     end
-    return true
+    true
   end
 
   def set_memsize(name, memsize)
-    raise t('apps.model.name_blank') if name.nil? || name.empty?
-    raise t('apps.model.memsize_blank') if memsize.nil? || memsize.empty?
-    raise t('apps.model.memsize_numeric') if (memsize =~ /^\d+$/).nil?
+    raise I18n.t('apps.model.name_blank') if name.blank?
+    raise I18n.t('apps.model.memsize_blank') if memsize.blank?
+    raise I18n.t('apps.model.memsize_numeric') if (memsize =~ /^\d+$/).nil?
     app = @cf_client.app_info(name)
     current_memory = app[:resources][:memory]
     wanted_mem = memsize.to_i * app[:instances]
-    if app[:state] != 'STOPPED'
-      wanted_mem = wanted_mem - (current_memory * app[:instances])
-    end
-    if !check_has_capacity_for(wanted_mem)
-      raise t('apps.model.memsize_unavailable')
-    end
-    if (memsize.to_i != current_memory.to_i)
+    wanted_mem = wanted_mem - (current_memory * app[:instances]) if app[:state] != 'STOPPED'
+    raise I18n.t('apps.model.memsize_unavailable') unless check_has_capacity_for(wanted_mem)
+    if memsize.to_i != current_memory.to_i
       app[:resources][:memory] = memsize
       @cf_client.update_app(name, app)
       check_app_for_restart(name)
     end
-    return true
+    true
   end
 
   def set_var(name, var_name, var_value, restart = "true")
-    raise t('apps.model.name_blank') if name.nil? || name.empty?
-    raise t('apps.model.envvar_blank') if var_name.nil? || var_name.empty?
-    raise t('apps.model.envvar_invalid', :var_name => var_name) if (var_name =~ /^[\w-]+$/).nil?
+    raise I18n.t('apps.model.name_blank') if name.blank?
+    raise I18n.t('apps.model.envvar_blank') if var_name.blank?
+    raise I18n.t('apps.model.envvar_invalid', :var_name => var_name) if (var_name =~ /^[\w-]+$/).nil?
     app = @cf_client.app_info(name)
     envvars = app[:env] || []
     var_exists = nil
     envvars.each do |env|
       var, value = env.split('=')
-      if (var == var_name)
+      if var == var_name
         var_exists = env
         break
       end
     end
-    if var_exists
-      envvars.delete(var_exists)
-    end
+    envvars.delete(var_exists) if var_exists
     envvars << "#{var_name}=#{var_value}"
     app[:env] = envvars
     @cf_client.update_app(name, app)
-    if restart == "true"
-      check_app_for_restart(name)
-    end
-    return var_exists
+    check_app_for_restart(name) if restart == "true"
+    var_exists
   end
 
-  def unset_var(name, var_name)
-    raise t('apps.model.name_blank') if name.nil? || name.empty?
-    raise t('apps.model.envvar_blank') if var_name.nil? || var_name.empty?
+  def unset_var(name, var_name, restart = "true")
+    raise I18n.t('apps.model.name_blank') if name.blank?
+    raise I18n.t('apps.model.envvar_blank') if var_name.blank?
     app = @cf_client.app_info(name)
     envvars = app[:env] || []
     var_deleted = nil
     envvars.each do |env|
       var, value = env.split('=')
-      if (var == var_name)
+      if var == var_name
         var_deleted = env
         break
       end
@@ -260,32 +229,32 @@ class App
       envvars.delete(var_deleted)
       app[:env] = envvars
       @cf_client.update_app(name, app)
-      check_app_for_restart(name)
+      check_app_for_restart(name) if restart == "true"
     else
-      raise t('apps.model.envvar_not_set', :var_name => var_name)
+      raise I18n.t('apps.model.envvar_not_set', :var_name => var_name)
     end
-    return var_deleted
+    var_deleted
   end
 
   def bind_service(name, service)
-    raise t('apps.model.name_blank') if name.nil? || name.empty?
-    raise t('apps.model.service_blank') if service.nil? || service.empty?
+    raise I18n.t('apps.model.name_blank') if name.blank?
+    raise I18n.t('apps.model.service_blank') if service.blank?
     app = @cf_client.app_info(name)
     services = app[:services] || []
     service_exists = services.index(service)
-    if !service_exists
+    if service_exists
+      raise I18n.t('apps.model.service_exists', :service => service)
+    else
       app[:services] = services << service
       @cf_client.update_app(name, app)
       check_app_for_restart(name)
-    else
-      raise t('apps.model.service_exists', :service => service)
     end
-    return true
+    true
   end
 
   def unbind_service(name, service)
-    raise t('apps.model.name_blank') if name.nil? || name.empty?
-    raise t('apps.model.service_blank') if service.nil? || service.empty?
+    raise I18n.t('apps.model.name_blank') if name.blank?
+    raise I18n.t('apps.model.service_blank') if service.blank?
     app = @cf_client.app_info(name)
     services = app[:services] || []
     service_deleted = services.delete(service)
@@ -294,30 +263,30 @@ class App
       @cf_client.update_app(name, app)
       check_app_for_restart(name)
     else
-      raise t('apps.model.service_not_binded', :service => service)
+      raise I18n.t('apps.model.service_not_binded', :service => service)
     end
-    return true
+    true
   end
 
   def map_url(name, url)
-    raise t('apps.model.name_blank') if name.nil? || name.empty?
-    raise t('apps.model.url_blank') if url.nil? || url.empty?
+    raise I18n.t('apps.model.name_blank') if name.blank?
+    raise I18n.t('apps.model.url_blank') if url.blank?
     url = url.strip.gsub(/^http(s*):\/\//i, '').downcase
     app = @cf_client.app_info(name)
     uris = app[:uris] || []
     url_exists = uris.index(url)
-    if !url_exists
+    if url_exists
+      raise I18n.t('apps.model.url_exists', :url => url)
+    else
       app[:uris] = uris << url
       @cf_client.update_app(name, app)
-    else
-      raise t('apps.model.url_exists', :url => url)
     end
-    return url
+    url
   end
 
   def unmap_url(name, url)
-    raise t('apps.model.name_blank') if name.nil? || name.empty?
-    raise t('apps.model.url_blank') if url.nil? || url.empty?
+    raise I18n.t('apps.model.name_blank') if name.blank?
+    raise I18n.t('apps.model.url_blank') if url.blank?
     url = url.strip.gsub(/^http(s*):\/\//i, '').downcase
     app = @cf_client.app_info(name)
     uris = app[:uris] || []
@@ -326,27 +295,28 @@ class App
       app[:uris] = uris
       @cf_client.update_app(name, app)
     else
-      raise t('apps.model.url_not_mapped', :url => url)
+      raise I18n.t('apps.model.url_not_mapped', :url => url)
     end
-    return url
+    url
   end
 
   def upload_app(name, zipfile, resource_manifest = [])
-    raise t('apps.model.name_blank') if name.nil? || name.empty?
-    raise t('apps.model.zipfile_blank') if zipfile.nil? || zipfile.empty?
+    raise I18n.t('apps.model.name_blank') if name.blank?
+    raise I18n.t('apps.model.zipfile_blank') if zipfile.blank?
     @cf_client.upload_app(name, zipfile, resource_manifest)
   end
 
   def upload_app_from_git(name, gitrepo, gitbranch)
-    raise t('apps.model.name_blank') if name.nil? || name.empty?
-    raise t('apps.model.name_invalid', :name => name) if (name =~ /^[\w-]+$/).nil?
-    raise t('apps.model.gitrepo_blank') if gitrepo.nil? || gitrepo.empty?
-    raise t('apps.model.gitbranch_blank') if gitbranch.nil? || gitbranch.empty?
+    raise I18n.t('apps.model.name_blank') if name.blank?
+    raise I18n.t('apps.model.name_invalid', :name => name) if (name =~ /^[\w-]+$/).nil?
+    raise I18n.t('apps.model.gitrepo_blank') if gitrepo.blank?
+    raise I18n.t('apps.model.gitbranch_blank') if gitbranch.blank?
     app_bits_tmpdir = get_app_bits_tmpdir()
     repodir = app_bits_tmpdir.join(name).to_s
     Utils::GitUtil.git_clone(gitrepo, gitbranch, repodir)
     zipfile = app_bits_tmpdir.join(name + ".zip").to_s
     files = get_files_to_pack(repodir)
+    raise I18n.t('apps.model.no_files') if files.empty?
     Utils::ZipUtil.pack_files(zipfile, files)
     files.each { |f| f[:fn] = f[:zn]}
     upload_app(name, zipfile, files)
@@ -356,7 +326,7 @@ class App
   end
 
   def download_app(name)
-    raise t('apps.model.name_blank') if name.nil? || name.empty?
+    raise I18n.t('apps.model.name_blank') if name.blank?
     app_bits_tmpdir = get_app_bits_tmpdir()
     zipfile = app_bits_tmpdir.join(name + ".zip").to_s
     app_bits = @cf_client.download_app(name)
@@ -365,10 +335,9 @@ class App
   end
 
   def view_file(name, path, instance = 0)
-    raise t('apps.model.name_blank') if name.nil? || name.empty?
-    raise t('apps.model.path_blank') if path.nil? || path.empty?
+    raise I18n.t('apps.model.name_blank') if name.blank?
+    raise I18n.t('apps.model.path_blank') if path.blank?
     contents = @cf_client.app_files(name, path, instance) || []
-    return contents
   end
 
   private
@@ -376,14 +345,14 @@ class App
   def app_crashes(name, since = 0)
     crashes = @cf_client.app_crashes(name)[:crashes] || {}
     crashes.delete_if {|crash| crash[:since] < since}
-    return crashes
+    crashes
   end
 
   def app_started_properly(name, error_on_health)
     app = @cf_client.app_info(name)
     case health(app)
       when 'N/A'
-        raise t('apps.model.undetermined_state') if error_on_health
+        raise I18n.t('apps.model.undetermined_state') if error_on_health
         return false
       when 'RUNNING'
         return true
@@ -400,7 +369,7 @@ class App
   def check_has_capacity_for(wanted_mem)
     system = System.new(@cf_client)
     available_for_use = system.find_available_memory()
-    return (available_for_use - wanted_mem.to_i) >= 0
+    (available_for_use - wanted_mem.to_i) >= 0
   end
 
   def check_resources(resources = [])
@@ -416,22 +385,18 @@ class App
     total_size = 0
     Dir.glob("#{repodir}/**/*", File::FNM_DOTMATCH).select do |f|
       process = true
-      ['*/.git', '*/.git/*'].each { |e| process = false if File.fnmatch(e, f) }
-      ['..', '.', '*~', '#*#', '*.log'].each { |e| process = false if File.fnmatch(e, File.basename(f)) }
-      if process == true
-        if (!File.directory?(f) && File.exists?(f))
+      %w(*/.git, */.git/*).each { |e| process = false if File.fnmatch(e, f) }
+      %w(.., ., *~, #*#, *.log).each { |e| process = false if File.fnmatch(e, File.basename(f)) }
+      if process
+        if !File.directory?(f) && File.exists?(f)
           files << {:fn => f, :zn => f.sub("#{repodir}/", ""), :size => File.size(f), :sha1 => Digest::SHA1.file(f).hexdigest}
           total_size += File.size(f)
         end
       end
     end
-    if (total_size > (64*1024))
-      files = check_resources(files)
-    end
-    if files.empty?
-      f = repodir + "/.__empty__"
-      File.new(f, "w")
-      files << {:fn => f, :zn => f.sub("#{repodir}/", ""), :size => File.size(f), :sha1 => Digest::SHA1.file(f).hexdigest}
+    if total_size > (64*1024)
+      matched_files = check_resources(files)
+      files = files - matched_files if matched_files
     end
     files
   end
@@ -465,7 +430,6 @@ class App
       #when "DEA_EVACUATION" then "#F71823"
       else "#F71823"
      end
-    return color
   end
 
   def valid_framework_and_runtime?(framework, runtime)
@@ -476,6 +440,6 @@ class App
          return true if (fwk[:name] == framework && run[:name] == runtime)
       end
     end
-    return false
+    false
   end
 end

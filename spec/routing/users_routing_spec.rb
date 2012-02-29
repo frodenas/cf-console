@@ -1,16 +1,16 @@
-require "spec_helper"
+require 'spec_helper'
 
 describe UsersController do
-  describe "routing" do
-    it "routes to #index" do
+  describe 'routes to' do
+    it 'users#index' do
       get("/users").should route_to("users#index")
     end
 
-    it "routes to #create" do
+    it 'users#create' do
       post("/users").should route_to("users#create")
     end
 
-    it "routes to #delete" do
+    it 'users#delete' do
       delete("/users/frodenas").should route_to("users#delete", :name => "frodenas")
     end
   end

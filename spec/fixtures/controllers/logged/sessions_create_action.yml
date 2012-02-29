@@ -1,80 +1,87 @@
----
-http_interactions:
-- request:
+--- 
+http_interactions: 
+- request: 
     method: get
-    uri: http://api.vcap.me:80/info
-    body: ''
-    headers:
-      User-Agent:
-      - cloudfoundry-client-0.1.1
-      Accept:
+    uri: http://api.vcap.me/info
+    body: 
+      encoding: US-ASCII
+      string: ""
+    headers: 
+      User-Agent: 
+      - cloudfoundry-client-0.2.0
+      Accept: 
       - application/json
-      Content-Type:
+      Content-Type: 
       - application/json
-      Accept-Encoding:
+      Accept-Encoding: 
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-  response:
-    status:
+  response: 
+    status: 
       code: 200
       message: OK
-    headers:
-      Server:
+    headers: 
+      Server: 
       - nginx/0.7.65
-      Date:
-      - Wed, 07 Dec 2011 22:39:31 GMT
-      Content-Type:
+      Date: 
+      - Mon, 27 Feb 2012 23:56:45 GMT
+      Content-Type: 
       - application/json; charset=utf-8
-      Transfer-Encoding:
+      Transfer-Encoding: 
       - chunked
-      Connection:
+      Connection: 
       - keep-alive
-      Keep-Alive:
+      Keep-Alive: 
       - timeout=20
-      Etag:
-      - ! '"cbc07ff8530919ca664fcfc8b21a398b"'
-      Cache-Control:
+      Etag: 
+      - "\"cbc07ff8530919ca664fcfc8b21a398b\""
+      Cache-Control: 
       - max-age=0, private, must-revalidate
-      X-Ua-Compatible:
+      X-Ua-Compatible: 
       - IE=Edge
-    body: ! '{"name":"vcap","build":2222,"support":"http://support.cloudfoundry.com","version":"0.999","description":"VMware''s
-      Cloud Application Platform","allow_debug":true}'
-    http_version: !!null 
-  recorded_at: Wed, 07 Dec 2011 22:39:34 GMT
-- request:
+    body: 
+      encoding: US-ASCII
+      string: "{\"name\":\"vcap\",\"build\":2222,\"support\":\"http://support.cloudfoundry.com\",\"version\":\"0.999\",\"description\":\"VMware's Cloud Application Platform\",\"allow_debug\":true}"
+    http_version: 
+  recorded_at: Mon, 27 Feb 2012 23:56:43 GMT
+- request: 
     method: post
-    uri: http://api.vcap.me:80/users/user@vcap.me/tokens
-    body: ! '{"password":"foobar"}'
-    headers:
-      User-Agent:
-      - cloudfoundry-client-0.1.1
-      Accept:
+    uri: http://api.vcap.me/users/user@vcap.me/tokens
+    body: 
+      encoding: US-ASCII
+      string: "{\"password\":\"foobar\"}"
+    headers: 
+      User-Agent: 
+      - cloudfoundry-client-0.2.0
+      Accept: 
       - application/json
-      Content-Type:
+      Content-Type: 
       - application/json
-  response:
-    status:
+  response: 
+    status: 
       code: 200
       message: OK
-    headers:
-      Server:
+    headers: 
+      Server: 
       - nginx/0.7.65
-      Date:
-      - Wed, 07 Dec 2011 22:39:32 GMT
-      Content-Type:
+      Date: 
+      - Mon, 27 Feb 2012 23:56:45 GMT
+      Content-Type: 
       - application/json; charset=utf-8
-      Transfer-Encoding:
+      Transfer-Encoding: 
       - chunked
-      Connection:
+      Connection: 
       - keep-alive
-      Keep-Alive:
+      Keep-Alive: 
       - timeout=20
-      Etag:
-      - ! '"8ea3ecd248344a5f921d841a1736eabf"'
-      Cache-Control:
+      Etag: 
+      - "\"af35d09de3c2242942f7374755d8affb\""
+      Cache-Control: 
       - max-age=0, private, must-revalidate
-      X-Ua-Compatible:
+      X-Ua-Compatible: 
       - IE=Edge
-    body: ! '{"token":"04085b084922117573657240766361702e6d65063a0645546c2b07a425e94e22198e17a751fda8ef6bcd2cf5c6675d92f45694b012"}'
-    http_version: !!null 
-  recorded_at: Wed, 07 Dec 2011 22:39:34 GMT
-recorded_with: VCR 2.0.0.beta2
+    body: 
+      encoding: US-ASCII
+      string: "{\"token\":\"04085b084922117573657240766361702e6d65063a0645546c2b07bd52554f2219e3f193e05498fdafb30d0bc0e2d212341f5deb5d\"}"
+    http_version: 
+  recorded_at: Mon, 27 Feb 2012 23:56:44 GMT
+recorded_with: VCR 2.0.0.rc2

@@ -3,6 +3,7 @@
 es:
   meta:
     language_name: "Español"
+    operation_not_permitted: "Operación no permitida"
   dashboard:
     title: "Escritorio"
     tab_account: "Cuenta"
@@ -207,6 +208,7 @@ es:
       zipfile_blank: "El fichero Zip no puede estar en blanco."
       gitrepo_blank: "La URI del repositorio Git no puede estar en blanco."
       gitbranch_blank: "La rama del repositorio Git no puede estar en blanco."
+      no_files: "No hay ficheros a actualizar."
       path_blank: "La ruta no puede estar en blanco."
       undetermined_state: "El estado de la aplicación es indeterminado, no hay suficiente información disponible."
       RUNNING: "En Ejecución"
@@ -366,3 +368,8 @@ es:
     iterator_exception: "Error interno - EM::Synchrony::Iterator exception: %{msg}."
     git_not_found: "No es posible encontrar el ejecutable git."
     git_clone_error: "No es posible clonar el repositorio. Error Git %{msg}."
+    zipfile_blank: "El fichero Zip no puede estar en blanco."
+    files_empty: "La lista de ficheros a empaquetar no puede estar vacia."
+    gitrepo_blank: "La URI del repositorio Git no puede estar en blanco."
+    gitbranch_blank: "La rama del repositorio Git no puede estar en blanco."
+    repodir_blank: "El directorio del repositorio Git no puede estar en blanco."

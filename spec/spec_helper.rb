@@ -1,5 +1,15 @@
 # This file is copied to spec/ when you run 'rails generate rspec:install'
-ENV["RAILS_ENV"] ||= 'test'
+begin
+  require 'simplecov'
+rescue LoadError
+  # ignore
+else
+  SimpleCov.start 'rails' do
+    coverage_dir "doc/coverage"
+  end
+end
+
+ENV["RAILS_ENV"] ||= "test"
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'rspec/autorun'
@@ -34,4 +44,8 @@ RSpec.configure do |config|
 
   # Make use_vcr_cassette available as a macro
   config.extend VCR::RSpec::Macros
+end
+
+def spec_fixture(filename)
+  File.expand_path(File.join(File.dirname(__FILE__), "fixtures", filename))
 end

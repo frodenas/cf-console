@@ -15,7 +15,7 @@ class AppsController < ApplicationController
       end
       @available_frameworks = find_available_frameworks_runtimes()
       @available_services = find_available_services()
-      if configatron.suggest.app.url == true
+      if configatron.suggest.app.url
         host = @cf_target_url.split("//")[1]
         @newapp_default_urldomain = host.split(".").drop(1).join(".")
       end
@@ -36,49 +36,44 @@ class AppsController < ApplicationController
     @gitrepo = params[:gitrepo]
     @gitbranch = params[:gitbranch]
     app_created = false
-    if !@name.nil? && !@name.empty?
-      if !@instances.nil? && !@instances.empty?
-        if !@memsize.nil? && !@memsize.empty?
-          if !@type.nil? && !@type.empty?
-            if !@url.nil? && !@url.empty?
-              begin
-                framework, runtime = @type.split("/")
-                app = App.new(@cf_client)
-                app.create(@name.strip, @instances, @memsize, @url.strip.gsub(/^http(s*):\/\//i, '').downcase, framework, runtime, @service)
-                @new_app = [] << app.find(@name.strip)
-                flash[:notice] = t('apps.controller.app_created', :name => @name)
-                app_created = true
-              rescue Exception => ex
-                flash[:alert] = ex.message
-              end
-            else
-              flash[:alert] = t('apps.controller.url_blank')
-            end
-          else
-            flash[:alert] = t('apps.controller.type_blank')
-          end
-        else
-          flash[:alert] = t('apps.controller.memsize_blank')
-        end
-      else
-        flash[:alert] = t('apps.controller.instances_blank')
-      end
+    if @name.blank?
+      flash[:alert] = I18n.t('apps.controller.name_blank')
+    elsif @instances.blank?
+      flash[:alert] = I18n.t('apps.controller.instances_blank')
+    elsif @memsize.blank?
+      flash[:alert] = I18n.t('apps.controller.memsize_blank')
+    elsif @type.blank?
+      flash[:alert] = I18n.t('apps.controller.type_blank')
+    elsif @url.blank?
+      flash[:alert] = I18n.t('apps.controller.url_blank')
     else
-      flash[:alert] = t('apps.controller.name_blank')
+      begin
+        @name = @name.strip.downcase
+        framework, runtime = @type.split("/")
+        @url = @url.strip.gsub(/^http(s*):\/\//i, '').downcase
+        app = App.new(@cf_client)
+        app.create(@name, @instances, @memsize, @url, framework, runtime, @service)
+        @new_app = [] << app.find(@name)
+        flash[:notice] = I18n.t('apps.controller.app_created', :name => @name)
+        app_created = true
+      rescue Exception => ex
+        flash[:alert] = ex.message
+      end
     end
-    if app_created == true
-      if !@gitrepo.nil? && !@gitrepo.strip.empty?
-        if Utils::GitUtil.git_uri_valid?(@gitrepo.strip)
+    if app_created
+      unless @gitrepo.blank?
+        @gitrepo = @gitrepo.strip
+        if Utils::GitUtil.git_uri_valid?(@gitrepo)
           begin
-            @gitbranch = "master" if @gitbranch.nil? || @gitbranch.strip.empty?
+            @gitbranch = @gitbranch.blank? ? "master" : @gitbranch.strip
             app = App.new(@cf_client)
             app.upload_app_from_git(@name, @gitrepo, @gitbranch)
-            flash[:notice] = t('apps.controller.app_created_bits_uploaded', :name => @name)
+            flash[:notice] = I18n.t('apps.controller.app_created_bits_uploaded', :name => @name)
           rescue Exception => ex
-            flash[:notice] = t('apps.controller.app_created_no_bits', :name => @name, :msg => ex.message)
+            flash[:notice] = I18n.t('apps.controller.app_created_no_bits', :name => @name, :msg => ex.message)
           end
         else
-          flash[:notice] = t('apps.controller.app_created_no_bits', :name => @name, :msg => "Invalid Git Repository URI.")
+          flash[:notice] = I18n.t('apps.controller.app_created_no_bits', :name => @name, :msg => "Invalid Git Repository URI.")
         end
       end
     end
@@ -90,41 +85,48 @@ class AppsController < ApplicationController
 
   def show
     @name = params[:name]
-    begin
-      app = App.new(@cf_client)
-      @app = app.find(@name)
-      @app[:instances_info] = Utils::FiberedIterator.map(@app[:instances_info], configatron.reactor_iterator.concurrency) do |instance|
-        if !instance[:stats].nil?
-          instance[:logfiles] = find_log_files(@name, instance[:instance])
-        else
-          instance[:logfiles] = []
-        end
-        instance
-      end
-      @app[:services] = Utils::FiberedIterator.map(@app[:services], configatron.reactor_iterator.concurrency) do |service|
-        find_service_details(service)
-      end
-      @app_files = find_files(@name, "/")
-      @available_instances = find_available_instances(@app[:state], @app[:resources][:memory], @app[:instances])
-      @available_memsizes = find_available_memsizes(@app[:state], @app[:resources][:memory], @app[:instances])
-      @available_services = find_available_services()
-    rescue CloudFoundry::Client::Exception::NotFound => ex
-      flash[:alert] = ex.message
+    if @name.blank?
+      flash[:alert] = I18n.t('apps.controller.name_blank')
       redirect_to apps_info_url
-    rescue Exception => ex
-      flash[:alert] = ex.message
+    else
+      begin
+        @name = @name.strip
+        app = App.new(@cf_client)
+        @app = app.find(@name)
+        @app[:instances_info] = Utils::FiberedIterator.map(@app[:instances_info], configatron.reactor_iterator.concurrency) do |instance|
+          instance[:stats].nil? ? instance[:logfiles] = [] : instance[:logfiles] = find_log_files(@name, instance[:instance])
+          instance
+        end
+        @app[:services] = Utils::FiberedIterator.map(@app[:services], configatron.reactor_iterator.concurrency) do |service|
+          find_service_details(service)
+        end
+        @app_files = find_files(@name, "/")
+        @available_instances = find_available_instances(@app[:state], @app[:resources][:memory], @app[:instances])
+        @available_memsizes = find_available_memsizes(@app[:state], @app[:resources][:memory], @app[:instances])
+        @available_services = find_available_services()
+      rescue CloudFoundry::Client::Exception::NotFound => ex
+        flash[:alert] = ex.message
+        redirect_to apps_info_url
+      rescue Exception => ex
+        flash[:alert] = ex.message
+      end
     end
   end
 
   def start
     @name = params[:name]
-    begin
-      app = App.new(@cf_client)
-      @updated_app = [] << app.start(@name)
-      @updated_app.collect! { |app_info| app.find(@name)}
-      flash[:notice] = t('apps.controller.app_started', :name => @name)
-    rescue Exception => ex
-      flash[:alert] = ex.message
+    if @name.blank?
+      flash[:alert] = I18n.t('apps.controller.name_blank')
+    else
+      begin
+        @name = @name.strip
+        app = App.new(@cf_client)
+        @updated_app = [] << app.start(@name)
+        @updated_app.collect! { |app_info| app.find(@name)}
+        flash[:notice] = I18n.t('apps.controller.app_started', :name => @name)
+      rescue Exception => ex
+        flash[:alert] = ex.message
+      end
     end
     respond_to do |format|
       format.html { redirect_to apps_info_url }
@@ -134,13 +136,18 @@ class AppsController < ApplicationController
 
   def stop
     @name = params[:name]
-    begin
-      app = App.new(@cf_client)
-      @updated_app = [] << app.stop(@name)
-      @updated_app.collect! { |app_info| app.find(@name)}
-      flash[:notice] = t('apps.controller.app_stopped', :name => @name)
-    rescue Exception => ex
-      flash[:alert] = ex.message
+    if @name.blank?
+      flash[:alert] = I18n.t('apps.controller.name_blank')
+    else
+      begin
+        @name = @name.strip
+        app = App.new(@cf_client)
+        @updated_app = [] << app.stop(@name)
+        @updated_app.collect! { |app_info| app.find(@name)}
+        flash[:notice] = I18n.t('apps.controller.app_stopped', :name => @name)
+      rescue Exception => ex
+        flash[:alert] = ex.message
+      end
     end
     respond_to do |format|
       format.html { redirect_to apps_info_url }
@@ -150,13 +157,18 @@ class AppsController < ApplicationController
 
   def restart
     @name = params[:name]
-    begin
-      app = App.new(@cf_client)
-      @updated_app = [] << app.restart(@name)
-      @updated_app.collect! { |app_info| app.find(@name)}
-      flash[:notice] = t('apps.controller.app_restarted', :name => @name)
-    rescue Exception => ex
-      flash[:alert] = ex.message
+    if @name.blank?
+      flash[:alert] = I18n.t('apps.controller.name_blank')
+    else
+      begin
+        @name = @name.strip
+        app = App.new(@cf_client)
+        @updated_app = [] << app.restart(@name)
+        @updated_app.collect! { |app_info| app.find(@name)}
+        flash[:notice] = I18n.t('apps.controller.app_restarted', :name => @name)
+      rescue Exception => ex
+        flash[:alert] = ex.message
+      end
     end
     respond_to do |format|
       format.html { redirect_to apps_info_url }
@@ -166,12 +178,17 @@ class AppsController < ApplicationController
 
   def delete
     @name = params[:name]
-    begin
-      app = App.new(@cf_client)
-      app.delete(@name)
-      flash[:notice] = t('apps.controller.app_deleted', :name => @name)
-    rescue Exception => ex
-      flash[:alert] = ex.message
+    if @name.blank?
+      flash[:alert] = I18n.t('apps.controller.name_blank')
+    else
+      begin
+        @name = @name.strip
+        app = App.new(@cf_client)
+        app.delete(@name)
+        flash[:notice] = I18n.t('apps.controller.app_deleted', :name => @name)
+      rescue Exception => ex
+        flash[:alert] = ex.message
+      end
     end
     respond_to do |format|
       format.html { redirect_to apps_info_url }
@@ -182,16 +199,19 @@ class AppsController < ApplicationController
   def set_instances
     @name = params[:name]
     @instances = params[:instances]
-    if !@instances.nil? && !@instances.empty?
+    if @name.blank?
+      flash[:alert] = I18n.t('apps.controller.name_blank')
+    elsif @instances.blank?
+      flash[:alert] = I18n.t('apps.controller.instances_blank')
+    else
       begin
+        @name = @name.strip
         app = App.new(@cf_client)
         app.set_instances(@name, @instances)
-        flash[:notice] = t('apps.controller.instances_set', :instances => @instances)
+        flash[:notice] = I18n.t('apps.controller.instances_set', :instances => @instances)
       rescue Exception => ex
         flash[:alert] = ex.message
       end
-    else
-      flash[:alert] = t('apps.controller.instances_blank')
     end
     respond_to do |format|
       format.html { redirect_to app_info_url(@name) }
@@ -209,16 +229,19 @@ class AppsController < ApplicationController
   def set_memsize
     @name = params[:name]
     @memsize = params[:memsize]
-    if !@memsize.nil? && !@memsize.empty?
+    if @name.blank?
+      flash[:alert] = I18n.t('apps.controller.name_blank')
+    elsif @memsize.blank?
+      flash[:alert] = I18n.t('apps.controller.memsize_blank')
+    else
       begin
+        @name = @name.strip
         app = App.new(@cf_client)
         app.set_memsize(@name, @memsize)
-        flash[:notice] = t('apps.controller.memsize_set', :memsize => @memsize)
+        flash[:notice] = I18n.t('apps.controller.memsize_set', :memsize => @memsize)
       rescue Exception => ex
         flash[:alert] = ex.message
       end
-    else
-      flash[:alert] = t('apps.controller.memsize_blank')
     end
     respond_to do |format|
       format.html { redirect_to app_info_url(@name) }
@@ -237,23 +260,29 @@ class AppsController < ApplicationController
     @name    = params[:name]
     @edit    = params[:edit]
     @restart = params[:restart]
-    if @edit.nil?
-      @var_name = params[:var_name].strip.upcase
+    if @name.blank?
+      flash[:alert] = I18n.t('apps.controller.name_blank')
     else
-      envvar, @var_name = params[:id].split("-envvar-")
-    end
-    @var_value = params[:var_value]
-    if !@var_name.nil? && !@var_name.empty?
-      begin
-        app = App.new(@cf_client)
-        @var_exists = app.set_var(@name, @var_name, @var_value, @restart)
-        @new_var = [] << {:var_name => @var_name, :var_value => @var_value}
-        flash[:notice] = t('apps.controller.envvar_set', :var_name => @var_name)
-      rescue Exception => ex
-        flash[:alert] = ex.message
+      if @edit.nil?
+        @var_name = params[:var_name]
+      else
+        envvar, @var_name = params[:id].split("-envvar-")
       end
-    else
-      flash[:alert] = t('apps.controller.varname_blank')
+      if @var_name.blank?
+       flash[:alert] = I18n.t('apps.controller.varname_blank')
+      else
+        begin
+          @name = @name.strip
+          @var_name = @var_name.strip.upcase
+          @var_value = params[:var_value]
+          app = App.new(@cf_client)
+          @var_exists = app.set_var(@name, @var_name, @var_value, @restart)
+          @new_var = [] << {:var_name => @var_name, :var_value => @var_value}
+          flash[:notice] = I18n.t('apps.controller.envvar_set', :var_name => @var_name)
+        rescue Exception => ex
+          flash[:alert] = ex.message
+        end
+      end
     end
     respond_to do |format|
       format.html { redirect_to app_info_url(@name) }
@@ -271,12 +300,20 @@ class AppsController < ApplicationController
   def unset_var
     @name = params[:name]
     @var_name = params[:var_name]
-    begin
-      app = App.new(@cf_client)
-      app.unset_var(@name, @var_name)
-      flash[:notice] = t('apps.controller.envvar_unset', :var_name => @var_name)
-    rescue Exception => ex
-      flash[:alert] = ex.message
+    if @name.blank?
+      flash[:alert] = I18n.t('apps.controller.name_blank')
+    elsif @var_name.blank?
+      flash[:alert] = I18n.t('apps.controller.varname_blank')
+    else
+      begin
+        @name = @name.strip
+        @var_name = @var_name.strip.upcase
+        app = App.new(@cf_client)
+        app.unset_var(@name, @var_name)
+        flash[:notice] = I18n.t('apps.controller.envvar_unset', :var_name => @var_name)
+      rescue Exception => ex
+        flash[:alert] = ex.message
+      end
     end
     respond_to do |format|
       format.html { redirect_to app_info_url(@name) }
@@ -290,17 +327,20 @@ class AppsController < ApplicationController
   def bind_service
     @name = params[:name]
     @service = params[:service]
-    if !@service.nil? && !@service.empty?
+    if @name.blank?
+      flash[:alert] = I18n.t('apps.controller.name_blank')
+    elsif @service.blank?
+      flash[:alert] = I18n.t('apps.controller.service_blank')
+    else
       begin
+        @name = @name.strip
         app = App.new(@cf_client)
         app.bind_service(@name, @service)
         @new_service = [] << find_service_details(@service)
-        flash[:notice] = t('apps.controller.service_binded', :service => @service)
+        flash[:notice] = I18n.t('apps.controller.service_binded', :service => @service)
       rescue Exception => ex
         flash[:alert] = ex.message
       end
-    else
-      flash[:alert] = t('apps.controller.service_blank')
     end
     respond_to do |format|
       format.html { redirect_to app_info_url(@name) }
@@ -314,12 +354,19 @@ class AppsController < ApplicationController
   def unbind_service
     @name = params[:name]
     @service = params[:service]
-    begin
-      app = App.new(@cf_client)
-      app.unbind_service(@name, @service)
-      flash[:notice] = t('apps.controller.service_unbinded', :service => @service)
-    rescue Exception => ex
-      flash[:alert] = ex.message
+    if @name.blank?
+      flash[:alert] = I18n.t('apps.controller.name_blank')
+    elsif @service.blank?
+      flash[:alert] = I18n.t('apps.controller.service_blank')
+    else
+      begin
+        @name = @name.strip
+        app = App.new(@cf_client)
+        app.unbind_service(@name, @service)
+        flash[:notice] = I18n.t('apps.controller.service_unbinded', :service => @service)
+      rescue Exception => ex
+        flash[:alert] = ex.message
+      end
     end
     respond_to do |format|
       format.html { redirect_to app_info_url(@name) }
@@ -332,17 +379,21 @@ class AppsController < ApplicationController
 
   def map_url
     @name = params[:name]
-    @url = params[:url].strip.gsub(/^http(s*):\/\//i, '').downcase
-    if !@url.nil? && !@url.empty?
+    @url = params[:url]
+    if @name.blank?
+      flash[:alert] = I18n.t('apps.controller.name_blank')
+    elsif @url.blank?
+      flash[:alert] = I18n.t('apps.controller.url_blank')
+    else
       begin
+        @name = @name.strip
+        @url = @url.strip.gsub(/^http(s*):\/\//i, '').downcase
         app = App.new(@cf_client)
         @new_url = [] << app.map_url(@name, @url)
-        flash[:notice] = t('apps.controller.url_mapped', :url => @url)
+        flash[:notice] = I18n.t('apps.controller.url_mapped', :url => @url)
       rescue Exception => ex
         flash[:alert] = ex.message
       end
-    else
-      flash[:alert] = t('apps.controller.url_blank')
     end
     respond_to do |format|
       format.html { redirect_to app_info_url(@name) }
@@ -355,14 +406,22 @@ class AppsController < ApplicationController
 
   def unmap_url
     @name = params[:name]
-    @url = params[:url].gsub(/^http(s*):\/\//i, '')
-    begin
-      app = App.new(@cf_client)
-      app.unmap_url(@name, @url)
-      @url_hash = @url.hash.to_s
-      flash[:notice] = t('apps.controller.url_unmapped', :url => @url)
-    rescue Exception => ex
-      flash[:alert] = ex.message
+    @url = params[:url]
+    if @name.blank?
+      flash[:alert] = I18n.t('apps.controller.name_blank')
+    elsif @url.blank?
+      flash[:alert] = I18n.t('apps.controller.url_blank')
+    else
+      begin
+        @name = @name.strip
+        @url = @url.strip.gsub(/^http(s*):\/\//i, '').downcase
+        app = App.new(@cf_client)
+        app.unmap_url(@name, @url)
+        @url_hash = @url.hash.to_s
+        flash[:notice] = I18n.t('apps.controller.url_unmapped', :url => @url)
+      rescue Exception => ex
+        flash[:alert] = ex.message
+      end
     end
     respond_to do |format|
       format.html { redirect_to app_info_url(@name) }
@@ -378,25 +437,25 @@ class AppsController < ApplicationController
     @deployform = params[:deployform]
     @gitrepo = params[:gitrepo]
     @gitbranch = params[:gitbranch]
-    if !@name.nil? && !@name.strip.empty?
-      if !@gitrepo.nil? && !@gitrepo.strip.empty?
-        if Utils::GitUtil.git_uri_valid?(@gitrepo.strip)
-          begin
-            @gitbranch = "master" if @gitbranch.nil? || @gitbranch.strip.empty?
-            app = App.new(@cf_client)
-            app.upload_app_from_git(@name, @gitrepo, @gitbranch)
-            flash[:notice] = t('apps.controller.bits_uploaded')
-          rescue Exception => ex
-            flash[:alert] = ex.message
-          end
-        else
-          flash[:alert] = t('apps.controller.gitrepo_invalid')
+    if @name.blank?
+      flash[:alert] = I18n.t('apps.controller.name_blank')
+    elsif @gitrepo.blank?
+      flash[:alert] = I18n.t('apps.controller.gitrepo_blank')
+    else
+      @name = @name.strip
+      @gitrepo = @gitrepo.strip
+      if Utils::GitUtil.git_uri_valid?(@gitrepo)
+        begin
+          @gitbranch = @gitbranch.blank? ? "master" : @gitbranch.strip
+          app = App.new(@cf_client)
+          app.upload_app_from_git(@name, @gitrepo, @gitbranch)
+          flash[:notice] = I18n.t('apps.controller.bits_uploaded')
+        rescue Exception => ex
+          flash[:alert] = ex.message
         end
       else
-        flash[:alert] = t('apps.controller.gitrepo_blank')
+        flash[:alert] = I18n.t('apps.controller.gitrepo_invalid')
       end
-    else
-      flash[:alert] = t('apps.controller.name_blank')
     end
     respond_to do |format|
       format.html { redirect_to apps_info_url }
@@ -407,7 +466,9 @@ class AppsController < ApplicationController
   def download_bits
     @name = params[:name]
     bits_sended = false
-    if !@name.nil? && !@name.strip.empty?
+    if @name.blank?
+      flash[:alert] = I18n.t('apps.controller.name_blank')
+    else
       begin
         app = App.new(@cf_client)
         zipfile = app.download_app(@name)
@@ -416,10 +477,8 @@ class AppsController < ApplicationController
       rescue Exception => ex
         flash[:alert] = ex.message
       end
-    else
-      flash[:alert] = t('apps.controller.name_blank')
     end
-    if !bits_sended
+    unless bits_sended
       respond_to do |format|
         format.html { redirect_to app_info_url(@name) }
       end
@@ -433,15 +492,18 @@ class AppsController < ApplicationController
     @name = params[:name]
     @instance = params[:instance] || 0
     @filename = params[:filename]
-    if !@filename.nil? && !@filename.empty?
+    if @name.blank?
+      flash[:alert] = I18n.t('apps.controller.name_blank')
+    elsif @filename.blank?
+      flash[:alert] = I18n.t('apps.controller.filename_blank')
+    else
+      @name = @name.strip
       @filename = Base64.decode64(@filename)
       begin
         @app_files = find_files(@name, @filename, @instance)
       rescue Exception => ex
         flash[:alert] = ex.message
       end
-    else
-      flash[:alert] = t('apps.controller.filename_blank')
     end
     respond_to do |format|
       format.html { redirect_to app_info_url(@name) }
@@ -457,12 +519,19 @@ class AppsController < ApplicationController
     @instance = params[:instance] || 0
     @filename = params[:filename]
     @formatcode = params[:formatcode] || "true"
-    if !@filename.nil? && !@filename.empty?
+    if @name.blank?
+      flash[:alert] = I18n.t('apps.controller.name_blank')
+    elsif @filename.blank?
+      flash[:alert] = I18n.t('apps.controller.filename_blank')
+    else
+      @name = @name.strip
       @filename = Base64.decode64(@filename)
       begin
         app = App.new(@cf_client)
         contents = app.view_file(@name, @filename, @instance)
-        if !is_binary?(contents)
+        if is_binary?(contents)
+          flash[:alert] = I18n.t('apps.controller.file_binary')
+        else
           if @formatcode == "true"
             lang = CodeRay::FileType[@filename]
             code = CodeRay.scan(contents, lang)
@@ -471,14 +540,10 @@ class AppsController < ApplicationController
           else
             @file_contents = contents.split("\n")
           end
-        else
-          flash[:alert] = t('apps.controller.file_binary')
         end
       rescue Exception => ex
-        flash[:alert] = t('apps.controller.file_not_found')
+        flash[:alert] = I18n.t('apps.controller.file_not_found')
       end
-    else
-      flash[:alert] = t('apps.controller.filename_blank')
     end
     respond_to do |format|
       format.html {
@@ -498,16 +563,16 @@ class AppsController < ApplicationController
     system = System.new(@cf_client)
     frameworks = system.find_all_frameworks()
     if frameworks.empty?
-      available_frameworks << [t('apps.controller.no_frameworks'), ""]
+      available_frameworks << [I18n.t('apps.controller.no_frameworks'), ""]
     else
-      available_frameworks << [t('apps.controller.select_framework'), ""]
+      available_frameworks << [I18n.t('apps.controller.select_framework'), ""]
       frameworks.each do |fwk_name, fwk|
         fwk[:runtimes].each do |run|
           available_frameworks << [fwk[:name].capitalize + " on " + run[:description], fwk_name.to_s + "/" + run[:name].to_s]
         end
       end
     end
-    return available_frameworks
+    available_frameworks
   end
 
   def find_available_instances(app_state, app_memsize, app_instances)
@@ -517,7 +582,6 @@ class AppsController < ApplicationController
       available_for_use = available_for_use + (app_memsize.to_i * app_instances.to_i)
     end
     available_instances = available_for_use.to_i / app_memsize.to_i
-    return available_instances
   end
 
   def find_available_memsizes(app_state, app_memsize, app_instances)
@@ -535,13 +599,13 @@ class AppsController < ApplicationController
     available_memsizes[1024] = "1 Gb" if available_for_use >= (1024 * app_instances.to_i)
     available_memsizes[2048] = "2 Gb" if available_for_use >= (2048 * app_instances.to_i)
     if available_memsizes.empty?
-      available_memsizes[""] = t('apps.controller.no_memory')
+      available_memsizes[""] = I18n.t('apps.controller.no_memory')
     else
       if app_memsize > 0
         available_memsizes["selected"] = app_memsize
       end
     end
-    return available_memsizes
+    available_memsizes
   end
 
   def find_available_services
@@ -549,14 +613,14 @@ class AppsController < ApplicationController
     service = Service.new(@cf_client)
     provisioned_services = service.find_all_services()
     if provisioned_services.empty?
-      available_services << [t('apps.controller.no_services'), ""]
+      available_services << [I18n.t('apps.controller.no_services'), ""]
     else
-      available_services << [t('apps.controller.select_service'), ""]
+      available_services << [I18n.t('apps.controller.select_service'), ""]
       provisioned_services.each do |service_info|
         available_services << [service_info[:name] + " (" + service_info[:vendor] + " " + service_info[:version] + ")", service_info[:name]]
       end
     end
-    return available_services
+    available_services
   end
 
   def find_files(name, path, instance = 0)
@@ -578,14 +642,14 @@ class AppsController < ApplicationController
       end
       files << {:name => filename.to_s, :size => filesize.to_s, :type => filetype, :path => path}
     end
-    return files
+    files
   end
 
   def find_log_files(name, instance)
     instance_logs = []
     logfiles = find_files(name, "/logs", instance.to_i)
-    if !logfiles.empty?
-      ['stdout.log', 'stderr.log', 'startup.log', 'err.log', 'staging.log', 'migration.log'].each do |log|
+    unless logfiles.empty?
+      %w(stdout.log, stderr.log, startup.log, err.log, staging.log, migration.log).each do |log|
         logfiles.each do |logfile|
           if logfile[:name] == log && logfile[:size] != "0B"
             name = logfile[:name].split(".")
@@ -595,7 +659,7 @@ class AppsController < ApplicationController
         end
       end
     end
-    return instance_logs
+    instance_logs
   end
 
   def find_service_details(name)

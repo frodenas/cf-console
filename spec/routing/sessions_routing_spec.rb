@@ -1,16 +1,16 @@
-require "spec_helper"
+require 'spec_helper'
 
 describe SessionsController do
-  describe "routing" do
-    it "routes to #index" do
+  describe 'routes to' do
+    it 'sessions#new' do
       get("/login").should route_to("sessions#new")
     end
 
-    it "routes to #create" do
+    it 'sessions#create' do
       post("/login").should route_to("sessions#create")
     end
 
-    it "routes to #destroy" do
+    it 'sessions#destroy' do
       get("/logout").should route_to("sessions#destroy")
     end
   end

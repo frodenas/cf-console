@@ -4,36 +4,40 @@ class User
   end
 
   def find_all_users()
-    return @cf_client.list_users || []
+    @cf_client.list_users || []
   end
 
   def find(username)
-    raise t('users.model.email_blank') if username.nil? || username.empty?
-    user_info = nil
-    users = find_all_users()
-    users.each do |user_item|
-      if user_item[:email] == username
-        user_info = user_item
-        break
+    raise I18n.t('users.model.email_blank') if username.blank?
+    user_info = @cf_client.user_info(username) || nil
+    # cc's prior to 31143c1 commit doesn't return the admin flag
+    if !user_info.nil? && !user_info.has_key?(:admin)
+      user_info = nil
+      users = find_all_users()
+      users.each do |user_item|
+        if user_item[:email] == username
+          user_info = user_item
+          break
+        end
       end
     end
-    return user_info
+    user_info
   end
 
   def is_admin?(username)
     user_info = find(username)
     return true if !user_info.nil? && user_info[:admin] == true
-    return false
+    false
   end
 
   def create(username, password)
-    raise t('users.model.email_blank') if username.nil? || username.empty?
-    raise t('users.model.password_blank') if password.nil? || password.empty?
+    raise I18n.t('users.model.email_blank') if username.blank?
+    raise I18n.t('users.model.password_blank') if password.blank?
     @cf_client.create_user(username, password)
   end
 
   def delete(username)
-    raise t('users.model.email_blank') if username.nil? || username.empty?
+    raise I18n.t('users.model.email_blank') if username.blank?
     @cf_client.delete_user(username)
   end
 end

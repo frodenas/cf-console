@@ -24,10 +24,11 @@ end
 
 # RSpec2 needs to be in the :development group to expose generators and rake tasks without having to type RAILS_ENV=test
 group :development, :test do
-  gem "rspec-rails", "~> 2.8.1"
+  gem 'rspec-rails', '~> 2.8.1'
 end
 
 group :test do
-  gem "webmock", "~> 1.7.10"
-  gem "vcr", "~> 2.0.0.rc1"
+  gem 'webmock', '~> 1.8.0'
+  gem 'vcr', '~> 2.0.0.rc2'
+  gem 'simplecov', '~> 0.6.1', :require => false
 end

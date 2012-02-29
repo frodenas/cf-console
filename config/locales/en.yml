@@ -3,6 +3,7 @@
 en:
   meta:
     language_name: "English"
+    operation_not_permitted: "Operation not permitted"
   dashboard:
     title: "Dashboard"
     tab_account: "Account"
@@ -197,8 +198,8 @@ en:
       start_failed: "Application failed to start, check your logs."
       start_too_long: "Application is taking too long to start, check your logs."
       envvar_blank: "Variable name cannot be blank."
-      envvar_invalid: "Invalid variable name: \"%{name}\". Must contain only letters, numbers, hyphen or underscore."
-      envvar_not_set: "Environment variable \"%{name}\" is not set."
+      envvar_invalid: "Invalid variable name: \"%{var_name}\". Must contain only letters, numbers, hyphen or underscore."
+      envvar_not_set: "Environment variable \"%{var_name}\" is not set."
       service_blank: "Service cannot be blank."
       service_exists: "Service \"%{service}\" already binded."
       service_not_binded: "Service \"%{service}\" is not binded."
@@ -207,6 +208,7 @@ en:
       zipfile_blank: "Zipfile cannot be blank."
       gitrepo_blank: "Git Repository URI cannot be blank."
       gitbranch_blank: "Git Repository Branch cannot be blank."
+      no_files: "No files to upload."
       path_blank: "Path cannot be blank."
       undetermined_state: "Application state is undetermined, not enough information available."
       RUNNING: "Running"
@@ -366,3 +368,8 @@ en:
     iterator_exception: "Internal error - EM::Synchrony::Iterator exception: %{msg}."
     git_not_found: "Unable to find git binary."
     git_clone_error: "Unable to clone the repository. Git error %{msg}."
+    zipfile_blank: "Zipfile cannot be blank."
+    files_empty: "Files list to pack cannot be empty."
+    gitrepo_blank: "Git Repository URI cannot be blank."
+    gitbranch_blank: "Git Repository Branch cannot be blank."
+    repodir_blank: "Git Repository Directory cannot be blank."

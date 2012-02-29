@@ -1,16 +1,16 @@
-require "spec_helper"
+require 'spec_helper'
 
 describe ServicesController do
-  describe "routing" do
-    it "routes to #index" do
+  describe 'routes to' do
+    it 'services#index' do
       get("/services").should route_to("services#index")
     end
 
-    it "routes to #create" do
+    it 'services#create' do
       post("/services").should route_to("services#create")
     end
 
-    it "routes to #delete" do
+    it 'services#delete' do
       delete("/services/mysql").should route_to("services#delete", :name => "mysql")
     end
   end

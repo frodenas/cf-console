@@ -3,7 +3,7 @@ require 'spec_helper'
 describe System do
   include CfConnectionHelper
 
-  context "without a user logged in" do
+  context 'without a user logged in' do
     before(:all) do
       VCR.use_cassette("models/no_logged/client", :record => :new_episodes) do
         cf_client = cloudfoundry_client(CloudFoundry::Client::DEFAULT_TARGET)
@@ -20,6 +20,7 @@ describe System do
       account_info.should have_key :support
       account_info.should have_key :version
       account_info.should have_key :description
+      account_info.should have_key :allow_debug
     end
 
     it 'returns an empty list of frameworks' do
@@ -45,7 +46,7 @@ describe System do
     end
   end
 
-  context "with a user logged in" do
+  context 'with a user logged in' do
     before(:all) do
       VCR.use_cassette("models/logged/client", :record => :new_episodes) do
         cf_client = cloudfoundry_client_user_logged(CloudFoundry::Client::DEFAULT_TARGET)
@@ -62,9 +63,10 @@ describe System do
       account_info.should have_key :support
       account_info.should have_key :version
       account_info.should have_key :description
+      account_info.should have_key :allow_debug
       account_info.should have_key :user
-      account_info.should have_key :usage
       account_info.should have_key :limits
+      account_info.should have_key :usage
       account_info.should have_key :frameworks
     end
 
@@ -73,8 +75,9 @@ describe System do
       frameworks.should have_at_least(1).items
       framework_info = frameworks.first[1]
       framework_info.should have_key :name
-      framework_info.should have_key :appservers
       framework_info.should have_key :runtimes
+      framework_info.should have_key :appservers
+      framework_info.should have_key :detection
     end
 
     it 'returns a proper list of runtimes' do
@@ -91,11 +94,11 @@ describe System do
       system_services.should have_at_least(1).items
       system_service_info = system_services.first[1].values[0].first[1]
       system_service_info.should have_key :id
-      system_service_info.should have_key :type
       system_service_info.should have_key :vendor
       system_service_info.should have_key :version
-      system_service_info.should have_key :description
       system_service_info.should have_key :tiers
+      system_service_info.should have_key :type
+      system_service_info.should have_key :description
     end
 
     it 'returns the user account available memory' do

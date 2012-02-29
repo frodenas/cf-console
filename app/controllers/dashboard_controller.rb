@@ -27,10 +27,10 @@ class DashboardController < ApplicationController
       Utils::FiberedIterator.each(apps, configatron.reactor_iterator.concurrency) do |app_item|
         app_info = app.find(app_item[:name])
         app_info[:instances_states].each do |instance_states|
-          if !instances_states[instance_states[:label]]
-            instances_states[instance_states[:label]] = instance_states
-          else
+          if instances_states[instance_states[:label]]
             instances_states[instance_states[:label]][:data] += instance_states[:data]
+          else
+            instances_states[instance_states[:label]] = instance_states
           end
         end
       end

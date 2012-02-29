@@ -2,185 +2,15 @@
 http_interactions: 
 - request: 
     method: get
-    uri: http://api.vcap.me:80/apps
-    body: ""
+    uri: http://api.vcap.me/apps/fakeapp
+    body: 
+      encoding: US-ASCII
+      string: ""
     headers: 
       User-Agent: 
-      - cloudfoundry-client-0.1.1
+      - cloudfoundry-client-0.2.0
       Authorization: 
-      - 04085b084922117573657240766361702e6d65063a0645546c2b07aa25e94e22193357f6e166053ef17797b5879877f6ca4542382f
-      Accept: 
-      - application/json
-      Content-Type: 
-      - application/json
-      Accept-Encoding: 
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-  response: 
-    status: 
-      code: 200
-      message: OK
-    headers: 
-      Server: 
-      - nginx/0.7.65
-      Date: 
-      - Wed, 07 Dec 2011 22:39:38 GMT
-      Content-Type: 
-      - application/json; charset=utf-8
-      Transfer-Encoding: 
-      - chunked
-      Connection: 
-      - keep-alive
-      Keep-Alive: 
-      - timeout=20
-      Etag: 
-      - "\"fcf049bc7fc07a856c0af8dedc1380fa\""
-      Cache-Control: 
-      - max-age=0, private, must-revalidate
-      X-Ua-Compatible: 
-      - IE=Edge
-    body: "[{\"name\":\"newapp\",\"staging\":{\"model\":\"node\",\"stack\":\"node\"},\"uris\":[\"newapp.vcap.me\"],\"instances\":1,\"runningInstances\":null,\"resources\":{\"memory\":64,\"disk\":2048,\"fds\":256},\"state\":\"STOPPED\",\"services\":[],\"version\":\"4f71126c62ec09a219abf6d18ba122d1-0\",\"env\":[],\"meta\":{\"debug\":null,\"version\":1,\"created\":1323297578}}]"
-    http_version: !!null 
-      str: ""
-      :@taguri: x-private:null
-  recorded_at: Wed, 07 Dec 2011 22:39:40 GMT
-- request: 
-    method: get
-    uri: http://api.vcap.me:80/apps/newapp
-    body: ""
-    headers: 
-      User-Agent: 
-      - cloudfoundry-client-0.1.1
-      Authorization: 
-      - 04085b084922117573657240766361702e6d65063a0645546c2b07aa25e94e22193357f6e166053ef17797b5879877f6ca4542382f
-      Accept: 
-      - application/json
-      Content-Type: 
-      - application/json
-      Accept-Encoding: 
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-  response: 
-    status: 
-      code: 200
-      message: OK
-    headers: 
-      Server: 
-      - nginx/0.7.65
-      Date: 
-      - Wed, 07 Dec 2011 22:39:38 GMT
-      Content-Type: 
-      - application/json; charset=utf-8
-      Transfer-Encoding: 
-      - chunked
-      Connection: 
-      - keep-alive
-      Keep-Alive: 
-      - timeout=20
-      Etag: 
-      - "\"1a6a93676df376b6e45714c072d36c89\""
-      Cache-Control: 
-      - max-age=0, private, must-revalidate
-      X-Ua-Compatible: 
-      - IE=Edge
-    body: "{\"name\":\"newapp\",\"staging\":{\"model\":\"node\",\"stack\":\"node\"},\"uris\":[\"newapp.vcap.me\"],\"instances\":1,\"runningInstances\":0,\"resources\":{\"memory\":64,\"disk\":2048,\"fds\":256},\"state\":\"STOPPED\",\"services\":[],\"version\":\"9c007089536047891269ccc9e97ea3e8-0\",\"env\":[],\"meta\":{\"debug\":null,\"version\":1,\"created\":1323297578}}"
-    http_version: !!null 
-      str: ""
-      :@taguri: x-private:null
-  recorded_at: Wed, 07 Dec 2011 22:39:41 GMT
-- request: 
-    method: get
-    uri: http://api.vcap.me:80/apps/newapp/instances
-    body: ""
-    headers: 
-      User-Agent: 
-      - cloudfoundry-client-0.1.1
-      Authorization: 
-      - 04085b084922117573657240766361702e6d65063a0645546c2b07aa25e94e22193357f6e166053ef17797b5879877f6ca4542382f
-      Accept: 
-      - application/json
-      Content-Type: 
-      - application/json
-      Accept-Encoding: 
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-  response: 
-    status: 
-      code: 200
-      message: OK
-    headers: 
-      Server: 
-      - nginx/0.7.65
-      Date: 
-      - Wed, 07 Dec 2011 22:39:38 GMT
-      Content-Type: 
-      - application/json; charset=utf-8
-      Transfer-Encoding: 
-      - chunked
-      Connection: 
-      - keep-alive
-      Keep-Alive: 
-      - timeout=20
-      Etag: 
-      - "\"1439580006f77fa0b8481cdc5a207b66\""
-      Cache-Control: 
-      - max-age=0, private, must-revalidate
-      X-Ua-Compatible: 
-      - IE=Edge
-    body: "{\"instances\":[]}"
-    http_version: !!null 
-      str: ""
-      :@taguri: x-private:null
-  recorded_at: Wed, 07 Dec 2011 22:39:41 GMT
-- request: 
-    method: get
-    uri: http://api.vcap.me:80/apps/newapp/crashes
-    body: ""
-    headers: 
-      User-Agent: 
-      - cloudfoundry-client-0.1.1
-      Authorization: 
-      - 04085b084922117573657240766361702e6d65063a0645546c2b07aa25e94e22193357f6e166053ef17797b5879877f6ca4542382f
-      Accept: 
-      - application/json
-      Content-Type: 
-      - application/json
-      Accept-Encoding: 
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-  response: 
-    status: 
-      code: 200
-      message: OK
-    headers: 
-      Server: 
-      - nginx/0.7.65
-      Date: 
-      - Wed, 07 Dec 2011 22:39:41 GMT
-      Content-Type: 
-      - application/json; charset=utf-8
-      Transfer-Encoding: 
-      - chunked
-      Connection: 
-      - keep-alive
-      Keep-Alive: 
-      - timeout=20
-      Etag: 
-      - "\"8f95df9c232fa5b8b530dcbe0687c0d0\""
-      Cache-Control: 
-      - max-age=0, private, must-revalidate
-      X-Ua-Compatible: 
-      - IE=Edge
-    body: "{\"crashes\":[]}"
-    http_version: !!null 
-      str: ""
-      :@taguri: x-private:null
-  recorded_at: Wed, 07 Dec 2011 22:39:43 GMT
-- request: 
-    method: get
-    uri: http://api.vcap.me:80/apps/noapp
-    body: ""
-    headers: 
-      User-Agent: 
-      - cloudfoundry-client-0.1.1
-      Authorization: 
-      - 04085b084922117573657240766361702e6d65063a0645546c2b07aa25e94e22193357f6e166053ef17797b5879877f6ca4542382f
+      - 04085b084922117573657240766361702e6d65063a0645546c2b07c547554f22195ac7b777ec1ed86057ee09ec9a97e38e61ce119b
       Accept: 
       - application/json
       Content-Type: 
@@ -195,7 +25,7 @@ http_interactions:
       Server: 
       - nginx/0.7.65
       Date: 
-      - Wed, 07 Dec 2011 22:39:41 GMT
+      - Mon, 27 Feb 2012 23:09:57 GMT
       Content-Type: 
       - application/json; charset=utf-8
       Transfer-Encoding: 
@@ -208,102 +38,22 @@ http_interactions:
       - no-cache
       X-Ua-Compatible: 
       - IE=Edge
-    body: "{\"code\":301,\"description\":\"Application not found\"}"
-    http_version: !!null 
-      str: ""
-      :@taguri: x-private:null
-  recorded_at: Wed, 07 Dec 2011 22:39:43 GMT
+    body: 
+      encoding: US-ASCII
+      string: "{\"code\":301,\"description\":\"Application not found\"}"
+    http_version: 
+  recorded_at: Mon, 27 Feb 2012 23:09:56 GMT
 - request: 
     method: get
-    uri: http://api.vcap.me:80/apps/noapp/instances
-    body: ""
+    uri: http://api.vcap.me/info
+    body: 
+      encoding: US-ASCII
+      string: ""
     headers: 
       User-Agent: 
-      - cloudfoundry-client-0.1.1
+      - cloudfoundry-client-0.2.0
       Authorization: 
-      - 04085b084922117573657240766361702e6d65063a0645546c2b07aa25e94e22193357f6e166053ef17797b5879877f6ca4542382f
-      Accept: 
-      - application/json
-      Content-Type: 
-      - application/json
-      Accept-Encoding: 
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-  response: 
-    status: 
-      code: 404
-      message: Not Found
-    headers: 
-      Server: 
-      - nginx/0.7.65
-      Date: 
-      - Wed, 07 Dec 2011 22:39:41 GMT
-      Content-Type: 
-      - application/json; charset=utf-8
-      Transfer-Encoding: 
-      - chunked
-      Connection: 
-      - keep-alive
-      Keep-Alive: 
-      - timeout=20
-      Cache-Control: 
-      - no-cache
-      X-Ua-Compatible: 
-      - IE=Edge
-    body: "{\"code\":301,\"description\":\"Application not found\"}"
-    http_version: !!null 
-      str: ""
-      :@taguri: x-private:null
-  recorded_at: Wed, 07 Dec 2011 22:39:43 GMT
-- request: 
-    method: get
-    uri: http://api.vcap.me:80/apps/noapp/crashes
-    body: ""
-    headers: 
-      User-Agent: 
-      - cloudfoundry-client-0.1.1
-      Authorization: 
-      - 04085b084922117573657240766361702e6d65063a0645546c2b07aa25e94e22193357f6e166053ef17797b5879877f6ca4542382f
-      Accept: 
-      - application/json
-      Content-Type: 
-      - application/json
-      Accept-Encoding: 
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-  response: 
-    status: 
-      code: 404
-      message: Not Found
-    headers: 
-      Server: 
-      - nginx/0.7.65
-      Date: 
-      - Wed, 07 Dec 2011 22:39:41 GMT
-      Content-Type: 
-      - application/json; charset=utf-8
-      Transfer-Encoding: 
-      - chunked
-      Connection: 
-      - keep-alive
-      Keep-Alive: 
-      - timeout=20
-      Cache-Control: 
-      - no-cache
-      X-Ua-Compatible: 
-      - IE=Edge
-    body: "{\"code\":301,\"description\":\"Application not found\"}"
-    http_version: !!null 
-      str: ""
-      :@taguri: x-private:null
-  recorded_at: Wed, 07 Dec 2011 22:39:43 GMT
-- request: 
-    method: get
-    uri: http://api.vcap.me:80/info
-    body: ""
-    headers: 
-      User-Agent: 
-      - cloudfoundry-client-0.1.1
-      Authorization: 
-      - 04085b084922117573657240766361702e6d65063a0645546c2b07aa25e94e22193357f6e166053ef17797b5879877f6ca4542382f
+      - 04085b084922117573657240766361702e6d65063a0645546c2b07c547554f22195ac7b777ec1ed86057ee09ec9a97e38e61ce119b
       Accept: 
       - application/json
       Content-Type: 
@@ -318,7 +68,7 @@ http_interactions:
       Server: 
       - nginx/0.7.65
       Date: 
-      - Wed, 07 Dec 2011 22:39:42 GMT
+      - Mon, 27 Feb 2012 23:09:57 GMT
       Content-Type: 
       - application/json; charset=utf-8
       Transfer-Encoding: 
@@ -328,38 +78,85 @@ http_interactions:
       Keep-Alive: 
       - timeout=20
       Etag: 
-      - "\"90ccd48beade59257c2aee914377c6eb\""
+      - "\"ad5e14bfa49d495d285bae155dd3e43d\""
       Cache-Control: 
       - max-age=0, private, must-revalidate
       X-Ua-Compatible: 
       - IE=Edge
-    body: "{\"name\":\"vcap\",\"build\":2222,\"support\":\"http://support.cloudfoundry.com\",\"version\":\"0.999\",\"description\":\"VMware's Cloud Application Platform\",\"allow_debug\":true,\"user\":\"user@vcap.me\",\"limits\":{\"memory\":2048,\"app_uris\":4,\"services\":16,\"apps\":20},\"usage\":{\"memory\":0,\"apps\":0,\"services\":0},\"frameworks\":{\"grails\":{\"name\":\"grails\",\"runtimes\":[{\"name\":\"java\",\"version\":\"1.6\",\"description\":\"Java 6\"}],\"appservers\":[{\"name\":\"tomcat\",\"description\":\"Tomcat\"}],\"detection\":[{\"*.war\":true}]},\"lift\":{\"name\":\"lift\",\"runtimes\":[{\"name\":\"java\",\"version\":\"1.6\",\"description\":\"Java 6\"}],\"appservers\":[{\"name\":\"tomcat\",\"description\":\"Tomcat\"}],\"detection\":[{\"*.war\":true}]},\"php\":{\"name\":\"php\",\"runtimes\":[{\"name\":\"php\",\"version\":\"5.3\",\"description\":\"PHP 5\"}],\"appservers\":[{\"name\":\"apache\",\"description\":\"Apache\"}],\"detection\":[{\"*.php\":true}]},\"spring\":{\"name\":\"spring\",\"runtimes\":[{\"name\":\"java\",\"version\":\"1.6\",\"description\":\"Java 6\"}],\"appservers\":[{\"name\":\"tomcat\",\"description\":\"Tomcat\"}],\"detection\":[{\"*.war\":true}]},\"java_web\":{\"name\":\"java_web\",\"runtimes\":[{\"name\":\"java\",\"version\":\"1.6\",\"description\":\"Java 6\"}],\"appservers\":[{\"name\":\"tomcat\",\"description\":\"Tomcat\"}],\"detection\":[{\"*.war\":true}]},\"django\":{\"name\":\"django\",\"runtimes\":[{\"name\":\"python26\",\"version\":\"2.6.5\",\"description\":\"Python 2.6.5\"}],\"appservers\":[],\"detection\":[{\"*.py\":\".\"}]},\"rails3\":{\"name\":\"rails3\",\"runtimes\":[{\"name\":\"ruby18\",\"version\":\"1.8.7\",\"description\":\"Ruby 1.8.7\"},{\"name\":\"ruby19\",\"version\":\"1.9.2p180\",\"description\":\"Ruby 1.9.2\"}],\"appservers\":[{\"name\":\"thin\",\"description\":\"Thin\"}],\"detection\":[{\"config/application.rb\":true},{\"config/environment.rb\":true}]},\"node\":{\"name\":\"node\",\"runtimes\":[{\"name\":\"node\",\"version\":\"0.4.5\",\"description\":\"Node.js\"}],\"appservers\":[],\"detection\":[{\"*.js\":\".\"}]},\"otp_rebar\":{\"name\":\"otp_rebar\",\"runtimes\":[{\"name\":\"erlangR14B02\",\"version\":\"R14B02\",\"description\":\"Erlang R14B02\"}],\"appservers\":[],\"detection\":[{\"releases/*/*.rel\":\".\"}]},\"sinatra\":{\"name\":\"sinatra\",\"runtimes\":[{\"name\":\"ruby18\",\"version\":\"1.8.7\",\"description\":\"Ruby 1.8.7\"},{\"name\":\"ruby19\",\"version\":\"1.9.2p180\",\"description\":\"Ruby 1.9.2\"}],\"appservers\":[{\"name\":\"thin\",\"description\":\"Thin\"}],\"detection\":[{\"*.rb\":\"require 'sinatra'|require \\\"sinatra\\\"\"},{\"config/environment.rb\":false}]},\"wsgi\":{\"name\":\"wsgi\",\"runtimes\":[{\"name\":\"python26\",\"version\":\"2.6.5\",\"description\":\"Python 2.6.5\"}],\"appservers\":[],\"detection\":[{\"*.py\":\".\"}]}}}"
-    http_version: !!null 
-      str: ""
-      :@taguri: x-private:null
-  recorded_at: Wed, 07 Dec 2011 22:39:44 GMT
+    body: 
+      encoding: US-ASCII
+      string: "{\"name\":\"vcap\",\"build\":2222,\"support\":\"http://support.cloudfoundry.com\",\"version\":\"0.999\",\"description\":\"VMware's Cloud Application Platform\",\"allow_debug\":true,\"user\":\"user@vcap.me\",\"limits\":{\"memory\":2048,\"app_uris\":4,\"services\":16,\"apps\":20},\"usage\":{\"memory\":0,\"apps\":0,\"services\":0},\"frameworks\":{\"java_web\":{\"name\":\"java_web\",\"runtimes\":[{\"name\":\"java\",\"version\":\"1.6\",\"description\":\"Java 6\"}],\"appservers\":[{\"name\":\"tomcat\",\"description\":\"Tomcat\"}],\"detection\":[{\"*.war\":true}]},\"node\":{\"name\":\"node\",\"runtimes\":[{\"name\":\"node\",\"version\":\"0.4.12\",\"description\":\"Node.js\"}],\"appservers\":[],\"detection\":[{\"*.js\":\".\"}]},\"sinatra\":{\"name\":\"sinatra\",\"runtimes\":[{\"name\":\"ruby18\",\"version\":\"1.8.7\",\"description\":\"Ruby 1.8.7\"},{\"name\":\"ruby19\",\"version\":\"1.9.2p180\",\"description\":\"Ruby 1.9.2\"}],\"appservers\":[{\"name\":\"thin\",\"description\":\"Thin\"}],\"detection\":[{\"*.rb\":\"require 'sinatra'|require \\\"sinatra\\\"\"},{\"config/environment.rb\":false}]},\"lift\":{\"name\":\"lift\",\"runtimes\":[{\"name\":\"java\",\"version\":\"1.6\",\"description\":\"Java 6\"}],\"appservers\":[{\"name\":\"tomcat\",\"description\":\"Tomcat\"}],\"detection\":[{\"*.war\":true}]},\"php\":{\"name\":\"php\",\"runtimes\":[{\"name\":\"php\",\"version\":\"5.3\",\"description\":\"PHP 5\"}],\"appservers\":[{\"name\":\"apache\",\"description\":\"Apache\"}],\"detection\":[{\"*.php\":true}]},\"wsgi\":{\"name\":\"wsgi\",\"runtimes\":[{\"name\":\"python26\",\"version\":\"2.6.5\",\"description\":\"Python 2.6.5\"}],\"appservers\":[],\"detection\":[{\"*.py\":\".\"}]},\"rails3\":{\"name\":\"rails3\",\"runtimes\":[{\"name\":\"ruby18\",\"version\":\"1.8.7\",\"description\":\"Ruby 1.8.7\"},{\"name\":\"ruby19\",\"version\":\"1.9.2p180\",\"description\":\"Ruby 1.9.2\"}],\"appservers\":[{\"name\":\"thin\",\"description\":\"Thin\"}],\"detection\":[{\"config/application.rb\":true},{\"config/environment.rb\":true}]},\"otp_rebar\":{\"name\":\"otp_rebar\",\"runtimes\":[{\"name\":\"erlangR14B02\",\"version\":\"R14B02\",\"description\":\"Erlang R14B02\"}],\"appservers\":[],\"detection\":[{\"releases/*/*.rel\":\".\"}]},\"grails\":{\"name\":\"grails\",\"runtimes\":[{\"name\":\"java\",\"version\":\"1.6\",\"description\":\"Java 6\"}],\"appservers\":[{\"name\":\"tomcat\",\"description\":\"Tomcat\"}],\"detection\":[{\"*.war\":true}]},\"spring\":{\"name\":\"spring\",\"runtimes\":[{\"name\":\"java\",\"version\":\"1.6\",\"description\":\"Java 6\"}],\"appservers\":[{\"name\":\"tomcat\",\"description\":\"Tomcat\"}],\"detection\":[{\"*.war\":true}]},\"django\":{\"name\":\"django\",\"runtimes\":[{\"name\":\"python26\",\"version\":\"2.6.5\",\"description\":\"Python 2.6.5\"}],\"appservers\":[],\"detection\":[{\"*.py\":\".\"}]}}}"
+    http_version: 
+  recorded_at: Mon, 27 Feb 2012 23:09:56 GMT
 - request: 
     method: get
-    uri: http://api.vcap.me:80/apps/newapp/instances/0/files/
-    body: ""
+    uri: http://api.vcap.me/info
+    body: 
+      encoding: US-ASCII
+      string: ""
     headers: 
       User-Agent: 
-      - cloudfoundry-client-0.1.1
+      - cloudfoundry-client-0.2.0
       Authorization: 
-      - 04085b084922117573657240766361702e6d65063a0645546c2b07aa25e94e22193357f6e166053ef17797b5879877f6ca4542382f
+      - 04085b084922117573657240766361702e6d65063a0645546c2b07c547554f22195ac7b777ec1ed86057ee09ec9a97e38e61ce119b
+      Accept: 
+      - application/json
+      Content-Type: 
+      - application/json
       Accept-Encoding: 
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept: 
-      - "*/*"
   response: 
     status: 
-      code: 400
-      message: Bad Request
+      code: 200
+      message: OK
     headers: 
       Server: 
       - nginx/0.7.65
       Date: 
-      - Wed, 07 Dec 2011 22:39:49 GMT
+      - Mon, 27 Feb 2012 23:09:58 GMT
+      Content-Type: 
+      - application/json; charset=utf-8
+      Transfer-Encoding: 
+      - chunked
+      Connection: 
+      - keep-alive
+      Keep-Alive: 
+      - timeout=20
+      Etag: 
+      - "\"ad5e14bfa49d495d285bae155dd3e43d\""
+      Cache-Control: 
+      - max-age=0, private, must-revalidate
+      X-Ua-Compatible: 
+      - IE=Edge
+    body: 
+      encoding: US-ASCII
+      string: "{\"name\":\"vcap\",\"build\":2222,\"support\":\"http://support.cloudfoundry.com\",\"version\":\"0.999\",\"description\":\"VMware's Cloud Application Platform\",\"allow_debug\":true,\"user\":\"user@vcap.me\",\"limits\":{\"memory\":2048,\"app_uris\":4,\"services\":16,\"apps\":20},\"usage\":{\"memory\":0,\"apps\":0,\"services\":0},\"frameworks\":{\"java_web\":{\"name\":\"java_web\",\"runtimes\":[{\"name\":\"java\",\"version\":\"1.6\",\"description\":\"Java 6\"}],\"appservers\":[{\"name\":\"tomcat\",\"description\":\"Tomcat\"}],\"detection\":[{\"*.war\":true}]},\"node\":{\"name\":\"node\",\"runtimes\":[{\"name\":\"node\",\"version\":\"0.4.12\",\"description\":\"Node.js\"}],\"appservers\":[],\"detection\":[{\"*.js\":\".\"}]},\"sinatra\":{\"name\":\"sinatra\",\"runtimes\":[{\"name\":\"ruby18\",\"version\":\"1.8.7\",\"description\":\"Ruby 1.8.7\"},{\"name\":\"ruby19\",\"version\":\"1.9.2p180\",\"description\":\"Ruby 1.9.2\"}],\"appservers\":[{\"name\":\"thin\",\"description\":\"Thin\"}],\"detection\":[{\"*.rb\":\"require 'sinatra'|require \\\"sinatra\\\"\"},{\"config/environment.rb\":false}]},\"lift\":{\"name\":\"lift\",\"runtimes\":[{\"name\":\"java\",\"version\":\"1.6\",\"description\":\"Java 6\"}],\"appservers\":[{\"name\":\"tomcat\",\"description\":\"Tomcat\"}],\"detection\":[{\"*.war\":true}]},\"php\":{\"name\":\"php\",\"runtimes\":[{\"name\":\"php\",\"version\":\"5.3\",\"description\":\"PHP 5\"}],\"appservers\":[{\"name\":\"apache\",\"description\":\"Apache\"}],\"detection\":[{\"*.php\":true}]},\"wsgi\":{\"name\":\"wsgi\",\"runtimes\":[{\"name\":\"python26\",\"version\":\"2.6.5\",\"description\":\"Python 2.6.5\"}],\"appservers\":[],\"detection\":[{\"*.py\":\".\"}]},\"rails3\":{\"name\":\"rails3\",\"runtimes\":[{\"name\":\"ruby18\",\"version\":\"1.8.7\",\"description\":\"Ruby 1.8.7\"},{\"name\":\"ruby19\",\"version\":\"1.9.2p180\",\"description\":\"Ruby 1.9.2\"}],\"appservers\":[{\"name\":\"thin\",\"description\":\"Thin\"}],\"detection\":[{\"config/application.rb\":true},{\"config/environment.rb\":true}]},\"otp_rebar\":{\"name\":\"otp_rebar\",\"runtimes\":[{\"name\":\"erlangR14B02\",\"version\":\"R14B02\",\"description\":\"Erlang R14B02\"}],\"appservers\":[],\"detection\":[{\"releases/*/*.rel\":\".\"}]},\"grails\":{\"name\":\"grails\",\"runtimes\":[{\"name\":\"java\",\"version\":\"1.6\",\"description\":\"Java 6\"}],\"appservers\":[{\"name\":\"tomcat\",\"description\":\"Tomcat\"}],\"detection\":[{\"*.war\":true}]},\"spring\":{\"name\":\"spring\",\"runtimes\":[{\"name\":\"java\",\"version\":\"1.6\",\"description\":\"Java 6\"}],\"appservers\":[{\"name\":\"tomcat\",\"description\":\"Tomcat\"}],\"detection\":[{\"*.war\":true}]},\"django\":{\"name\":\"django\",\"runtimes\":[{\"name\":\"python26\",\"version\":\"2.6.5\",\"description\":\"Python 2.6.5\"}],\"appservers\":[],\"detection\":[{\"*.py\":\".\"}]}}}"
+    http_version: 
+  recorded_at: Mon, 27 Feb 2012 23:09:56 GMT
+- request: 
+    method: post
+    uri: http://api.vcap.me/apps
+    body: 
+      encoding: US-ASCII
+      string: "{\"name\":\"fakeapp\",\"instances\":\"1\",\"resources\":{\"memory\":\"64\"},\"uris\":[\"fakeapp.vcap.me\"],\"staging\":{\"framework\":\"sinatra\",\"runtime\":\"ruby18\"},\"services\":[\"noservice\"]}"
+    headers: 
+      User-Agent: 
+      - cloudfoundry-client-0.2.0
+      Authorization: 
+      - 04085b084922117573657240766361702e6d65063a0645546c2b07c547554f22195ac7b777ec1ed86057ee09ec9a97e38e61ce119b
+      Accept: 
+      - application/json
+      Content-Type: 
+      - application/json
+  response: 
+    status: 
+      code: 404
+      message: Not Found
+    headers: 
+      Server: 
+      - nginx/0.7.65
+      Date: 
+      - Mon, 27 Feb 2012 23:09:58 GMT
       Content-Type: 
       - application/json; charset=utf-8
       Transfer-Encoding: 
@@ -372,22 +169,44 @@ http_interactions:
       - no-cache
       X-Ua-Compatible: 
       - IE=Edge
-    body: "{\"code\":305,\"description\":\"Operation not permitted on a stopped app\"}"
-    http_version: !!null 
-      str: ""
-      :@taguri: x-private:null
-  recorded_at: Wed, 07 Dec 2011 22:39:51 GMT
+    body: 
+      encoding: US-ASCII
+      string: "{\"code\":500,\"description\":\"Service not found\"}"
+    http_version: 
+  recorded_at: Mon, 27 Feb 2012 23:09:57 GMT
 - request: 
-    method: get
-    uri: http://api.vcap.me:80/apps/noapp/instances/0/files/
-    body: ""
+    method: put
+    uri: http://api.vcap.me/apps/noapp/application
+    body: 
+      encoding: ASCII-8BIT
+      string: !binary |
+        LS0tLS0tLS0tLS0tLVJ1YnlNdWx0aXBhcnRQb3N0DQpDb250ZW50LURpc3Bv
+        c2l0aW9uOiBmb3JtLWRhdGE7IG5hbWU9ImFwcGxpY2F0aW9uIjsgZmlsZW5h
+        bWU9ImNmLXNpbmF0cmEtc2FtcGxlLnppcCINCkNvbnRlbnQtTGVuZ3RoOiA0
+        MTINCkNvbnRlbnQtVHlwZTogYXBwbGljYXRpb24vemlwDQpDb250ZW50LVRy
+        YW5zZmVyLUVuY29kaW5nOiBiaW5hcnkNCg0KUEsDBBQAAAAIANCgNkD2sFGF
+        3gAAADcBAAAUABwAY2Ytc2luYXRyYS1zYW1wbGUucmJVVAkAAzdeHE/BSUpP
+        dXgLAAEE9QEAAAQUAAAAZY9Na8MwDIbv/hXCPegQmGHHkgRK6dgua9hGL1sp
+        SeOlZqu8yfYglP73yQk77WJ9PHr1ymy/k2MLyKkbB3sOqPivFRy1kVtUarAR
+        0CD0XgGcfIhQweZx94q79ao5rJrmcL99fsG90C/P/2mzfZop2yAQUdJ3z/Bh
+        R3CUh28kDdKdR4oKdNnVGopppJDKzKWu8pu3C9hPpGNTv5EWsaUeQKIuT7f1
+        +tOn/s4n6nmEBwqxpaMFTkSOBmgjLC75J9fl4pJvvpZGRLIMTJ3lG/px7Ols
+        KS4nJBZiJ9cpsfkFUEsBAh4DFAAAAAgA0KA2QPawUYXeAAAANwEAABQAGAAA
+        AAAAAQAAAKSBAAAAAGNmLXNpbmF0cmEtc2FtcGxlLnJiVVQFAAM3XhxPdXgL
+        AAEE9QEAAAQUAAAAUEsFBgAAAAABAAEAWgAAACwBAAAAAA0KLS0tLS0tLS0t
+        LS0tLVJ1YnlNdWx0aXBhcnRQb3N0DQpDb250ZW50LURpc3Bvc2l0aW9uOiBm
+        b3JtLWRhdGE7IG5hbWU9InJlc291cmNlcyINCg0KW10NCi0tLS0tLS0tLS0t
+        LS1SdWJ5TXVsdGlwYXJ0UG9zdC0tDQoNCg==
+
     headers: 
       User-Agent: 
-      - cloudfoundry-client-0.1.1
+      - cloudfoundry-client-0.2.0
       Authorization: 
-      - 04085b084922117573657240766361702e6d65063a0645546c2b07aa25e94e22193357f6e166053ef17797b5879877f6ca4542382f
-      Accept-Encoding: 
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      - 04085b084922117573657240766361702e6d65063a0645546c2b07c547554f22195ac7b777ec1ed86057ee09ec9a97e38e61ce119b
+      Content-Type: 
+      - multipart/form-data;boundary=-----------RubyMultipartPost
+      Content-Length: 
+      - "745"
       Accept: 
       - "*/*"
   response: 
@@ -398,7 +217,7 @@ http_interactions:
       Server: 
       - nginx/0.7.65
       Date: 
-      - Wed, 07 Dec 2011 22:39:49 GMT
+      - Mon, 27 Feb 2012 23:09:59 GMT
       Content-Type: 
       - application/json; charset=utf-8
       Transfer-Encoding: 
@@ -411,20 +230,239 @@ http_interactions:
       - no-cache
       X-Ua-Compatible: 
       - IE=Edge
-    body: "{\"code\":301,\"description\":\"Application not found\"}"
-    http_version: !!null 
-      str: ""
-      :@taguri: x-private:null
-  recorded_at: Wed, 07 Dec 2011 22:39:51 GMT
+    body: 
+      encoding: US-ASCII
+      string: "{\"code\":301,\"description\":\"Application not found\"}"
+    http_version: 
+  recorded_at: Mon, 27 Feb 2012 23:09:58 GMT
 - request: 
-    method: delete
-    uri: http://api.vcap.me:80/apps/newapp
-    body: ""
+    method: get
+    uri: http://api.vcap.me/apps/noapp
+    body: 
+      encoding: US-ASCII
+      string: ""
     headers: 
       User-Agent: 
-      - cloudfoundry-client-0.1.1
+      - cloudfoundry-client-0.2.0
       Authorization: 
-      - 04085b084922117573657240766361702e6d65063a0645546c2b07aa25e94e22193357f6e166053ef17797b5879877f6ca4542382f
+      - 04085b084922117573657240766361702e6d65063a0645546c2b07c547554f22195ac7b777ec1ed86057ee09ec9a97e38e61ce119b
+      Accept: 
+      - application/json
+      Content-Type: 
+      - application/json
+      Accept-Encoding: 
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response: 
+    status: 
+      code: 404
+      message: Not Found
+    headers: 
+      Server: 
+      - nginx/0.7.65
+      Date: 
+      - Mon, 27 Feb 2012 23:10:02 GMT
+      Content-Type: 
+      - application/json; charset=utf-8
+      Transfer-Encoding: 
+      - chunked
+      Connection: 
+      - keep-alive
+      Keep-Alive: 
+      - timeout=20
+      Cache-Control: 
+      - no-cache
+      X-Ua-Compatible: 
+      - IE=Edge
+    body: 
+      encoding: US-ASCII
+      string: "{\"code\":301,\"description\":\"Application not found\"}"
+    http_version: 
+  recorded_at: Mon, 27 Feb 2012 23:10:01 GMT
+- request: 
+    method: get
+    uri: http://api.vcap.me/apps
+    body: 
+      encoding: US-ASCII
+      string: ""
+    headers: 
+      User-Agent: 
+      - cloudfoundry-client-0.2.0
+      Authorization: 
+      - 04085b084922117573657240766361702e6d65063a0645546c2b07c547554f22195ac7b777ec1ed86057ee09ec9a97e38e61ce119b
+      Accept: 
+      - application/json
+      Content-Type: 
+      - application/json
+      Accept-Encoding: 
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response: 
+    status: 
+      code: 200
+      message: OK
+    headers: 
+      Server: 
+      - nginx/0.7.65
+      Date: 
+      - Mon, 27 Feb 2012 23:10:16 GMT
+      Content-Type: 
+      - application/json; charset=utf-8
+      Transfer-Encoding: 
+      - chunked
+      Connection: 
+      - keep-alive
+      Keep-Alive: 
+      - timeout=20
+      Etag: 
+      - "\"a28ebb214f0d80d799d27aba671ad9bf\""
+      Cache-Control: 
+      - max-age=0, private, must-revalidate
+      X-Ua-Compatible: 
+      - IE=Edge
+    body: 
+      encoding: US-ASCII
+      string: "[{\"name\":\"fakeapp\",\"staging\":{\"model\":\"sinatra\",\"stack\":\"ruby18\"},\"uris\":[\"fakeapp.vcap.me\",\"fakeapp2.vcap.me\"],\"instances\":5,\"runningInstances\":5,\"resources\":{\"memory\":128,\"disk\":2048,\"fds\":256},\"state\":\"STARTED\",\"services\":[\"fakeservice\"],\"version\":\"36024617e2f7c8e016dce6b92df741b75e2d7c3a-1\",\"env\":[\"fakevar=fakevalue2\"],\"meta\":{\"debug\":null,\"version\":17,\"created\":1330384216}}]"
+    http_version: 
+  recorded_at: Mon, 27 Feb 2012 23:10:15 GMT
+- request: 
+    method: get
+    uri: http://api.vcap.me/apps/noapp/instances
+    body: 
+      encoding: US-ASCII
+      string: ""
+    headers: 
+      User-Agent: 
+      - cloudfoundry-client-0.2.0
+      Authorization: 
+      - 04085b084922117573657240766361702e6d65063a0645546c2b07c547554f22195ac7b777ec1ed86057ee09ec9a97e38e61ce119b
+      Accept: 
+      - application/json
+      Content-Type: 
+      - application/json
+      Accept-Encoding: 
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response: 
+    status: 
+      code: 404
+      message: Not Found
+    headers: 
+      Server: 
+      - nginx/0.7.65
+      Date: 
+      - Mon, 27 Feb 2012 23:10:17 GMT
+      Content-Type: 
+      - application/json; charset=utf-8
+      Transfer-Encoding: 
+      - chunked
+      Connection: 
+      - keep-alive
+      Keep-Alive: 
+      - timeout=20
+      Cache-Control: 
+      - no-cache
+      X-Ua-Compatible: 
+      - IE=Edge
+    body: 
+      encoding: US-ASCII
+      string: "{\"code\":301,\"description\":\"Application not found\"}"
+    http_version: 
+  recorded_at: Mon, 27 Feb 2012 23:10:16 GMT
+- request: 
+    method: get
+    uri: http://api.vcap.me/apps/noapp/crashes
+    body: 
+      encoding: US-ASCII
+      string: ""
+    headers: 
+      User-Agent: 
+      - cloudfoundry-client-0.2.0
+      Authorization: 
+      - 04085b084922117573657240766361702e6d65063a0645546c2b07c547554f22195ac7b777ec1ed86057ee09ec9a97e38e61ce119b
+      Accept: 
+      - application/json
+      Content-Type: 
+      - application/json
+      Accept-Encoding: 
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response: 
+    status: 
+      code: 404
+      message: Not Found
+    headers: 
+      Server: 
+      - nginx/0.7.65
+      Date: 
+      - Mon, 27 Feb 2012 23:10:17 GMT
+      Content-Type: 
+      - application/json; charset=utf-8
+      Transfer-Encoding: 
+      - chunked
+      Connection: 
+      - keep-alive
+      Keep-Alive: 
+      - timeout=20
+      Cache-Control: 
+      - no-cache
+      X-Ua-Compatible: 
+      - IE=Edge
+    body: 
+      encoding: US-ASCII
+      string: "{\"code\":301,\"description\":\"Application not found\"}"
+    http_version: 
+  recorded_at: Mon, 27 Feb 2012 23:10:16 GMT
+- request: 
+    method: get
+    uri: http://api.vcap.me/apps/noapp/application
+    body: 
+      encoding: US-ASCII
+      string: ""
+    headers: 
+      User-Agent: 
+      - cloudfoundry-client-0.2.0
+      Authorization: 
+      - 04085b084922117573657240766361702e6d65063a0645546c2b07c547554f22195ac7b777ec1ed86057ee09ec9a97e38e61ce119b
+      Accept-Encoding: 
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept: 
+      - "*/*"
+  response: 
+    status: 
+      code: 404
+      message: Not Found
+    headers: 
+      Server: 
+      - nginx/0.7.65
+      Date: 
+      - Mon, 27 Feb 2012 23:10:24 GMT
+      Content-Type: 
+      - application/json; charset=utf-8
+      Transfer-Encoding: 
+      - chunked
+      Connection: 
+      - keep-alive
+      Keep-Alive: 
+      - timeout=20
+      Cache-Control: 
+      - no-cache
+      X-Ua-Compatible: 
+      - IE=Edge
+    body: 
+      encoding: US-ASCII
+      string: "{\"code\":301,\"description\":\"Application not found\"}"
+    http_version: 
+  recorded_at: Mon, 27 Feb 2012 23:10:23 GMT
+- request: 
+    method: get
+    uri: http://api.vcap.me/apps/fakeapp/instances/0/files/
+    body: 
+      encoding: US-ASCII
+      string: ""
+    headers: 
+      User-Agent: 
+      - cloudfoundry-client-0.2.0
+      Authorization: 
+      - 04085b084922117573657240766361702e6d65063a0645546c2b07c547554f22195ac7b777ec1ed86057ee09ec9a97e38e61ce119b
+      Accept-Encoding: 
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept: 
       - "*/*"
   response: 
@@ -435,7 +473,7 @@ http_interactions:
       Server: 
       - nginx/0.7.65
       Date: 
-      - Wed, 07 Dec 2011 22:39:49 GMT
+      - Mon, 27 Feb 2012 23:10:24 GMT
       Content-Type: 
       - text/html; charset=utf-8
       Transfer-Encoding: 
@@ -446,24 +484,34 @@ http_interactions:
       - timeout=20
       Vary: 
       - Accept-Encoding
+      Etag: 
+      - "\"52737835f3079863e934d36b7ffeef44\""
       Cache-Control: 
-      - no-cache
+      - max-age=0, private, must-revalidate
       X-Ua-Compatible: 
       - IE=Edge
-    body: " "
-    http_version: !!null 
-      str: ""
-      :@taguri: x-private:null
-  recorded_at: Wed, 07 Dec 2011 22:39:51 GMT
+      Content-Encoding: 
+      - gzip
+    body: 
+      encoding: ASCII-8BIT
+      string: !binary |
+        H4sIAAAAAAAAA0osKNBXIBbocuXkpxcTrV4XAAAA//8DAFg22ctdAAAA
+
+    http_version: 
+  recorded_at: Mon, 27 Feb 2012 23:10:23 GMT
 - request: 
-    method: delete
-    uri: http://api.vcap.me:80/apps/noapp
-    body: ""
+    method: get
+    uri: http://api.vcap.me/apps/noapp/instances/0/files/
+    body: 
+      encoding: US-ASCII
+      string: ""
     headers: 
       User-Agent: 
-      - cloudfoundry-client-0.1.1
+      - cloudfoundry-client-0.2.0
       Authorization: 
-      - 04085b084922117573657240766361702e6d65063a0645546c2b07aa25e94e22193357f6e166053ef17797b5879877f6ca4542382f
+      - 04085b084922117573657240766361702e6d65063a0645546c2b07c547554f22195ac7b777ec1ed86057ee09ec9a97e38e61ce119b
+      Accept-Encoding: 
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept: 
       - "*/*"
   response: 
@@ -474,7 +522,7 @@ http_interactions:
       Server: 
       - nginx/0.7.65
       Date: 
-      - Wed, 07 Dec 2011 22:39:49 GMT
+      - Mon, 27 Feb 2012 23:10:25 GMT
       Content-Type: 
       - application/json; charset=utf-8
       Transfer-Encoding: 
@@ -487,26 +535,26 @@ http_interactions:
       - no-cache
       X-Ua-Compatible: 
       - IE=Edge
-    body: "{\"code\":301,\"description\":\"Application not found\"}"
-    http_version: !!null 
-      str: ""
-      :@taguri: x-private:null
-  recorded_at: Wed, 07 Dec 2011 22:39:51 GMT
+    body: 
+      encoding: US-ASCII
+      string: "{\"code\":301,\"description\":\"Application not found\"}"
+    http_version: 
+  recorded_at: Mon, 27 Feb 2012 23:10:23 GMT
 - request: 
-    method: get
-    uri: http://api.vcap.me:80/info
-    body: ""
+    method: post
+    uri: http://api.vcap.me/resources
+    body: 
+      encoding: US-ASCII
+      string: "[{\"fn\":\"/Users/frodenas/Rails/cf-console/tmp/app-bits/noapp/.gitignore\",\"zn\":\".gitignore\",\"size\":89,\"sha1\":\"3ea67d7f82ab5276f2aa0d1484bde427ff04ad3e\"},{\"fn\":\"/Users/frodenas/Rails/cf-console/tmp/app-bits/noapp/.rspec\",\"zn\":\".rspec\",\"size\":25,\"sha1\":\"4b1dbd26fb9f3811391de2e80891e2ce6efd68bc\"},{\"fn\":\"/Users/frodenas/Rails/cf-console/tmp/app-bits/noapp/.travis.yml\",\"zn\":\".travis.yml\",\"size\":56,\"sha1\":\"071c7d2fadf0eaa003d4847a9bb8f43873631fc8\"},{\"fn\":\"/Users/frodenas/Rails/cf-console/tmp/app-bits/noapp/.yardopts\",\"zn\":\".yardopts\",\"size\":182,\"sha1\":\"c93cbca36c5783814b163520f5bc62e2f3b01628\"},{\"fn\":\"/Users/frodenas/Rails/cf-console/tmp/app-bits/noapp/CHANGELOG.md\",\"zn\":\"CHANGELOG.md\",\"size\":1347,\"sha1\":\"b1432db1e492c8e54018d68ff7f81041f1bddfdf\"},{\"fn\":\"/Users/frodenas/Rails/cf-console/tmp/app-bits/noapp/cloudfoundry.gemspec\",\"zn\":\"cloudfoundry.gemspec\",\"size\":1386,\"sha1\":\"814beba4d133a59b9fbbd9699fe5c873c915d15c\"},{\"fn\":\"/Users/frodenas/Rails/cf-console/tmp/app-bits/noapp/Gemfile\",\"zn\":\"Gemfile\",\"size\":38,\"sha1\":\"cbac8707de1c6cb000a0ebbf4d3f64ab2d3102cb\"},{\"fn\":\"/Users/frodenas/Rails/cf-console/tmp/app-bits/noapp/lib/cloudfoundry/client/apps.rb\",\"zn\":\"lib/cloudfoundry/client/apps.rb\",\"size\":8965,\"sha1\":\"585f14bdeabcf2433c886528445e56fafb5eb6e7\"},{\"fn\":\"/Users/frodenas/Rails/cf-console/tmp/app-bits/noapp/lib/cloudfoundry/client/info.rb\",\"zn\":\"lib/cloudfoundry/client/info.rb\",\"size\":1002,\"sha1\":\"61619df4c826d79f33fb5a54424be8ba179a5c85\"},{\"fn\":\"/Users/frodenas/Rails/cf-console/tmp/app-bits/noapp/lib/cloudfoundry/client/request.rb\",\"zn\":\"lib/cloudfoundry/client/request.rb\",\"size\":3458,\"sha1\":\"b51bb2ddcff6d8ca7616a5901586d1c623fa377b\"},{\"fn\":\"/Users/frodenas/Rails/cf-console/tmp/app-bits/noapp/lib/cloudfoundry/client/resources.rb\",\"zn\":\"lib/cloudfoundry/client/resources.rb\",\"size\":486,\"sha1\":\"24f23301aad901c1b06a1d2f709dd6d00d384786\"},{\"fn\":\"/Users/frodenas/Rails/cf-console/tmp/app-bits/noapp/lib/cloudfoundry/client/response.rb\",\"zn\":\"lib/cloudfoundry/client/response.rb\",\"size\":2941,\"sha1\":\"8788bd7dd47fbbec756a3c0b69de3b3720da9303\"},{\"fn\":\"/Users/frodenas/Rails/cf-console/tmp/app-bits/noapp/lib/cloudfoundry/client/services.rb\",\"zn\":\"lib/cloudfoundry/client/services.rb\",\"size\":5955,\"sha1\":\"29720cdad4a8bb334d05584b6e3bf8d75d0d4c49\"},{\"fn\":\"/Users/frodenas/Rails/cf-console/tmp/app-bits/noapp/lib/cloudfoundry/client/users.rb\",\"zn\":\"lib/cloudfoundry/client/users.rb\",\"size\":5205,\"sha1\":\"2f2bf571dc24f470cdf88e1d39e8e8a4cd943df9\"},{\"fn\":\"/Users/frodenas/Rails/cf-console/tmp/app-bits/noapp/lib/cloudfoundry/client.rb\",\"zn\":\"lib/cloudfoundry/client.rb\",\"size\":3684,\"sha1\":\"aa0ae134690afa3184973384c3ceb5dd06b14b5f\"},{\"fn\":\"/Users/frodenas/Rails/cf-console/tmp/app-bits/noapp/lib/cloudfoundry/constants.rb\",\"zn\":\"lib/cloudfoundry/constants.rb\",\"size\":772,\"sha1\":\"a0b1be753951b473a4efd6a21010653b4aafd792\"},{\"fn\":\"/Users/frodenas/Rails/cf-console/tmp/app-bits/noapp/lib/cloudfoundry/exception.rb\",\"zn\":\"lib/cloudfoundry/exception.rb\",\"size\":883,\"sha1\":\"0190e943f124b1961e373b20d4a0b6954e5dd41a\"},{\"fn\":\"/Users/frodenas/Rails/cf-console/tmp/app-bits/noapp/lib/cloudfoundry/version.rb\",\"zn\":\"lib/cloudfoundry/version.rb\",\"size\":450,\"sha1\":\"ea59174d17c0e9331d357599cf0b99e6f32e64f0\"},{\"fn\":\"/Users/frodenas/Rails/cf-console/tmp/app-bits/noapp/lib/cloudfoundry.rb\",\"zn\":\"lib/cloudfoundry.rb\",\"size\":1062,\"sha1\":\"531e75e4d97fc405aa9a4ec4e6785ce30e9b6fe4\"},{\"fn\":\"/Users/frodenas/Rails/cf-console/tmp/app-bits/noapp/LICENSE\",\"zn\":\"LICENSE\",\"size\":1058,\"sha1\":\"f933994f3d5d4a47f5e8a5e61cad08ad0b740ca9\"},{\"fn\":\"/Users/frodenas/Rails/cf-console/tmp/app-bits/noapp/Rakefile\",\"zn\":\"Rakefile\",\"size\":637,\"sha1\":\"b2b71a50359c2e68f21f4f27abbf71de02c2df7b\"},{\"fn\":\"/Users/frodenas/Rails/cf-console/tmp/app-bits/noapp/README.md\",\"zn\":\"README.md\",\"size\":4604,\"sha1\":\"52ad68cc7a229accacf08be6612b8e3f6f3954b0\"},{\"fn\":\"/Users/frodenas/Rails/cf-console/tmp/app-bits/noapp/spec/client/apps_spec.rb\",\"zn\":\"spec/client/apps_spec.rb\",\"size\":17159,\"sha1\":\"b5dd113fca5e97d416d701a8782b3b8496e7f10c\"},{\"fn\":\"/Users/frodenas/Rails/cf-console/tmp/app-bits/noapp/spec/client/info_spec.rb\",\"zn\":\"spec/client/info_spec.rb\",\"size\":3385,\"sha1\":\"3cea0e13965f8b8b821cbc08ddc25912f0cb8149\"},{\"fn\":\"/Users/frodenas/Rails/cf-console/tmp/app-bits/noapp/spec/client/resources_spec.rb\",\"zn\":\"spec/client/resources_spec.rb\",\"size\":1809,\"sha1\":\"51053c8b0efeee35b980e5f991a26c89ea93b623\"},{\"fn\":\"/Users/frodenas/Rails/cf-console/tmp/app-bits/noapp/spec/client/services_spec.rb\",\"zn\":\"spec/client/services_spec.rb\",\"size\":9751,\"sha1\":\"b94b65cb39430dfe298777d2fb8244279f3b7578\"},{\"fn\":\"/Users/frodenas/Rails/cf-console/tmp/app-bits/noapp/spec/client/users_spec.rb\",\"zn\":\"spec/client/users_spec.rb\",\"size\":14189,\"sha1\":\"4799826a42d51fa0af272f867ed2a8fb3e191ac3\"},{\"fn\":\"/Users/frodenas/Rails/cf-console/tmp/app-bits/noapp/spec/client_spec.rb\",\"zn\":\"spec/client_spec.rb\",\"size\":4281,\"sha1\":\"c5ecd8f3385fa2e1effa9af36c5d03494aa7fc0b\"},{\"fn\":\"/Users/frodenas/Rails/cf-console/tmp/app-bits/noapp/spec/cloudfoundry_spec.rb\",\"zn\":\"spec/cloudfoundry_spec.rb\",\"size\":2145,\"sha1\":\"22d7eeef7f8f6a14d06809e9a6e8a3e97ca94980\"},{\"fn\":\"/Users/frodenas/Rails/cf-console/tmp/app-bits/noapp/spec/fixtures/admin_logged/client.yml\",\"zn\":\"spec/fixtures/admin_logged/client.yml\",\"size\":7806,\"sha1\":\"8d6ea20bf6cbeb5cf6140c626b1969b110cf9ea4\"},{\"fn\":\"/Users/frodenas/Rails/cf-console/tmp/app-bits/noapp/spec/fixtures/admin_logged/users.yml\",\"zn\":\"spec/fixtures/admin_logged/users.yml\",\"size\":12287,\"sha1\":\"81a4f201916bdb26a90d9fc1f112929f021e55f8\"},{\"fn\":\"/Users/frodenas/Rails/cf-console/tmp/app-bits/noapp/spec/fixtures/admin_logged/users_create_action.yml\",\"zn\":\"spec/fixtures/admin_logged/users_create_action.yml\",\"size\":884,\"sha1\":\"c402a550b37555ff9aa8a80bdc671febf475d054\"},{\"fn\":\"/Users/frodenas/Rails/cf-console/tmp/app-bits/noapp/spec/fixtures/admin_logged/users_proxy_action.yml\",\"zn\":\"spec/fixtures/admin_logged/users_proxy_action.yml\",\"size\":3967,\"sha1\":\"4e8cca18b9105bdccd035cca8af67f2448902dcd\"},{\"fn\":\"/Users/frodenas/Rails/cf-console/tmp/app-bits/noapp/spec/fixtures/admin_logged/users_proxy_nouser_action.yml\",\"zn\":\"spec/fixtures/admin_logged/users_proxy_nouser_action.yml\",\"size\":1091,\"sha1\":\"44a0732389dca0ba58f1dd205af4bbe2388c6aa0\"},{\"fn\":\"/Users/frodenas/Rails/cf-console/tmp/app-bits/noapp/spec/fixtures/admin_logged/users_unproxy_action.yml\",\"zn\":\"spec/fixtures/admin_logged/users_unproxy_action.yml\",\"size\":3931,\"sha1\":\"18b95b16a76be0492f6935c7562a9999b7e30574\"},{\"fn\":\"/Users/frodenas/Rails/cf-console/tmp/app-bits/noapp/spec/fixtures/app.js\",\"zn\":\"spec/fixtures/app.js\",\"size\":457,\"sha1\":\"80e11ec5ac403c9198776471c80aef8d84334ccb\"},{\"fn\":\"/Users/frodenas/Rails/cf-console/tmp/app-bits/noapp/spec/fixtures/app.zip\",\"zn\":\"spec/fixtures/app.zip\",\"size\":441,\"sha1\":\"c96c90bf4b4a4335ecb547a884a83b1e809245e6\"},{\"fn\":\"/Users/frodenas/Rails/cf-console/tmp/app-bits/noapp/spec/fixtures/client.yml\",\"zn\":\"spec/fixtures/client.yml\",\"size\":6695,\"sha1\":\"af6f7ddeb88086f33d2570c4b7f4c98232fd0305\"},{\"fn\":\"/Users/frodenas/Rails/cf-console/tmp/app-bits/noapp/spec/fixtures/client_invalid.yml\",\"zn\":\"spec/fixtures/client_invalid.yml\",\"size\":2286,\"sha1\":\"0fb7aa8b705f8fdcacaca3a7fe75f6eafcad40e2\"},{\"fn\":\"/Users/frodenas/Rails/cf-console/tmp/app-bits/noapp/spec/fixtures/cloudfoundry.yml\",\"zn\":\"spec/fixtures/cloudfoundry.yml\",\"size\":8860,\"sha1\":\"f4e3811ec9f6f95c40228ef500bd9133c7c06582\"},{\"fn\":\"/Users/frodenas/Rails/cf-console/tmp/app-bits/noapp/spec/fixtures/cloudfoundry_vs_client.yml\",\"zn\":\"spec/fixtures/cloudfoundry_vs_client.yml\",\"size\":4320,\"sha1\":\"90dbc8c0871ac1e920b4cd96703340c254b70b47\"},{\"fn\":\"/Users/frodenas/Rails/cf-console/tmp/app-bits/noapp/spec/fixtures/no_logged/apps.yml\",\"zn\":\"spec/fixtures/no_logged/apps.yml\",\"size\":1122,\"sha1\":\"17139c02faedf7b3dcfa362e416b8014cdf88f37\"},{\"fn\":\"/Users/frodenas/Rails/cf-console/tmp/app-bits/noapp/spec/fixtures/no_logged/client.yml\",\"zn\":\"spec/fixtures/no_logged/client.yml\",\"size\":1122,\"sha1\":\"eeaf69de1aea3a02beb021e65206f12f0407e1d7\"},{\"fn\":\"/Users/frodenas/Rails/cf-console/tmp/app-bits/noapp/spec/fixtures/no_logged/info.yml\",\"zn\":\"spec/fixtures/no_logged/info.yml\",\"size\":2312,\"sha1\":\"b370d183598e1cdcec0cb25ddeacf16a48046248\"},{\"fn\":\"/Users/frodenas/Rails/cf-console/tmp/app-bits/noapp/spec/fixtures/no_logged/resources.yml\",\"zn\":\"spec/fixtures/no_logged/resources.yml\",\"size\":1122,\"sha1\":\"3aed592c63c75e54e66012a1fe3237e0dcd1f244\"},{\"fn\":\"/Users/frodenas/Rails/cf-console/tmp/app-bits/noapp/spec/fixtures/no_logged/services.yml\",\"zn\":\"spec/fixtures/no_logged/services.yml\",\"size\":1122,\"sha1\":\"3aed592c63c75e54e66012a1fe3237e0dcd1f244\"},{\"fn\":\"/Users/frodenas/Rails/cf-console/tmp/app-bits/noapp/spec/fixtures/no_logged/users.yml\",\"zn\":\"spec/fixtures/no_logged/users.yml\",\"size\":2652,\"sha1\":\"aae6efa73ffe2154923dd9b634b575df1a24d524\"},{\"fn\":\"/Users/frodenas/Rails/cf-console/tmp/app-bits/noapp/spec/fixtures/no_logged/users_login_action.yml\",\"zn\":\"spec/fixtures/no_logged/users_login_action.yml\",\"size\":4907,\"sha1\":\"046fdd19afef811e3697624837d4fd481a18b60e\"},{\"fn\":\"/Users/frodenas/Rails/cf-console/tmp/app-bits/noapp/spec/fixtures/no_logged/users_proxy_action.yml\",\"zn\":\"spec/fixtures/no_logged/users_proxy_action.yml\",\"size\":959,\"sha1\":\"7caf33eb6851ad2598521e2dc302110d79d63a7d\"},{\"fn\":\"/Users/frodenas/Rails/cf-console/tmp/app-bits/noapp/spec/fixtures/no_logged/users_unproxy_action.yml\",\"zn\":\"spec/fixtures/no_logged/users_unproxy_action.yml\",\"size\":1122,\"sha1\":\"ae4fbcdee0252f6ea9e92cdf866a3c5afc287ee3\"},{\"fn\":\"/Users/frodenas/Rails/cf-console/tmp/app-bits/noapp/spec/fixtures/user_logged/apps.yml\",\"zn\":\"spec/fixtures/user_logged/apps.yml\",\"size\":23317,\"sha1\":\"c36d0d0872dec124a4a1edf7d9ec8e210d611c1e\"},{\"fn\":\"/Users/frodenas/Rails/cf-console/tmp/app-bits/noapp/spec/fixtures/user_logged/apps_create_action.yml\",\"zn\":\"spec/fixtures/user_logged/apps_create_action.yml\",\"size\":1193,\"sha1\":\"9361429f552405eb28f190ff2af35a1b99f6ba61\"},{\"fn\":\"/Users/frodenas/Rails/cf-console/tmp/app-bits/noapp/spec/fixtures/user_logged/apps_directory_action.yml\",\"zn\":\"spec/fixtures/user_logged/apps_directory_action.yml\",\"size\":1185,\"sha1\":\"4e043746368a51934e442dee3312b16d94191aab\"},{\"fn\":\"/Users/frodenas/Rails/cf-console/tmp/app-bits/noapp/spec/fixtures/user_logged/apps_download_action.yml\",\"zn\":\"spec/fixtures/user_logged/apps_download_action.yml\",\"size\":1760,\"sha1\":\"657b92cbf544eea3cec57750d2e4860ac15decb9\"},{\"fn\":\"/Users/frodenas/Rails/cf-console/tmp/app-bits/noapp/spec/fixtures/user_logged/apps_file_action.yml\",\"zn\":\"spec/fixtures/user_logged/apps_file_action.yml\",\"size\":1590,\"sha1\":\"47f48c28af854977bef60673a392ca57d01cb90c\"},{\"fn\":\"/Users/frodenas/Rails/cf-console/tmp/app-bits/noapp/spec/fixtures/user_logged/apps_start_action.yml\",\"zn\":\"spec/fixtures/user_logged/apps_start_action.yml\",\"size\":2694,\"sha1\":\"2521ed47ef93e5a79a7c427ca9a0083c35643421\"},{\"fn\":\"/Users/frodenas/Rails/cf-console/tmp/app-bits/noapp/spec/fixtures/user_logged/apps_stats_action.yml\",\"zn\":\"spec/fixtures/user_logged/apps_stats_action.yml\",\"size\":1372,\"sha1\":\"d07691851d53f2bf05cd5ff7b87123eee4471e90\"},{\"fn\":\"/Users/frodenas/Rails/cf-console/tmp/app-bits/noapp/spec/fixtures/user_logged/apps_update_info_action.yml\",\"zn\":\"spec/fixtures/user_logged/apps_update_info_action.yml\",\"size\":1137,\"sha1\":\"6b10cf08a09aaf1ac0ca52f4ebcd590cab740410\"},{\"fn\":\"/Users/frodenas/Rails/cf-console/tmp/app-bits/noapp/spec/fixtures/user_logged/apps_upload_filename_action.yml\",\"zn\":\"spec/fixtures/user_logged/apps_upload_filename_action.yml\",\"size\":2179,\"sha1\":\"753c8a8997b6b8a3dd7ae91c12a7e245c6c39dec\"},{\"fn\":\"/Users/frodenas/Rails/cf-console/tmp/app-bits/noapp/spec/fixtures/user_logged/apps_upload_zipfile_action.yml\",\"zn\":\"spec/fixtures/user_logged/apps_upload_zipfile_action.yml\",\"size\":2179,\"sha1\":\"753c8a8997b6b8a3dd7ae91c12a7e245c6c39dec\"},{\"fn\":\"/Users/frodenas/Rails/cf-console/tmp/app-bits/noapp/spec/fixtures/user_logged/client.yml\",\"zn\":\"spec/fixtures/user_logged/client.yml\",\"size\":7794,\"sha1\":\"a2903d07eebc054d1d80a67c7f1318bbe87fc5f9\"},{\"fn\":\"/Users/frodenas/Rails/cf-console/tmp/app-bits/noapp/spec/fixtures/user_logged/info.yml\",\"zn\":\"spec/fixtures/user_logged/info.yml\",\"size\":7081,\"sha1\":\"c334b45464779e1c9648ba50d08a9e48650ec9c2\"},{\"fn\":\"/Users/frodenas/Rails/cf-console/tmp/app-bits/noapp/spec/fixtures/user_logged/resources.yml\",\"zn\":\"spec/fixtures/user_logged/resources.yml\",\"size\":1049,\"sha1\":\"9dbb73c95540e5cf40760260069150eae4bf690e\"},{\"fn\":\"/Users/frodenas/Rails/cf-console/tmp/app-bits/noapp/spec/fixtures/user_logged/resources_check_action.yml\",\"zn\":\"spec/fixtures/user_logged/resources_check_action.yml\",\"size\":1300,\"sha1\":\"3fab1a7c4c80f959a82a59876a9ef3ef59d3b555\"},{\"fn\":\"/Users/frodenas/Rails/cf-console/tmp/app-bits/noapp/spec/fixtures/user_logged/services.yml\",\"zn\":\"spec/fixtures/user_logged/services.yml\",\"size\":10726,\"sha1\":\"1405c87889728b1ef7b780fe5c27fc95c57924d0\"},{\"fn\":\"/Users/frodenas/Rails/cf-console/tmp/app-bits/noapp/spec/fixtures/user_logged/services_bind_action.yml\",\"zn\":\"spec/fixtures/user_logged/services_bind_action.yml\",\"size\":5121,\"sha1\":\"db4593b744b13e6d23f44354c45bbeb69a92bd16\"},{\"fn\":\"/Users/frodenas/Rails/cf-console/tmp/app-bits/noapp/spec/fixtures/user_logged/services_create_action.yml\",\"zn\":\"spec/fixtures/user_logged/services_create_action.yml\",\"size\":2949,\"sha1\":\"9c055a858a5483ba2753896626c08938c6e509a9\"},{\"fn\":\"/Users/frodenas/Rails/cf-console/tmp/app-bits/noapp/spec/fixtures/user_logged/services_unbind_action.yml\",\"zn\":\"spec/fixtures/user_logged/services_unbind_action.yml\",\"size\":3984,\"sha1\":\"6e6ea47fa2baf5b475d0987c6eff7bd8f23dd555\"},{\"fn\":\"/Users/frodenas/Rails/cf-console/tmp/app-bits/noapp/spec/fixtures/user_logged/services_unbind_fail_action.yml\",\"zn\":\"spec/fixtures/user_logged/services_unbind_fail_action.yml\",\"size\":3585,\"sha1\":\"26ea01d4ebaaa7659c16af0eebf769d825ec26d2\"},{\"fn\":\"/Users/frodenas/Rails/cf-console/tmp/app-bits/noapp/spec/fixtures/user_logged/users.yml\",\"zn\":\"spec/fixtures/user_logged/users.yml\",\"size\":10451,\"sha1\":\"8cbfb9142f8134ad72d18bc37b04ebb2f3e88c0d\"},{\"fn\":\"/Users/frodenas/Rails/cf-console/tmp/app-bits/noapp/spec/fixtures/user_logged/users_proxy_action.yml\",\"zn\":\"spec/fixtures/user_logged/users_proxy_action.yml\",\"size\":1101,\"sha1\":\"9470c981cb26119501925493308a9ed14520c1c9\"},{\"fn\":\"/Users/frodenas/Rails/cf-console/tmp/app-bits/noapp/spec/fixtures/user_logged/users_unproxy_action.yml\",\"zn\":\"spec/fixtures/user_logged/users_unproxy_action.yml\",\"size\":3925,\"sha1\":\"e601f3e3524ed2ddb80dcb29f59e682f483983b1\"},{\"fn\":\"/Users/frodenas/Rails/cf-console/tmp/app-bits/noapp/spec/spec_helper.rb\",\"zn\":\"spec/spec_helper.rb\",\"size\":702,\"sha1\":\"471a31bd1afc015589dc40b0a1e51e6780218881\"},{\"fn\":\"/Users/frodenas/Rails/cf-console/tmp/app-bits/noapp/spec/support/cf_connection_helper.rb\",\"zn\":\"spec/support/cf_connection_helper.rb\",\"size\":920,\"sha1\":\"603a35221834561b898d4cc04e9602ff72435c96\"},{\"fn\":\"/Users/frodenas/Rails/cf-console/tmp/app-bits/noapp/spec/support/vcr.rb\",\"zn\":\"spec/support/vcr.rb\",\"size\":207,\"sha1\":\"14ff3294a3358be59aad7ef595fe2a685b8423eb\"}]"
     headers: 
       User-Agent: 
-      - cloudfoundry-client-0.1.1
+      - cloudfoundry-client-0.2.0
       Authorization: 
-      - 04085b084922117573657240766361702e6d65063a0645546c2b07aa25e94e22193357f6e166053ef17797b5879877f6ca4542382f
+      - 04085b084922117573657240766361702e6d65063a0645546c2b07c547554f22195ac7b777ec1ed86057ee09ec9a97e38e61ce119b
       Accept: 
       - application/json
       Content-Type: 
       - application/json
-      Accept-Encoding: 
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
   response: 
     status: 
       code: 200
@@ -515,7 +563,7 @@ http_interactions:
       Server: 
       - nginx/0.7.65
       Date: 
-      - Sat, 10 Dec 2011 11:40:46 GMT
+      - Mon, 27 Feb 2012 23:10:31 GMT
       Content-Type: 
       - application/json; charset=utf-8
       Transfer-Encoding: 
@@ -525,29 +573,29 @@ http_interactions:
       Keep-Alive: 
       - timeout=20
       Etag: 
-      - "\"90ccd48beade59257c2aee914377c6eb\""
+      - "\"ad89095df787aa58964f885a4bbb4151\""
       Cache-Control: 
       - max-age=0, private, must-revalidate
       X-Ua-Compatible: 
       - IE=Edge
-    body: "{\"name\":\"vcap\",\"build\":2222,\"support\":\"http://support.cloudfoundry.com\",\"version\":\"0.999\",\"description\":\"VMware's Cloud Application Platform\",\"allow_debug\":true,\"user\":\"user@vcap.me\",\"limits\":{\"memory\":2048,\"app_uris\":4,\"services\":16,\"apps\":20},\"usage\":{\"memory\":0,\"apps\":0,\"services\":0},\"frameworks\":{\"grails\":{\"name\":\"grails\",\"runtimes\":[{\"name\":\"java\",\"version\":\"1.6\",\"description\":\"Java 6\"}],\"appservers\":[{\"name\":\"tomcat\",\"description\":\"Tomcat\"}],\"detection\":[{\"*.war\":true}]},\"lift\":{\"name\":\"lift\",\"runtimes\":[{\"name\":\"java\",\"version\":\"1.6\",\"description\":\"Java 6\"}],\"appservers\":[{\"name\":\"tomcat\",\"description\":\"Tomcat\"}],\"detection\":[{\"*.war\":true}]},\"php\":{\"name\":\"php\",\"runtimes\":[{\"name\":\"php\",\"version\":\"5.3\",\"description\":\"PHP 5\"}],\"appservers\":[{\"name\":\"apache\",\"description\":\"Apache\"}],\"detection\":[{\"*.php\":true}]},\"spring\":{\"name\":\"spring\",\"runtimes\":[{\"name\":\"java\",\"version\":\"1.6\",\"description\":\"Java 6\"}],\"appservers\":[{\"name\":\"tomcat\",\"description\":\"Tomcat\"}],\"detection\":[{\"*.war\":true}]},\"java_web\":{\"name\":\"java_web\",\"runtimes\":[{\"name\":\"java\",\"version\":\"1.6\",\"description\":\"Java 6\"}],\"appservers\":[{\"name\":\"tomcat\",\"description\":\"Tomcat\"}],\"detection\":[{\"*.war\":true}]},\"django\":{\"name\":\"django\",\"runtimes\":[{\"name\":\"python26\",\"version\":\"2.6.5\",\"description\":\"Python 2.6.5\"}],\"appservers\":[],\"detection\":[{\"*.py\":\".\"}]},\"rails3\":{\"name\":\"rails3\",\"runtimes\":[{\"name\":\"ruby18\",\"version\":\"1.8.7\",\"description\":\"Ruby 1.8.7\"},{\"name\":\"ruby19\",\"version\":\"1.9.2p180\",\"description\":\"Ruby 1.9.2\"}],\"appservers\":[{\"name\":\"thin\",\"description\":\"Thin\"}],\"detection\":[{\"config/application.rb\":true},{\"config/environment.rb\":true}]},\"node\":{\"name\":\"node\",\"runtimes\":[{\"name\":\"node\",\"version\":\"0.4.5\",\"description\":\"Node.js\"}],\"appservers\":[],\"detection\":[{\"*.js\":\".\"}]},\"otp_rebar\":{\"name\":\"otp_rebar\",\"runtimes\":[{\"name\":\"erlangR14B02\",\"version\":\"R14B02\",\"description\":\"Erlang R14B02\"}],\"appservers\":[],\"detection\":[{\"releases/*/*.rel\":\".\"}]},\"sinatra\":{\"name\":\"sinatra\",\"runtimes\":[{\"name\":\"ruby18\",\"version\":\"1.8.7\",\"description\":\"Ruby 1.8.7\"},{\"name\":\"ruby19\",\"version\":\"1.9.2p180\",\"description\":\"Ruby 1.9.2\"}],\"appservers\":[{\"name\":\"thin\",\"description\":\"Thin\"}],\"detection\":[{\"*.rb\":\"require 'sinatra'|require \\\"sinatra\\\"\"},{\"config/environment.rb\":false}]},\"wsgi\":{\"name\":\"wsgi\",\"runtimes\":[{\"name\":\"python26\",\"version\":\"2.6.5\",\"description\":\"Python 2.6.5\"}],\"appservers\":[],\"detection\":[{\"*.py\":\".\"}]}}}"
-    http_version: !!null 
-      str: ""
-      :@taguri: x-private:null
-  recorded_at: Sat, 10 Dec 2011 11:40:50 GMT
+    body: 
+      encoding: US-ASCII
+      string: "[]"
+    http_version: 
+  recorded_at: Mon, 27 Feb 2012 23:10:30 GMT
 - request: 
-    method: post
-    uri: http://api.vcap.me:80/apps
-    body: "{\"name\":\"newapp\",\"instances\":\"1\",\"resources\":{\"memory\":\"64\"},\"uris\":[\"newapp.vcap.me\"],\"staging\":{\"framework\":\"node\",\"runtime\":\"node\"},\"services\":[\"noservice\"]}"
+    method: delete
+    uri: http://api.vcap.me/apps/noapp
+    body: 
+      encoding: US-ASCII
+      string: ""
     headers: 
       User-Agent: 
-      - cloudfoundry-client-0.1.1
+      - cloudfoundry-client-0.2.0
       Authorization: 
-      - 04085b084922117573657240766361702e6d65063a0645546c2b07aa25e94e22193357f6e166053ef17797b5879877f6ca4542382f
+      - 04085b084922117573657240766361702e6d65063a0645546c2b07c547554f22195ac7b777ec1ed86057ee09ec9a97e38e61ce119b
       Accept: 
-      - application/json
-      Content-Type: 
-      - application/json
+      - "*/*"
   response: 
     status: 
       code: 404
@@ -556,7 +604,7 @@ http_interactions:
       Server: 
       - nginx/0.7.65
       Date: 
-      - Sun, 11 Dec 2011 22:44:36 GMT
+      - Mon, 27 Feb 2012 23:10:34 GMT
       Content-Type: 
       - application/json; charset=utf-8
       Transfer-Encoding: 
@@ -569,7 +617,9 @@ http_interactions:
       - no-cache
       X-Ua-Compatible: 
       - IE=Edge
-    body: "{\"code\":500,\"description\":\"Service not found\"}"
+    body: 
+      encoding: US-ASCII
+      string: "{\"code\":301,\"description\":\"Application not found\"}"
     http_version: 
-  recorded_at: Sun, 11 Dec 2011 22:44:47 GMT
-recorded_with: VCR 2.0.0.beta2
+  recorded_at: Mon, 27 Feb 2012 23:10:33 GMT
+recorded_with: VCR 2.0.0.rc2

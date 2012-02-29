@@ -4,12 +4,12 @@ class System
   end
 
   def find_account_info()
-    return @cf_client.cloud_info || {}
+    @cf_client.cloud_info || {}
   end
 
   def find_all_frameworks()
     info = find_account_info()
-    return info[:frameworks] || {}
+    info[:frameworks] || {}
   end
 
   def find_all_runtimes()
@@ -23,13 +23,13 @@ class System
     frameworks = find_all_frameworks()
     frameworks.each do |fwk_name, fwk_data|
       next unless fwk_data[:runtimes]
-      fwk_data[:runtimes].each { |r| runtimes[r[:name]] = r}
+      fwk_data[:runtimes].each { |r| runtimes[r[:name]] = r }
     end
-    return runtimes
+    runtimes
   end
 
   def find_all_system_services()
-    return @cf_client.cloud_services_info || {}
+    @cf_client.cloud_services_info || {}
   end
 
   def find_available_memory()
@@ -39,6 +39,5 @@ class System
     return 0 unless usage and limits
 
     available_memory = limits[:memory].to_i - usage[:memory].to_i
-    return available_memory
   end
 end

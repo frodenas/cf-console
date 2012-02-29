@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
     begin
       @cf_client = cloudfoundry_client(cookies[:cf_target_url], cookies.signed[:cf_auth_token])
       @cf_logged_in = @cf_client.logged_in?
-    rescue Exception => ex
+    rescue Exception
       @cf_logged_in = false
     end
     if @cf_logged_in
@@ -27,13 +27,20 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def require_admin
+    unless @cf_admin_user
+      flash[:alert] = I18n.t('meta.operation_not_permitted')
+      redirect_to root_url
+    end
+  end
+
   def cloudfoundry_client(cf_target_url, cf_auth_token = nil)
     cf_target_url ||= CloudFoundry::Client::DEFAULT_TARGET
     @client = CloudFoundry::Client.new({:adapter => which_faraday_adapter?, :target_url => cf_target_url, :auth_token => cf_auth_token})
   end
 
   def which_faraday_adapter?
-    if (defined?(EM::Synchrony) && EM.reactor_running?)
+    if defined?(EM::Synchrony) && EM.reactor_running?
       :em_synchrony
     else
       :net_http
@@ -50,7 +57,7 @@ class ApplicationController < ActionController::Base
   end
 
   def user_agent_locale
-    user_agent_languages ||= env['HTTP_ACCEPT_LANGUAGE'].split(/\s*,\s*/).collect do |lang|
+    user_agent_languages ||= request.env['HTTP_ACCEPT_LANGUAGE'].split(/\s*,\s*/).collect do |lang|
       lang += ";q=1.0" unless lang =~ /;q=\d+\.\d+$/
       lang.split(";q=")
     end.sort do |x, y|

@@ -855,14 +855,13 @@ describe App do
       end
     end
 
-    # TODO Fix this test when executed in Travis CI
-    #it 'raises an exception when uploading bits from Git and bits did not change' do
-      #VCR.use_cassette("models/logged/app_upload_from_git_nofiles", :record => :new_episodes, :exclusive => true) do
-        #expect {
-          #uploaded = @app.upload_app_from_git("fakeapp", "git://github.com/frodenas/cloudfoundry-client.git", "master")
-        #}.to raise_exception(I18n.t('apps.model.no_files'))
-      #end
-    #end
+    it 'raises an exception when uploading bits from Git and bits did not change' do
+      VCR.use_cassette("models/logged/app_upload_from_git_nofiles", :record => :new_episodes, :exclusive => true) do
+        expect {
+          uploaded = @app.upload_app_from_git("fakeapp", "git://github.com/frodenas/cloudfoundry-client.git", "master")
+        }.to raise_exception
+      end
+    end
 
     it 'raises an exception when uploading bits from Git for an app that does not exists' do
       expect {

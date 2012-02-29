@@ -1,3 +1,12 @@
+0.5 - February 28, 2012
+----------------------
+* [Follow Ruby coding style and improve tests](https://github.com/frodenas/cf-console/commit/71bf8e900d4f5c9817453a16567672bc4882fc39)
+* [Show restart app option when creating an env var only when app is started](https://github.com/frodenas/cf-console/commit/b4d87faa16dc7b5bfa1e6e37ad586498da7f7ce3)
+* [Fix jQuery .on mimic syntax (must use .live instead of .bind)](https://github.com/frodenas/cf-console/commit/cd6bd16ae9ec8510bac3a771074079075c634d88)
+* [Fix validator behaviour: validate field when it loses focus instead of keyup](https://github.com/frodenas/cf-console/commit/f8cb0dbb057ed77f04b76b5a6162c2d04606284d)
+* [Add I18n support. Languages added: English, Español and Català](https://github.com/frodenas/cf-console/commit/f3bfbcf3326b35d03f37a05c37fe0efc8299ef93)
+* [Upgrade to v.0.2.0 cloudfoundy-client gem](https://github.com/frodenas/cf-console/commit/f26e9e9f5709bfc4e3bca78df27d08226efb93bf)
+
 0.4 - January 22, 2012
 ----------------------
 * [Upgrade to rails 3.2](https://github.com/frodenas/cf-console/commit/979382517f0741c09076d380eaf8efeb04be0eb1)

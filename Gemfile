@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.2.0'
+gem 'rails', '3.2.2'
 gem 'haml', '~> 3.1.4'
 gem 'coderay', '~> 1.0.5'
 gem 'cloudfoundry-client', '~> 0.2.0'
@@ -29,6 +29,6 @@ end
 
 group :test do
   gem 'webmock', '~> 1.8.0'
-  gem 'vcr', '~> 2.0.0.rc2'
+  gem 'vcr', '~> 2.0.0'
   #gem 'simplecov', '~> 0.6.1', :require => false
 end

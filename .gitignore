@@ -9,6 +9,7 @@ db/*.sqlite3
 doc/coverage/
 log/*.log
 tmp/
-vendor/bundle/ruby/
+vendor/bundle/
+vendor/cache/
 
 

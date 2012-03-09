@@ -178,6 +178,7 @@ ca:
       file_not_found: "Arxiu no trobat."
       no_frameworks: "No hi han frameworks disponibles."
       select_framework: "Seleccioni un framework ..."
+      fwk_on_run: "amb"
       no_memory: "No hi ha suficient memòria disponible."
       no_services: "No hi han serveix disponibles."
       select_service: "Seleccioni un servei a enllaçar ..."

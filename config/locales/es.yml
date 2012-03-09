@@ -178,6 +178,7 @@ es:
       file_not_found: "Archivo no encontrado."
       no_frameworks: "No hay frameworks disponibles."
       select_framework: "Seleccione un framework ..."
+      fwk_on_run: "en"
       no_memory: "No hay suficiente memoria disponible."
       no_services: "No hay servicios disponibles."
       select_service: "Seleccione un servicio a enlazar ..."

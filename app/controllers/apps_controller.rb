@@ -568,7 +568,7 @@ class AppsController < ApplicationController
       available_frameworks << [I18n.t('apps.controller.select_framework'), ""]
       frameworks.each do |fwk_name, fwk|
         fwk[:runtimes].each do |run|
-          available_frameworks << [fwk[:name].capitalize + " on " + run[:description], fwk_name.to_s + "/" + run[:name].to_s]
+          available_frameworks << [fwk[:name].capitalize + " " + I18n.t('apps.controller.fwk_on_run') + " " + run[:description], fwk_name.to_s + "/" + run[:name].to_s]
         end
       end
     end

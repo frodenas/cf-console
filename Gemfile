@@ -28,7 +28,7 @@ group :development, :test do
 end
 
 group :test do
-  gem 'webmock', '~> 1.8.0'
+  gem 'webmock', '~> 1.8.2'
   gem 'vcr', '~> 2.0.0'
   #gem 'simplecov', '~> 0.6.1', :require => false
 end

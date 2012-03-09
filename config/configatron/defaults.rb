@@ -33,7 +33,7 @@ configatron.suggest.app.url = true
 # Set which vendor images are included in vendor_images.png sprite.
 configatron.sprites.vendor_images = [
   "aspdotnet", "aspdotnet40", "django", "erlangR14B02", "grails", "java", "java_web", "lift",
-  "mongodb", "mssql", "mysql", "neo4j", "node",  "otp_rebar", "perl", "perl514", "php", "postgresql",
+  "mongodb", "mssql", "mysql", "neo4j", "node", "node06", "otp_rebar", "perl", "perl514", "php", "postgresql",
   "python", "python26", "python27", "python32", "rabbitmq", "rails3", "redis", "ruby18", "ruby19",
   "sinatra", "spring"
 ]

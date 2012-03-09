@@ -1,3 +1,19 @@
+0.6 - March 9, 2012
+----------------------
+* [Update .gitignore](https://github.com/frodenas/cf-console/commit/e2703f4efb3d42f6a0bc65f4ca83e8f5a61231fd)
+* [Update Rails 3.2.2 configs](https://github.com/frodenas/cf-console/commit/57bff51a3966c777377e32944185e3ec6c8ea104)
+* [Add Node 0.6 image](https://github.com/frodenas/cf-console/commit/44a6eb181e2d13a4e9fa925841c8084982eafe74)
+* [Add a require statement at the Gemfile (needed for MRI 1.9.2-p180)](https://github.com/frodenas/cf-console/commit/7fb2949e369d6484d7130459c73ae826224a1b7a)
+* [Filter sensitive parameters in the log file](https://github.com/frodenas/cf-console/commit/200e0c930cd204a9e33e96fd3e48e2494e998981)
+* [Upgrade gems: webmock](https://github.com/frodenas/cf-console/commit/44ffdf914a97b476d30728a5762e6e15f6161763)
+* [Upgrade gems: rails and vcr](https://github.com/frodenas/cf-console/commit/43033687abefe533e8abe0c490b326314de8722e)
+* [Reenable test in app model](https://github.com/frodenas/cf-console/commit/a61059d38a987836ed626e12e0172a23dd3280cb)
+* [Test commit: disable simplecov to prevent Travis CI exception](https://github.com/frodenas/cf-console/commit/09fc5cb65e908c1eb7fec554d2aa96c020c9ec2e)
+* [Disable an app model test](https://github.com/frodenas/cf-console/commit/9b47bf2a299f5e1377227b10ce8ad1dff2c8c90a)
+* [Fix a test in app model](https://github.com/frodenas/cf-console/commit/d6deada9d3e93b27fe950d85e961562a0f75561c)
+* [Upgrade gems: addressable, rubyzip, sass-rails, uglifier, sprite-factory](https://github.com/frodenas/cf-console/commit/7216f3ff2974cc689dc1d4346040e4a234fc3f4b)
+* [Fix a bug with %w arrays](https://github.com/frodenas/cf-console/commit/245dd8e87779a9552c9d448bb3021809ab771568)
+
 0.5 - February 28, 2012
 ----------------------
 * [Follow Ruby coding style and improve tests](https://github.com/frodenas/cf-console/commit/71bf8e900d4f5c9817453a16567672bc4882fc39)

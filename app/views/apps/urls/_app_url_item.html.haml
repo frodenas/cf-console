@@ -3,4 +3,4 @@
     %a{:href => "http://" + app_url_item, :target => "_blank"}= app_url_item
   %td.tdcenter= link_to sprite_tag("delete", :title => t('apps.urls.delete_url'), :class => "delete icon-tip"),
                 app_unmap_url_url(@name, :url => app_url_item), :id => "unmap-url-link", :remote => true,
-                :method => :put, :confirm => t('apps.urls.delete_url_confirm')
+                :method => :put, :data => { :confirm => t('apps.urls.delete_url_confirm') }

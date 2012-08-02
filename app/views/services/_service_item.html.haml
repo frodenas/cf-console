@@ -11,4 +11,4 @@
   %td= Time.at(service_item[:meta][:updated]).strftime(t('services.format.updated'))
   %td.tdcenter= link_to sprite_tag("delete", :title => t('services.delete_service'), :class => "delete icon-tip"),
                 service_delete_url(service_item[:name]), :id => "delete-service-link", :remote => true,
-                :method => :delete , :confirm => t('services.delete_service_confirm')
+                :method => :delete , :data => { :confirm => t('services.delete_service_confirm') }

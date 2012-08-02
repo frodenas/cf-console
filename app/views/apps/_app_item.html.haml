@@ -37,4 +37,4 @@
         app_update_bits_url(app_item[:name]), :rel => "#update_application_bits_modalBox", :class => "uploadAppBits"
     = link_to sprite_tag("delete", :title => t('apps.delete_app'), :class => "delete icon-tip"),
       app_delete_url(app_item[:name]), :id => "delete-app-link", :remote => true,
-      :method => :delete, :confirm => t('apps.delete_app_confirm')
+      :method => :delete, :data => { :confirm => t('apps.delete_app_confirm') }

@@ -3,4 +3,4 @@
   %td.editableText= app_envvar_item[:var_value]
   %td.tdcenter= link_to sprite_tag("delete", :title => t('apps.envvars.delete_envvar'), :class => "delete icon-tip"),
                 app_unset_var_url(@name, :var_name => app_envvar_item[:var_name]), :id => "unset-var-link",
-                :remote => true, :method => :put, :confirm => t('apps.envvars.delete_envvar_confirm')
+                :remote => true, :method => :put, :data => { :confirm => t('apps.envvars.delete_envvar_confirm') }

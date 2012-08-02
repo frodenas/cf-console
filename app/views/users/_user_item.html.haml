@@ -10,5 +10,5 @@
       = sprite_tag("ok", :alt => t('users.admin'))
   %td.tdcenter= link_to sprite_tag("delete", :title => t('users.delete_user'), :class => "delete icon-tip"),
                 user_delete_url(Base64.encode64(user_item[:email])), :id => "delete-user-link", :remote => true,
-                :method => :delete, :confirm => t('users.delete_user_confirm')
+                :method => :delete, :data => { :confirm => t('users.delete_user_confirm') }
 

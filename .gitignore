@@ -11,5 +11,6 @@ log/*.log
 tmp/
 vendor/bundle/
 vendor/cache/
+public/assets/
 
 

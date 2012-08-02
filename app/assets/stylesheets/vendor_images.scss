@@ -4,9 +4,9 @@
         
         app/assets/images/vendor_images/rabbitmq.png (119x25)
         app/assets/images/vendor_images/otp_rebar.png (92x21)
-        app/assets/images/vendor_images/python26.png (87x21)
-        app/assets/images/vendor_images/python32.png (87x21)
         app/assets/images/vendor_images/python.png (87x21)
+        app/assets/images/vendor_images/python32.png (87x21)
+        app/assets/images/vendor_images/python26.png (87x21)
         app/assets/images/vendor_images/python27.png (87x21)
         app/assets/images/vendor_images/postgresql.png (81x30)
         app/assets/images/vendor_images/mssql.png (81x21)
@@ -14,10 +14,12 @@
         app/assets/images/vendor_images/sinatra.png (79x21)
         app/assets/images/vendor_images/aspdotnet.png (78x25)
         app/assets/images/vendor_images/aspdotnet40.png (78x25)
-        app/assets/images/vendor_images/node.png (77x21)
         app/assets/images/vendor_images/node06.png (77x21)
+        app/assets/images/vendor_images/node.png (77x21)
+        app/assets/images/vendor_images/node08.png (77x21)
         app/assets/images/vendor_images/neo4j.png (73x21)
         app/assets/images/vendor_images/django.png (72x25)
+        app/assets/images/vendor_images/play.png (72x23)
         app/assets/images/vendor_images/redis.png (65x21)
         app/assets/images/vendor_images/rails3.png (63x25)
         app/assets/images/vendor_images/mongodb.png (63x21)
@@ -27,6 +29,7 @@
         app/assets/images/vendor_images/ruby19.png (52x25)
         app/assets/images/vendor_images/ruby18.png (52x25)
         app/assets/images/vendor_images/java.png (43x25)
+        app/assets/images/vendor_images/java7.png (43x25)
         app/assets/images/vendor_images/perl514.png (43x25)
         app/assets/images/vendor_images/java_web.png (43x25)
         app/assets/images/vendor_images/perl.png (43x25)
@@ -39,15 +42,15 @@
           app/assets/stylesheets/vendor_images.scss
 
         Output size:
-          269x226
+          278x222
 
 
 */
 img.rabbitmq { width: 119px; height: 25px; background: image_url('vendor_images.png') 0px 0px no-repeat }
 img.otp_rebar { width: 92px; height: 21px; background: image_url('vendor_images.png') 0px -25px no-repeat }
-img.python26 { width: 87px; height: 21px; background: image_url('vendor_images.png') 0px -46px no-repeat }
+img.python { width: 87px; height: 21px; background: image_url('vendor_images.png') 0px -46px no-repeat }
 img.python32 { width: 87px; height: 21px; background: image_url('vendor_images.png') 0px -67px no-repeat }
-img.python { width: 87px; height: 21px; background: image_url('vendor_images.png') 0px -88px no-repeat }
+img.python26 { width: 87px; height: 21px; background: image_url('vendor_images.png') 0px -88px no-repeat }
 img.python27 { width: 87px; height: 21px; background: image_url('vendor_images.png') -119px 0px no-repeat }
 img.postgresql { width: 81px; height: 30px; background: image_url('vendor_images.png') -119px -21px no-repeat }
 img.mssql { width: 81px; height: 21px; background: image_url('vendor_images.png') -119px -51px no-repeat }
@@ -55,22 +58,25 @@ img.grails { width: 80px; height: 21px; background: image_url('vendor_images.png
 img.sinatra { width: 79px; height: 21px; background: image_url('vendor_images.png') 0px -109px no-repeat }
 img.aspdotnet { width: 78px; height: 25px; background: image_url('vendor_images.png') 0px -130px no-repeat }
 img.aspdotnet40 { width: 78px; height: 25px; background: image_url('vendor_images.png') -78px -130px no-repeat }
-img.node { width: 77px; height: 21px; background: image_url('vendor_images.png') -79px -109px no-repeat }
-img.node06 { width: 77px; height: 21px; background: image_url('vendor_images.png') 0px -155px no-repeat }
-img.neo4j { width: 73px; height: 21px; background: image_url('vendor_images.png') -77px -155px no-repeat }
-img.django { width: 72px; height: 25px; background: image_url('vendor_images.png') 0px -176px no-repeat }
-img.redis { width: 65px; height: 21px; background: image_url('vendor_images.png') -72px -176px no-repeat }
-img.rails3 { width: 63px; height: 25px; background: image_url('vendor_images.png') -206px 0px no-repeat }
-img.mongodb { width: 63px; height: 21px; background: image_url('vendor_images.png') -206px -25px no-repeat }
-img.spring { width: 58px; height: 25px; background: image_url('vendor_images.png') -206px -46px no-repeat }
-img.lift { width: 56px; height: 25px; background: image_url('vendor_images.png') -206px -71px no-repeat }
-img.mysql { width: 55px; height: 21px; background: image_url('vendor_images.png') -206px -96px no-repeat }
-img.ruby19 { width: 52px; height: 25px; background: image_url('vendor_images.png') -206px -117px no-repeat }
-img.ruby18 { width: 52px; height: 25px; background: image_url('vendor_images.png') -206px -142px no-repeat }
-img.java { width: 43px; height: 25px; background: image_url('vendor_images.png') -206px -167px no-repeat }
-img.perl514 { width: 43px; height: 25px; background: image_url('vendor_images.png') -156px -130px no-repeat }
-img.java_web { width: 43px; height: 25px; background: image_url('vendor_images.png') 0px -201px no-repeat }
-img.perl { width: 43px; height: 25px; background: image_url('vendor_images.png') -43px -201px no-repeat }
+img.node06 { width: 77px; height: 21px; background: image_url('vendor_images.png') -79px -109px no-repeat }
+img.node { width: 77px; height: 21px; background: image_url('vendor_images.png') 0px -155px no-repeat }
+img.node08 { width: 77px; height: 21px; background: image_url('vendor_images.png') -77px -155px no-repeat }
+img.neo4j { width: 73px; height: 21px; background: image_url('vendor_images.png') 0px -176px no-repeat }
+img.django { width: 72px; height: 25px; background: image_url('vendor_images.png') -206px 0px no-repeat }
+img.play { width: 72px; height: 23px; background: image_url('vendor_images.png') -206px -25px no-repeat }
+img.redis { width: 65px; height: 21px; background: image_url('vendor_images.png') -206px -48px no-repeat }
+img.rails3 { width: 63px; height: 25px; background: image_url('vendor_images.png') -206px -69px no-repeat }
+img.mongodb { width: 63px; height: 21px; background: image_url('vendor_images.png') -206px -94px no-repeat }
+img.spring { width: 58px; height: 25px; background: image_url('vendor_images.png') -206px -115px no-repeat }
+img.lift { width: 56px; height: 25px; background: image_url('vendor_images.png') -206px -140px no-repeat }
+img.mysql { width: 55px; height: 21px; background: image_url('vendor_images.png') -206px -165px no-repeat }
+img.ruby19 { width: 52px; height: 25px; background: image_url('vendor_images.png') 0px -197px no-repeat }
+img.ruby18 { width: 52px; height: 25px; background: image_url('vendor_images.png') -52px -197px no-repeat }
+img.java { width: 43px; height: 25px; background: image_url('vendor_images.png') -156px -130px no-repeat }
+img.java7 { width: 43px; height: 25px; background: image_url('vendor_images.png') -104px -197px no-repeat }
+img.perl514 { width: 43px; height: 25px; background: image_url('vendor_images.png') -147px -197px no-repeat }
+img.java_web { width: 43px; height: 25px; background: image_url('vendor_images.png') -190px -197px no-repeat }
+img.perl { width: 43px; height: 25px; background: image_url('vendor_images.png') -233px -197px no-repeat }
 img.php { width: 40px; height: 21px; background: image_url('vendor_images.png') -156px -109px no-repeat }
 img.erlangR14B02 { width: 25px; height: 21px; background: image_url('vendor_images.png') -92px -25px no-repeat }
-img.test { width: 1px; height: 1px; background: image_url('vendor_images.png') -264px -46px no-repeat }
+img.test { width: 1px; height: 1px; background: image_url('vendor_images.png') -271px -48px no-repeat }

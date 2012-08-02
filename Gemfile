@@ -24,6 +24,7 @@ end
 
 # RSpec2 needs to be in the :development group to expose generators and rake tasks without having to type RAILS_ENV=test
 group :development, :test do
+  gem "rake", '~> 0.9.2.2'
   gem 'rspec-rails', '~> 2.11.0'
 end
 

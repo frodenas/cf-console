@@ -3,8 +3,6 @@
     %tr
       %th.thsort{:scope => "col", :rowspan => 2}
         = t('system.frameworks.framework_head')
-      %th.thsort{:scope => "col", :rowspan => 2}
-        = t('system.frameworks.appserver_head')
       %th.thcenter{:scope => "col", :colspan => 3}
         = t('system.frameworks.runtimes_head')
     %tr
@@ -19,10 +17,6 @@
       - fwk[:runtimes].each do |run|
         %tr.oddeven
           %td= find_vendor_image(fwk[:name]).html_safe
-          %td
-            - fwk[:appservers].each do |appserver|
-              = appserver[:description]
-              %br/
           %td= find_vendor_image(run[:name]).html_safe
           %td= run[:version]
           %td= run[:description]

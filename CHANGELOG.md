@@ -1,3 +1,23 @@
+0.7 - October 15, 2012
+----------------------
+* [Fix sprockets error: enable again assets:precompile](https://github.com/frodenas/cf-console/commit/cdd66bf82b58bcafd5f9d5cfb23a58d1099737ac)
+* [Fix javascripts after upgrading jQuery & Datatables](https://github.com/frodenas/cf-console/commit/94f3ba1d4eed0506c33195d1dd770eca795feb94)
+* [Fix stack level too deep](https://github.com/frodenas/cf-console/commit/35aae0ac5864fd52e2c481c242a73ec998c853c4)
+* [Use i18n-js gem from github (PR-74 needed)](https://github.com/frodenas/cf-console/commit/8e3d8ffebcf438dfd54c39f0645f39274c14d91d)
+* [Upgrade javascript helpers](https://github.com/frodenas/cf-console/commit/854ce0670d689a5e09a45903fe089cd6597fc6b6)
+* [Drop appservers column at system frameworks info](https://github.com/frodenas/cf-console/commit/93bfea959dfca16a161737dd6624862c3b825715)
+* [Upgrade several gems](https://github.com/frodenas/cf-console/commit/9c2313e89f48d1a76dddd34f27ffda6d1f53b754)
+* [Add some Travis CI options](https://github.com/frodenas/cf-console/commit/e787004300f90abe8022dcd6589c72560f5b3be5)
+* [Add Java 1.7, Node 0.8 and Play vendor images](https://github.com/frodenas/cf-console/commit/93b6594a9161ce5d006ea513fe5a877722ef6ac9)
+* [Fix for confirm option deprecation in Rails 4.0.](https://github.com/frodenas/cf-console/commit/3516c82cab6f9ad2df4813289420289cbebf7af3)
+* [Upgrade several gems](https://github.com/frodenas/cf-console/commit/ae3e7b72f3175c6446bb31b3936fc61d97c13db6)
+* [Ignore public/assets](https://github.com/frodenas/cf-console/commit/a74a3a4d230ce082d1a90d9bb1b2d3861e0795e7)
+* [Fix Fork app banner](https://github.com/frodenas/cf-console/commit/80def22c9e3579f8d8316349b3b4c6d29c2f28a0)
+* [Merge pull request #1 from troytop/patch-1](https://github.com/frodenas/cf-console/commit/d0edd0eaab6934c9010fdf028e2467d96a03dc6c)
+* [Updated Stackato Sandbox URL. Stackato only accepts requests via HTTPS.](https://github.com/frodenas/cf-console/commit/fb79ab197d825fb9b0e5394ab6773e52037e5003)
+* [Fix a literal not translated](https://github.com/frodenas/cf-console/commit/67b653d7c8ac654e0e59ed822db3fbab1b3f51c4)
+* [Bug fix: node 0.6 logo must be included in vendor_images sprite](https://github.com/frodenas/cf-console/commit/36b2c62f3b40775bc14eab64ddbec512640a6792)
+
 0.6 - March 9, 2012
 ----------------------
 * [Update .gitignore](https://github.com/frodenas/cf-console/commit/e2703f4efb3d42f6a0bc65f4ca83e8f5a61231fd)

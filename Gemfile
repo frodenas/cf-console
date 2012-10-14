@@ -12,7 +12,7 @@ gem 'rack-fiber_pool', '~> 0.9.2', :require => 'rack/fiber_pool'
 gem 'em-synchrony', '~> 1.0.2', :require => ['em-synchrony', 'em-synchrony/em-http', 'em-synchrony/fiber_iterator']
 gem 'em-http-request', '~> 1.0.3', :require => 'em-http'
 gem 'thin', '~> 1.5.0'
-gem 'i18n-js', '~> 3.0.0.rc2'
+gem 'i18n-js', :git => 'https://github.com/fnando/i18n-js.git'
 gem 'routing-filter', '~> 0.3.1'
 
 group :assets do

@@ -4,15 +4,15 @@
  * the top of the compiled file, but it's generally better to create a new file per style scope.
  *= require application-pre
  *= require_self
- *= require chosen
- *= require coderay
- *= require flags
- *= require vendor_images
  *= require application-media
  *= require application-post
 */
 
+@import 'chosen';
+@import 'coderay';
 @import 'icons';
+@import 'flags';
+@import 'vendor_images';
 
 body {
   background-color: #FFFFFF;

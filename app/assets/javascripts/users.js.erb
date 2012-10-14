@@ -15,10 +15,11 @@ $(function() {
     };
     usersTable = $('#users-table').dataTable(usersTable_Settings);
     var ultabs = $('ul.tabs');
-    ultabs.tabs('div.panels > div.panel', {effect: 'slide', tabs: 'li'});
-    $(document)
-      .on('onClick', ultabs, function(event, tabIndex) {
-        var tab = $(this).find('li.current > a').attr('href');
+    ultabs.tabs('div.panels > div.panel', {
+      effect: 'slide',
+      tabs: 'li',
+      onClick: function(event, tabIndex) {
+        var tab = this.getCurrentTab().find('a').attr('href');
         if (tab == '#users') {
           $('.invoke-modalBox').html('<button class="addUser" rel="#add_user_modalBox">' + I18n.t('users.js.add_user') + '</button>').toggle();
           addUser_trigger = $('.addUser').overlay({
@@ -31,7 +32,8 @@ $(function() {
           });
           $('#users-table .icon-tip').tooltip({'effect': 'fade', 'tipClass': 'help-tip'});
         }
-      });
+      }
+    });
     $('#new-user-form .help').tooltip({'effect': 'fade', 'tipClass': 'help-tip'});
     $('#new-user-form').validator({'effect': 'below_field_error', 'inputEvent': 'blur', 'lang': validatorTools_lang});
     $(document)

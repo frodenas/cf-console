@@ -3,7 +3,7 @@ $('#flash-content').empty();
   $('#flash-content').append('<div class="alert"><%= escape_javascript(flash[:alert]) %></div>');
   $('#flash').fadeIn('slow');
 <%- else %>
-  var row = $('tr.#service-<%= @name %>').html('<td colspan="7" class="tdcenter"><%= escape_javascript(flash[:notice]) %></td>').addClass('highlight');
+  var row = $('#service-<%= @name %>').html('<td colspan="7" class="tdcenter"><%= escape_javascript(flash[:notice]) %></td>').addClass('highlight');
   row.fadeOut(1800, function() { servicesTable.fnDeleteRow(row.get(0)); });
 <%- end %>
 

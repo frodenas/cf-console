@@ -15,10 +15,11 @@ $(function() {
     };
     servicesTable = $('#services-table').dataTable(servicesTable_Settings);
     var ultabs = $('ul.tabs');
-    ultabs.tabs('div.panels > div.panel', {effect: 'slide', tabs: 'li'});
-    $(document)
-      .on('onClick', ultabs, function(event, tabIndex) {
-        var tab = $(this).find('li.current > a').attr('href');
+    ultabs.tabs('div.panels > div.panel', {
+      effect: 'slide',
+      tabs: 'li',
+      onClick: function(event, tabIndex) {
+        var tab = this.getCurrentTab().find('a').attr('href');
         if (tab == '#services') {
           $('.invoke-modalBox').html('<button class="addService" rel="#add_service_modalBox">' + I18n.t('services.js.add_service') + '</button>').toggle();
           addService_trigger = $('.addService').overlay({
@@ -34,7 +35,8 @@ $(function() {
           }
           $('#services-table .icon-tip').tooltip({'effect': 'fade', 'tipClass': 'help-tip'});
         }
-      });
+      }
+    });
     $('#new-service-form .help').tooltip({'effect': 'fade', 'tipClass': 'help-tip'});
     $('#new-service-form').validator({'effect': 'below_field_error', 'inputEvent': 'blur', 'lang': validatorTools_lang});
     $(document)

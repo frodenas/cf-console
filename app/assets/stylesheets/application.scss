@@ -523,7 +523,7 @@ header li#locale ul#locale-switch li {
   padding: .5em;
 }
 
-#main span.paginate_button, #main span.paginate_active {
+#main a.paginate_button, #main a.paginate_active {
   border: .1em solid #444444;
   border-radius: .5em;
   cursor: pointer;
@@ -531,11 +531,11 @@ header li#locale ul#locale-switch li {
   padding: 0 .5em;
 }
 
-#main span.paginate_active {
+#main a.paginate_active {
   font-weight: bold;
 }
 
-#main span.paginate_button_disabled {
+#main a.paginate_button_disabled {
   border: .1em solid #D4D4D5;
   color: #A7A7A7;
   cursor: default;
@@ -912,7 +912,7 @@ header li#locale ul#locale-switch li {
   padding: .5em;
 }
 
-#main .modalLog-content span.paginate_button, #main .modalLog-content span.paginate_active {
+#main .modalLog-content a.paginate_button, #main .modalLog-content a.paginate_active {
   border: .1em solid #FFFFFF;
   border-radius: .5em;
   color: #FFFFFF;
@@ -921,11 +921,11 @@ header li#locale ul#locale-switch li {
   padding: 0 .5em;
 }
 
-#main .modalLog-content span.paginate_active {
+#main .modalLog-content a.paginate_active {
   font-weight: bold;
 }
 
-#main .modalLog-content span.paginate_button_disabled {
+#main .modalLog-content a.paginate_button_disabled {
   border: .1em solid #333333;
   color: #333333;
   cursor: default;

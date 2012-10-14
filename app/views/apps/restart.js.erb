@@ -5,7 +5,7 @@ $('#flash-content').empty();
   $('#flash').fadeIn('slow');
 <%- else %>
   request_processed = true;
-  appsTable.fnDeleteRow($('tr.#app-<%= @name %>').get(0));
+  appsTable.fnDeleteRow($('#app-<%= @name %>').get(0));
   var row = $('#apps-table').append('<%= escape_javascript( render :partial => "apps/app_item", :collection => @updated_app ) %>');
   appsTable.dataTable().fnDestroy();
   appsTable.dataTable(appsTable_Settings);

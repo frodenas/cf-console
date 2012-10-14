@@ -45,10 +45,11 @@ $(function() {
     };
     appUrlsTable = $('#app-urls-table').dataTable(appUrlsTable_Settings);
     var ultabs = $('ul.tabs');
-    ultabs.tabs('div.panels > div.panel', {effect: 'slide', tabs: 'li'});
-    $(document)
-      .on('onClick', ultabs, function(event, tabIndex) {
-        var tab = $(this).find('li.current > a').attr('href');
+    ultabs.tabs('div.panels > div.panel', {
+      effect: 'slide',
+      tabs: 'li',
+      onClick: function(event, tabIndex) {
+        var tab = this.getCurrentTab().find('a').attr('href');
         if (tab == '#resources') {
           $('.invoke-modalBox').empty().hide();
           $.editable.addInputType('range', {
@@ -229,7 +230,8 @@ $(function() {
             $('.invoke-modalBox').html('<a href="' + app_download_bits_url + '" class="button">' + I18n.t('apps.js.download_bits') + '</a>').show();
           }
         }
-      });
+      }
+    });
     $('#set-var-form .help').tooltip({'effect': 'fade', 'tipClass': 'help-tip'});
     $('#set-var-form').validator({'effect': 'below_field_error', 'inputEvent': 'blur', 'lang': validatorTools_lang});
     $(document)

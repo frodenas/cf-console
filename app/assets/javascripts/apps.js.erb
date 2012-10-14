@@ -32,10 +32,11 @@ $(function() {
     };
     appsTable = $('#apps-table').dataTable(appsTable_Settings);
     var ultabs = $('ul.tabs');
-    ultabs.tabs('div.panels > div.panel', {effect: 'slide', tabs: 'li'});
-    $(document)
-      .on('onClick', ultabs, function(event, tabIndex) {
-        var tab = $(this).find('li.current > a').attr('href');
+    ultabs.tabs('div.panels > div.panel', {
+      effect: 'slide',
+      tabs: 'li',
+      onClick: function(event, tabIndex) {
+        var tab = this.getCurrentTab().find('a').attr('href');
         if (tab == '#apps') {
           $('.invoke-modalBox').html('<button class="createApplication" rel="#create_application_modalBox">' + I18n.t('apps.js.add_app') + '</button>').toggle();
           createApplication_trigger = $('.createApplication').overlay({
@@ -57,7 +58,8 @@ $(function() {
           }
           $('#apps-table .icon-tip').tooltip({'effect': 'fade', 'tipClass': 'help-tip'});
         }
-      });
+      }
+    });
     $('#new-app-form .help').tooltip({'effect': 'fade', 'tipClass': 'help-tip'});
     $('#new-app-form').validator({'effect': 'below_field_error', 'inputEvent': 'blur', 'lang': validatorTools_lang});
     $(document)

@@ -3,6 +3,6 @@ $('#flash-content').empty();
   $('#flash-content').append('<div class="alert"><%= escape_javascript(flash[:alert]) %></div>');
   $('#flash').fadeIn('slow');
 <%- else %>
-  var row = $('tr.#app-<%= @name %>-envvar-<%= @var_name %>').html('<td colspan="3" class="tdcenter"><%= escape_javascript(flash[:notice]) %></td>').addClass('highlight');
+  var row = $('#app-<%= @name %>-envvar-<%= @var_name %>').html('<td colspan="3" class="tdcenter"><%= escape_javascript(flash[:notice]) %></td>').addClass('highlight');
   row.fadeOut(1800, function() { appEnvvarsTable.fnDeleteRow(row.get(0)); });
 <%- end %>

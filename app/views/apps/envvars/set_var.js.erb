@@ -14,7 +14,7 @@
   <%- else %>
     request_processed = true;
     <%- if @var_exists %>
-      appEnvvarsTable.fnDeleteRow($('tr.#app-<%= @name %>-envvar-<%= @var_name %>').get(0));
+      appEnvvarsTable.fnDeleteRow($('#app-<%= @name %>-envvar-<%= @var_name %>').get(0));
     <%- end %>
     var row = $('#app-envvars-table').append('<%= escape_javascript( render :partial => "apps/envvars/app_envvar_item", :collection => @new_var ) %>').find('tr:last').addClass('highlight').hide();
     row.fadeIn(1800, function() { $(this).removeClass('highlight'); });

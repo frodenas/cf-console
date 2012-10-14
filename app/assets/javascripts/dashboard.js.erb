@@ -3,10 +3,11 @@ $(function() {
   if ($('body').hasClass('dashboard')) {
     $('#dashboard-menu-link').addClass('menu-current');
     var ultabs = $('ul.tabs');
-    ultabs.tabs('div.panels > div.panel', {effect: 'slide', tabs: 'li'});
-    $(document)
-      .on('onClick', ultabs, function(event, tabIndex) {
-        var tab = $(this).find('li.current > a').attr('href');
+    ultabs.tabs('div.panels > div.panel', {
+      effect: 'slide',
+      tabs: 'li',
+      onClick: function(event, tabIndex) {
+        var tab = this.getCurrentTab().find('a').attr('href');
         if (tab == '#account') {
           $('.help').tooltip({'effect': 'fade', 'tipClass': 'help-tip'});
           $('td.usage').each(function() {
@@ -101,7 +102,8 @@ $(function() {
             $('.apps_types').text("No available data");
           }
         }
-      });
+      }
+    });
   }
 });
 

@@ -40,7 +40,7 @@ class ApplicationController < ActionController::Base
   end
 
   def which_faraday_adapter?
-    if defined?(EM::Synchrony) && EM.reactor_running?
+    if Utils::ModuleLoaded.synchrony? && Utils::ModuleLoaded.fiberpool?
       :em_synchrony
     else
       :net_http

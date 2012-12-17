@@ -28,6 +28,7 @@ If you plan to deploy this app to a production environment:
 * Change the secret token at /config/initializers/secret_token.rb
 * Remove "= render "layouts/forkapp"" at /app/views/layouts/application.html.haml
 * precompile the assets -> RAILS_ENV=production rake assets:precompile
+* enable "config.middleware" option at /config/application.rb to enable async http calls
 
 Testing
 -------

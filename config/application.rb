@@ -65,7 +65,8 @@ module CfConsole
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
 
+    # Enable this option if you want async http calls
     # Place the FiberPool early in the pipeline (you can see your app's current pipeline using `rake middleware`)
-    config.middleware.insert_before Rails::Rack::Logger, Rack::FiberPool
+    #config.middleware.insert_before Rails::Rack::Logger, Rack::FiberPool
   end
 end

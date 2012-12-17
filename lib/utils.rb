@@ -1,4 +1,14 @@
 module Utils
+  module ModuleLoaded
+    def self.synchrony?
+      defined?(EM::Synchrony) && EM.reactor_running?
+    end
+
+    def self.fiberpool?
+      CfConsole::Application.config.middleware.middlewares.include?(Rack::FiberPool)
+    end
+  end
+
   module EMDeferredBlock
     def self.defer_block(&blk)
       f = Fiber.current
@@ -40,7 +50,7 @@ module Utils
           error = ex
         end
       end
-      if defined?(EM::Synchrony) && EM.reactor_running?
+      if Utils::ModuleLoaded.synchrony? && Utils::ModuleLoaded.fiberpool?
         begin
           result = EM::Synchrony::FiberIterator.new(list, concurrency).each(foreach)
         rescue => ex
@@ -69,7 +79,7 @@ module Utils
           end
         }.resume
       end
-      if defined?(EM::Synchrony) && EM.reactor_running?
+      if Utils::ModuleLoaded.synchrony? && Utils::ModuleLoaded.fiberpool?
         begin
           result = EM::Synchrony::Iterator.new(list, concurrency).map(&foreach)
         rescue => ex

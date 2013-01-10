@@ -12,6 +12,18 @@ Demo
 ----
 Check [CF-Console at cloudfoundry.com](http://cf-console.cloudfoundry.com/).
 
+Deploy to CloudFoundry
+----------------------
+
+```
+git clone git://github.com/frodenas/cf-console.git
+cd cf-console
+bundle
+bundle exec rake assets:precompile
+wmgvmc push --runtime ruby19
+# press Enter for all defaults
+```
+
 Installation
 ------------
 No DB required, just clone the project and start the server:

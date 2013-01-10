@@ -1,0 +1,13 @@
+---
+applications:
+  .:
+    name: cf-console
+    framework:
+      name: rails3
+      info:
+        mem: 256M
+        description: Rails Application
+        exec: 
+    url: ${name}.${target-base}
+    mem: 256M
+    instances: 1

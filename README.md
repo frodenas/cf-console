@@ -20,7 +20,7 @@ git clone git://github.com/frodenas/cf-console.git
 cd cf-console
 bundle
 bundle exec rake assets:precompile
-wmgvmc push --runtime ruby19
+vmc push --runtime ruby19
 # press Enter for all defaults
 ```
 

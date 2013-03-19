@@ -41,6 +41,10 @@ CfConsole::Application.routes.draw do
   get     'users'       => 'users#index',  :as => :users_info
   post    'users'       => 'users#create', :as => :user_create
   delete  'users/:name' => 'users#delete', :as => :user_delete
+  
+  get     'user/switch/:email'           => 'user#switch', :as => :user_switch, :constraints => { email: /[^\/]+/ }
+  get     'user/switchapp/:email/:name'  => 'user#switch_view_app', :as => :user_switch_app, :constraints => { email: /[^\/]+/ }
+  get     'user/clear'                   => 'user#clear', :as => :user_clear
 
   # Sessions
   get     'login'  => 'sessions#new',     :as => :login

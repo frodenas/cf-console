@@ -1,9 +1,9 @@
 %tr.oddeven{:id => "user-" + user_item[:email].hash.to_s}
-  %td= user_item[:email]
+  %td= link_to user_item[:email], user_switch_url(Rack::Utils.escape(user_item[:email]))
   %td
     - if !user_item[:apps].nil?
       - user_item[:apps].each do |appname|
-        = link_to appname[:name], app_info_url(appname[:name])
+        = link_to appname[:name], user_switch_app_url(Rack::Utils.escape(user_item[:email]), appname[:name])
         %br/
   %td.tdcenter
     - if user_item[:admin]

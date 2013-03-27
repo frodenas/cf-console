@@ -22,6 +22,10 @@ class ApplicationController < ActionController::Base
       rescue CloudFoundry::Client::Exception::Forbidden
         @cf_admin_user = false
       end
+      if cookies[:cf_proxy_user]
+        @cf_client.set_proxy_user(cookies[:cf_proxy_user])
+        @cf_proxy_user = cookies[:cf_proxy_user]
+      end
     else
       redirect_to login_url
     end

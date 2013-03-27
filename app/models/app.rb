@@ -47,7 +47,12 @@ class App
     raise I18n.t('apps.model.name_blank') if name.blank?
     app_instances = []
     instances_info = @cf_client.app_instances(name) || {}
-    instances_stats = instances_info[:instances].blank? ? [] : @cf_client.app_stats(name) || []
+    instances_stats = []
+    begin
+      instances_stats = instances_info[:instances].blank? ? [] : @cf_client.app_stats(name) || []
+    rescue Exception => ex
+      puts "stats #{name} #{ex.message}"
+    end
     instances_info.each do |instances, instances_value|
       instances_value.each do |info|
         stats = nil

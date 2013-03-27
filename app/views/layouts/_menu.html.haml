@@ -6,4 +6,5 @@
       %li#services-menu-link= link_to t('layouts.menu.services'), services_info_url
       %li#system-menu-link= link_to t('layouts.menu.system'), system_info_url
       - if @cf_admin_user
-        %li#users-menu-link= link_to t('layouts.menu.users'), users_info_url
+        - unless @cf_proxy_user
+          %li#users-menu-link= link_to t('layouts.menu.users'), users_info_url

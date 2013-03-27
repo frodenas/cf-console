@@ -39,6 +39,7 @@ class SessionsController < ApplicationController
         cookies[:cf_target_url] = @target_url
         cookies.signed[:cf_auth_token] = auth_token
       end
+      cookies.delete(:cf_proxy_user)
       redirect_to root_url
     else
       flash.now[:alert] = I18n.t('sessions.controller.login_failed')
@@ -56,6 +57,7 @@ class SessionsController < ApplicationController
 
   def destroy
     cookies.delete(:cf_auth_token)
+    cookies.delete(:cf_proxy_user)
     redirect_to root_url
   end
 end

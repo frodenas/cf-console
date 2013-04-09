@@ -84,6 +84,7 @@ describe SessionsController do
                :cloud_service => CloudFoundry::Client::DEFAULT_TARGET
           response.code.should eq("302")
           response.should redirect_to("/" + I18n.locale.to_s)
+          response.cookies["cf_proxy_user"].should be_nil
           response.cookies["cf_target_url"].should_not be_nil
           response.cookies["cf_auth_token"].should_not be_nil
         end
@@ -96,6 +97,7 @@ describe SessionsController do
                :cloud_service => CloudFoundry::Client::DEFAULT_TARGET
           response.code.should eq("302")
           response.should redirect_to("/" + I18n.locale.to_s)
+          response.cookies["cf_proxy_user"].should be_nil
           response.cookies["cf_target_url"].should_not be_nil
           response.cookies["cf_auth_token"].should_not be_nil
         end
@@ -106,6 +108,7 @@ describe SessionsController do
       it 'redirects to login page' do
         get :destroy
         response.code.should eq("302")
+        response.cookies["cf_proxy_user"].should be_nil
         response.should redirect_to("/" + I18n.locale.to_s + "/login")
       end
     end

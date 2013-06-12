@@ -1,16 +1,10 @@
 CF-Console
 ==========
 
-CF-Console is an easy-to-use web-based interface for your [Cloud Foundry](http://cloudfoundry.org/) instances.
+CF-Console is an easy-to-use web-based interface for your [Cloud Foundry](http://cloudfoundry.org/) v1 instances.
 
-Continuous Integration
-----------------------
+**IMPORTANT: This console doesn't manage the new Cloud Foundy v2 (or ng) instances.**
 
-[![Build Status](https://secure.travis-ci.org/frodenas/cf-console.png)](http://travis-ci.org/frodenas/cf-console)
-
-Demo
-----
-Check [CF-Console at cloudfoundry.com](http://cf-console.cloudfoundry.com/).
 
 Deploy to CloudFoundry
 ----------------------
